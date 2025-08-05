@@ -26,7 +26,17 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					hover: 'hsl(var(--primary-hover))'
+				},
+				emergency: {
+					DEFAULT: 'hsl(var(--emergency))',
+					foreground: 'hsl(var(--emergency-foreground))',
+					hover: 'hsl(var(--emergency-hover))'
+				},
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+					foreground: 'hsl(var(--success-foreground))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',

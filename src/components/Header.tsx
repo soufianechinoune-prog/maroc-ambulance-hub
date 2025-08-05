@@ -1,7 +1,14 @@
-import { Phone, MessageCircle, Menu, X } from "lucide-react";
+import { Phone, MessageCircle, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { cities } from "@/data/cities";
 import logo from "@/assets/logo.jpg";
 
 interface HeaderProps {
@@ -34,9 +41,26 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
             <Link to="/services" className="text-foreground hover:text-primary transition-colors font-medium">
               Nos Services
             </Link>
-            <Link to="/zones" className="text-foreground hover:text-primary transition-colors font-medium">
-              Zones d'intervention
-            </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-foreground hover:text-primary transition-colors font-medium">
+                Zones d'intervention
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link to="/zones" className="w-full">
+                    Toutes les zones
+                  </Link>
+                </DropdownMenuItem>
+                {cities.map((city) => (
+                  <DropdownMenuItem key={city.slug} asChild>
+                    <Link to={`/${city.slug}`} className="w-full">
+                      Ambulance {city.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Link to="/contact" className="text-foreground hover:text-primary transition-colors font-medium">
               Contact
             </Link>

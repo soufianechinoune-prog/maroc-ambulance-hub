@@ -1,6 +1,7 @@
 import { Phone, MessageCircle, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.jpg";
 
 interface HeaderProps {
@@ -17,28 +18,28 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3">
             <img src={logo} alt="Ambulance Maroc" className="h-10 w-10 rounded-lg" />
             <div>
               <h1 className="text-lg font-bold text-foreground">Ambulance Maroc</h1>
               <p className="text-xs text-muted-foreground">Service 24/7</p>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="/" className="text-foreground hover:text-primary transition-colors font-medium">
+            <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium">
               Accueil
-            </a>
-            <a href="/services" className="text-foreground hover:text-primary transition-colors font-medium">
+            </Link>
+            <Link to="/services" className="text-foreground hover:text-primary transition-colors font-medium">
               Nos Services
-            </a>
-            <a href="/zones" className="text-foreground hover:text-primary transition-colors font-medium">
+            </Link>
+            <Link to="/zones" className="text-foreground hover:text-primary transition-colors font-medium">
               Zones d'intervention
-            </a>
-            <a href="/contact" className="text-foreground hover:text-primary transition-colors font-medium">
+            </Link>
+            <Link to="/contact" className="text-foreground hover:text-primary transition-colors font-medium">
               Contact
-            </a>
+            </Link>
           </nav>
 
           {/* Emergency Contact */}
@@ -78,18 +79,18 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-3">
-              <a href="/" className="text-foreground hover:text-primary transition-colors font-medium py-2">
+              <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium py-2">
                 Accueil
-              </a>
-              <a href="/services" className="text-foreground hover:text-primary transition-colors font-medium py-2">
+              </Link>
+              <Link to="/services" className="text-foreground hover:text-primary transition-colors font-medium py-2">
                 Nos Services
-              </a>
-              <a href="/zones" className="text-foreground hover:text-primary transition-colors font-medium py-2">
+              </Link>
+              <Link to="/zones" className="text-foreground hover:text-primary transition-colors font-medium py-2">
                 Zones d'intervention
-              </a>
-              <a href="/contact" className="text-foreground hover:text-primary transition-colors font-medium py-2">
+              </Link>
+              <Link to="/contact" className="text-foreground hover:text-primary transition-colors font-medium py-2">
                 Contact
-              </a>
+              </Link>
               <div className="pt-3 border-t">
                 <div className="flex flex-col space-y-2">
                   <p className="text-sm text-muted-foreground">Urgence 24/7</p>

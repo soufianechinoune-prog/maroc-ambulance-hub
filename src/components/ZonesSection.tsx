@@ -1,6 +1,7 @@
 import { MapPin, Clock, Phone } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const ZonesSection = () => {
   const cities = [
@@ -122,9 +123,9 @@ const ZonesSection = () => {
                     <span className="font-semibold text-primary">{city.coverage}</span>
                   </div>
                   <Button variant="outline" size="sm" className="w-full mt-3" asChild>
-                    <a href={`/${city.slug}`}>
+                    <Link to={`/${city.slug}`}>
                       Page dédiée {city.name}
-                    </a>
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -148,7 +149,7 @@ const ZonesSection = () => {
                       {city.responseTime}
                     </div>
                     <Button variant="ghost" size="sm" className="text-xs" asChild>
-                      <a href={`/${city.slug}`}>Voir la page</a>
+                      <Link to={`/${city.slug}`}>Voir la page</Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -194,9 +195,9 @@ const ZonesSection = () => {
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a href="#contact">
+              <Link to="/contact">
                 Nous contacter
-              </a>
+              </Link>
             </Button>
           </div>
         </div>

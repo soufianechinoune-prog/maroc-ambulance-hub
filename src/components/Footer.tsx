@@ -1,5 +1,6 @@
 import { Phone, MessageCircle, MapPin, Clock, Mail, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.jpg";
 
 const Footer = () => {
@@ -51,13 +52,13 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="space-y-4">
-              <div className="flex items-center space-x-3">
+              <Link to="/" className="flex items-center space-x-3">
                 <img src={logo} alt="Ambulance Maroc" className="h-10 w-10 rounded-lg" />
                 <div>
                   <h3 className="text-lg font-bold">Ambulance Maroc</h3>
                   <p className="text-sm text-background/70">Service 24/7</p>
                 </div>
-              </div>
+              </Link>
               <p className="text-background/80 text-sm leading-relaxed">
                 Service d'ambulance professionnel disponible 24h/24 et 7j/7 
                 partout au Maroc. Intervention rapide et équipe qualifiée.
@@ -79,24 +80,24 @@ const Footer = () => {
               <h4 className="text-lg font-semibold">Nos Services</h4>
               <ul className="space-y-2 text-sm text-background/80">
                 <li>
-                  <a href="/services#urgence" className="hover:text-success transition-colors">
+                  <Link to="/services#urgence" className="hover:text-success transition-colors">
                     Ambulance d'urgence
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/services#inter-hopitaux" className="hover:text-success transition-colors">
+                  <Link to="/services#inter-hopitaux" className="hover:text-success transition-colors">
                     Transport inter-hôpitaux
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/services#longue-distance" className="hover:text-success transition-colors">
+                  <Link to="/services#longue-distance" className="hover:text-success transition-colors">
                     Transport longue distance
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/services#evenements" className="hover:text-success transition-colors">
+                  <Link to="/services#evenements" className="hover:text-success transition-colors">
                     Couverture événements
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -107,21 +108,21 @@ const Footer = () => {
               <ul className="space-y-2 text-sm text-background/80">
                 {cities.map((city) => (
                   <li key={city.slug}>
-                    <a 
-                      href={`/${city.slug}`} 
+                    <Link 
+                      to={`/${city.slug}`} 
                       className="hover:text-success transition-colors"
                     >
                       Ambulance {city.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
-              <a 
-                href="/zones" 
+              <Link 
+                to="/zones" 
                 className="text-success hover:underline text-sm font-medium"
               >
                 Voir toutes les villes →
-              </a>
+              </Link>
             </div>
 
             {/* Contact */}
@@ -167,15 +168,15 @@ const Footer = () => {
               © {currentYear} Ambulance Maroc. Tous droits réservés.
             </p>
             <div className="flex space-x-4">
-              <a href="/mentions-legales" className="hover:text-success transition-colors">
+              <Link to="/mentions-legales" className="hover:text-success transition-colors">
                 Mentions légales
-              </a>
-              <a href="/politique-confidentialite" className="hover:text-success transition-colors">
+              </Link>
+              <Link to="/politique-confidentialite" className="hover:text-success transition-colors">
                 Politique de confidentialité
-              </a>
-              <a href="/conditions-utilisation" className="hover:text-success transition-colors">
+              </Link>
+              <Link to="/conditions-utilisation" className="hover:text-success transition-colors">
                 Conditions d'utilisation
-              </a>
+              </Link>
             </div>
           </div>
         </div>

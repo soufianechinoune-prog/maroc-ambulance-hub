@@ -25,7 +25,10 @@ const App = () => (
           <Route path="/zones" element={<Zones />} />
           <Route path="/contact" element={<Contact />} />
           
-          {/* City routes - dynamically generated */}
+          {/* City route - dynamic parameter */}
+          <Route path="/ville/:citySlug" element={<CityPage />} />
+          
+          {/* Direct city routes for SEO */}
           {cities.map(city => (
             <Route 
               key={city.slug} 

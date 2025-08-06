@@ -1,13 +1,14 @@
 import { Ambulance, Hospital, Route, Calendar } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const ServicesSection = () => {
   const services = [
     {
       icon: Ambulance,
       title: "Ambulance médicale d'urgence",
-      description: "Intervention immédiate pour les urgences médicales avec équipe de secours qualifiée",
+      description: "Intervention immédiate pour les urgences médicales avec équipe de secours qualifiée. Service d'ambulance urgence 24/7 pour transport médical d'urgence.",
       features: [
         "Réanimation cardio-pulmonaire",
         "Soins d'urgence pré-hospitaliers",
@@ -20,7 +21,7 @@ const ServicesSection = () => {
     {
       icon: Hospital,
       title: "Transport inter-hôpitaux",
-      description: "Transfert sécurisé de patients entre établissements de santé",
+      description: "Transfert sécurisé de patients entre établissements de santé. Service d'ambulance pour transport médical inter-hospitalier 24/7.",
       features: [
         "Transport médicalisé",
         "Accompagnement médical spécialisé",
@@ -33,7 +34,7 @@ const ServicesSection = () => {
     {
       icon: Route,
       title: "Transport longue distance",
-      description: "Transport médical pour les déplacements inter-villes au Maroc",
+      description: "Transport médical pour les déplacements inter-villes au Maroc. Ambulance pour transport médical longue distance avec équipe 24/7.",
       features: [
         "Ambulances équipées pour longs trajets",
         "Personnel médical qualifié",
@@ -46,7 +47,7 @@ const ServicesSection = () => {
     {
       icon: Calendar,
       title: "Événements & Rassemblements",
-      description: "Couverture médicale pour événements sportifs et rassemblements",
+      description: "Couverture médicale pour événements sportifs et rassemblements. Service d'ambulance pour événements avec urgence 24/7.",
       features: [
         "Poste de secours mobile",
         "Équipe médicale dédiée",
@@ -58,8 +59,23 @@ const ServicesSection = () => {
     }
   ];
 
+  // JSON-LD structure for OfferCatalog (to be used by parent components)
+  const jsonLdOfferCatalog = {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "name": "Catalogue de services d'ambulance",
+    "itemListElement": services.map(service => ({
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": service.title,
+        "description": service.description
+      }
+    }))
+  };
+
   return (
-    <section className="py-16 bg-background">
+    <section className="py-16 bg-background" aria-label="Liste des services d'ambulance">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -92,10 +108,10 @@ const ServicesSection = () => {
                     <div className={`p-3 rounded-lg ${
                       service.urgent ? 'bg-emergency text-emergency-foreground' : 'bg-primary text-primary-foreground'
                     }`}>
-                      <IconComponent className="h-6 w-6" />
+                      <IconComponent className="h-6 w-6" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
-                      <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
+                      <h3 className="text-xl mb-2 font-semibold">{service.title}</h3>
                       <CardDescription className="text-base">
                         {service.description}
                       </CardDescription>
@@ -126,9 +142,15 @@ const ServicesSection = () => {
                         size="sm"
                         asChild
                       >
-                        <a href={service.urgent ? "tel:+212522000000" : "#contact"}>
-                          {service.urgent ? "Appeler maintenant" : "Demander un devis"}
-                        </a>
+                        {service.urgent ? (
+                          <a href="tel:+212522000000" aria-label={`Appeler pour ${service.title}`}>
+                            Appeler maintenant
+                          </a>
+                        ) : (
+                          <Link to="/services" aria-label={`En savoir plus sur ${service.title}`}>
+                            Demander un devis
+                          </Link>
+                        )}
                       </Button>
                     </div>
                   </div>
@@ -149,15 +171,20 @@ const ServicesSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="emergency" size="lg" asChild>
-              <a href="tel:+212522000000" className="flex items-center">
-                <Ambulance className="h-5 w-5 mr-2" />
+              <a href="tel:+212522000000" className="flex items-center" aria-label="Appeler immédiatement pour urgence médicale">
+                <Ambulance className="h-5 w-5 mr-2" aria-hidden="true" />
                 Urgence : +212 522 000 000
               </a>
             </Button>
             <Button variant="cta" size="lg" asChild>
-              <a href="#demande-ambulance">
+              <a href="#demande-ambulance" aria-label="Accéder au formulaire de demande d'ambulance">
                 Formulaire de demande
               </a>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/contact" aria-label="Aller à la page de contact">
+                Page Contact
+              </Link>
             </Button>
           </div>
         </div>

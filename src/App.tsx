@@ -22,20 +22,29 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/zones" element={<Zones />} />
+          <Route path="/zones-d-intervention" element={<Zones />} />
           <Route path="/contact" element={<Contact />} />
           
-          {/* City route - dynamic parameter */}
-          <Route path="/ville/:citySlug" element={<CityPage />} />
-          
-          {/* Direct city routes for SEO */}
+          {/* City routes with SEO-friendly URLs */}
           {cities.map(city => (
             <Route 
               key={city.slug} 
+              path={`/ambulance-${city.slug}`} 
+              element={<CityPage />} 
+            />
+          ))}
+          
+          {/* Redirects for old URLs */}
+          {cities.map(city => (
+            <Route 
+              key={`redirect-${city.slug}`} 
               path={`/${city.slug}`} 
               element={<CityPage />} 
             />
           ))}
+          
+          {/* Legacy zone route redirect */}
+          <Route path="/zones" element={<Zones />} />
           
           {/* Legal pages */}
           <Route path="/mentions-legales" element={<NotFound />} />

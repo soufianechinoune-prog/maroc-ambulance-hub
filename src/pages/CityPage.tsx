@@ -14,8 +14,16 @@ import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle } from "lucide-
 const CityPage = () => {
   const { citySlug } = useParams();
   
-  // Find city by slug - handle both URL parameter and direct route
-  const slug = citySlug || window.location.pathname.replace('/', '');
+  // Extract city slug from URL path (handle both /ambulance-city and /city formats)
+  const extractSlugFromPath = () => {
+    const path = window.location.pathname;
+    if (path.startsWith('/ambulance-')) {
+      return path.replace('/ambulance-', '');
+    }
+    return path.replace('/', '');
+  };
+  
+  const slug = citySlug || extractSlugFromPath();
   const city = cities.find(c => c.slug === slug);
   const siteUrl = "https://www.ambulance-maroc.ma";
 

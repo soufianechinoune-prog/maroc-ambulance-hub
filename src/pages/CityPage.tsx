@@ -11,8 +11,6 @@ import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle } from "lucide-react";
-import { useEffect } from "react";
-
 const CityPage = () => {
   const { citySlug } = useParams();
   
@@ -21,22 +19,10 @@ const CityPage = () => {
   const city = cities.find(c => c.slug === slug);
   const siteUrl = "https://www.ambulance-maroc.ma";
 
-  useEffect(() => {
-    if (city) {
-      document.title = `Ambulance ${city.name} - Service d'urgence 24h/24 | Ambulance Maroc`;
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute('content', 
-          `Service d'ambulance professionnel à ${city.name}. Intervention rapide 24h/24 et 7j/7. Temps de réponse: ${city.responseTime}. Appelez maintenant: +212 522 000 000`
-        );
-      }
-    }
-  }, [city]);
-
   // SEO data
   const title = city ? `Ambulance à ${city.name} – Intervention rapide 24/7 | Ambulance Maroc` : "Ville non trouvée";
-  const description = city ? `Ambulance à ${city.name} disponible 24h/24 et 7j/7. Temps de réponse: ${city.responseTime}. ${city.description} Couverture ${city.coverage} de la région ${city.region}.` : "";
-  const canonical = city ? `${siteUrl}/${city.slug}` : `${siteUrl}/`;
+  const description = city ? `Ambulance à ${city.name}, intervention 24/7. Temps de réponse ${city.responseTime}. ${city.coverage}.` : "";
+  const canonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
 
   const jsonLd = city ? {
     "@context": "https://schema.org",
@@ -91,7 +77,7 @@ const CityPage = () => {
       <Header city={city.name} />
       
       {/* Hero Section - Identique à la Home Page mais personnalisée */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden" aria-label={`Service d'ambulance à ${city.name}`}>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -100,6 +86,7 @@ const CityPage = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent"></div>
         </div>
+        <img src="/src/assets/ambulance-hero.jpg" alt={`Ambulance à ${city.name} – intervention rapide au Maroc`} className="sr-only" />
 
         <div className="relative container mx-auto px-4 py-20">
           <div className="max-w-4xl">
@@ -110,9 +97,9 @@ const CityPage = () => {
                 Service disponible à {city.name}
               </div>
 
-              {/* Main Heading */}
+               {/* Main Heading */}
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                Ambulance à <span className="text-emergency">{city.name}</span>
+                Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7
               </h1>
               
               <div className="text-xl md:text-2xl text-white/90 space-y-2">
@@ -308,7 +295,7 @@ const CityPage = () => {
             <Button size="lg" variant="secondary" asChild>
               <a href="tel:+212522000000" className="flex items-center gap-2">
                 <Phone className="h-5 w-5" />
-                Appelez maintenant: +212 522 000 000
+                Appelez: +212 522 000 000
               </a>
             </Button>
             <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white/20" asChild>

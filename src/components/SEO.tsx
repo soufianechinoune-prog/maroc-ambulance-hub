@@ -6,29 +6,76 @@ type Props = {
   canonical: string;
   image?: string;
   jsonLd?: Record<string, any>;
+  keywords?: string[];
+  author?: string;
+  noIndex?: boolean;
+  jsonLdMultiple?: Record<string, any>[];
 };
 
-export default function SEO({ title, description, canonical, image, jsonLd }: Props) {
-  const ogImg = image ?? "/placeholder.svg";
+export default function SEO({ 
+  title, 
+  description, 
+  canonical, 
+  image, 
+  jsonLd, 
+  keywords, 
+  author, 
+  noIndex = false, 
+  jsonLdMultiple 
+}: Props) {
+  const ogImg = image ?? "/default-seo-image.jpg";
+  
   return (
     <>
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />
+        
+        {/* Robots meta */}
+        {noIndex ? (
+          <meta name="robots" content="noindex, nofollow" />
+        ) : (
+          <meta name="robots" content="index, follow" />
+        )}
+        
+        {/* Keywords meta */}
+        {keywords && keywords.length > 0 && (
+          <meta name="keywords" content={keywords.join(", ")} />
+        )}
+        
+        {/* Author meta */}
+        {author && (
+          <meta name="author" content={author} />
+        )}
+        
+        {/* OpenGraph meta tags */}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <meta property="og:image" content={ogImg} />
+        
+        {/* Twitter Card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImg} />
       </Helmet>
+      
+      {/* JSON-LD single schema */}
       {jsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       )}
+      
+      {/* JSON-LD multiple schemas */}
+      {jsonLdMultiple && jsonLdMultiple.map((schema, index) => (
+        <script 
+          key={index}
+          type="application/ld+json" 
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} 
+        />
+      ))}
     </>
   );
 }

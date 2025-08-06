@@ -10,7 +10,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({ city = "Casablanca", h1, subtitle }: HeroSectionProps) => {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden" aria-label={`Section présentation – ambulance à ${city}`}>
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -20,6 +20,14 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle }: HeroSectionProps) =>
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent"></div>
       </div>
+      
+      {/* SEO and Accessibility Image */}
+      <img 
+        src={ambulanceHero} 
+        alt={`Ambulance à ${city} – intervention rapide 24/7`} 
+        className="sr-only" 
+        loading="lazy"
+      />
 
       {/* Content */}
       <div className="relative container mx-auto px-4 py-20">
@@ -33,15 +41,7 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle }: HeroSectionProps) =>
 
             {/* Main Heading */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-              {h1 ? (
-                <>
-                  <span className="text-primary">Ambulance</span> à <span className="text-emergency">{city}</span> – <span className="text-success">Intervention 24/7</span>
-                </>
-              ) : (
-                <>
-                  Ambulance à <span className="text-emergency">{city}</span>
-                </>
-              )}
+              Ambulance à <span className="text-emergency">{city}</span> – Intervention 24/7
             </h1>
             
             <div className="text-xl md:text-2xl text-white/90 space-y-2">
@@ -135,8 +135,9 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle }: HeroSectionProps) =>
       {/* Floating Emergency Contact (Mobile) */}
       <div className="fixed bottom-4 right-4 z-50 lg:hidden">
         <Button variant="emergency" size="lg" className="rounded-full shadow-2xl" asChild>
-          <a href="tel:+212522000000">
+          <a href="tel:+212522000000" aria-label="Appel d'urgence">
             <Phone className="h-6 w-6" />
+            <span className="sr-only">Appeler maintenant</span>
           </a>
         </Button>
       </div>

@@ -82,8 +82,27 @@ const ZonesSection = () => {
   const mainCities = cities.filter(city => city.isMain);
   const otherCities = cities.filter(city => !city.isMain);
 
+  // JSON-LD structure for ItemList (to be used by parent components)
+  const jsonLdItemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Zones d'intervention ambulance Maroc",
+    "itemListElement": cities.map((city, index) => ({
+      "@type": "Place",
+      "position": index + 1,
+      "name": city.name,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": city.name,
+        "addressRegion": city.region,
+        "addressCountry": "MA"
+      },
+      "url": `https://www.ambulance-maroc.ma/ambulance-${city.slug}`
+    }))
+  };
+
   return (
-    <section className="py-16 bg-secondary/20">
+    <section className="py-16 bg-secondary/20" aria-label="Zones d'intervention">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -96,24 +115,26 @@ const ZonesSection = () => {
         </div>
 
         {/* Main Cities */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">
+        <div className="mb-12" aria-label="Villes principales">
+          <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
             Villes Principales
-          </h3>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {mainCities.map((city, index) => (
               <Card key={index} className="hover:shadow-lg transition-all duration-300 border-primary/20">
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center text-lg">
-                    <MapPin className="h-5 w-5 text-primary mr-2" />
-                    {city.name}
+                    <MapPin className="h-5 w-5 text-primary mr-2" aria-hidden="true" />
+                    <Link to={`/ambulance-${city.slug}`} className="hover:text-primary transition-colors">
+                      <h3 className="text-lg font-semibold">{city.name}</h3>
+                    </Link>
                   </CardTitle>
                   <p className="text-sm text-muted-foreground">{city.region}</p>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center">
-                      <Clock className="h-4 w-4 text-success mr-1" />
+                      <Clock className="h-4 w-4 text-success mr-1" aria-hidden="true" />
                       <span className="text-muted-foreground">Réponse</span>
                     </div>
                     <span className="font-semibold text-success">{city.responseTime}</span>
@@ -123,7 +144,7 @@ const ZonesSection = () => {
                     <span className="font-semibold text-primary">{city.coverage}</span>
                   </div>
                   <Button variant="outline" size="sm" className="w-full mt-3" asChild>
-                    <Link to={`/${city.slug}`}>
+                    <Link to={`/ambulance-${city.slug}`}>
                       Page dédiée {city.name}
                     </Link>
                   </Button>
@@ -134,22 +155,24 @@ const ZonesSection = () => {
         </div>
 
         {/* Other Cities */}
-        <div className="mb-12">
-          <h3 className="text-xl font-semibold text-foreground mb-6 text-center">
+        <div className="mb-12" aria-label="Autres villes couvertes">
+          <h2 className="text-xl font-semibold text-foreground mb-6 text-center">
             Autres Villes Couvertes
-          </h3>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {otherCities.map((city, index) => (
               <Card key={index} className="hover:shadow-md transition-all duration-300">
                 <CardContent className="p-4">
                   <div className="text-center space-y-2">
-                    <h4 className="font-semibold text-foreground">{city.name}</h4>
+                    <Link to={`/ambulance-${city.slug}`} className="hover:text-primary transition-colors">
+                      <h3 className="font-semibold text-foreground">{city.name}</h3>
+                    </Link>
                     <div className="flex items-center justify-center text-xs text-muted-foreground">
-                      <Clock className="h-3 w-3 mr-1" />
+                      <Clock className="h-3 w-3 mr-1" aria-hidden="true" />
                       {city.responseTime}
                     </div>
                     <Button variant="ghost" size="sm" className="text-xs" asChild>
-                      <Link to={`/${city.slug}`}>Voir la page</Link>
+                      <Link to={`/ambulance-${city.slug}`}>Voir la page</Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -161,12 +184,12 @@ const ZonesSection = () => {
         {/* Coverage Map Placeholder */}
         <div className="bg-card rounded-2xl p-8 border border-border">
           <div className="text-center space-y-4">
-            <h3 className="text-2xl font-bold text-foreground">
+            <h2 className="text-2xl font-bold text-foreground">
               Couverture Nationale
-            </h3>
+            </h2>
             <div className="h-64 bg-accent/30 rounded-xl flex items-center justify-center">
               <div className="text-center space-y-2">
-                <MapPin className="h-12 w-12 text-primary mx-auto" />
+                <MapPin className="h-12 w-12 text-primary mx-auto" aria-hidden="true" />
                 <p className="text-muted-foreground">
                   Carte interactive du Maroc
                 </p>
@@ -180,9 +203,9 @@ const ZonesSection = () => {
 
         {/* Bottom CTA */}
         <div className="mt-12 text-center bg-primary/5 rounded-2xl p-8 border border-primary/20">
-          <h3 className="text-2xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl font-bold text-foreground mb-4">
             Votre ville n'est pas listée ?
-          </h3>
+          </h2>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
             Nous intervenons également dans de nombreuses autres localités. 
             Contactez-nous pour connaître nos possibilités d'intervention dans votre région.
@@ -190,7 +213,7 @@ const ZonesSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="default" size="lg" asChild>
               <a href="tel:+212522000000" className="flex items-center">
-                <Phone className="h-5 w-5 mr-2" />
+                <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
                 +212 522 000 000
               </a>
             </Button>

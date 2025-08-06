@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, Mail, MapPin, Clock } from "lucide-react";
@@ -8,10 +9,30 @@ import { Phone, MessageCircle, Mail, MapPin, Clock } from "lucide-react";
 const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Contact Ambulance Maroc – Urgence 24/7 | Intervention Rapide" 
+        description="Contactez Ambulance Maroc pour une intervention urgente 24/7 partout au Maroc. Téléphone, WhatsApp, email et adresse à Casablanca." 
+        canonical="https://www.ambulance-maroc.ma/contact"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "EmergencyService",
+          "name": "Ambulance Maroc",
+          "telephone": "+212600000000",
+          "email": "contact@ambulance-maroc.ma",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123 Bd Mohammed V",
+            "addressLocality": "Casablanca",
+            "addressCountry": "MA"
+          },
+          "availableService": ["Emergency medical transport", "Inter-hospital transfer", "Event standby"],
+          "openingHours": "Mo-Su 00:00-23:59"
+        }}
+      />
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary-dark text-white py-20">
+      <section className="bg-gradient-to-r from-primary to-primary-dark text-white py-20" aria-label="Section de contact principal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Contactez-nous
@@ -37,7 +58,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Info */}
-      <section className="py-16">
+      <section className="py-16" aria-label="Informations de contact">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             <Card className="text-center">

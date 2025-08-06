@@ -8,6 +8,10 @@ export interface City {
   isMain: boolean;
   description: string;
   specificities: string[];
+  phone: string;
+  whatsapp: string;
+  avgEtaMin: number;
+  serviceArea: string;
 }
 
 export const cities: City[] = [
@@ -25,7 +29,11 @@ export const cities: City[] = [
       "Couverture complète des zones industrielles",
       "Partenariats avec tous les hôpitaux majeurs",
       "Service VIP pour les entreprises"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 10,
+    serviceArea: "Casablanca-Settat"
   },
   {
     name: "Rabat",
@@ -41,7 +49,11 @@ export const cities: City[] = [
       "Couverture Rabat-Salé-Témara",
       "Équipes spécialisées en protocole",
       "Transport diplomatique autorisé"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 12,
+    serviceArea: "Rabat-Salé-Kénitra"
   },
   {
     name: "Marrakech",
@@ -57,7 +69,11 @@ export const cities: City[] = [
       "Accès optimisé à la médina",
       "Service touristique 24h/24",
       "Partenariat avec les riads et hôtels"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 15,
+    serviceArea: "Marrakech-Safi"
   },
   {
     name: "Tanger",
@@ -73,7 +89,11 @@ export const cities: City[] = [
       "Couverture zone industrielle TFZ",
       "Transport port-hôpitaux",
       "Coordination internationale"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 17,
+    serviceArea: "Tanger-Tétouan-Al Hoceïma"
   },
   {
     name: "Fès",
@@ -89,7 +109,11 @@ export const cities: City[] = [
       "Service universitaire renforcé",
       "Couverture zones historiques",
       "Transport inter-régional"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 17,
+    serviceArea: "Fès-Meknès"
   },
   {
     name: "Agadir",
@@ -105,7 +129,11 @@ export const cities: City[] = [
       "Service zones hôtelières",
       "Transport aéroport-hôpitaux",
       "Équipes formées tourisme"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 15,
+    serviceArea: "Souss-Massa"
   },
   {
     name: "Meknès",
@@ -121,7 +149,11 @@ export const cities: City[] = [
       "Service sites historiques",
       "Transport rural-urbain",
       "Coordination avec Fès"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 21,
+    serviceArea: "Fès-Meknès"
   },
   {
     name: "Oujda",
@@ -137,7 +169,11 @@ export const cities: City[] = [
       "Couverture zones commerciales",
       "Transport frontalier",
       "Service zones rurales"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 22,
+    serviceArea: "Oriental"
   },
   {
     name: "Tétouan",
@@ -153,7 +189,11 @@ export const cities: City[] = [
       "Service zones montagneuses",
       "Transport vers Tanger",
       "Urgences rurales Rif"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 25,
+    serviceArea: "Tanger-Tétouan-Al Hoceïma"
   },
   {
     name: "Laâyoune",
@@ -169,7 +209,11 @@ export const cities: City[] = [
       "Service conditions désertiques",
       "Couverture zones isolées",
       "Transport longue distance"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 20,
+    serviceArea: "Laâyoune-Sakia El Hamra"
   },
   {
     name: "Mohammedia",
@@ -185,7 +229,11 @@ export const cities: City[] = [
       "Service zones résidentielles",
       "Transport inter-villes",
       "Couverture littorale"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 17,
+    serviceArea: "Casablanca-Settat"
   },
   {
     name: "Kénitra",
@@ -201,6 +249,10 @@ export const cities: City[] = [
       "Coordination avec Rabat",
       "Transport rural-urbain",
       "Couverture Gharb"
-    ]
+    ],
+    phone: "+212612345678",
+    whatsapp: "https://wa.me/212612345678",
+    avgEtaMin: 21,
+    serviceArea: "Rabat-Salé-Kénitra"
   }
 ];

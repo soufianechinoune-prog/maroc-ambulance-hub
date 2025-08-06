@@ -7,6 +7,7 @@ import ReassuranceSection from "@/components/ReassuranceSection";
 import ServicesSection from "@/components/ServicesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactForm from "@/components/ContactForm";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle } from "lucide-react";
@@ -18,6 +19,7 @@ const CityPage = () => {
   // Find city by slug - handle both URL parameter and direct route
   const slug = citySlug || window.location.pathname.replace('/', '');
   const city = cities.find(c => c.slug === slug);
+  const siteUrl = "https://www.ambulance-maroc.ma";
 
   useEffect(() => {
     if (city) {
@@ -30,6 +32,38 @@ const CityPage = () => {
       }
     }
   }, [city]);
+
+  // SEO data
+  const title = city ? `Ambulance à ${city.name} – Intervention rapide 24/7 | Ambulance Maroc` : "Ville non trouvée";
+  const description = city ? `Ambulance à ${city.name} disponible 24h/24 et 7j/7. Temps de réponse: ${city.responseTime}. ${city.description} Couverture ${city.coverage} de la région ${city.region}.` : "";
+  const canonical = city ? `${siteUrl}/${city.slug}` : `${siteUrl}/`;
+
+  const jsonLd = city ? {
+    "@context": "https://schema.org",
+    "@type": "EmergencyService",
+    "name": `Ambulance ${city.name}`,
+    "areaServed": city.name,
+    "url": canonical,
+    "telephone": city.phone,
+    "serviceArea": city.serviceArea,
+    "availableService": ["Emergency medical transport", "Inter-hospital transfer", "Event standby"],
+    "openingHours": "Mo-Su 00:00-23:59",
+    "priceRange": "$$",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": `Services d'ambulance à ${city.name}`,
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Transport d'urgence",
+            "description": `Service d'ambulance d'urgence 24h/24 à ${city.name}`
+          }
+        }
+      ]
+    }
+  } : undefined;
 
   if (!city) {
     return (
@@ -53,6 +87,7 @@ const CityPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO title={title} description={description} canonical={canonical} jsonLd={jsonLd} />
       <Header city={city.name} />
       
       {/* Hero Section - Identique à la Home Page mais personnalisée */}

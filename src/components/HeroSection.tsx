@@ -4,9 +4,11 @@ import ambulanceHero from "@/assets/ambulance-hero.jpg";
 
 interface HeroSectionProps {
   city?: string;
+  h1?: string;
+  subtitle?: string;
 }
 
-const HeroSection = ({ city = "Casablanca" }: HeroSectionProps) => {
+const HeroSection = ({ city = "Casablanca", h1, subtitle }: HeroSectionProps) => {
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -31,12 +33,26 @@ const HeroSection = ({ city = "Casablanca" }: HeroSectionProps) => {
 
             {/* Main Heading */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-              Ambulance à <span className="text-emergency">{city}</span>
+              {h1 ? (
+                <>
+                  <span className="text-primary">Ambulance</span> à <span className="text-emergency">{city}</span> – <span className="text-success">Intervention 24/7</span>
+                </>
+              ) : (
+                <>
+                  Ambulance à <span className="text-emergency">{city}</span>
+                </>
+              )}
             </h1>
             
             <div className="text-xl md:text-2xl text-white/90 space-y-2">
-              <p>Intervention rapide 24h/24 et 7j/7</p>
-              <p className="font-semibold">Partout au Maroc</p>
+              {subtitle ? (
+                <p>{subtitle}</p>
+              ) : (
+                <>
+                  <p>Intervention rapide 24h/24 et 7j/7</p>
+                  <p className="font-semibold">Partout au Maroc</p>
+                </>
+              )}
             </div>
 
             {/* Key Features */}

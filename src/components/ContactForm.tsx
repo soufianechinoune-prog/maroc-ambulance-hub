@@ -54,9 +54,9 @@ const ContactForm = () => {
                   Pour toute urgence médicale, appelez immédiatement notre numéro d'urgence.
                 </p>
                 <Button variant="emergency" className="w-full" asChild>
-                  <a href="tel:+212522000000" className="flex items-center justify-center">
+                  <a href="tel:+212777722311" className="flex items-center justify-center">
                     <Phone className="h-4 w-4 mr-2" />
-                    +212 522 000 000
+                    +212 7777 223 11
                   </a>
                 </Button>
                 <p className="text-xs text-center text-muted-foreground">
@@ -77,7 +77,7 @@ const ContactForm = () => {
                   Contactez-nous via WhatsApp pour une réponse rapide.
                 </p>
                 <Button variant="success" className="w-full" asChild>
-                  <a href="https://wa.me/212522000000" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
                     <MessageCircle className="h-4 w-4 mr-2" />
                     Ouvrir WhatsApp
                   </a>

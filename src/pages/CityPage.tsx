@@ -70,7 +70,7 @@ const CityPage = () => {
               Cette ville n'est pas encore dans notre zone de couverture.
             </p>
             <Button asChild>
-              <a href="tel:+212522000000">Contactez-nous</a>
+              <a href="tel:+212777722311">Contactez-nous</a>
             </Button>
           </div>
         </div>
@@ -143,7 +143,7 @@ const CityPage = () => {
                   className="text-lg px-8 py-4 h-auto"
                   asChild
                 >
-                  <a href="tel:+212522000000" className="flex items-center justify-center">
+                  <a href="tel:+212777722311" className="flex items-center justify-center">
                     <Phone className="h-6 w-6 mr-3" />
                     📞 Appelez maintenant
                   </a>
@@ -155,7 +155,7 @@ const CityPage = () => {
                   className="text-lg px-8 py-4 h-auto"
                   asChild
                 >
-                  <a href="https://wa.me/212522000000" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
                     <MessageCircle className="h-6 w-6 mr-3" />
                     💬 WhatsApp direct
                   </a>
@@ -195,7 +195,7 @@ const CityPage = () => {
         {/* Floating Emergency Contact (Mobile) */}
         <div className="fixed bottom-4 right-4 z-50 lg:hidden">
           <Button variant="emergency" size="lg" className="rounded-full shadow-2xl" asChild>
-            <a href="tel:+212522000000">
+            <a href="tel:+212777722311">
               <Phone className="h-6 w-6" />
             </a>
           </Button>
@@ -301,13 +301,13 @@ const CityPage = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <a href="tel:+212522000000" className="flex items-center gap-2">
+              <a href="tel:+212777722311" className="flex items-center gap-2">
                 <Phone className="h-5 w-5" />
-                Appelez: +212 522 000 000
+                Appelez: +212 7777 223 11
               </a>
             </Button>
             <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white/20" asChild>
-              <a href="https://wa.me/212522000000" className="flex items-center gap-2">
+              <a href="https://wa.me/212777722311" className="flex items-center gap-2">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp Direct
               </a>

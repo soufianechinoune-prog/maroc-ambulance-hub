@@ -25,19 +25,19 @@ const Footer = () => {
               <div className="flex items-center space-x-2">
                 <Phone className="h-5 w-5" />
                 <span className="font-semibold">Urgence 24/7 :</span>
-                <a href="tel:+212522000000" className="text-lg font-bold hover:underline">
-                  +212 522 000 000
+                <a href="tel:+212777722311" className="text-lg font-bold hover:underline">
+                  +212 7777 223 11
                 </a>
               </div>
               <div className="flex space-x-3">
                 <Button variant="secondary" size="sm" asChild>
-                  <a href="tel:+212522000000">
+                  <a href="tel:+212777722311">
                     <Phone className="h-4 w-4 mr-2" />
                     Appeler
                   </a>
                 </Button>
                 <Button variant="secondary" size="sm" asChild>
-                  <a href="https://wa.me/212522000000" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="h-4 w-4 mr-2" />
                     WhatsApp
                   </a>
@@ -133,8 +133,8 @@ const Footer = () => {
                   <Phone className="h-4 w-4 mt-0.5 text-emergency flex-shrink-0" />
                   <div>
                     <p className="font-medium">Urgence 24/7</p>
-                    <a href="tel:+212522000000" className="text-background/80 hover:text-success">
-                      +212 522 000 000
+                    <a href="tel:+212777722311" className="text-background/80 hover:text-success">
+                      +212 7777 223 11
                     </a>
                   </div>
                 </div>

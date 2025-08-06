@@ -95,18 +95,18 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
           <div className="hidden lg:flex items-center space-x-3">
             <div className="text-right">
               <p className="text-xs text-muted-foreground">Urgence 24/7</p>
-              <a href="tel:+212522000000" className="text-lg font-bold text-emergency hover:text-emergency-hover">
-                +212 522 000 000
+              <a href="tel:+212777722311" className="text-lg font-bold text-emergency hover:text-emergency-hover">
+                +212 7777 223 11
               </a>
             </div>
             <Button variant="emergency" size="sm" asChild>
-              <a href="tel:+212522000000" className="flex items-center">
+              <a href="tel:+212777722311" className="flex items-center">
                 <Phone className="h-4 w-4" />
                 Appeler
               </a>
             </Button>
             <Button variant="success" size="sm" asChild>
-              <a href="https://wa.me/212522000000" target="_blank" rel="noopener noreferrer" className="flex items-center">
+              <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" className="flex items-center">
                 <MessageCircle className="h-4 w-4" />
                 WhatsApp
               </a>
@@ -145,13 +145,13 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
                   <p className="text-sm text-muted-foreground">Urgence 24/7</p>
                   <div className="flex space-x-2">
                     <Button variant="emergency" size="sm" asChild className="flex-1">
-                      <a href="tel:+212522000000" className="flex items-center justify-center">
+                      <a href="tel:+212777722311" className="flex items-center justify-center">
                         <Phone className="h-4 w-4 mr-2" />
-                        +212 522 000 000
+                        +212 7777 223 11
                       </a>
                     </Button>
                     <Button variant="success" size="sm" asChild>
-                      <a href="https://wa.me/212522000000" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                      <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" className="flex items-center">
                         <MessageCircle className="h-4 w-4 mr-1" />
                         <span className="text-xs">WhatsApp</span>
                       </a>

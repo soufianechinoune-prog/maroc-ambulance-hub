@@ -30,8 +30,8 @@ export const cities: City[] = [
       "Partenariats avec tous les hôpitaux majeurs",
       "Service VIP pour les entreprises"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 10,
     serviceArea: "Casablanca-Settat"
   },
@@ -50,8 +50,8 @@ export const cities: City[] = [
       "Équipes spécialisées en protocole",
       "Transport diplomatique autorisé"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 12,
     serviceArea: "Rabat-Salé-Kénitra"
   },
@@ -70,8 +70,8 @@ export const cities: City[] = [
       "Service touristique 24h/24",
       "Partenariat avec les riads et hôtels"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 15,
     serviceArea: "Marrakech-Safi"
   },
@@ -90,8 +90,8 @@ export const cities: City[] = [
       "Transport port-hôpitaux",
       "Coordination internationale"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 17,
     serviceArea: "Tanger-Tétouan-Al Hoceïma"
   },
@@ -110,8 +110,8 @@ export const cities: City[] = [
       "Couverture zones historiques",
       "Transport inter-régional"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 17,
     serviceArea: "Fès-Meknès"
   },
@@ -130,8 +130,8 @@ export const cities: City[] = [
       "Transport aéroport-hôpitaux",
       "Équipes formées tourisme"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 15,
     serviceArea: "Souss-Massa"
   },
@@ -150,8 +150,8 @@ export const cities: City[] = [
       "Transport rural-urbain",
       "Coordination avec Fès"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 21,
     serviceArea: "Fès-Meknès"
   },
@@ -170,8 +170,8 @@ export const cities: City[] = [
       "Transport frontalier",
       "Service zones rurales"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 22,
     serviceArea: "Oriental"
   },
@@ -190,8 +190,8 @@ export const cities: City[] = [
       "Transport vers Tanger",
       "Urgences rurales Rif"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 25,
     serviceArea: "Tanger-Tétouan-Al Hoceïma"
   },
@@ -210,8 +210,8 @@ export const cities: City[] = [
       "Couverture zones isolées",
       "Transport longue distance"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 20,
     serviceArea: "Laâyoune-Sakia El Hamra"
   },
@@ -230,8 +230,8 @@ export const cities: City[] = [
       "Transport inter-villes",
       "Couverture littorale"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 17,
     serviceArea: "Casablanca-Settat"
   },
@@ -250,8 +250,8 @@ export const cities: City[] = [
       "Transport rural-urbain",
       "Couverture Gharb"
     ],
-    phone: "+212612345678",
-    whatsapp: "https://wa.me/212612345678",
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 21,
     serviceArea: "Rabat-Salé-Kénitra"
   }

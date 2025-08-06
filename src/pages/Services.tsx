@@ -77,7 +77,7 @@ const Services = () => {
               </a>
             </Button>
             <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white/20" asChild>
-              <a href="https://wa.me/212600000000" className="flex items-center gap-2">
+              <a href="https://wa.me/212777722311" className="flex items-center gap-2">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
               </a>
@@ -169,7 +169,7 @@ const Services = () => {
               </a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="https://wa.me/212600000000" className="flex items-center gap-2">
+              <a href="https://wa.me/212777722311" className="flex items-center gap-2">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
               </a>

@@ -143,7 +143,7 @@ const ServicesSection = () => {
                         asChild
                       >
                         {service.urgent ? (
-                          <a href="tel:+212522000000" aria-label={`Appeler pour ${service.title}`}>
+                          <a href="tel:+212777722311" aria-label={`Appeler pour ${service.title}`}>
                             Appeler maintenant
                           </a>
                         ) : (
@@ -171,9 +171,9 @@ const ServicesSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="emergency" size="lg" asChild>
-              <a href="tel:+212522000000" className="flex items-center" aria-label="Appeler immédiatement pour urgence médicale">
+              <a href="tel:+212777722311" className="flex items-center" aria-label="Appeler immédiatement pour urgence médicale">
                 <Ambulance className="h-5 w-5 mr-2" aria-hidden="true" />
-                Urgence : +212 522 000 000
+                Urgence : +212 7777 223 11
               </a>
             </Button>
             <Button variant="cta" size="lg" asChild>

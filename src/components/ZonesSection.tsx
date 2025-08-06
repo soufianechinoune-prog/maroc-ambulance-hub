@@ -212,9 +212,9 @@ const ZonesSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="default" size="lg" asChild>
-              <a href="tel:+212522000000" className="flex items-center">
+              <a href="tel:+212777722311" className="flex items-center">
                 <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
-                +212 522 000 000
+                +212 7777 223 11
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>

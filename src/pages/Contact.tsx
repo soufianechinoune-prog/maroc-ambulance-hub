@@ -17,7 +17,7 @@ const Contact = () => {
           "@context": "https://schema.org",
           "@type": "EmergencyService",
           "name": "Ambulance Maroc",
-          "telephone": "+212600000000",
+          "telephone": "+212777722311",
           "email": "contact@ambulance-maroc.ma",
           "address": {
             "@type": "PostalAddress",
@@ -42,13 +42,13 @@ const Contact = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <a href="tel:+212600000000" className="flex items-center gap-2">
+              <a href="tel:+212777722311" className="flex items-center gap-2">
                 <Phone className="h-5 w-5" />
-                Urgence: +212 6 00 00 00 00
+                Urgence: +212 7777 223 11
               </a>
             </Button>
             <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white/20" asChild>
-              <a href="https://wa.me/212600000000" className="flex items-center gap-2">
+              <a href="https://wa.me/212777722311" className="flex items-center gap-2">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
               </a>
@@ -69,7 +69,7 @@ const Contact = () => {
                 <CardTitle className="text-emergency">Urgences</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold text-gray-900 mb-2">+212 6 00 00 00 00</p>
+                <p className="text-2xl font-bold text-gray-900 mb-2">+212 7777 223 11</p>
                 <p className="text-gray-600">Disponible 24h/24</p>
               </CardContent>
             </Card>
@@ -82,7 +82,7 @@ const Contact = () => {
                 <CardTitle>WhatsApp</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-lg font-semibold text-gray-900 mb-2">+212 6 00 00 00 00</p>
+                <p className="text-lg font-semibold text-gray-900 mb-2">+212 7777 223 11</p>
                 <p className="text-gray-600">Message instantané</p>
               </CardContent>
             </Card>
@@ -140,9 +140,9 @@ const Contact = () => {
             En cas d'urgence médicale, ne remplissez pas le formulaire - appelez directement !
           </p>
           <Button size="lg" variant="secondary" asChild>
-            <a href="tel:+212600000000" className="flex items-center gap-2">
+            <a href="tel:+212777722311" className="flex items-center gap-2">
               <Phone className="h-5 w-5" />
-              Appelez immédiatement: +212 6 00 00 00 00
+              Appelez immédiatement: +212 7777 223 11
             </a>
           </Button>
         </div>

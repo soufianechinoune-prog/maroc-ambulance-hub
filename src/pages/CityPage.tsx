@@ -42,8 +42,8 @@ const CityPage = () => {
       description: "Service d'ambulance à Marrakech disponible jour et nuit. Intervention rapide, urgence, hospitalisation et transfert médicalisé.",
     },
     tanger: {
-      title: "Ambulance Tanger - Intervention Rapide & Transport Médical 24h",
-      description: "Ambulance à Tanger ? Service rapide et professionnel pour urgences, hospitalisation et transport médicalisé au nord du Maroc.",
+      title: "Ambulance Tanger - Service Médical 24h/24 | Ambulance Maroc",
+      description: "Urgence ou transport médical à Tanger ? Nos ambulances sont prêtes à intervenir 24h/24, avec du personnel qualifié et une couverture sur toute la région.",
     },
     agadir: {
       title: "Ambulance Agadir - Service 24h/24 pour Urgence & Transfert Médical",
@@ -377,6 +377,54 @@ const CityPage = () => {
               <div className="space-y-2 text-gray-700">
                 <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                 <p>📍 Casablanca & périphérie</p>
+                <p>🕐 Service 24h/24 – 7j/7</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Contenu SEO spécifique pour Tanger */}
+      {city.slug === 'tanger' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Tanger 24h/24 et 7j/7</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Que vous soyez un résident, un professionnel ou un visiteur, <strong>notre service d'ambulance à Tanger</strong> est prêt à intervenir à tout moment pour répondre à vos besoins médicaux.
+              Nous couvrons toutes les zones de Tanger : Malabata, centre-ville, Marshan, Branes, Mghogha, ainsi que la zone franche, l'aéroport ou le port de Tanger Med.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Tanger avec prise en charge complète</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Chaque intervention se fait avec un équipement médical complet, et une équipe formée : auxiliaires ambulanciers, infirmiers ou médecins selon les cas. 
+              <strong>Nous assurons aussi bien les urgences que les transferts programmés</strong> vers les hôpitaux publics ou cliniques privées.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zone d'intervention étendue sur toute la région de Tanger-Tétouan</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nous intervenons à Tanger mais aussi à Tétouan, Fnideq, M'diq, Assilah ou Ksar El Kebir. 
+              Appelez notre <strong>centre de coordination disponible 24h/24</strong> pour planifier un transport ou demander une ambulance en urgence.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous joindre ?</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Vous pouvez nous appeler directement au <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou cliquer sur le bouton WhatsApp depuis notre site pour une réponse immédiate.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">Pourquoi faire appel à Ambulance Maroc à Tanger ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Service disponible 24h/24 et 7j/7</li>
+              <li>✅ Couverture de toute la région Nord</li>
+              <li>✅ Ambulances équipées et climatisées</li>
+              <li>✅ Personnel qualifié, parlant arabe, français et parfois espagnol</li>
+              <li>✅ Assistance aux passagers de ferry, touristes ou entreprises</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                <p>📍 Tanger & région Nord</p>
                 <p>🕐 Service 24h/24 – 7j/7</p>
               </div>
             </div>

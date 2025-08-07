@@ -50,8 +50,8 @@ const CityPage = () => {
       description: "Besoin d'une ambulance à Agadir ? Transport d'urgence, transfert médicalisé, assistance hospitalière. Contactez-nous immédiatement.",
     },
     fes: {
-      title: "Ambulance Fès - Transport Sanitaire d'Urgence 24h/24",
-      description: "Ambulance à Fès disponible 24/7. Service de transport médical, urgence, transfert vers hôpital. Appelez maintenant pour intervention rapide.",
+      title: "Ambulance Fès - Service Médical d'Urgence 24h/24 | Ambulance Maroc",
+      description: "Besoin d'une ambulance à Fès ? Intervention rapide 24h/24, personnel qualifié et véhicules équipés. Appelez dès maintenant pour une prise en charge immédiate.",
     },
     meknes: {
       title: "Ambulance Meknès - Urgences Médicales & Transport Sanitaire",
@@ -123,7 +123,42 @@ const CityPage = () => {
     }
   } : undefined;
 
-  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || {
+  const fesJsonLd = city?.slug === 'fes' ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Ambulance Maroc - Fès",
+    "image": "https://www.ambulance-maroc.ma/images/ambulance-fes.jpg",
+    "@id": "https://www.ambulance-maroc.ma/ambulance-fes",
+    "url": "https://www.ambulance-maroc.ma/ambulance-fes",
+    "telephone": "+212600000000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Fès",
+      "addressCountry": "MA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 34.0331,
+      "longitude": -4.9998
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "Fès, Saïss, Fès-Meknès"
+    },
+    "description": "Service d'ambulance médicalisée à Fès. Intervention rapide, 24h/24, personnel qualifié, zones desservies : Fès, Sefrou, Meknès, Imouzzer, etc."
+  } : undefined;
+
+  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": `Ambulance ${city.name}`,
@@ -559,6 +594,54 @@ const CityPage = () => {
                 <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                 <p>📍 Rabat & régions alentours</p>
                 <p>🕐 Disponible 24h/24 – 7j/7</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Contenu SEO spécifique pour Fès */}
+      {city.slug === 'fes' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚑 Service Ambulance Fès disponible 24h/24 et 7j/7</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Avec Ambulance Maroc, bénéficiez d’un <strong>service d'ambulance à Fès</strong> fiable, professionnel et adapté à tous types de situations : urgence vitale, transfert médical, hospitalisation planifiée ou soins à domicile.
+              Nos équipes couvrent tous les quartiers : Fès el Bali, Fès el Jadid, Agdal, Saïss, Route d’Imouzzer, etc.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">🩺 Ambulances privées à Fès avec personnel qualifié</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nos ambulances sont médicalisées et pilotées par du personnel qualifié : auxiliaires ambulanciers, infirmiers ou médecins en fonction de la situation.
+              Chaque mission est encadrée dans le respect des normes de sécurité et de santé.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zone d’intervention étendue dans le Saïss et la région de Fès-Meknès</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nous desservons également les alentours : Sefrou, Imouzzer Kandar, Bhalil, Meknès, ou encore El Hajeb.
+              <strong>Appelez notre centrale 24h/24</strong> pour une intervention immédiate ou un transport planifié.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📞 Comment nous contacter ?</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Un simple appel suffit : <strong><a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline">+212 6 00 00 00 00</a></strong> ou contactez-nous via WhatsApp pour une réponse instantanée.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">Pourquoi faire confiance à Ambulance Maroc à Fès ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Intervention rapide dans tous les quartiers de Fès</li>
+              <li>✅ Service disponible 24/7 même les jours fériés</li>
+              <li>✅ Véhicules récents et parfaitement équipés</li>
+              <li>✅ Personnel formé aux urgences et gestes de premiers secours</li>
+              <li>✅ Couverture étendue à toute la région Fès-Saïss</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
+                <p>📍 Fès & région Fès-Meknès</p>
+                <p>🕐 Service 24h/24 – 7j/7</p>
               </div>
             </div>
           </div>

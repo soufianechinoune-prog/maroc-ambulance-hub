@@ -58,8 +58,8 @@ const CityPage = () => {
       description: "Ambulance à Meknès disponible 24h/24 pour urgences, transferts et hospitalisations. Service fiable, rapide et professionnel dans toute la région.",
     },
     oujda: {
-      title: "Ambulance Oujda - Intervention Immédiate & Transfert Hospitalier",
-      description: "Ambulance disponible à Oujda pour toute urgence. Transport médicalisé et hospitalisation. Appelez une équipe professionnelle 24h/24.",
+      title: "Ambulance Oujda - Service d'Urgence 24h/24 | Ambulance Maroc",
+      description: "Ambulance à Oujda disponible jour et nuit pour urgences médicales et transferts vers cliniques et hôpitaux. Intervention rapide et professionnelle 7j/7.",
     },
     tetouan: {
       title: "Ambulance Tétouan - Service Ambulancier 24/7",
@@ -298,7 +298,42 @@ const CityPage = () => {
     "description": "Service d’ambulance à Meknès 24h/24 – Urgences, transferts médicaux et hospitaliers, coordination avec les établissements de soins. Équipe expérimentée."
   } : undefined;
 
-  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || mohammediaJsonLd || kenitraJsonLd || meknesJsonLd || {
+  const oujdaJsonLd = city?.slug === 'oujda' ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Ambulance Maroc - Oujda",
+    "image": "https://www.ambulance-maroc.ma/images/ambulance-oujda.jpg",
+    "@id": "https://www.ambulance-maroc.ma/ambulance-oujda",
+    "url": "https://www.ambulance-maroc.ma/ambulance-oujda",
+    "telephone": "+212600000000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Oujda",
+      "addressCountry": "MA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 34.6835,
+      "longitude": -1.9086
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "Oujda et région de l’Oriental"
+    },
+    "description": "Service ambulance 24h/24 à Oujda pour urgences médicales, évacuations et transferts. Équipe qualifiée, véhicules équipés, intervention rapide."
+  } : undefined;
+
+  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || mohammediaJsonLd || kenitraJsonLd || meknesJsonLd || oujdaJsonLd || {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": `Ambulance ${city.name}`,
@@ -924,6 +959,55 @@ const CityPage = () => {
               <div className="space-y-2 text-gray-700">
                 <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
                 <p>📍 Kénitra & région Gharb</p>
+                <p>🕐 Service permanent 24h/24 – 7j/7</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Contenu SEO spécifique pour Oujda */}
+      {city.slug === 'oujda' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Ambulance Oujda – Disponible 24h/24 et 7j/7</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              En cas d’urgence médicale à Oujda, notre service d’ambulance intervient rapidement dans tous les quartiers de la ville, de <strong>Sidi Yahya</strong> à <strong>Hay El Qods</strong>,
+              en passant par <strong>Al Boustane</strong>, <strong>Hay Al Matar</strong>, et <strong>Centre-ville</strong>. Nous couvrons également l’aéroport, la zone industrielle, et les localités proches comme <strong>Ahfir</strong>, <strong>Jerada</strong> et <strong>Berkane</strong>.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Équipe professionnelle et véhicules médicalisés</h3>
+            <p className="mb-4 text-gray-700 leading-relaxed">
+              Nos ambulances sont climatisées, bien équipées et conduites par des professionnels formés. Nous assurons :
+            </p>
+            <ul className="list-disc list-inside mb-4 text-gray-700 space-y-2">
+              <li>✅ Les urgences médicales</li>
+              <li>✅ Les transferts inter-hôpitaux</li>
+              <li>✅ Les rapatriements privés</li>
+            </ul>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Chaque intervention peut inclure un auxiliaire ambulancier, un infirmier ou un médecin selon le besoin.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📞 Contact rapide</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Appelez notre standard 24/24 au <strong><a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline">+212 6 00 00 00 00</a></strong> ou contactez-nous par WhatsApp pour une réponse immédiate.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">✔️ Pourquoi Ambulance Maroc à Oujda ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Intervention rapide à Oujda et ses environs</li>
+              <li>✅ Ambulances modernes, propres et climatisées</li>
+              <li>✅ Couverture 24h/24 – 7j/7</li>
+              <li>✅ Coordination avec les cliniques et CHU de l’Oriental</li>
+              <li>✅ Équipe multilingue (arabe, français)</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
+                <p>📍 Oujda & région de l'Oriental</p>
                 <p>🕐 Service permanent 24h/24 – 7j/7</p>
               </div>
             </div>

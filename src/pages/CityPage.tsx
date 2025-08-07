@@ -38,8 +38,8 @@ const CityPage = () => {
       description: "Urgence médicale à Rabat ? Nos ambulances interviennent 7j/7. Transport patient, accident, hospitalisation. Réservez maintenant.",
     },
     marrakech: {
-      title: "Ambulance Marrakech - Transport Médicalisé & Urgences 24h/24",
-      description: "Service d'ambulance à Marrakech disponible jour et nuit. Intervention rapide, urgence, hospitalisation et transfert médicalisé.",
+      title: "🚑 Ambulance Marrakech - Intervention rapide 24h/24 | Ambulance Maroc",
+      description: "Besoin d'une ambulance à Marrakech ? Nos équipes interviennent 24h/24 en moins de 15 min. Services médicaux, touristiques et urgences. 📞 +212 7777 223 11",
     },
     tanger: {
       title: "Ambulance Tanger - Service Médical 24h/24 | Ambulance Maroc",
@@ -84,7 +84,27 @@ const CityPage = () => {
   const description = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const canonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
 
-  const jsonLd = city ? {
+  // JSON-LD spécifique pour Marrakech
+  const marrakechJsonLd = city?.slug === 'marrakech' ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Ambulance Marrakech",
+    "image": "https://www.ambulance-maroc.ma/images/ambulance-marrakech.jpg",
+    "url": "https://www.ambulance-maroc.ma/ambulance-marrakech",
+    "telephone": "+212777722311",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Marrakech",
+      "addressCountry": "MA"
+    },
+    "openingHours": "24/7",
+    "areaServed": {
+      "@type": "City",
+      "name": "Marrakech"
+    }
+  } : undefined;
+
+  const jsonLd = city ? (marrakechJsonLd || {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": `Ambulance ${city.name}`,
@@ -109,7 +129,7 @@ const CityPage = () => {
         }
       ]
     }
-  } : undefined;
+  }) : undefined;
 
   if (!city) {
     return (

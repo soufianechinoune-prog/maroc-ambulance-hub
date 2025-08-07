@@ -74,8 +74,8 @@ const CityPage = () => {
       description: "Ambulance privée à Mohammedia disponible pour urgence et hospitalisation. Intervention express et accompagnement médical.",
     },
     kenitra: {
-      title: "Ambulance Kénitra - Transport Ambulancier Rapide 24h/24",
-      description: "Service ambulance à Kénitra : urgences, transferts hospitaliers, accidents. Intervention immédiate avec équipe qualifiée.",
+      title: "Ambulance Kénitra - Intervention Médicale Urgente 24h/24 | Ambulance Maroc",
+      description: "Ambulance à Kénitra disponible jour et nuit. Transferts hospitaliers, urgences, évacuations sanitaires. Équipe qualifiée. Appel immédiat possible.",
     },
   };
 
@@ -228,7 +228,42 @@ const CityPage = () => {
     "description": "Ambulance à Mohammedia disponible 24h/24 pour urgences, transferts médicaux, évacuations sanitaires. Zones couvertes : centre-ville, plage, Zenata, Mansouria, zone industrielle."
   } : undefined;
 
-  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || mohammediaJsonLd || {
+  const kenitraJsonLd = city?.slug === 'kenitra' ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Ambulance Maroc - Kénitra",
+    "image": "https://www.ambulance-maroc.ma/images/ambulance-kenitra.jpg",
+    "@id": "https://www.ambulance-maroc.ma/ambulance-kenitra",
+    "url": "https://www.ambulance-maroc.ma/ambulance-kenitra",
+    "telephone": "+212600000000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kénitra",
+      "addressCountry": "MA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 34.2610,
+      "longitude": -6.5790
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "Kénitra et région Gharb"
+    },
+    "description": "Ambulance à Kénitra – Urgences et transferts médicaux 24h/24 vers CHU, cliniques, Mehdia, Sidi Taïbi et toute la région. Équipe formée et matériel complet."
+  } : undefined;
+
+  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || mohammediaJsonLd || kenitraJsonLd || {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": `Ambulance ${city.name}`,
@@ -808,6 +843,53 @@ const CityPage = () => {
                 <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
                 <p>📍 Mohammedia & périphérie</p>
                 <p>🕐 Service permanent 24h/24</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Contenu SEO spécifique pour Kénitra */}
+      {city.slug === 'kenitra' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Ambulance Kénitra - Intervention 24h/24</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Vous êtes à <strong>Kénitra</strong> et avez besoin d’un transport médicalisé ? Que ce soit pour une urgence, une hospitalisation programmée ou un transfert médical,
+              notre <strong>service d’ambulance à Kénitra</strong> est disponible 24h/24 et 7j/7.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Couverture complète de la ville et des alentours</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nous intervenons dans tous les quartiers : Maamora, Val Fleuri, Ouled Oujih, Centre-ville, Saknia, Université Ibn Tofail, et dans les communes périphériques : Mehdia, Sidi Taïbi, Sidi Yahya, Souk El Arbaa.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">🚑 Ambulances modernes et personnel qualifié</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nos ambulances privées sont équipées d’oxygène, de matériel de réanimation, de brancards confortables et d’une équipe médicale ou paramédicale selon le cas :
+              auxiliaires, infirmiers ou médecin.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📞 Contactez-nous 24h/24</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Notre centre de régulation est joignable à tout moment. Appelez le <strong><a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline">+212 6 00 00 00 00</a></strong> ou utilisez le bouton WhatsApp disponible sur notre site.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">✔️ Pourquoi faire confiance à Ambulance Maroc à Kénitra ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Disponibilité immédiate 24h/24</li>
+              <li>✅ Couverture urbaine et rurale</li>
+              <li>✅ Ambulances climatisées et médicalisées</li>
+              <li>✅ Personnel expérimenté et bilingue</li>
+              <li>✅ Transferts vers CHU, cliniques, centres de dialyse ou aéroports</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
+                <p>📍 Kénitra & région Gharb</p>
+                <p>🕐 Service permanent 24h/24 – 7j/7</p>
               </div>
             </div>
           </div>

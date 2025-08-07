@@ -193,7 +193,42 @@ const CityPage = () => {
     "description": "Service d'ambulance à Agadir disponible 24h/24 pour les urgences, transferts et soins médicaux. Zones couvertes : centre-ville, Inezgane, Aït Melloul, Dcheira, Taroudant."
   } : undefined;
 
-  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || {
+  const mohammediaJsonLd = city?.slug === 'mohammedia' ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Ambulance Maroc - Mohammedia",
+    "image": "https://www.ambulance-maroc.ma/images/ambulance-mohammedia.jpg",
+    "@id": "https://www.ambulance-maroc.ma/ambulance-mohammedia",
+    "url": "https://www.ambulance-maroc.ma/ambulance-mohammedia",
+    "telephone": "+212600000000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mohammedia",
+      "addressCountry": "MA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 33.6861,
+      "longitude": -7.3847
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "Mohammedia et environs"
+    },
+    "description": "Ambulance à Mohammedia disponible 24h/24 pour urgences, transferts médicaux, évacuations sanitaires. Zones couvertes : centre-ville, plage, Zenata, Mansouria, zone industrielle."
+  } : undefined;
+
+  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || mohammediaJsonLd || {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": `Ambulance ${city.name}`,
@@ -725,6 +760,54 @@ const CityPage = () => {
                 <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
                 <p>📍 Agadir & région Souss-Massa</p>
                 <p>🕐 Service disponible 24h/24 et 7j/7</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Contenu SEO spécifique pour Mohammedia */}
+      {city.slug === 'mohammedia' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Mohammedia - Urgences 24h/24</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Notre service d'<strong>ambulance à Mohammedia</strong> est disponible à toute heure pour répondre à vos besoins : urgences, hospitalisations, soins à domicile ou transferts médicaux.
+              Nous couvrons tous les quartiers : Al Wifaq, Sablettes, Al Houria, Hay Salam, El Alia, ainsi que la zone industrielle et la plage.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👩‍⚕️ Équipe médicale professionnelle et véhicules équipés</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nos ambulances privées sont équipées pour assurer une prise en charge optimale avec brancards, oxygène, matériel de secours et défibrillateur. 
+              <strong>Notre personnel est formé et certifié</strong> : auxiliaires, infirmiers et parfois médecin à bord selon le cas.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zone couverte à Mohammedia et alentours</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nous intervenons aussi dans les environs : Zenata, Mansouria, Ben Yakhlef ou jusqu’à Aïn Harrouda. 
+              Contactez notre <strong>standard 24h/24</strong> pour une intervention rapide ou une prise de rendez-vous.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📞 Comment nous contacter ?</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Appelez notre équipe au <strong><a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline">+212 6 00 00 00 00</a></strong> ou utilisez le bouton WhatsApp de notre site pour une réponse immédiate.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">Pourquoi faire confiance à Ambulance Maroc à Mohammedia ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Disponibilité 24/7</li>
+              <li>✅ Intervention dans toute la région de Mohammedia</li>
+              <li>✅ Équipements médicaux à bord</li>
+              <li>✅ Personnel qualifié et empathique</li>
+              <li>✅ Ambulances pour particuliers, hôtels, entreprises et professionnels de santé</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
+                <p>📍 Mohammedia & périphérie</p>
+                <p>🕐 Service permanent 24h/24</p>
               </div>
             </div>
           </div>

@@ -34,8 +34,8 @@ const CityPage = () => {
       description: "Besoin d'une ambulance à Casablanca ? Service rapide, professionnel et disponible 24h/24 pour toutes vos urgences médicales. Contactez-nous immédiatement.",
     },
     rabat: {
-      title: "Ambulance Rabat - Service d'Urgence Médicale & Transport Sanitaire",
-      description: "Urgence médicale à Rabat ? Nos ambulances interviennent 7j/7. Transport patient, accident, hospitalisation. Réservez maintenant.",
+      title: "Ambulance Rabat - Service d'Urgence 24h/24 | Ambulance Maroc",
+      description: "Besoin d'une ambulance à Rabat ? Intervention rapide, 24h/24, dans tous les quartiers. Équipe médicale expérimentée, véhicules équipés. Appelez-nous dès maintenant.",
     },
     marrakech: {
       title: "🚑 Ambulance Marrakech - Intervention rapide 24h/24 | Ambulance Maroc",
@@ -84,7 +84,7 @@ const CityPage = () => {
   const description = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const canonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
 
-  // JSON-LD spécifique pour Marrakech
+  // JSON-LD spécifique pour Marrakech et Rabat
   const marrakechJsonLd = city?.slug === 'marrakech' ? {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
@@ -104,7 +104,26 @@ const CityPage = () => {
     }
   } : undefined;
 
-  const jsonLd = city ? (marrakechJsonLd || {
+  const rabatJsonLd = city?.slug === 'rabat' ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Ambulance Rabat",
+    "image": "https://www.ambulance-maroc.ma/images/ambulance-rabat.jpg",
+    "url": "https://www.ambulance-maroc.ma/ambulance-rabat",
+    "telephone": "+212777722311",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rabat",
+      "addressCountry": "MA"
+    },
+    "openingHours": "24/7",
+    "areaServed": {
+      "@type": "City",
+      "name": "Rabat"
+    }
+  } : undefined;
+
+  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": `Ambulance ${city.name}`,
@@ -493,6 +512,53 @@ const CityPage = () => {
                 <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                 <p>📍 Tanger & région Nord</p>
                 <p>🕐 Service 24h/24 – 7j/7</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Contenu SEO spécifique pour Rabat */}
+      {city.slug === 'rabat' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat 24h/24 et 7j/7</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Vous êtes à Rabat et avez besoin d'une intervention médicale rapide ? <strong>Notre service d'ambulance à Rabat</strong> couvre toutes les zones : Agdal, Hay Riad, Souissi, Centre-Ville, Yacoub El Mansour, Océan, et même Salé. Disponibles 24h/24 et 7j/7, nous intervenons en moins de 15 minutes.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Rabat avec équipement complet</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nos véhicules sont climatisés, équipés de tout le matériel nécessaire, et accompagnés d'un personnel formé : auxiliaires, infirmiers et médecins selon les besoins. 
+              <strong>Transferts cliniques, urgences à domicile, évacuations</strong> : nous répondons à tous les besoins.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zones couvertes à Rabat et périphérie</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nous intervenons à Rabat, mais aussi dans les zones périphériques comme Salé, Témara, Skhirat, Ain Atiq, Harhoura, et plus encore. 
+              Notre standard est disponible <strong>24h/24</strong> pour toute demande d'ambulance privée ou médicalisée.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Contact rapide</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez le bouton WhatsApp sur notre site pour nous contacter immédiatement.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">Pourquoi choisir Ambulance Maroc à Rabat ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Réponse rapide 24h/24 – 7j/7</li>
+              <li>✅ Couverture large : Rabat + périphérie</li>
+              <li>✅ Ambulances équipées, climatisées, sécurisées</li>
+              <li>✅ Personnel professionnel multilingue (FR/AR)</li>
+              <li>✅ Adapté aux particuliers, entreprises, événements</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                <p>📍 Rabat & régions alentours</p>
+                <p>🕐 Disponible 24h/24 – 7j/7</p>
               </div>
             </div>
           </div>

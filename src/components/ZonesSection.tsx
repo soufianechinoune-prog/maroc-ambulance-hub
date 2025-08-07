@@ -2,7 +2,6 @@ import { MapPin, Clock, Phone } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const ZonesSection = () => {
   const cities = [
@@ -115,46 +114,40 @@ const ZonesSection = () => {
           </p>
         </div>
 
-        {/* Mobile city list (accordion) */}
-        <div className="md:hidden mb-10" aria-label="Villes - navigation mobile">
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="main">
-              <AccordionTrigger className="text-base font-semibold">Villes Principales</AccordionTrigger>
-              <AccordionContent>
-                <ul className="grid grid-cols-1 gap-2">
-                  {mainCities.map((city, index) => (
-                    <li key={index}>
-                      <Link
-                        to={`/ambulance-${city.slug}`}
-                        className="block rounded-lg border border-border bg-card px-4 py-3 text-foreground hover:bg-accent/30 hover:text-primary transition-colors"
-                        aria-label={`Ambulance ${city.name}`}
-                      >
-                        Ambulance à {city.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="others">
-              <AccordionTrigger className="text-base font-semibold">Autres Villes Couvertes</AccordionTrigger>
-              <AccordionContent>
-                <ul className="grid grid-cols-1 gap-2">
-                  {otherCities.map((city, index) => (
-                    <li key={index}>
-                      <Link
-                        to={`/ambulance-${city.slug}`}
-                        className="block rounded-lg border border-border bg-card px-4 py-3 text-foreground hover:bg-accent/30 hover:text-primary transition-colors"
-                        aria-label={`Voir les infos pour ${city.name}`}
-                      >
-                        Voir les infos pour {city.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+        {/* Mobile city list (compact grid) */}
+        <div className="md:hidden mb-10 space-y-8" aria-label="Villes - navigation mobile">
+          <section>
+            <h3 className="text-base font-semibold text-foreground mb-3">Villes Principales</h3>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {mainCities.map((city, index) => (
+                <li key={index}>
+                  <Link
+                    to={`/ambulance-${city.slug}`}
+                    className="block rounded-lg border border-border bg-card px-4 py-3 text-foreground hover:border-primary hover:bg-accent/30 hover:text-primary transition-colors"
+                    aria-label={`Ambulance ${city.name}`}
+                  >
+                    Ambulance à {city.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section>
+            <h3 className="text-base font-semibold text-foreground mb-3">Autres Villes Couvertes</h3>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {otherCities.map((city, index) => (
+                <li key={index}>
+                  <Link
+                    to={`/ambulance-${city.slug}`}
+                    className="block rounded-lg border border-border bg-card px-4 py-3 text-foreground hover:border-primary hover:bg-accent/30 hover:text-primary transition-colors"
+                    aria-label={`Voir les infos pour ${city.name}`}
+                  >
+                    Voir les infos pour {city.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
         </div>
 
         {/* Main Cities */}

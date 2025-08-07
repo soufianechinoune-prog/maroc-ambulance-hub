@@ -46,8 +46,8 @@ const CityPage = () => {
       description: "Urgence ou transport médical à Tanger ? Nos ambulances sont prêtes à intervenir 24h/24, avec du personnel qualifié et une couverture sur toute la région.",
     },
     agadir: {
-      title: "Ambulance Agadir - Service 24h/24 pour Urgence & Transfert Médical",
-      description: "Besoin d'une ambulance à Agadir ? Transport d'urgence, transfert médicalisé, assistance hospitalière. Contactez-nous immédiatement.",
+      title: "Ambulance Agadir - Service d'Urgence 24h/24 | Ambulance Maroc",
+      description: "Besoin d'une ambulance à Agadir ? Service rapide, sécurisé et disponible 24h/24 pour tous types d'urgences médicales dans la région Souss-Massa.",
     },
     fes: {
       title: "Ambulance Fès - Service Médical d'Urgence 24h/24 | Ambulance Maroc",
@@ -158,7 +158,42 @@ const CityPage = () => {
     "description": "Service d'ambulance médicalisée à Fès. Intervention rapide, 24h/24, personnel qualifié, zones desservies : Fès, Sefrou, Meknès, Imouzzer, etc."
   } : undefined;
 
-  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || {
+  const agadirJsonLd = city?.slug === 'agadir' ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Ambulance Maroc - Agadir",
+    "image": "https://www.ambulance-maroc.ma/images/ambulance-agadir.jpg",
+    "@id": "https://www.ambulance-maroc.ma/ambulance-agadir",
+    "url": "https://www.ambulance-maroc.ma/ambulance-agadir",
+    "telephone": "+212600000000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Agadir",
+      "addressCountry": "MA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 30.4278,
+      "longitude": -9.5981
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "Agadir, Souss-Massa"
+    },
+    "description": "Service d'ambulance à Agadir disponible 24h/24 pour les urgences, transferts et soins médicaux. Zones couvertes : centre-ville, Inezgane, Aït Melloul, Dcheira, Taroudant."
+  } : undefined;
+
+  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": `Ambulance ${city.name}`,
@@ -642,6 +677,54 @@ const CityPage = () => {
                 <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
                 <p>📍 Fès & région Fès-Meknès</p>
                 <p>🕐 Service 24h/24 – 7j/7</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Contenu SEO spécifique pour Agadir */}
+      {city.slug === 'agadir' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Agadir 24h/24 et 7j/7</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              <strong>Ambulance Maroc intervient rapidement à Agadir</strong> pour toutes vos urgences : soins à domicile, transferts hospitaliers, évacuations médicales ou transport sanitaire.
+              Nos véhicules couvrent le centre-ville ainsi que les zones périphériques comme Dcheira, Aït Melloul, Inezgane, Hay Mohammadi, Cité Dakhla, etc.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Agadir avec équipements complets</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nos ambulances sont équipées de matériel de réanimation et de surveillance. 
+              Chaque intervention est assurée par du personnel qualifié : ambulanciers, infirmiers ou médecins, selon le niveau d'urgence.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Intervention dans toute la région Souss-Massa</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nous intervenons également dans les zones proches : Inezgane, Aït Melloul, Tikiouine, Drarga, ou même jusqu’à Taroudant si besoin.
+              Appelez notre <strong>centre de régulation 24h/24</strong> pour une prise en charge rapide.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous joindre ?</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Contactez-nous immédiatement au <strong><a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline">+212 6 00 00 00 00</a></strong> ou cliquez sur le bouton WhatsApp pour une réponse immédiate.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">Pourquoi faire confiance à Ambulance Maroc à Agadir ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Disponibilité 24h/24 – 7j/7</li>
+              <li>✅ Couverture large de toute la région Souss-Massa</li>
+              <li>✅ Équipements médicaux de pointe</li>
+              <li>✅ Personnel qualifié et bienveillant</li>
+              <li>✅ Service d’ambulance privé pour particuliers, entreprises ou hôtels</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
+                <p>📍 Agadir & région Souss-Massa</p>
+                <p>🕐 Service disponible 24h/24 et 7j/7</p>
               </div>
             </div>
           </div>

@@ -23,13 +23,15 @@ export default function SEO({
   noIndex = false, 
   jsonLdMultiple 
 }: Props) {
-  const ogImg = image ?? "/default-seo-image.jpg";
+  const ogImg = image ?? "/default-ambulance.jpg";
   
   return (
     <>
-      <Helmet>
+      <Helmet htmlAttributes={{ lang: "fr" }}>
         <title>{title}</title>
         <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="author" content={author || "Ambulance Maroc"} />
         <link rel="canonical" href={canonical} />
         
         {/* Robots meta */}
@@ -44,17 +46,13 @@ export default function SEO({
           <meta name="keywords" content={keywords.join(", ")} />
         )}
         
-        {/* Author meta */}
-        {author && (
-          <meta name="author" content={author} />
-        )}
-        
         {/* OpenGraph meta tags */}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <meta property="og:image" content={ogImg} />
+        <meta property="og:locale" content="fr_MA" />
         
         {/* Twitter Card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />

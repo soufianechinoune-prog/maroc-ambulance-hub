@@ -27,9 +27,61 @@ const CityPage = () => {
   const city = cities.find(c => c.slug === slug);
   const siteUrl = "https://www.ambulance-maroc.ma";
 
-  // SEO data
-  const title = city ? `Ambulance à ${city.name} – Intervention rapide 24/7 | Ambulance Maroc` : "Ville non trouvée";
-  const description = city ? `Ambulance à ${city.name}, intervention 24/7. Temps de réponse ${city.responseTime}. ${city.coverage}.` : "";
+  // SEO data optimisé pour chaque ville
+  const seoData = {
+    casablanca: {
+      title: "Ambulance Casablanca - Urgence 24h/24 & Transport Médical Maroc",
+      description: "Besoin d'une ambulance à Casablanca ? Intervention rapide 24h/24, transport médicalisé, assistance urgence et hospitalisation. Appelez maintenant.",
+    },
+    rabat: {
+      title: "Ambulance Rabat - Service d'Urgence Médicale & Transport Sanitaire",
+      description: "Urgence médicale à Rabat ? Nos ambulances interviennent 7j/7. Transport patient, accident, hospitalisation. Réservez maintenant.",
+    },
+    marrakech: {
+      title: "Ambulance Marrakech - Transport Médicalisé & Urgences 24h/24",
+      description: "Service d'ambulance à Marrakech disponible jour et nuit. Intervention rapide, urgence, hospitalisation et transfert médicalisé.",
+    },
+    tanger: {
+      title: "Ambulance Tanger - Intervention Rapide & Transport Médical 24h",
+      description: "Ambulance à Tanger ? Service rapide et professionnel pour urgences, hospitalisation et transport médicalisé au nord du Maroc.",
+    },
+    agadir: {
+      title: "Ambulance Agadir - Service 24h/24 pour Urgence & Transfert Médical",
+      description: "Besoin d'une ambulance à Agadir ? Transport d'urgence, transfert médicalisé, assistance hospitalière. Contactez-nous immédiatement.",
+    },
+    fes: {
+      title: "Ambulance Fès - Transport Sanitaire d'Urgence 24h/24",
+      description: "Ambulance à Fès disponible 24/7. Service de transport médical, urgence, transfert vers hôpital. Appelez maintenant pour intervention rapide.",
+    },
+    meknes: {
+      title: "Ambulance Meknès - Urgences Médicales & Transport Sanitaire",
+      description: "Service d'ambulance rapide et efficace à Meknès. Transfert vers hôpitaux, urgence médicale, assistance 24h/24.",
+    },
+    oujda: {
+      title: "Ambulance Oujda - Intervention Immédiate & Transfert Hospitalier",
+      description: "Ambulance disponible à Oujda pour toute urgence. Transport médicalisé et hospitalisation. Appelez une équipe professionnelle 24h/24.",
+    },
+    tetouan: {
+      title: "Ambulance Tétouan - Service Ambulancier 24/7",
+      description: "Ambulance à Tétouan pour urgences, accident, hospitalisation ou transfert médical. Disponible tous les jours.",
+    },
+    laayoune: {
+      title: "Ambulance Laâyoune - Transport Médical Rapid et Fiable",
+      description: "Intervention ambulanciere à Laâyoune en urgence. Transfert hospitalier, assistance médicale, prise en charge rapide.",
+    },
+    mohammedia: {
+      title: "Ambulance Mohammedia - Services Sanitaires Immédiats",
+      description: "Ambulance privée à Mohammedia disponible pour urgence et hospitalisation. Intervention express et accompagnement médical.",
+    },
+    kenitra: {
+      title: "Ambulance Kénitra - Transport Ambulancier Rapide 24h/24",
+      description: "Service ambulance à Kénitra : urgences, transferts hospitaliers, accidents. Intervention immédiate avec équipe qualifiée.",
+    },
+  };
+
+  const cityData = seoData[city?.slug] || {};
+  const title = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
+  const description = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const canonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
 
   const jsonLd = city ? {

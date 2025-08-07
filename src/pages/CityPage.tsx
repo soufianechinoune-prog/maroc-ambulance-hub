@@ -1210,17 +1210,23 @@ const CityPage = () => {
       </div>
 
       {/* Maillage interne: autres villes */}
-      <section className="mt-10 px-4" aria-label="Liens vers d'autres services d'ambulance au Maroc">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xl font-semibold mb-4">🚑 Autres services d'ambulance au Maroc</h2>
-          <ul className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
+      <section className="mt-16 px-4 sm:px-6 lg:px-8 py-10 bg-muted/50 border-t border-border" aria-label="Autres villes couvertes">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-xl font-bold mb-6 text-center">🏙️ Autres Villes Couvertes</h2>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {relatedCities.map((c) => (
-              <li key={c.slug}>
+              <li
+                key={c.slug}
+                className="group bg-card hover:bg-accent rounded-lg p-4 shadow-sm hover:shadow-md transition-colors ring-1 ring-border"
+              >
+                <div className="text-lg font-medium text-foreground">{c.name}</div>
+                <div className="text-sm text-muted-foreground">🚑 Intervention 15–30 min</div>
                 <a
                   href={`/ambulance-${c.slug}`}
-                  className="underline text-primary hover:text-primary/80 transition-colors"
+                  className="mt-2 inline-flex items-center gap-1 text-sm text-primary underline hover:text-primary/80 transition-colors"
+                  aria-label={`Voir la page Ambulance à ${c.name}`}
                 >
-                  Ambulance à {c.name}
+                  👉 Voir la page
                 </a>
               </li>
             ))}

@@ -62,8 +62,8 @@ const CityPage = () => {
       description: "Ambulance à Oujda disponible jour et nuit pour urgences médicales et transferts vers cliniques et hôpitaux. Intervention rapide et professionnelle 7j/7.",
     },
     tetouan: {
-      title: "Ambulance Tétouan - Service Ambulancier 24/7",
-      description: "Ambulance à Tétouan pour urgences, accident, hospitalisation ou transfert médical. Disponible tous les jours.",
+      title: "Ambulance Tétouan - Service d’Urgence 24h/24 | Ambulance Maroc",
+      description: "Ambulance à Tétouan disponible 24h/24 pour toutes urgences médicales. Transferts vers hôpitaux, interventions rapides, et équipes qualifiées.",
     },
     laayoune: {
       title: "Ambulance Laâyoune - Transport Médical Rapid et Fiable",
@@ -333,7 +333,42 @@ const CityPage = () => {
     "description": "Service ambulance 24h/24 à Oujda pour urgences médicales, évacuations et transferts. Équipe qualifiée, véhicules équipés, intervention rapide."
   } : undefined;
 
-  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || mohammediaJsonLd || kenitraJsonLd || meknesJsonLd || oujdaJsonLd || {
+  const tetouanJsonLd = city?.slug === 'tetouan' ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Ambulance Maroc - Tétouan",
+    "image": "https://www.ambulance-maroc.ma/images/ambulance-tetouan.jpg",
+    "@id": "https://www.ambulance-maroc.ma/ambulance-tetouan",
+    "url": "https://www.ambulance-maroc.ma/ambulance-tetouan",
+    "telephone": "+212600000000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tétouan",
+      "addressCountry": "MA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 35.5714,
+      "longitude": -5.3626
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "Tétouan, M’diq, Fnideq, Martil, Nord Maroc"
+    },
+    "description": "Service d'ambulance à Tétouan, disponible jour et nuit pour les urgences, transferts médicaux et interventions sanitaires dans toute la région Nord."
+  } : undefined;
+
+  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || mohammediaJsonLd || kenitraJsonLd || meknesJsonLd || oujdaJsonLd || tetouanJsonLd || {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": `Ambulance ${city.name}`,
@@ -1009,6 +1044,53 @@ const CityPage = () => {
                 <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
                 <p>📍 Oujda & région de l'Oriental</p>
                 <p>🕐 Service permanent 24h/24 – 7j/7</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Contenu SEO spécifique pour Tétouan */}
+      {city.slug === 'tetouan' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance à Tétouan – 24h/24 et 7j/7</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Besoin d’une ambulance à Tétouan ou dans les environs ? Notre service est disponible à tout moment pour les urgences ou les transferts médicaux.
+              Nous couvrons tous les quartiers de Tétouan : <strong>El Balad, Al Mandar Al Jamil, Avenue des FAR, Hay Kharroub</strong>, ainsi que les villes côtières comme <strong>Fnideq, M’diq, Martil et Cabo Negro</strong>.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Équipe qualifiée et matériel médical complet</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nos ambulances sont modernes, climatisées et équipées pour tous types de situations : <strong>urgence, évacuation, transport inter-hôpitaux, etc.</strong><br/>
+              Notre personnel est composé d’ambulanciers diplômés, infirmiers et médecins d’urgence si besoin.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zone d’intervention étendue – Nord Maroc</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nous intervenons rapidement sur toute la région de Tétouan et ses alentours, jusqu’à Fnideq, M’diq, Chefchaouen, Ksar El Kebir et Tanger.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📞 Contact rapide – 24h/24</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Appelez le <strong><a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline">+212 6 00 00 00 00</a></strong> ou cliquez sur le bouton WhatsApp pour une assistance immédiate.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc à Tétouan ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Intervention rapide dans tout le Nord</li>
+              <li>✅ Service disponible 24h/24 – 7j/7</li>
+              <li>✅ Ambulances équipées et climatisées</li>
+              <li>✅ Équipe multilingue : arabe, français, espagnol</li>
+              <li>✅ Partenariat avec hôpitaux et cliniques privées</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
+                <p>📍 Tétouan & région Nord</p>
+                <p>🕐 Service 24h/24 – 7j/7</p>
               </div>
             </div>
           </div>

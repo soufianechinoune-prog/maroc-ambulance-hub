@@ -8,6 +8,7 @@ import ServicesSection from "@/components/ServicesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactForm from "@/components/ContactForm";
 import SEO from "@/components/SEO";
+import { generateLocalBusinessSchema } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle } from "lucide-react";
@@ -395,6 +396,12 @@ const CityPage = () => {
     }
   }) : undefined;
 
+  // LocalBusiness JSON-LD (dynamic for all cities)
+  const localBusinessSchema = city ? generateLocalBusinessSchema(city) : undefined;
+  const jsonLdArray: Record<string, any>[] = [];
+  if (localBusinessSchema) jsonLdArray.push(localBusinessSchema);
+  if (jsonLd) jsonLdArray.push(jsonLd);
+
   if (!city) {
     return (
       <div className="min-h-screen bg-background">
@@ -417,7 +424,7 @@ const CityPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title={title} description={description} canonical={canonical} jsonLd={jsonLd} />
+      <SEO title={title} description={description} canonical={canonical} jsonLdMultiple={jsonLdArray} />
       <Header city={city.name} />
       
       {/* Hero Section - Identique à la Home Page mais personnalisée */}

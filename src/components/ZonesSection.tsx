@@ -143,9 +143,9 @@ const ZonesSection = () => {
                     <span className="text-muted-foreground">Disponibilité</span>
                     <span className="font-semibold text-primary">{city.coverage}</span>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full mt-3" asChild>
-                    <Link to={`/ambulance-${city.slug}`}>
-                      Page dédiée {city.name}
+                  <Button variant="default" size="sm" className="w-full mt-3" asChild>
+                    <Link to={`/ambulance-${city.slug}`} aria-label={`Voir la page dédiée ${city.name}`}>
+                      Voir la page dédiée
                     </Link>
                   </Button>
                 </CardContent>
@@ -171,9 +171,11 @@ const ZonesSection = () => {
                       <Clock className="h-3 w-3 mr-1" aria-hidden="true" />
                       {city.responseTime}
                     </div>
-                    <Button variant="ghost" size="sm" className="text-xs" asChild>
-                      <Link to={`/ambulance-${city.slug}`}>Voir la page</Link>
-                    </Button>
+                      <Button variant="default" size="sm" className="mt-2" asChild>
+                        <Link to={`/ambulance-${city.slug}`} aria-label={`Voir les infos pour ${city.name}`}>
+                          Voir les infos pour {city.name}
+                        </Link>
+                      </Button>
                   </div>
                 </CardContent>
               </Card>

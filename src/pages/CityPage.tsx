@@ -54,8 +54,8 @@ const CityPage = () => {
       description: "Besoin d'une ambulance à Fès ? Intervention rapide 24h/24, personnel qualifié et véhicules équipés. Appelez dès maintenant pour une prise en charge immédiate.",
     },
     meknes: {
-      title: "Ambulance Meknès - Urgences Médicales & Transport Sanitaire",
-      description: "Service d'ambulance rapide et efficace à Meknès. Transfert vers hôpitaux, urgence médicale, assistance 24h/24.",
+      title: "Ambulance Meknès - Intervention Médicale Rapide 24h/24 | Ambulance Maroc",
+      description: "Ambulance à Meknès disponible 24h/24 pour urgences, transferts et hospitalisations. Service fiable, rapide et professionnel dans toute la région.",
     },
     oujda: {
       title: "Ambulance Oujda - Intervention Immédiate & Transfert Hospitalier",
@@ -263,7 +263,42 @@ const CityPage = () => {
     "description": "Ambulance à Kénitra – Urgences et transferts médicaux 24h/24 vers CHU, cliniques, Mehdia, Sidi Taïbi et toute la région. Équipe formée et matériel complet."
   } : undefined;
 
-  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || mohammediaJsonLd || kenitraJsonLd || {
+  const meknesJsonLd = city?.slug === 'meknes' ? {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Ambulance Maroc - Meknès",
+    "image": "https://www.ambulance-maroc.ma/images/ambulance-meknes.jpg",
+    "@id": "https://www.ambulance-maroc.ma/ambulance-meknes",
+    "url": "https://www.ambulance-maroc.ma/ambulance-meknes",
+    "telephone": "+212600000000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Meknès",
+      "addressCountry": "MA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 33.8950,
+      "longitude": -5.5547
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "Meknès et région Fès-Meknès"
+    },
+    "description": "Service d’ambulance à Meknès 24h/24 – Urgences, transferts médicaux et hospitaliers, coordination avec les établissements de soins. Équipe expérimentée."
+  } : undefined;
+
+  const jsonLd = city ? (marrakechJsonLd || rabatJsonLd || fesJsonLd || agadirJsonLd || mohammediaJsonLd || kenitraJsonLd || meknesJsonLd || {
     "@context": "https://schema.org",
     "@type": "EmergencyService",
     "name": `Ambulance ${city.name}`,

@@ -181,22 +181,23 @@ const ZonesSection = () => {
           </div>
         </div>
 
-        {/* Coverage Map Placeholder */}
+        {/* Coverage Map Placeholder - Reformulated to be coherent */}
         <div className="bg-card rounded-2xl p-8 border border-border">
-          <div className="text-center space-y-4">
-            <h2 className="text-2xl font-bold text-foreground">
-              Couverture Nationale
-            </h2>
-            <div className="h-64 bg-accent/30 rounded-xl flex items-center justify-center">
-              <div className="text-center space-y-2">
-                <MapPin className="h-12 w-12 text-primary mx-auto" aria-hidden="true" />
-                <p className="text-muted-foreground">
-                  Carte interactive du Maroc
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Toutes les villes et régions couvertes par notre service
-                </p>
-              </div>
+          <div className="text-center space-y-6">
+            <h2 className="text-2xl font-bold text-foreground">Couverture Nationale</h2>
+            <div className="mx-auto max-w-xl rounded-xl border border-border bg-background p-6 shadow-sm">
+              <p className="text-sm text-muted-foreground">
+                Nous intervenons dans plus de 15 villes au Maroc.
+                <br />
+                Consultez la liste complète pour voir si votre ville est couverte.
+              </p>
+              <Link
+                to="/zones-d-intervention"
+                className="mt-4 inline-block text-primary underline hover:text-primary/80 transition-colors"
+                aria-label="Voir toutes les villes couvertes"
+              >
+                Voir toutes les villes
+              </Link>
             </div>
           </div>
         </div>

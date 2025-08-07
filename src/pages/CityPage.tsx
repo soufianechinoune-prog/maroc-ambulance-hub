@@ -1097,6 +1097,53 @@ const CityPage = () => {
         </section>
       )}
 
+      {/* Contenu SEO spécifique pour Meknès */}
+      {city.slug === 'meknes' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Ambulance Meknès – Service d'Urgence 24h/24</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Notre <strong>service d’ambulance à Meknès</strong> est disponible 7j/7 et 24h/24 pour toute urgence médicale, transfert vers une clinique ou évacuation sanitaire.
+              Que vous soyez un particulier, une entreprise ou un professionnel de santé, nous intervenons dans les meilleurs délais.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Intervention à Meknès et dans toute la région</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nous couvrons tous les quartiers : Hamria, Marjane, Sidi Baba, Toulal, Bassatine, Médina, ainsi que les zones rurales avoisinantes comme El Hajeb, Ain Taoujdate, ou Azrou.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">🚑 Matériel médical et personnel formé</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nos ambulances sont équipées pour assurer la sécurité et le confort du patient : oxygène, brancard, matériel de réanimation, et présence d’un auxiliaire ambulancier,
+              infirmier ou médecin si besoin.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📞 Assistance téléphonique 24h/24</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Appelez notre centre de coordination au <strong><a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline">+212 6 00 00 00 00</a></strong> ou contactez-nous par WhatsApp via notre site.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">✔️ Pourquoi choisir Ambulance Maroc à Meknès ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Réactivité immédiate 24/7</li>
+              <li>✅ Zones couvertes : ville et périphérie</li>
+              <li>✅ Matériel médical complet à bord</li>
+              <li>✅ Équipe expérimentée, bienveillante et formée</li>
+              <li>✅ Coordination avec hôpitaux, cliniques et structures de soins</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212600000000" className="text-primary hover:text-primary/80 underline font-semibold">+212 6 00 00 00 00</a></p>
+                <p>📍 Meknès & région Fès-Meknès</p>
+                <p>🕐 Disponible 24h/24 et 7j/7</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Reassurance Section */}
       <ReassuranceSection />
 

@@ -404,6 +404,53 @@ const CityPage = () => {
         </section>
       )}
 
+      {/* Contenu SEO spécifique pour Marrakech */}
+      {city.slug === 'marrakech' && (
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Marrakech 24h/24 et 7j/7</h2>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Que vous soyez un résident, un professionnel de santé ou un visiteur, <strong>notre service d'ambulance à Marrakech</strong> est prêt à intervenir à tout moment. Nous couvrons toute la ville : Guéliz, Médina, Ménara, Hivernage, route de Casablanca, route de l'Ourika ou encore Targa.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Marrakech avec personnel qualifié</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Chaque intervention se fait avec un véhicule équipé, un brancard sécurisé et un personnel médical ou paramédical. 
+              <strong>Urgence ou transfert programmé</strong>, nous assurons tous les types de déplacements vers les cliniques et hôpitaux de Marrakech.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zone d'intervention à Marrakech et alentours</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Nous intervenons à Marrakech mais aussi dans la région : Tahannaout, Amizmiz, Ourika, Aït Ourir, ou Chichaoua. 
+              Appelez notre <strong>standard 24h/24</strong> pour organiser une intervention immédiate ou planifiée.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Contactez-nous</h3>
+            <p className="mb-6 text-gray-700 leading-relaxed">
+              Appelez-nous directement au <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou envoyez-nous un message sur WhatsApp via le bouton sur notre site.
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">Pourquoi faire appel à Ambulance Maroc à Marrakech ?</h3>
+            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+              <li>✅ Disponibilité 24h/24 – 7j/7</li>
+              <li>✅ Ambulances modernes, climatisées et équipées</li>
+              <li>✅ Équipe médicale formée et réactive</li>
+              <li>✅ Couverture de Marrakech et sa région</li>
+              <li>✅ Intervention rapide à domicile, clinique, hôtel ou lieu public</li>
+            </ul>
+
+            <div className="bg-gray-100 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+              <div className="space-y-2 text-gray-700">
+                <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                <p>📍 Marrakech & alentours</p>
+                <p>🕐 Disponible 24h/24 – 7j/7</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Contenu SEO spécifique pour Tanger */}
       {city.slug === 'tanger' && (
         <section className="py-16 bg-white">

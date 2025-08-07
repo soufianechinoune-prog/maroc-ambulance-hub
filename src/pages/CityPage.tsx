@@ -12,6 +12,13 @@ import { generateLocalBusinessSchema } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle } from "lucide-react";
+const getRandomCities = (currentSlug: string, count = 4) => {
+  const pool = cities
+    .filter((c) => c.slug !== currentSlug)
+    .map((c) => ({ name: c.name, slug: c.slug }));
+  return pool.sort(() => 0.5 - Math.random()).slice(0, count);
+};
+
 const CityPage = () => {
   const { citySlug } = useParams();
   
@@ -26,6 +33,7 @@ const CityPage = () => {
   
   const slug = citySlug || extractSlugFromPath();
   const city = cities.find(c => c.slug === slug);
+  const relatedCities = getRandomCities(slug, 4);
   const siteUrl = "https://www.ambulance-maroc.ma";
 
   // SEO data optimisé pour chaque ville
@@ -1200,6 +1208,25 @@ const CityPage = () => {
           <ContactForm />
         </div>
       </div>
+
+      {/* Maillage interne: autres villes */}
+      <section className="mt-10 px-4" aria-label="Liens vers d'autres services d'ambulance au Maroc">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-xl font-semibold mb-4">🚑 Autres services d'ambulance au Maroc</h2>
+          <ul className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
+            {relatedCities.map((c) => (
+              <li key={c.slug}>
+                <a
+                  href={`/ambulance-${c.slug}`}
+                  className="underline text-primary hover:text-primary/80 transition-colors"
+                >
+                  Ambulance à {c.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <Footer />
     </div>

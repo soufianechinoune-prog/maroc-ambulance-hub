@@ -102,26 +102,27 @@ const Footer = () => {
                 </ul>
               </div>
 
-              {/* Informations légales */}
+              {/* Cities */}
               <div className="space-y-4">
-                <h4 className="text-lg font-semibold">Informations légales</h4>
+                <h4 className="text-lg font-semibold">Villes Couvertes</h4>
                 <ul className="space-y-2 text-sm text-background/80">
-                  <li>
-                    <Link to="/mentions-legales" className="hover:text-success transition-colors">
-                      Mentions légales
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/politique-confidentialite" className="hover:text-success transition-colors">
-                      Politique de confidentialité
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/conditions-generales-utilisation" className="hover:text-success transition-colors">
-                      Conditions générales d’utilisation
-                    </Link>
-                  </li>
+                  {cities.map((city) => (
+                    <li key={city.slug}>
+                      <Link 
+                        to={`/${city.slug}`} 
+                        className="hover:text-success transition-colors"
+                      >
+                        Ambulance {city.name}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
+                <Link 
+                  to="/zones" 
+                  className="text-success hover:underline text-sm font-medium"
+                >
+                  Voir toutes les villes →
+                </Link>
               </div>
 
               {/* Contact */}

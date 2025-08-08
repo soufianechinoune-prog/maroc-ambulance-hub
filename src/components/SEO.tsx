@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { SITE_URL } from "@/lib/config";
 
 type Props = {
   title: string;
@@ -24,6 +25,7 @@ export default function SEO({
   jsonLdMultiple 
 }: Props) {
   const ogImg = image ?? "/default-ambulance.jpg";
+  const absCanonical = canonical?.startsWith("http") ? canonical : `${SITE_URL}${canonical}`;
   
   return (
     <>
@@ -32,7 +34,7 @@ export default function SEO({
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="author" content={author || "Ambulance Maroc"} />
-        <link rel="canonical" href={canonical} />
+        <link rel="canonical" href={absCanonical} />
         
         {/* Robots meta */}
         {noIndex ? (
@@ -50,7 +52,7 @@ export default function SEO({
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonical} />
+        <meta property="og:url" content={absCanonical} />
         <meta property="og:image" content={ogImg} />
         <meta property="og:locale" content="fr_MA" />
         

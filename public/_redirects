@@ -1,0 +1,35 @@
+
+# Redirections 301 permanentes pour les anciennes URLs de villes
+# Format: ancien_chemin nouveau_chemin code_statut
+
+# Villes principales
+/casablanca /ambulance-casablanca 301!
+/rabat /ambulance-rabat 301!
+/marrakech /ambulance-marrakech 301!
+/fes /ambulance-fes 301!
+/tanger /ambulance-tanger 301!
+/agadir /ambulance-agadir 301!
+/oujda /ambulance-oujda 301!
+/kenitra /ambulance-kenitra 301!
+/tetouan /ambulance-tetouan 301!
+/safi /ambulance-safi 301!
+
+# Autres villes
+/meknes /ambulance-meknes 301!
+/el-jadida /ambulance-el-jadida 301!
+/nador /ambulance-nador 301!
+/khouribga /ambulance-khouribga 301!
+/beni-mellal /ambulance-beni-mellal 301!
+/mohammedia /ambulance-mohammedia 301!
+/larache /ambulance-larache 301!
+/ksar-el-kebir /ambulance-ksar-el-kebir 301!
+/berrechid /ambulance-berrechid 301!
+/settat /ambulance-settat 301!
+/taza /ambulance-taza 301!
+/essaouira /ambulance-essaouira 301!
+/ouarzazate /ambulance-ouarzazate 301!
+/al-hoceima /ambulance-al-hoceima 301!
+/tiznit /ambulance-tiznit 301!
+
+# Fallback pour toute autre route qui ne match pas les routes spécifiques
+# Cette règle doit être en dernier

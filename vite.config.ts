@@ -49,6 +49,18 @@ export default defineConfig(({ mode }) => ({
           "conditions-generales-utilisation",
         ];
 
+        // Blog posts (from src/content/blog/*.md)
+        const blogDir = path.resolve(rootDir, "src/content/blog");
+        let blogSlugs: string[] = [];
+        if (fs.existsSync(blogDir)) {
+          const files = fs.readdirSync(blogDir).filter((f) => f.endsWith(".md"));
+          blogSlugs = files.map((f) => {
+            const raw = fs.readFileSync(path.resolve(blogDir, f), "utf8");
+            const m = raw.match(/slug:\s*"([^"]+)"/);
+            return m ? m[1] : f.replace(/\.md$/, "");
+          });
+        }
+
         const today = new Date().toISOString().slice(0,10);
         const entries = [
           // Core pages
@@ -56,10 +68,13 @@ export default defineConfig(({ mode }) => ({
           { loc: `${site}/services`, changefreq: 'monthly', priority: '0.6' },
           { loc: `${site}/zones-d-intervention`, changefreq: 'monthly', priority: '0.6' },
           { loc: `${site}/contact`, changefreq: 'monthly', priority: '0.6' },
+          { loc: `${site}/blog`, changefreq: 'weekly', priority: '0.6' },
           // Service landing pages
           ...services.map((s) => ({ loc: `${site}/${s}`, changefreq: 'weekly', priority: '0.7' })),
           // City pages (canonical format)
           ...cities.map((c) => ({ loc: `${site}/ambulance-${c.slug}`, changefreq: 'weekly', priority: '0.7' })),
+          // Blog posts
+          ...blogSlugs.map((slug) => ({ loc: `${site}/blog/${slug}`, changefreq: 'weekly', priority: '0.6' })),
           // Legal pages
           ...legals.map((p) => ({ loc: `${site}/${p}`, changefreq: 'yearly', priority: '0.3' })),
         ];
@@ -112,6 +127,7 @@ export default defineConfig(({ mode }) => ({
         const baseRoutes = [
           "/",
           "/contact",
+          "/blog",
           "/mentions-legales",
           "/politique-confidentialite",
           "/conditions-generales-utilisation",
@@ -126,7 +142,9 @@ export default defineConfig(({ mode }) => ({
           cityRoutes = citySlugs.map((slug) => `/ambulance-${slug}`);
         }
 
-        const routes = Array.from(new Set([...baseRoutes, ...cityRoutes]));
+        const blogRoutes = (blogSlugs || []).map((slug) => `/blog/${slug}`);
+
+        const routes = Array.from(new Set([...baseRoutes, ...cityRoutes, ...blogRoutes]));
 
         for (const route of routes) {
           const { html, head } = (render as (url: string) => { html: string; head: string }).call(null, route);

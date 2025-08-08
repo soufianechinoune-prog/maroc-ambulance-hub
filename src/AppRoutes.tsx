@@ -12,6 +12,8 @@ import { cities } from "./data/cities";
 import MentionsLegales from "./pages/MentionsLegales";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisation";
+import BlogIndex from "./pages/BlogIndex";
+import BlogPost from "./pages/BlogPost";
 
 const AppRoutes = () => (
   <Routes>
@@ -25,6 +27,10 @@ const AppRoutes = () => (
     <Route path="/transport-inter-hopitaux" element={<Services />} />
     <Route path="/zones-d-intervention" element={<Zones />} />
     <Route path="/contact" element={<Contact />} />
+
+    {/* Blog */}
+    <Route path="/blog" element={<BlogIndex />} />
+    <Route path="/blog/:slug" element={<BlogPost />} />
 
     {cities.map((city) => (
       <Route

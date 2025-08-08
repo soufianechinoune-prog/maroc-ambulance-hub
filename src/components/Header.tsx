@@ -70,6 +70,9 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
+            <Link to="/blog" className="text-foreground hover:text-primary transition-colors font-medium">
+              Blog
+            </Link>
             <Link to="/contact" className="text-foreground hover:text-primary transition-colors font-medium">
               Contact
             </Link>
@@ -136,6 +139,9 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
               </Link>
               <Link to="/zones-d-intervention" className="text-foreground hover:text-primary transition-colors font-medium py-2">
                 Zones d'intervention
+              </Link>
+              <Link to="/blog" className="text-foreground hover:text-primary transition-colors font-medium py-2">
+                Blog
               </Link>
               <Link to="/contact" className="text-foreground hover:text-primary transition-colors font-medium py-2">
                 Contact

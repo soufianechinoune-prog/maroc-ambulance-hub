@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => ({
     {
       name: 'generate-seo-assets',
       apply: 'build' as const,
-      async closeBundle() {
+      async writeBundle() {
         const site = process.env.VITE_SITE_URL || "https://www.ambulance-maroc.ma";
         const distDir = path.resolve(rootDir, "dist");
         if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });

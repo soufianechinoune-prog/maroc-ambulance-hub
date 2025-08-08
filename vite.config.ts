@@ -80,6 +80,14 @@ export default defineConfig(({ mode }) => ({
           format: "esm",
           platform: "node",
           sourcemap: false,
+          loader: {
+            ".jpg": "dataurl",
+            ".jpeg": "dataurl",
+            ".png": "dataurl",
+            ".gif": "dataurl",
+            ".svg": "dataurl",
+            ".webp": "dataurl",
+          },
         });
 
         const { pathToFileURL } = await import('url');

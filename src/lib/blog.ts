@@ -66,8 +66,17 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
 let modules: Record<string, string> = {} as any;
 try {
   // @ts-ignore - available in Vite/browser build
-  if (typeof import.meta !== "undefined" && (import.meta as any).glob) {
-    modules = (import.meta as any).glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+  const anyMeta = (import.meta as any);
+  if (anyMeta && typeof anyMeta.glob === "function") {
+    const patterns = [
+      "/src/content/blog/*.md",
+      "/src/content/blog/**/*.md",
+      "/src/content/**/*.md",
+    ];
+    for (const pattern of patterns) {
+      const hit = anyMeta.glob(pattern, { eager: true, as: "raw" }) as Record<string, string>;
+      Object.assign(modules, hit);
+    }
   } else {
     throw new Error("no import.meta.glob");
   }
@@ -76,11 +85,10 @@ try {
     const fs = require("fs");
     const path = require("path");
     const dir = path.resolve(process.cwd(), "src/content/blog");
-    const files = fs.readdirSync(dir).filter((f: string) => f.endsWith(".md"));
+    const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f: string) => f.endsWith(".md")) : [];
     for (const f of files) {
-      const p = require("path").join("/src/content/blog", f);
-      const raw = fs.readFileSync(require("path").join(dir, f), "utf8");
-      modules[p] = raw;
+      const raw = fs.readFileSync(path.join(dir, f), "utf8");
+      modules[path.join("/src/content/blog", f)] = raw;
     }
   } catch {}
 }

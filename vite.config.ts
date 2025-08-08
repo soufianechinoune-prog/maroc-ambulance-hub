@@ -71,13 +71,13 @@ export default defineConfig(({ mode }) => ({
         // --- SSG prerender for SEO-critical routes (simulated ISR 24h via daily rebuild) ---
         const ssgTmpDir = path.resolve(__dirname, "dist-ssg");
         if (!fs.existsSync(ssgTmpDir)) fs.mkdirSync(ssgTmpDir, { recursive: true });
-        const serverEntry = path.resolve(ssgTmpDir, "entry-ssg.mjs");
+        const serverEntry = path.resolve(ssgTmpDir, "entry-ssg.cjs");
 
         await esbuild.build({
           entryPoints: [path.resolve(__dirname, "src/entry-ssg.tsx")],
           outfile: serverEntry,
           bundle: true,
-          format: "esm",
+          format: "cjs",
           platform: "node",
           sourcemap: false,
           loader: {
@@ -91,7 +91,8 @@ export default defineConfig(({ mode }) => ({
         });
 
         const { pathToFileURL } = await import('url');
-        const { render } = await import(pathToFileURL(serverEntry).href);
+        const mod: any = await import(pathToFileURL(serverEntry).href);
+        const render = (mod.render || mod.default?.render) as (url: string) => { html: string; head: string; htmlAttrs?: string; bodyAttrs?: string };
 
         const templatePath = path.resolve(distDir, "index.html");
         const template = fs.readFileSync(templatePath, "utf8");

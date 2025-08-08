@@ -4,29 +4,28 @@ import { SITE_URL } from "@/lib/config";
 const DEFAULT_IMAGE = "/default-seo-image.jpg"; // served from public/
 
 /**
- * Generate LocalBusiness JSON-LD for a given city
- * Ensures consistent fields for all city pages and SSR-friendly output via react-helmet-async
+ * Generate EmergencyService JSON-LD for a given city
+ * Uniform schema for all city pages
  */
 export function generateLocalBusinessSchema(city: City): Record<string, any> {
   const url = `${SITE_URL}/ambulance-${city.slug}`;
+  const image = `${SITE_URL}${DEFAULT_IMAGE}`;
 
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: `Ambulance ${city.name} - Ambulance Maroc`,
-    image: `${SITE_URL}${DEFAULT_IMAGE}`,
+    "@type": "EmergencyService",
+    name: `Ambulance ${city.name} – Intervention 24/7`,
+    image,
     url,
-    telephone: city.phone || "+212600000000",
+    telephone: "+212777722311",
     address: {
       "@type": "PostalAddress",
       addressLocality: city.name,
       addressCountry: "MA",
     },
+    areaServed: `${city.name}, Maroc`,
     openingHours: "Mo-Su 00:00-23:59",
-    areaServed: {
-      "@type": "Place",
-      name: city.name,
-    },
+    priceRange: "$$",
     "@id": url,
   };
 }

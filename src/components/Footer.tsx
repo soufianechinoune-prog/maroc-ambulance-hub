@@ -2,18 +2,10 @@ import { Phone, MessageCircle, MapPin, Clock, Mail, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.jpg";
-
+import { cities } from "@/data/cities";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const cities = [
-    { name: "Casablanca", slug: "casablanca" },
-    { name: "Rabat", slug: "rabat" },
-    { name: "Marrakech", slug: "marrakech" },
-    { name: "Tanger", slug: "tanger" },
-    { name: "Fès", slug: "fes" },
-    { name: "Agadir", slug: "agadir" }
-  ];
 
   return (
     <footer className="bg-foreground text-background">
@@ -106,10 +98,10 @@ const Footer = () => {
               <div className="space-y-4">
                 <h4 className="text-lg font-semibold">Villes Couvertes</h4>
                 <ul className="space-y-2 text-sm text-background/80">
-                  {cities.map((city) => (
+                  {cities.slice(0,6).map((city) => (
                     <li key={city.slug}>
                       <Link 
-                        to={`/${city.slug}`} 
+                        to={`/ambulance-${city.slug}`} 
                         className="hover:text-success transition-colors"
                       >
                         Ambulance {city.name}

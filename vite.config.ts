@@ -82,6 +82,8 @@ export default defineConfig(({ mode }) => ({
           format: "cjs",
           platform: "node",
           sourcemap: false,
+          jsx: "automatic",
+          banner: { js: 'var React = require("react");' },
           loader: {
             ".jpg": "dataurl",
             ".jpeg": "dataurl",

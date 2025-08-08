@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { SITE_URL } from "@/lib/config";
 import { getAllPosts } from "@/lib/blog";
+import { slugify } from "@/lib/slugify";
 import { Link, useSearchParams, useParams } from "react-router-dom";
 import { useMemo } from "react";
 import { Input } from "@/components/ui/input";
@@ -21,11 +22,12 @@ const BlogIndex = () => {
 
   const all = getAllPosts();
   const filtered = useMemo(() => {
-    const normalize = (s?: string) => (s || "").toLowerCase();
+    const citySlug = city ? slugify(city) : "";
     const base = city
       ? all.filter((p) => {
-          const cats = (p.categories || []).map((c) => c.toLowerCase());
-          return normalize(p.city) === city || cats.includes(city) || cats.includes("toutes-les-villes");
+          const cats = (p.categories || []);
+          const pCity = p.city ? slugify(p.city) : "";
+          return pCity === citySlug || cats.includes(citySlug) || cats.includes("toutes-les-villes");
         })
       : all;
     if (!q) return base;

@@ -1,3 +1,4 @@
+import { slugify } from "@/lib/slugify";
 // Lightweight frontmatter parser to avoid Node Buffer polyfills in browser
 export type BlogPost = {
   slug: string;
@@ -69,8 +70,8 @@ const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
 
   const date = (data.date as string) || new Date().toISOString().slice(0, 10);
   const updated = (data.updated as string) || date;
-  const cityRaw = data.city as string | undefined;
-  const city = cityRaw === "" ? "" : (cityRaw || "casablanca");
+  const cityLabel = typeof data.city === "string" ? (data.city as string) : "";
+  const city = cityLabel ? slugify(cityLabel) : "";
   const service = ((data.service as string | undefined) || "");
   const coverImage = ((data.cover as string) || (data.coverImage as string) || "/default-seo-image.jpg");
 
@@ -82,20 +83,11 @@ const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
   const readingTime = typeof rt === "number" ? rt : calcReadingTime(content);
 
   // Categories: always add "toutes-les-villes" + city slug if provided + any FM categories (normalized)
-  const toSlug = (s: string) =>
-    (s || "")
-      .toString()
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9\s-]/g, "")
-      .trim()
-      .replace(/\s+/g, "-");
   const fmCategories: string[] = Array.isArray(data.categories) ? (data.categories as string[]) : [];
   const categories = Array.from(new Set([
     "toutes-les-villes",
-    ...(city ? [toSlug(city)] : []),
-    ...fmCategories.map(toSlug),
+    ...(city ? [city] : []),
+    ...fmCategories.map(slugify),
   ]));
 
   return {

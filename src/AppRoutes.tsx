@@ -17,6 +17,12 @@ const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Index />} />
     <Route path="/services" element={<Services />} />
+    {/* Service landing aliases to Services page (canonicalized via SEO) */}
+    <Route path="/ambulance-urgence" element={<Services />} />
+    <Route path="/transport-medicalise" element={<Services />} />
+    <Route path="/ambulance-privee" element={<Services />} />
+    <Route path="/rapatriement-sanitaire" element={<Services />} />
+    <Route path="/transport-inter-hopitaux" element={<Services />} />
     <Route path="/zones-d-intervention" element={<Zones />} />
     <Route path="/contact" element={<Contact />} />
 

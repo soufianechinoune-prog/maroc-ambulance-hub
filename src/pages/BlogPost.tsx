@@ -217,7 +217,7 @@ const BlogPost = () => {
 
         <div className="grid gap-10 lg:grid-cols-[1fr,280px] lg:items-start mt-6">
           {/* Article */}
-          <article ref={articleRef} className="prose prose-neutral max-w-3xl">
+          <article ref={articleRef} className="prose md:prose-lg dark:prose-invert">
             <header className="mb-6">
               {post.city && (
                 <div className="mb-2">

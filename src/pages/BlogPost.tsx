@@ -78,20 +78,27 @@ const BlogPost = () => {
     mainEntityOfPage: canonical,
   };
 
+  // Breadcrumbs JSON-LD: Accueil > Blog > [Ville?] > [Article]
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-      post.city
-        ? { "@type": "ListItem", position: 3, name: "Villes", item: `${SITE_URL}/blog/villes/${post.city}` }
-        : undefined,
-      post.city
-        ? { "@type": "ListItem", position: 4, name: (post.city.charAt(0).toUpperCase() + post.city.slice(1)), item: `${SITE_URL}/blog/villes/${post.city}` }
-        : undefined,
-      { "@type": "ListItem", position: post.city ? 5 : 3, name: post.title, item: canonical },
-    ].filter(Boolean),
+    itemListElement: post.city
+      ? [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.city.charAt(0).toUpperCase() + post.city.slice(1),
+            item: `${SITE_URL}/blog/villes/${post.city}`,
+          },
+          { "@type": "ListItem", position: 4, name: post.title, item: canonical },
+        ]
+      : [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: canonical },
+        ],
   } as any;
 
   // Prepare content & TOC
@@ -135,11 +142,24 @@ const BlogPost = () => {
   // Smooth hash scroll when navigating TOC links
   useHashScroll(88);
 
-  // Related posts (same city)
+  // Related posts (same city, then by relevance: same service, then tag overlap, then recency)
   const related = useMemo(() => {
-    const cityPosts = post.city ? getPostsByCity(post.city) : [];
-    return cityPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
-  }, [post.city, post.slug]);
+    if (!post.city) return [] as ReturnType<typeof getPostsByCity>;
+    const cityPosts = getPostsByCity(post.city).filter((p) => p.slug !== post.slug);
+
+    const currentTags = new Set(post.tags || []);
+    const score = (p: typeof cityPosts[number]) => {
+      let s = 0;
+      if (post.service && p.service && p.service === post.service) s += 2;
+      const overlap = (p.tags || []).reduce((acc, t) => acc + (currentTags.has(t) ? 1 : 0), 0);
+      s += overlap;
+      // newer is slightly better
+      s += (new Date(p.date).getTime() / 1000_000_000);
+      return s;
+    };
+
+    return cityPosts.sort((a, b) => score(b) - score(a)).slice(0, 3);
+  }, [post.city, post.slug, post.service, post.tags, post.date]);
 
   return (
     <>
@@ -172,12 +192,10 @@ const BlogPost = () => {
               <>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Villes</BreadcrumbPage>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link to={`/blog/villes/${post.city}`}>{post.city.charAt(0).toUpperCase() + post.city.slice(1)}</Link>
+                    <Link to={`/blog/villes/${post.city}`}>
+                      {post.city.charAt(0).toUpperCase() + post.city.slice(1)}
+                    </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
               </>
@@ -215,7 +233,7 @@ const BlogPost = () => {
                   loading="lazy"
                   decoding="async"
                   className="w-full rounded-lg mt-4"
-                  sizes="(max-width: 768px) 100vw, 768px"
+                  sizes="(max-width: 768px) 100vw, 1200px"
                 />
               )}
 
@@ -243,7 +261,13 @@ const BlogPost = () => {
               remarkPlugins={[remarkGfm]}
               components={{
                 img: ({ node, ...props }) => (
-                  <img loading="lazy" decoding="async" alt={props.alt || `${post.title} – ambulance ${post.city || "Maroc"}`} {...props} />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                    alt={props.alt || `${post.title} – ambulance ${post.city || "Maroc"}`}
+                    {...props}
+                  />
                 ),
                 h2: ({ node, children, ...props }) => {
                   const text = String(children as any);
@@ -299,7 +323,7 @@ const BlogPost = () => {
         {/* Related articles */}
         {related.length > 0 && (
           <section className="max-w-5xl mx-auto mt-12">
-            <h2 className="text-xl font-semibold text-foreground mb-4">Articles liés</h2>
+            <h2 className="text-xl font-semibold text-foreground mb-4">Articles similaires</h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => {
                 const path = r.city ? `/blog/${r.city}/${r.slug}` : `/blog/${r.slug}`;

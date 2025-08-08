@@ -1,5 +1,5 @@
 
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { cities } from "@/data/cities";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,14 +22,16 @@ const getRandomCities = (currentSlug: string, count = 4) => {
 
 const CityPage = () => {
   const { citySlug } = useParams();
+  const location = useLocation();
   
-  // Extract city slug from URL path (handle both /ambulance-city and /city formats)
+  // Extract city slug from URL path using react-router location (SSR-safe)
   const extractSlugFromPath = () => {
-    const path = window.location.pathname;
-    if (path.startsWith('/ambulance-')) {
-      return path.replace('/ambulance-', '');
+    const path = location?.pathname || "/";
+    if (path.startsWith("/ambulance-")) {
+      return path.replace("/ambulance-", "").replace(/\/$/, "");
     }
-    return path.replace('/', '');
+    const m = path.match(/^\/([^/]+)/);
+    return m ? m[1] : "";
   };
   
   const slug = citySlug || extractSlugFromPath();

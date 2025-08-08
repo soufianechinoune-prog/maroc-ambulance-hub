@@ -5,7 +5,9 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import fs from "fs";
 import * as esbuild from "esbuild";
-import { createRequire } from "module";
+import { fileURLToPath, pathToFileURL } from "url";
+
+const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -23,7 +25,7 @@ export default defineConfig(({ mode }) => ({
       apply: 'build' as const,
       async closeBundle() {
         const site = process.env.VITE_SITE_URL || "https://www.ambulance-maroc.ma";
-        const distDir = path.resolve(__dirname, "dist");
+        const distDir = path.resolve(rootDir, "dist");
         if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });
 
         // robots.txt: generate minimal, index-all with dynamic sitemap
@@ -69,12 +71,12 @@ export default defineConfig(({ mode }) => ({
         fs.writeFileSync(path.resolve(distDir, "sitemap.xml"), xml);
 
         // --- SSG prerender for SEO-critical routes (simulated ISR 24h via daily rebuild) ---
-        const ssgTmpDir = path.resolve(__dirname, "dist-ssg");
+        const ssgTmpDir = path.resolve(rootDir, "dist-ssg");
         if (!fs.existsSync(ssgTmpDir)) fs.mkdirSync(ssgTmpDir, { recursive: true });
         const serverEntry = path.resolve(ssgTmpDir, "entry-ssg.cjs");
 
         await esbuild.build({
-          entryPoints: [path.resolve(__dirname, "src/entry-ssg.tsx")],
+          entryPoints: [path.resolve(rootDir, "src/entry-ssg.tsx")],
           outfile: serverEntry,
           bundle: true,
           format: "cjs",
@@ -88,13 +90,21 @@ export default defineConfig(({ mode }) => ({
             ".svg": "dataurl",
             ".webp": "dataurl",
           },
+          define: {
+            "import.meta.env.VITE_SITE_URL": JSON.stringify(process.env.VITE_SITE_URL || "https://www.ambulance-maroc.ma"),
+          },
         });
 
-        const { pathToFileURL } = await import('url');
         const mod: any = await import(pathToFileURL(serverEntry).href);
-        const render = (mod.render || mod.default?.render) as (url: string) => { html: string; head: string; htmlAttrs?: string; bodyAttrs?: string };
+        const render = (mod.render || mod.default?.render) as undefined | ((url: string) => { html: string; head: string; htmlAttrs?: string; bodyAttrs?: string });
+        if (!render) {
+          throw new Error("entry-ssg.tsx doit exporter `render(url)` ou `default.render(url)`");
+        }
 
         const templatePath = path.resolve(distDir, "index.html");
+        if (!fs.existsSync(templatePath)) {
+          throw new Error(`Fichier modèle introuvable: ${templatePath}`);
+        }
         const template = fs.readFileSync(templatePath, "utf8");
 
         const baseRoutes = [
@@ -106,7 +116,7 @@ export default defineConfig(({ mode }) => ({
           ...services.map((s) => `/${s}`),
         ];
 
-        const cityTsPath = path.resolve(__dirname, "src/data/cities.ts");
+        const cityTsPath = path.resolve(rootDir, "src/data/cities.ts");
         let cityRoutes: string[] = [];
         if (fs.existsSync(cityTsPath)) {
           const cityTs = fs.readFileSync(cityTsPath, "utf8");
@@ -137,7 +147,7 @@ export default defineConfig(({ mode }) => ({
   ].filter(Boolean),
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(rootDir, "./src"),
     },
   },
 }));

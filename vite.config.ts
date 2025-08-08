@@ -127,7 +127,6 @@ export default defineConfig(({ mode }) => ({
         const baseRoutes = [
           "/",
           "/contact",
-          "/blog",
           "/mentions-legales",
           "/politique-confidentialite",
           "/conditions-generales-utilisation",
@@ -142,9 +141,7 @@ export default defineConfig(({ mode }) => ({
           cityRoutes = citySlugs.map((slug) => `/ambulance-${slug}`);
         }
 
-        const blogRoutes = (blogSlugs || []).map((slug) => `/blog/${slug}`);
-
-        const routes = Array.from(new Set([...baseRoutes, ...cityRoutes, ...blogRoutes]));
+        const routes = Array.from(new Set([...baseRoutes, ...cityRoutes]));
 
         for (const route of routes) {
           const { html, head } = (render as (url: string) => { html: string; head: string }).call(null, route);

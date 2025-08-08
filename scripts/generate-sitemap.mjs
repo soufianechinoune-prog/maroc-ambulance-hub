@@ -15,10 +15,33 @@ const baseUrls = [
   `${site}/mentions-legales`,
   `${site}/politique-confidentialite`,
   `${site}/conditions-generales-utilisation`,
+  `${site}/blog`, // blog index
 ];
 
 const cityUrls = uniqueSlugs.map((slug) => `${site}/ambulance-${slug}`);
-const urls = [...baseUrls, ...cityUrls];
+const blogCityUrls = uniqueSlugs.map((slug) => `${site}/blog/villes/${slug}`);
+
+// Build blog article URLs from markdown frontmatter (fallback city=casablanca)
+import { readdirSync, readFileSync as rfs } from "fs";
+const blogDir = "src/content/blog";
+let blogArticleUrls = [];
+try {
+  const files = readdirSync(blogDir).filter((f) => f.endsWith(".md"));
+  for (const f of files) {
+    const raw = rfs(`${blogDir}/${f}`, "utf8");
+    const fmMatch = raw.startsWith("---") ? raw.slice(3).split("\n---")[0] : "";
+    const get = (k) => {
+      const m = fmMatch.match(new RegExp(`^${k}:(.*)$`, "m"));
+      return m ? m[1].trim().replace(/^['\"]|['\"]$/g, "") : "";
+    };
+    const slug = get("slug") || f.replace(/\.md$/, "");
+    const city = get("city") || "casablanca";
+    const url = city ? `${site}/blog/${city}/${slug}` : `${site}/blog/${slug}`;
+    blogArticleUrls.push(url);
+  }
+} catch {}
+
+const urls = [...baseUrls, ...cityUrls, ...blogCityUrls, ...blogArticleUrls];
 
 const today = new Date().toISOString().slice(0, 10);
 const toUrlXml = (u) => {

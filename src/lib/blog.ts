@@ -3,11 +3,15 @@ export type BlogPost = {
   slug: string;
   title: string;
   description: string;
-  date: string; // ISO string
+  date: string; // YYYY-MM-DD
+  updated: string; // YYYY-MM-DD
   author?: string;
   tags?: string[];
   keywords?: string[];
   coverImage?: string; // public path like /default-seo-image.jpg
+  city?: string; // e.g., "casablanca" or "" for general
+  service?: string; // optional service slug
+  readingTime: number; // minutes
   content: string; // markdown body
 };
 
@@ -38,6 +42,16 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
       }
       continue;
     }
+    // booleans
+    if (value === "true" || value === "false") {
+      data[key] = value === "true";
+      continue;
+    }
+    // numbers
+    if (/^-?\d+(?:\.\d+)?$/.test(value)) {
+      data[key] = Number(value);
+      continue;
+    }
     data[key] = value;
   }
   return { data, content: body };
@@ -51,15 +65,34 @@ const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
   // slug from frontmatter or filename
   const fileSlug = path.split("/").pop()?.replace(/\.md$/, "") || "";
   const slug: string = (data.slug as string) || fileSlug;
+
+  const date = (data.date as string) || new Date().toISOString().slice(0, 10);
+  const updated = (data.updated as string) || date;
+  const cityRaw = data.city as string | undefined;
+  const city = cityRaw === "" ? "" : (cityRaw || "casablanca");
+  const service = ((data.service as string | undefined) || "");
+  const coverImage = ((data.cover as string) || (data.coverImage as string) || "/default-seo-image.jpg");
+
+  const calcReadingTime = (txt: string) => {
+    const words = txt.split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.ceil(words / 200));
+  };
+  const rt = data.readingTime as unknown;
+  const readingTime = typeof rt === "number" ? rt : calcReadingTime(content);
+
   return {
     slug,
     title: (data.title as string) || fileSlug,
     description: (data.description as string) || "",
-    date: (data.date as string) || new Date().toISOString(),
+    date,
+    updated,
     author: data.author as string | undefined,
     tags: (data.tags as string[]) || [],
     keywords: (data.keywords as string[]) || [],
-    coverImage: (data.coverImage as string) || "/default-seo-image.jpg",
+    coverImage,
+    city,
+    service,
+    readingTime,
     content,
   } satisfies BlogPost;
 });
@@ -73,6 +106,14 @@ export function getAllPosts(): BlogPost[] {
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return posts.find((p) => p.slug === slug);
+}
+
+export function getPostsByCity(city: string): BlogPost[] {
+  return posts.filter((p) => (p.city || "") === city);
+}
+
+export function getPostByCityAndSlug(city: string, slug: string): BlogPost | undefined {
+  return posts.find((p) => p.slug === slug && (p.city || "") === city);
 }
 
 // Very light auto-internal-linking for a few primary keywords

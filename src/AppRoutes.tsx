@@ -31,6 +31,8 @@ const AppRoutes = () => (
 
     {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
+    <Route path="/blog/villes/:city" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
+    <Route path="/blog/:city/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
     <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
 
     {cities.map((city) => (

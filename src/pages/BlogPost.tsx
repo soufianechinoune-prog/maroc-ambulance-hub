@@ -2,22 +2,29 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { SITE_URL } from "@/lib/config";
-import { addInternalLinks, getPostBySlug } from "@/lib/blog";
-import { useParams, Link } from "react-router-dom";
+import { addInternalLinks, getPostBySlug, getPostByCityAndSlug } from "@/lib/blog";
+import { useParams, Link, Navigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 const BlogPost = () => {
-  const { slug = "" } = useParams();
-  const post = slug ? getPostBySlug(slug) : undefined;
+  const { city, slug = "" } = useParams();
+  const post = slug
+    ? (city ? getPostByCityAndSlug(city, slug) : getPostBySlug(slug))
+    : undefined;
+
+  // Runtime redirect from legacy URL /blog/:slug -> /blog/:city/:slug when applicable
+  if (!city && post && post.city) {
+    return <Navigate to={`/blog/${post.city}/${post.slug}`} replace />;
+  }
 
   if (!post) {
     return (
       <>
         <SEO
-          title="Article introuvable – Blog Ambulance Casablanca"
-          description="Article introuvable. Découvrez nos guides sur l'ambulance à Casablanca."
-          canonical={`${SITE_URL}/blog/${slug || ""}`}
+          title="Article introuvable – Blog Ambulance Maroc"
+          description="Article introuvable. Découvrez nos guides sur l'ambulance au Maroc."
+          canonical={`${SITE_URL}${city ? `/blog/${city}/${slug || ""}` : `/blog/${slug || ""}`}`}
           noIndex
         />
         <Header />
@@ -31,7 +38,8 @@ const BlogPost = () => {
     );
   }
 
-  const canonical = `${SITE_URL}/blog/${post.slug}`;
+const canonicalPath = post.city ? `/blog/${post.city}/${post.slug}` : `/blog/${post.slug}`;
+  const canonical = `${SITE_URL}${canonicalPath}`;
   const image = post.coverImage || "/default-seo-image.jpg";
 
   const articleLd = {
@@ -42,7 +50,8 @@ const BlogPost = () => {
     image: `${SITE_URL}${image}`,
     author: { "@type": "Organization", name: post.author || "Ambulance Maroc" },
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updated || post.date,
+    articleSection: post.city || undefined,
     mainEntityOfPage: canonical,
   };
 
@@ -51,7 +60,7 @@ const BlogPost = () => {
   return (
     <>
       <SEO
-        title={`${post.title} | Blog Ambulance Casablanca`}
+        title={`${post.title} | Blog Ambulance Maroc`}
         description={post.description}
         canonical={canonical}
         image={image}
@@ -66,7 +75,7 @@ const BlogPost = () => {
             <h1 className="text-3xl md:text-4xl font-bold text-foreground">{post.title}</h1>
             <p className="text-sm text-muted-foreground mt-2">{new Date(post.date).toLocaleDateString("fr-MA")} • {post.author || "Ambulance Maroc"}</p>
             {image && (
-              <img src={image} alt={`${post.title} – ambulance Casablanca`} loading="lazy" className="w-full rounded-lg mt-4" />
+              <img src={image} alt={`${post.title} – ambulance ${post.city || 'Maroc'}`} loading="lazy" className="w-full rounded-lg mt-4" />
             )}
           </header>
           <ReactMarkdown
@@ -74,7 +83,7 @@ const BlogPost = () => {
             components={{
               img: ({ node, ...props }) => (
                 // ensure lazy
-                <img loading="lazy" alt={props.alt || `${post.title} – ambulance Casablanca`} {...props} />
+                <img loading="lazy" alt={props.alt || `${post.title} – ambulance ${post.city || 'Maroc'}`} {...props} />
               ),
               a: ({ node, ...props }) => (
                 <a {...props} rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined} />

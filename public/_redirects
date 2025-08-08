@@ -32,4 +32,6 @@
 /tiznit /ambulance-tiznit 301!
 
 # Fallback pour toute autre route qui ne match pas les routes spécifiques
-# Cette règle doit être en dernier
+
+# Redirection blog legacy -> nouvelle taxonomie (casablanca par défaut pour contenu existant)
+/blog/:slug /blog/casablanca/:slug 301!

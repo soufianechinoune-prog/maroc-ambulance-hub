@@ -47,9 +47,13 @@ const today = new Date().toISOString().slice(0, 10);
 const toUrlXml = (u) => {
   let priority = 0.8;
   let changefreq = "daily";
+
+  // Home
   if (u === `${site}/`) {
     priority = 1.0;
   }
+
+  // Legal pages
   if (
     u.includes("/mentions-legales") ||
     u.includes("/politique-confidentialite") ||
@@ -58,6 +62,20 @@ const toUrlXml = (u) => {
     priority = 0.3;
     changefreq = "yearly";
   }
+
+  // Blog categories by city
+  if (u.includes("/blog/villes/")) {
+    priority = 0.4;
+    changefreq = "weekly";
+  }
+
+  // Blog articles (city or general)
+  const isBlogArticle = /\/blog\/(?!villes\/).+/.test(u) && u !== `${site}/blog`;
+  if (isBlogArticle) {
+    priority = 0.5;
+    changefreq = "weekly";
+  }
+
   return `<url><loc>${u}</loc><lastmod>${today}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
 };
 

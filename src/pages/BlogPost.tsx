@@ -8,6 +8,7 @@ import {
   getPostBySlug,
   getPostByCityAndSlug,
   getPostsByCity,
+  getAllPosts,
 } from "@/lib/blog";
 import { useParams, Link, Navigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
@@ -142,23 +143,30 @@ const BlogPost = () => {
   // Smooth hash scroll when navigating TOC links
   useHashScroll(88);
 
-  // Related posts (same city, then by relevance: same service, then tag overlap, then recency)
   const related = useMemo(() => {
-    if (!post.city) return [] as ReturnType<typeof getPostsByCity>;
-    const cityPosts = getPostsByCity(post.city).filter((p) => p.slug !== post.slug);
+    const max = 3;
+    const byCity: typeof post[] = post.city ? getPostsByCity(post.city).filter((p) => p.slug !== post.slug) : [] as any;
 
     const currentTags = new Set(post.tags || []);
-    const score = (p: typeof cityPosts[number]) => {
+    const tagScore = (p: { tags?: string[]; service?: string; date: string }) => {
       let s = 0;
       if (post.service && p.service && p.service === post.service) s += 2;
-      const overlap = (p.tags || []).reduce((acc, t) => acc + (currentTags.has(t) ? 1 : 0), 0);
-      s += overlap;
-      // newer is slightly better
-      s += (new Date(p.date).getTime() / 1000_000_000);
+      s += (p.tags || []).reduce((acc, t) => acc + (currentTags.has(t) ? 1 : 0), 0);
+      s += new Date(p.date).getTime() / 1_000_000_000; // slight freshness bias
       return s;
     };
 
-    return cityPosts.sort((a, b) => score(b) - score(a)).slice(0, 3);
+    let list = [...byCity].sort((a, b) => tagScore(b) - tagScore(a));
+    if (list.length < max) {
+      const others = getAllPosts()
+        .filter((p) => p.slug !== post.slug && (!post.city || p.city !== post.city))
+        .sort((a, b) => tagScore(b) - tagScore(a));
+      for (const p of others) {
+        if (list.length >= max) break;
+        if (!list.find((x) => x.slug === p.slug)) list.push(p);
+      }
+    }
+    return list.slice(0, max);
   }, [post.city, post.slug, post.service, post.tags, post.date]);
 
   return (
@@ -211,19 +219,22 @@ const BlogPost = () => {
           {/* Article */}
           <article ref={articleRef} className="prose prose-neutral max-w-3xl">
             <header className="mb-6">
+              {post.city && (
+                <div className="mb-2">
+                  <Link
+                    to={`/blog/villes/${post.city}`}
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-xs md:text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    aria-label={`Catégorie ville: ${post.city}`}
+                  >
+                    {post.city.charAt(0).toUpperCase() + post.city.slice(1)}
+                  </Link>
+                </div>
+              )}
               <h1 className="text-3xl md:text-4xl font-bold text-foreground">{post.title}</h1>
               <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                 <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("fr-MA")}</time>
                 <span aria-hidden>•</span>
                 <span>{post.readingTime} min</span>
-                {post.city && (
-                  <>
-                    <span aria-hidden>•</span>
-                    <Link to={`/blog/villes/${post.city}`} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium text-foreground hover:text-primary transition-colors">
-                      {post.city.charAt(0).toUpperCase() + post.city.slice(1)}
-                    </Link>
-                  </>
-                )}
               </div>
               {/* Cover image */}
               {image && (

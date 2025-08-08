@@ -8,6 +8,8 @@ import { useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { cities } from "@/data/cities";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 
 const PER_PAGE = 9;
 
@@ -34,6 +36,31 @@ const BlogIndex = () => {
   const current = Math.min(page, totalPages);
   const start = (current - 1) * PER_PAGE;
   const posts = filtered.slice(start, start + PER_PAGE);
+  const cityName = city ? city.charAt(0).toUpperCase() + city.slice(1) : null;
+  const selectedCity = city ? cities.find((c) => c.slug === city) : undefined;
+
+  const collectionLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: city ? `Blog Ambulance ${cityName}` : "Blog Ambulance Maroc",
+    description: city
+      ? `Guides et conseils sur les services d'ambulance à ${cityName}`
+      : "Guides et conseils sur les services d'ambulance au Maroc",
+    url: `${SITE_URL}${city ? `/blog/villes/${city}` : "/blog"}`,
+  } as const;
+
+  const breadcrumbLd = city
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+          { "@type": "ListItem", position: 3, name: "Villes" },
+          { "@type": "ListItem", position: 4, name: cityName, item: `${SITE_URL}/blog/villes/${city}` },
+        ],
+      }
+    : undefined;
 
   const handleSearch = (value: string) => {
     const next = new URLSearchParams(params);
@@ -41,34 +68,83 @@ const BlogIndex = () => {
     next.delete("page");
     setParams(next, { replace: true });
   };
-
   return (
     <>
       <SEO
-        title={city ? `Blog Ambulance ${city.charAt(0).toUpperCase() + city.slice(1)} – Guides & Conseils 24/7` : "Blog Ambulance Maroc – Guides & Conseils 24/7"}
-        description={city ? `Articles SEO sur l'ambulance à ${city.charAt(0).toUpperCase() + city.slice(1)}: urgences, tarifs, quartiers, transport médicalisé.` : "Articles SEO nationaux sur l'ambulance au Maroc: urgences, tarifs, transport médicalisé et conseils."}
+        title={city ? `Blog Ambulance ${cityName} – Guides & Conseils 24/7` : "Blog Ambulance Maroc – Guides & Conseils 24/7"}
+        description={city ? `Articles SEO sur l'ambulance à ${cityName}: urgences, tarifs, quartiers, transport médicalisé.` : "Articles SEO nationaux sur l'ambulance au Maroc: urgences, tarifs, transport médicalisé et conseils."}
         canonical={`${SITE_URL}${city ? `/blog/villes/${city}` : "/blog"}`}
         keywords={city ? ["ambulance", city] : ["ambulance Maroc", "urgence ambulance", "transport médicalisé"]}
         image="/default-seo-image.jpg"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: city ? `Blog Ambulance ${city}` : "Blog Ambulance Maroc",
-          description: city ? `Guides et conseils sur les services d'ambulance à ${city}` : "Guides et conseils sur les services d'ambulance au Maroc",
-          url: `${SITE_URL}${city ? `/blog/villes/${city}` : "/blog"}`,
-        }}
+        {...(city
+          ? { jsonLdMultiple: [collectionLd, breadcrumbLd!] }
+          : { jsonLd: collectionLd })}
       />
       <Header />
 
       <main className="container mx-auto px-4 py-10">
+        {city && (
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/">Accueil</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/blog">Blog</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <span className="text-muted-foreground">Villes</span>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{cityName}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        )}
         <header className="max-w-3xl mx-auto text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground">{city ? `Blog Ambulance ${city.charAt(0).toUpperCase() + city.slice(1)}` : "Blog Ambulance Maroc"}</h1>
-          <p className="text-muted-foreground mt-2">{city ? `Guides pratiques et actualités locales pour ${city}.` : "Guides pratiques, urgences, quartiers et tarifs pour bien vous orienter au Maroc."}</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground">{city ? `Blog Ambulance ${cityName}` : "Blog Ambulance Maroc"}</h1>
+          {city ? (
+            <>
+              <p className="text-muted-foreground mt-2">{selectedCity?.description || `Guides pratiques et actualités locales pour ${cityName}.`}</p>
+              <p className="text-muted-foreground">{`Temps d'intervention moyen: ${selectedCity?.avgEtaMin ?? 12} min · Couverture ${selectedCity?.coverage ?? "étendue"}.`}</p>
+            </>
+          ) : (
+            <p className="text-muted-foreground mt-2">Guides pratiques, urgences, quartiers et tarifs pour bien vous orienter au Maroc.</p>
+          )}
+
+          {/* Cities chips */}
+          <nav className="mt-5 flex gap-2 overflow-x-auto py-1" aria-label="Filtrer par ville">
+            <Link
+              to="/blog"
+              className={`whitespace-nowrap inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors ${!city ? "bg-primary/10 text-primary border-primary" : "text-foreground hover:text-primary"}`}
+              aria-current={!city ? "page" : undefined}
+            >
+              Toutes les villes
+            </Link>
+            {cities.map((c) => (
+              <Link
+                key={c.slug}
+                to={`/blog/villes/${c.slug}`}
+                className={`whitespace-nowrap inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors ${city === c.slug ? "bg-primary/10 text-primary border-primary" : "text-foreground hover:text-primary"}`}
+                aria-current={city === c.slug ? "page" : undefined}
+              >
+                {c.name}
+              </Link>
+            ))}
+          </nav>
+
           <div className="mt-6">
             <Input
               type="search"
               defaultValue={q}
-              placeholder={city ? `Rechercher à ${city} (ex: tarifs, quartiers, urgence)` : "Rechercher un article (ex: tarifs, Ain Diab, urgence)"}
+              placeholder={city ? `Rechercher à ${cityName} (ex: tarifs, quartiers, urgence)` : "Rechercher un article (ex: tarifs, Ain Diab, urgence)"}
               onChange={(e) => handleSearch(e.target.value)}
             />
           </div>

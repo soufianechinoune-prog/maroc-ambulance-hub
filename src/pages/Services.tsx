@@ -4,8 +4,7 @@ import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Ambulance, Clock, Users, Shield, Phone, MessageCircle } from "lucide-react";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useHashScroll } from "@/hooks/useHashScroll";
 
 const Services = () => {
   const services = [
@@ -35,14 +34,7 @@ const Services = () => {
     }
   ];
 
-  const location = useLocation();
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, [location.hash]);
+  useHashScroll(96);
 
   return (
     <div className="min-h-screen bg-background">

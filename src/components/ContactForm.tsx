@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -205,6 +206,10 @@ const ContactForm = () => {
 
                   <p className="text-xs text-muted-foreground text-center">
                     * Champs obligatoires. Nous vous contacterons dans les plus brefs délais pour confirmer votre demande.
+                  </p>
+                  <p className="text-xs text-muted-foreground text-center">
+                    En envoyant ce formulaire, vous acceptez notre {" "}
+                    <Link to="/politique-confidentialite" className="underline">politique de confidentialité</Link>.
                   </p>
                 </form>
               </CardContent>

@@ -63,7 +63,7 @@ export default defineConfig(({ mode }) => ({
         const body = entries
           .map(e => `<url><loc>${e.loc}</loc><lastmod>${today}</lastmod><changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`) 
           .join("");
-        const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${body}</urlset>`;
+        const xml = `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">${body}</urlset>`;
         fs.writeFileSync(path.resolve(distDir, "sitemap.xml"), xml);
       }
     } as Plugin

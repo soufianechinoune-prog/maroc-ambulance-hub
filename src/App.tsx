@@ -12,6 +12,9 @@ import CityPage from "./pages/CityPage";
 import NotFound from "./pages/NotFound";
 import RedirectCity from "./components/RedirectCity";
 import { cities } from "./data/cities";
+import MentionsLegales from "./pages/MentionsLegales";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
+import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisation";
 
 const queryClient = new QueryClient();
 
@@ -40,9 +43,9 @@ const App = () => (
           <Route path="/zones" element={<Zones />} />
           
           {/* Legal pages */}
-          <Route path="/mentions-legales" element={<NotFound />} />
-          <Route path="/politique-confidentialite" element={<NotFound />} />
-          <Route path="/conditions-utilisation" element={<NotFound />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+          <Route path="/conditions-generales-utilisation" element={<ConditionsGeneralesUtilisation />} />
           
           {/* Redirects for old city URLs (/:slug -> /ambulance-:slug) */}
           {cities.map(city => (

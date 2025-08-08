@@ -1,11 +1,34 @@
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { SITE_URL } from "@/lib/config";
-import { addInternalLinks, getPostBySlug, getPostByCityAndSlug } from "@/lib/blog";
+import {
+  addInternalLinks,
+  getPostBySlug,
+  getPostByCityAndSlug,
+  getPostsByCity,
+} from "@/lib/blog";
 import { useParams, Link, Navigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
+import { useHashScroll } from "@/hooks/useHashScroll";
+
+// Utils
+const PHONE_DISPLAY = "0777 22 23 11";
+const PHONE_TEL = "+212777722311";
+const WHATSAPP_URL = `https://wa.me/212777722311?text=${encodeURIComponent("Bonjour, j’ai besoin d’une ambulance.")}`;
+
+const slugify = (str: string) =>
+  str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
 
 const BlogPost = () => {
   const { city, slug = "" } = useParams();
@@ -38,7 +61,7 @@ const BlogPost = () => {
     );
   }
 
-const canonicalPath = post.city ? `/blog/${post.city}/${post.slug}` : `/blog/${post.slug}`;
+  const canonicalPath = post.city ? `/blog/${post.city}/${post.slug}` : `/blog/${post.slug}`;
   const canonical = `${SITE_URL}${canonicalPath}`;
   const image = post.coverImage || "/default-seo-image.jpg";
 
@@ -55,7 +78,68 @@ const canonicalPath = post.city ? `/blog/${post.city}/${post.slug}` : `/blog/${p
     mainEntityOfPage: canonical,
   };
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+      post.city
+        ? { "@type": "ListItem", position: 3, name: "Villes", item: `${SITE_URL}/blog/villes/${post.city}` }
+        : undefined,
+      post.city
+        ? { "@type": "ListItem", position: 4, name: (post.city.charAt(0).toUpperCase() + post.city.slice(1)), item: `${SITE_URL}/blog/villes/${post.city}` }
+        : undefined,
+      { "@type": "ListItem", position: post.city ? 5 : 3, name: post.title, item: canonical },
+    ].filter(Boolean),
+  } as any;
+
+  // Prepare content & TOC
   const content = addInternalLinks(post.content);
+  const headings = useMemo(() => {
+    const lines = post.content.split(/\n+/);
+    const hs: Array<{ depth: 2 | 3; text: string; id: string }> = [];
+    for (const line of lines) {
+      if (line.startsWith("## ")) {
+        const text = line.replace(/^##\s+/, "").trim();
+        hs.push({ depth: 2, text, id: slugify(text) });
+      } else if (line.startsWith("### ")) {
+        const text = line.replace(/^###\s+/, "").trim();
+        hs.push({ depth: 3, text, id: slugify(text) });
+      }
+    }
+    return hs;
+  }, [post.content]);
+
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const articleRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = articleRef.current;
+    if (!root) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActiveId(visible[0].target.id);
+      },
+      { rootMargin: "-120px 0px -60% 0px", threshold: [0, 1] }
+    );
+
+    const els = root.querySelectorAll("h2[id], h3[id]");
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [content]);
+
+  // Smooth hash scroll when navigating TOC links
+  useHashScroll(88);
+
+  // Related posts (same city)
+  const related = useMemo(() => {
+    const cityPosts = post.city ? getPostsByCity(post.city) : [];
+    return cityPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  }, [post.city, post.slug]);
 
   return (
     <>
@@ -66,36 +150,188 @@ const canonicalPath = post.city ? `/blog/${post.city}/${post.slug}` : `/blog/${p
         image={image}
         keywords={post.keywords}
         author={post.author}
-        jsonLd={articleLd}
+        jsonLdMultiple={[articleLd, breadcrumbLd]}
       />
       <Header />
       <main className="container mx-auto px-4 py-10">
-        <article className="prose prose-neutral max-w-3xl mx-auto">
-          <header className="mb-6">
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground">{post.title}</h1>
-            <p className="text-sm text-muted-foreground mt-2">{new Date(post.date).toLocaleDateString("fr-MA")} • {post.author || "Ambulance Maroc"}</p>
-            {image && (
-              <img src={image} alt={`${post.title} – ambulance ${post.city || 'Maroc'}`} loading="lazy" className="w-full rounded-lg mt-4" />
+        {/* Breadcrumbs */}
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/">Accueil</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/blog">Blog</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            {post.city && (
+              <>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Villes</BreadcrumbPage>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to={`/blog/villes/${post.city}`}>{post.city.charAt(0).toUpperCase() + post.city.slice(1)}</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </>
             )}
-          </header>
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              img: ({ node, ...props }) => (
-                // ensure lazy
-                <img loading="lazy" alt={props.alt || `${post.title} – ambulance ${post.city || 'Maroc'}`} {...props} />
-              ),
-              a: ({ node, ...props }) => (
-                <a {...props} rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined} />
-              ),
-            }}
-          >
-            {content}
-          </ReactMarkdown>
-        </article>
-        <nav className="max-w-3xl mx-auto mt-10">
-          <Link to="/blog" className="text-primary font-medium hover:underline">← Tous les articles</Link>
-        </nav>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{post.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        <div className="grid gap-10 lg:grid-cols-[1fr,280px] lg:items-start mt-6">
+          {/* Article */}
+          <article ref={articleRef} className="prose prose-neutral max-w-3xl">
+            <header className="mb-6">
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground">{post.title}</h1>
+              <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("fr-MA")}</time>
+                <span aria-hidden>•</span>
+                <span>{post.readingTime} min</span>
+                {post.city && (
+                  <>
+                    <span aria-hidden>•</span>
+                    <Link to={`/blog/villes/${post.city}`} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium text-foreground hover:text-primary transition-colors">
+                      {post.city.charAt(0).toUpperCase() + post.city.slice(1)}
+                    </Link>
+                  </>
+                )}
+              </div>
+              {/* Cover image */}
+              {image && (
+                <img
+                  src={image}
+                  alt={`${post.title} – ambulance ${post.city || "Maroc"}`}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full rounded-lg mt-4"
+                  sizes="(max-width: 768px) 100vw, 768px"
+                />
+              )}
+
+              {/* Practical info block */}
+              <aside className="mt-6 rounded-lg border bg-card text-card-foreground p-4">
+                <p className="text-sm text-muted-foreground">Urgence ambulance – 24/7</p>
+                <div className="mt-1 text-lg font-semibold">{PHONE_DISPLAY}</div>
+                {post.city && (
+                  <p className="mt-1 text-sm text-muted-foreground">Zone couverte: {post.city.charAt(0).toUpperCase() + post.city.slice(1)} et environs</p>
+                )}
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Button asChild>
+                    <a href={`tel:${PHONE_TEL}`} aria-label="Appeler maintenant">Appeler</a>
+                  </Button>
+                  <Button variant="secondary" asChild>
+                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                      WhatsApp
+                    </a>
+                  </Button>
+                </div>
+              </aside>
+            </header>
+
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                img: ({ node, ...props }) => (
+                  <img loading="lazy" decoding="async" alt={props.alt || `${post.title} – ambulance ${post.city || "Maroc"}`} {...props} />
+                ),
+                h2: ({ node, children, ...props }) => {
+                  const text = String(children as any);
+                  const id = slugify(text);
+                  return (
+                    <h2 id={id} {...props}>
+                      {children}
+                    </h2>
+                  );
+                },
+                h3: ({ node, children, ...props }) => {
+                  const text = String(children as any);
+                  const id = slugify(text);
+                  return (
+                    <h3 id={id} {...props}>
+                      {children}
+                    </h3>
+                  );
+                },
+                a: ({ node, ...props }) => (
+                  <a {...props} rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined} />
+                ),
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          </article>
+
+          {/* TOC */}
+          <aside className="hidden lg:block sticky top-24 h-max border rounded-lg p-4 bg-card text-card-foreground">
+            <p className="text-sm font-semibold mb-2">Sommaire</p>
+            {headings.length === 0 ? (
+              <p className="text-sm text-muted-foreground">Aucun sous-titre</p>
+            ) : (
+              <nav aria-label="Table des matières">
+                <ul className="space-y-1">
+                  {headings.map((h) => (
+                    <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
+                      <a
+                        href={`#${h.id}`}
+                        className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
+                      >
+                        {h.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+          </aside>
+        </div>
+
+        {/* Related articles */}
+        {related.length > 0 && (
+          <section className="max-w-5xl mx-auto mt-12">
+            <h2 className="text-xl font-semibold text-foreground mb-4">Articles liés</h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((r) => {
+                const path = r.city ? `/blog/${r.city}/${r.slug}` : `/blog/${r.slug}`;
+                return (
+                  <article key={r.slug} className="rounded-lg border bg-card text-card-foreground p-4">
+                    <h3 className="text-base font-semibold">
+                      <Link className="hover:underline" to={path}>{r.title}</Link>
+                    </h3>
+                    <p className="mt-1 text-sm text-muted-foreground line-clamp-3">{r.description}</p>
+                    <div className="mt-2 text-xs text-muted-foreground flex items-center gap-2">
+                      <time dateTime={r.date}>{new Date(r.date).toLocaleDateString("fr-MA")}</time>
+                      <span aria-hidden>•</span>
+                      <span>{r.readingTime} min</span>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* Mobile sticky CTA */}
+        <div className="md:hidden fixed inset-x-0 bottom-0 z-40 border-t bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container mx-auto px-4 py-3 flex gap-2">
+            <Button asChild className="flex-1">
+              <a href={`tel:${PHONE_TEL}`} aria-label="Appeler maintenant">Appeler</a>
+            </Button>
+            <Button variant="secondary" asChild className="flex-1">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WhatsApp</a>
+            </Button>
+          </div>
+        </div>
       </main>
       <Footer />
     </>

@@ -181,7 +181,7 @@ const BlogPost = () => {
         jsonLdMultiple={[articleLd, breadcrumbLd]}
       />
       <Header />
-      <main className="container mx-auto px-4 py-10">
+      <main className="container mx-auto px-4 lg:px-6 max-w-6xl py-10">
         {/* Breadcrumbs */}
         <Breadcrumb>
           <BreadcrumbList>
@@ -215,9 +215,9 @@ const BlogPost = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="grid gap-10 lg:grid-cols-[1fr,280px] lg:items-start mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:items-start mt-6">
           {/* Article */}
-          <article ref={articleRef} className="prose md:prose-lg dark:prose-invert">
+          <article ref={articleRef} className="lg:col-span-8 xl:col-span-9 prose prose-lg lg:prose-xl leading-relaxed dark:prose-invert max-w-none [--tw-prose-body:75ch]">
             <header className="mb-6">
               {post.city && (
                 <div className="mb-2">
@@ -243,7 +243,7 @@ const BlogPost = () => {
                   alt={`${post.title} – ambulance ${post.city || "Maroc"}`}
                   loading="lazy"
                   decoding="async"
-                  className="w-full rounded-lg mt-4"
+                  className="w-full h-auto rounded-xl mt-4"
                   sizes="(max-width: 768px) 100vw, 1200px"
                 />
               )}
@@ -308,26 +308,28 @@ const BlogPost = () => {
           </article>
 
           {/* TOC */}
-          <aside className="hidden lg:block sticky top-24 h-max border rounded-lg p-4 bg-card text-card-foreground">
-            <p className="text-sm font-semibold mb-2">Sommaire</p>
-            {headings.length === 0 ? (
-              <p className="text-sm text-muted-foreground">Aucun sous-titre</p>
-            ) : (
-              <nav aria-label="Table des matières">
-                <ul className="space-y-1">
-                  {headings.map((h) => (
-                    <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
-                      <a
-                        href={`#${h.id}`}
-                        className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
-                      >
-                        {h.text}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            )}
+          <aside className="hidden lg:block lg:col-span-4 xl:col-span-3 lg:sticky lg:top-24">
+            <div className="border rounded-lg p-4 bg-card text-card-foreground w-full lg:w-[260px] xl:w-[300px]">
+              <p className="text-sm font-semibold mb-2">Sommaire</p>
+              {headings.length === 0 ? (
+                <p className="text-sm text-muted-foreground">Aucun sous-titre</p>
+              ) : (
+                <nav aria-label="Table des matières">
+                  <ul className="space-y-1">
+                    {headings.map((h) => (
+                      <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
+                        <a
+                          href={`#${h.id}`}
+                          className={`block text-sm leading-snug hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
+                        >
+                          {h.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
+            </div>
           </aside>
         </div>
 

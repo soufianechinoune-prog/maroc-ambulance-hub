@@ -4,6 +4,8 @@ import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Ambulance, Clock, Users, Shield, Phone, MessageCircle } from "lucide-react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Services = () => {
   const services = [
@@ -32,6 +34,15 @@ const Services = () => {
       features: ["Équipes sur site", "Intervention rapide", "Premier secours", "Évacuation d'urgence"]
     }
   ];
+
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [location.hash]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -99,33 +110,39 @@ const Services = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <div className="bg-primary/10 p-3 rounded-lg">
-                      <service.icon className="h-8 w-8 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl">{service.title}</h3>
-                    </div>
-                  </div>
-                  <CardDescription className="text-base">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-gray-700">
-                        <div className="h-2 w-2 bg-primary rounded-full"></div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+            {services.map((service, index) => {
+              const ids = ["urgence", "inter-hopitaux", "longue-distance", "evenements"] as const;
+              const sectionId = ids[index] || `service-${index}`;
+              return (
+                <section key={sectionId} id={sectionId} className="scroll-mt-24">
+                  <Card className="hover:shadow-lg transition-shadow">
+                    <CardHeader>
+                      <div className="flex items-center gap-4">
+                        <div className="bg-primary/10 p-3 rounded-lg">
+                          <service.icon className="h-8 w-8 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl">{service.title}</h3>
+                        </div>
+                      </div>
+                      <CardDescription className="text-base">
+                        {service.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center gap-2 text-gray-700">
+                            <div className="h-2 w-2 bg-primary rounded-full"></div>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </section>
+              );
+            })}
           </div>
         </div>
       </section>

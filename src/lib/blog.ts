@@ -72,10 +72,15 @@ try {
       "/src/content/blog/*.md",
       "/src/content/blog/**/*.md",
       "/src/content/**/*.md",
+      "../content/blog/*.md",
+      "../content/blog/**/*.md",
     ];
     for (const pattern of patterns) {
-      const hit = anyMeta.glob(pattern, { eager: true, as: "raw" }) as Record<string, string>;
+      const hit = anyMeta.glob(pattern, { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
       Object.assign(modules, hit);
+    }
+    if (Object.keys(modules).length === 0) {
+      console.warn("Blog loader: no markdown files matched patterns", patterns);
     }
   } else {
     throw new Error("no import.meta.glob");

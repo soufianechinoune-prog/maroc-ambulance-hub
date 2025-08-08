@@ -24,11 +24,9 @@ export default defineConfig(({ mode }) => ({
         const distDir = path.resolve(__dirname, "dist");
         if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });
 
-        // robots.txt: preserve existing rules, update Sitemap line
-        const robotsSrc = path.resolve(__dirname, "public", "robots.txt");
-        let robotsContent = fs.existsSync(robotsSrc) ? fs.readFileSync(robotsSrc, "utf-8") : "User-agent: *\nAllow: /\n";
-        robotsContent = robotsContent.replace(/Sitemap:.*$/m, `Sitemap: ${site}/sitemap.xml`);
-        fs.writeFileSync(path.resolve(distDir, "robots.txt"), robotsContent);
+        // robots.txt: generate minimal, index-all with dynamic sitemap
+        const robots = `User-agent: *\nAllow: /\nSitemap: ${site}/sitemap.xml\n`;
+        fs.writeFileSync(path.resolve(distDir, "robots.txt"), robots);
 
         // sitemap.xml: generate canonical URLs only
         const cities = [

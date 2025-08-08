@@ -12,7 +12,7 @@ const Contact = () => {
       <SEO 
         title="Contact Ambulance Maroc – Urgence 24/7 | Intervention Rapide" 
         description="Contactez Ambulance Maroc pour une intervention urgente 24/7 partout au Maroc. Téléphone, WhatsApp, email et adresse à Casablanca." 
-        canonical="https://www.ambulance-maroc.ma/contact"
+        canonical="/contact"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "EmergencyService",

@@ -18,13 +18,13 @@ const NotFound = () => {
       <SEO 
         title="Page introuvable – Ambulance Maroc"
         description="La page que vous recherchez n'existe pas. Découvrez nos services d'ambulance disponibles 24/7 partout au Maroc."
-        canonical="https://www.ambulance-maroc.ma/404"
+        canonical="/404"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Page introuvable",
           "description": "La page demandée n'existe pas sur Ambulance Maroc. Retrouvez nos services d'urgence 24/7 partout au Maroc.",
-          "url": "https://www.ambulance-maroc.ma/404"
+          "url": "/404"
         }}
       />
       <div className="min-h-screen flex items-center justify-center bg-gray-100" aria-label="Page introuvable">

@@ -9,10 +9,9 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 
 const Index = () => {
-  const siteUrl = "https://www.ambulance-maroc.ma";
   const title = "Ambulance à Casablanca – Intervention rapide 24/7 | Ambulance Maroc";
   const description = "Ambulance à Casablanca disponible 24h/24 et 7j/7. Service d'urgence médical professionnel avec temps de réponse moyen de 8-12 minutes. Couverture complète de la région Casablanca-Settat.";
-  const canonical = `${siteUrl}/`;
+  const canonical = `/`;
 
   const jsonLd = {
     "@context": "https://schema.org",

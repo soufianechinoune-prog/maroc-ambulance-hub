@@ -11,7 +11,7 @@ const Zones = () => {
       <SEO 
         title="Zones d'Intervention – Ambulance Maroc 24/7"
         description="Ambulance Maroc intervient 24/7 dans toutes les grandes villes du Maroc. Intervention rapide, couverture nationale et service médical d'urgence."
-        canonical="https://www.ambulance-maroc.ma/zones-d-intervention"
+        canonical="/zones-d-intervention"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Service",
@@ -20,7 +20,7 @@ const Zones = () => {
           "serviceArea": "Maroc",
           "availableService": ["Emergency medical transport", "Inter-hospital transfer", "Event standby"],
           "openingHours": "Mo-Su 00:00-23:59",
-          "url": "https://www.ambulance-maroc.ma/zones-d-intervention"
+          "url": "/zones-d-intervention"
         }}
       />
       <Header />

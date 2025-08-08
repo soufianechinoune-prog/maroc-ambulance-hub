@@ -12,6 +12,7 @@ import { generateLocalBusinessSchema } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle } from "lucide-react";
+import { SITE_URL } from "@/lib/config";
 const getRandomCities = (currentSlug: string, count = 4) => {
   const pool = cities
     .filter((c) => c.slug !== currentSlug)
@@ -34,7 +35,7 @@ const CityPage = () => {
   const slug = citySlug || extractSlugFromPath();
   const city = cities.find(c => c.slug === slug);
   const relatedCities = getRandomCities(slug, 4);
-  const siteUrl = "https://www.ambulance-maroc.ma";
+  const siteUrl = SITE_URL;
 
   // SEO data optimisé pour chaque ville
   const seoData = {
@@ -98,8 +99,8 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Ambulance Marrakech",
-    "image": "https://www.ambulance-maroc.ma/images/ambulance-marrakech.jpg",
-    "url": "https://www.ambulance-maroc.ma/ambulance-marrakech",
+    "image": `${siteUrl}/images/ambulance-marrakech.jpg`,
+    "url": `${siteUrl}/ambulance-marrakech`,
     "telephone": "+212777722311",
     "address": {
       "@type": "PostalAddress",
@@ -117,8 +118,8 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Ambulance Rabat",
-    "image": "https://www.ambulance-maroc.ma/images/ambulance-rabat.jpg",
-    "url": "https://www.ambulance-maroc.ma/ambulance-rabat",
+    "image": `${siteUrl}/images/ambulance-rabat.jpg`,
+    "url": `${siteUrl}/ambulance-rabat`,
     "telephone": "+212777722311",
     "address": {
       "@type": "PostalAddress",
@@ -136,9 +137,9 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Ambulance Maroc - Fès",
-    "image": "https://www.ambulance-maroc.ma/images/ambulance-fes.jpg",
-    "@id": "https://www.ambulance-maroc.ma/ambulance-fes",
-    "url": "https://www.ambulance-maroc.ma/ambulance-fes",
+    "image": `${siteUrl}/images/ambulance-fes.jpg`,
+    "@id": `${siteUrl}/ambulance-fes`,
+    "url": `${siteUrl}/ambulance-fes`,
     "telephone": "+212600000000",
     "address": {
       "@type": "PostalAddress",
@@ -171,9 +172,9 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Ambulance Maroc - Agadir",
-    "image": "https://www.ambulance-maroc.ma/images/ambulance-agadir.jpg",
-    "@id": "https://www.ambulance-maroc.ma/ambulance-agadir",
-    "url": "https://www.ambulance-maroc.ma/ambulance-agadir",
+    "image": `${siteUrl}/images/ambulance-agadir.jpg`,
+    "@id": `${siteUrl}/ambulance-agadir`,
+    "url": `${siteUrl}/ambulance-agadir`,
     "telephone": "+212600000000",
     "address": {
       "@type": "PostalAddress",
@@ -206,9 +207,9 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Ambulance Maroc - Mohammedia",
-    "image": "https://www.ambulance-maroc.ma/images/ambulance-mohammedia.jpg",
-    "@id": "https://www.ambulance-maroc.ma/ambulance-mohammedia",
-    "url": "https://www.ambulance-maroc.ma/ambulance-mohammedia",
+    "image": `${siteUrl}/images/ambulance-mohammedia.jpg`,
+    "@id": `${siteUrl}/ambulance-mohammedia`,
+    "url": `${siteUrl}/ambulance-mohammedia`,
     "telephone": "+212600000000",
     "address": {
       "@type": "PostalAddress",
@@ -241,9 +242,9 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Ambulance Maroc - Kénitra",
-    "image": "https://www.ambulance-maroc.ma/images/ambulance-kenitra.jpg",
-    "@id": "https://www.ambulance-maroc.ma/ambulance-kenitra",
-    "url": "https://www.ambulance-maroc.ma/ambulance-kenitra",
+    "image": `${siteUrl}/images/ambulance-kenitra.jpg`,
+    "@id": `${siteUrl}/ambulance-kenitra`,
+    "url": `${siteUrl}/ambulance-kenitra`,
     "telephone": "+212600000000",
     "address": {
       "@type": "PostalAddress",
@@ -276,9 +277,9 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Ambulance Maroc - Meknès",
-    "image": "https://www.ambulance-maroc.ma/images/ambulance-meknes.jpg",
-    "@id": "https://www.ambulance-maroc.ma/ambulance-meknes",
-    "url": "https://www.ambulance-maroc.ma/ambulance-meknes",
+    "image": `${siteUrl}/images/ambulance-meknes.jpg`,
+    "@id": `${siteUrl}/ambulance-meknes`,
+    "url": `${siteUrl}/ambulance-meknes`,
     "telephone": "+212600000000",
     "address": {
       "@type": "PostalAddress",
@@ -311,9 +312,9 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Ambulance Maroc - Oujda",
-    "image": "https://www.ambulance-maroc.ma/images/ambulance-oujda.jpg",
-    "@id": "https://www.ambulance-maroc.ma/ambulance-oujda",
-    "url": "https://www.ambulance-maroc.ma/ambulance-oujda",
+    "image": `${siteUrl}/images/ambulance-oujda.jpg`,
+    "@id": `${siteUrl}/ambulance-oujda`,
+    "url": `${siteUrl}/ambulance-oujda`,
     "telephone": "+212600000000",
     "address": {
       "@type": "PostalAddress",
@@ -346,9 +347,9 @@ const CityPage = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Ambulance Maroc - Tétouan",
-    "image": "https://www.ambulance-maroc.ma/images/ambulance-tetouan.jpg",
-    "@id": "https://www.ambulance-maroc.ma/ambulance-tetouan",
-    "url": "https://www.ambulance-maroc.ma/ambulance-tetouan",
+    "image": `${siteUrl}/images/ambulance-tetouan.jpg`,
+    "@id": `${siteUrl}/ambulance-tetouan`,
+    "url": `${siteUrl}/ambulance-tetouan`,
     "telephone": "+212600000000",
     "address": {
       "@type": "PostalAddress",

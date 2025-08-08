@@ -38,7 +38,7 @@ const Services = () => {
       <SEO 
         title="Services d'Ambulance – Urgence 24/7 au Maroc | Ambulance Maroc"
         description="Transports d'urgence, inter-hôpitaux, longue distance et événements. Intervention 24/7 partout au Maroc."
-        canonical="https://www.ambulance-maroc.ma/services"
+        canonical="/services"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Service",

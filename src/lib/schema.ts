@@ -1,6 +1,6 @@
 import type { City } from "@/data/cities";
+import { SITE_URL } from "@/lib/config";
 
-const BASE_URL = "https://www.ambulance-maroc.ma";
 const DEFAULT_IMAGE = "/default-seo-image.jpg"; // served from public/
 
 /**
@@ -8,13 +8,13 @@ const DEFAULT_IMAGE = "/default-seo-image.jpg"; // served from public/
  * Ensures consistent fields for all city pages and SSR-friendly output via react-helmet-async
  */
 export function generateLocalBusinessSchema(city: City): Record<string, any> {
-  const url = `${BASE_URL}/ambulance-${city.slug}`;
+  const url = `${SITE_URL}/ambulance-${city.slug}`;
 
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: `Ambulance ${city.name} - Ambulance Maroc`,
-    image: `${BASE_URL}${DEFAULT_IMAGE}`,
+    image: `${SITE_URL}${DEFAULT_IMAGE}`,
     url,
     telephone: city.phone || "+212600000000",
     address: {

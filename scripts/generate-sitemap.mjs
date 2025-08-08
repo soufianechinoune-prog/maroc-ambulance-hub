@@ -16,14 +16,13 @@ const cities = [
   { name: "Kénitra", slug: "kenitra" }
 ];
 
-const site = "https://www.ambulance-maroc.ma";
+const site = process.env.VITE_SITE_URL || "https://www.ambulance-maroc.ma";
 const urls = [
   `${site}/`,
   `${site}/services`,
-  `${site}/zones`,
+  `${site}/zones-d-intervention`,
   `${site}/contact`,
-  ...cities.map(c => `${site}/${c.slug}`),
-  ...cities.map(c => `${site}/ville/${c.slug}`)
+  ...cities.map(c => `${site}/ambulance-${c.slug}`)
 ];
 
 const today = new Date().toISOString().slice(0,10);

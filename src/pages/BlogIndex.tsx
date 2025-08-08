@@ -16,7 +16,12 @@ const PER_PAGE = 9;
 
 const BlogIndex = () => {
   const [params, setParams] = useSearchParams();
-  const { city } = useParams();
+  const { city: cityParam, cityCategory } = useParams();
+  const city = useMemo(() => {
+    const raw = (cityParam || cityCategory || "").trim();
+    if (!raw) return undefined;
+    return raw.replace(/^ambulance-/, "");
+  }, [cityParam, cityCategory]);
   const q = params.get("q")?.trim() || "";
   const page = Math.max(1, parseInt(params.get("page") || "1", 10) || 1);
 

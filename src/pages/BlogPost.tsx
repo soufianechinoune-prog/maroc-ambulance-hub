@@ -91,7 +91,7 @@ const BlogPost = () => {
             "@type": "ListItem",
             position: 3,
             name: post.city.charAt(0).toUpperCase() + post.city.slice(1),
-            item: `${SITE_URL}/blog/villes/${post.city}`,
+            item: `${SITE_URL}/blog/ambulance-${post.city}`,
           },
           { "@type": "ListItem", position: 4, name: post.title, item: canonical },
         ]
@@ -201,7 +201,7 @@ const BlogPost = () => {
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link to={`/blog/villes/${post.city}`}>
+                    <Link to={`/blog/ambulance-${post.city}`}>
                       {post.city.charAt(0).toUpperCase() + post.city.slice(1)}
                     </Link>
                   </BreadcrumbLink>
@@ -222,7 +222,7 @@ const BlogPost = () => {
               {post.city && (
                 <div className="mb-2">
                   <Link
-                    to={`/blog/villes/${post.city}`}
+                    to={`/blog/ambulance-${post.city}`}
                     className="inline-flex items-center rounded-full border px-3 py-1 text-xs md:text-sm font-medium text-foreground hover:text-primary transition-colors"
                     aria-label={`Catégorie ville: ${post.city}`}
                   >

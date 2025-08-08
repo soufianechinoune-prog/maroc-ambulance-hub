@@ -19,7 +19,7 @@ const baseUrls = [
 ];
 
 const cityUrls = uniqueSlugs.map((slug) => `${site}/ambulance-${slug}`);
-const blogCityUrls = uniqueSlugs.map((slug) => `${site}/blog/villes/${slug}`);
+const blogCityUrls = uniqueSlugs.map((slug) => `${site}/blog/ambulance-${slug}`);
 
 // Build blog article URLs from markdown frontmatter (fallback city=casablanca)
 import { readdirSync, readFileSync as rfs } from "fs";
@@ -64,13 +64,13 @@ const toUrlXml = (u) => {
   }
 
   // Blog categories by city
-  if (u.includes("/blog/villes/")) {
+  if (u.includes("/blog/ambulance-")) {
     priority = 0.4;
     changefreq = "weekly";
   }
 
   // Blog articles (city or general)
-  const isBlogArticle = /\/blog\/(?!villes\/).+/.test(u) && u !== `${site}/blog`;
+  const isBlogArticle = /\/blog\/(?!villes\/|ambulance-).+/.test(u) && u !== `${site}/blog`;
   if (isBlogArticle) {
     priority = 0.5;
     changefreq = "weekly";

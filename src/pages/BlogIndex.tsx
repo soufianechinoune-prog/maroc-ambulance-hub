@@ -46,7 +46,7 @@ const BlogIndex = () => {
     description: city
       ? `Guides et conseils sur les services d'ambulance à ${cityName}`
       : "Guides et conseils sur les services d'ambulance au Maroc",
-    url: `${SITE_URL}${city ? `/blog/villes/${city}` : "/blog"}`,
+    url: `${SITE_URL}${city ? `/blog/ambulance-${city}` : "/blog"}`,
   } as const;
 
   const breadcrumbLd = city
@@ -57,7 +57,7 @@ const BlogIndex = () => {
           { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
           { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
           { "@type": "ListItem", position: 3, name: "Villes" },
-          { "@type": "ListItem", position: 4, name: cityName, item: `${SITE_URL}/blog/villes/${city}` },
+          { "@type": "ListItem", position: 4, name: cityName, item: `${SITE_URL}/blog/ambulance-${city}` },
         ],
       }
     : undefined;
@@ -73,7 +73,7 @@ const BlogIndex = () => {
       <SEO
         title={city ? `Blog Ambulance ${cityName} – Guides & Conseils 24/7` : "Blog Ambulance Maroc – Guides & Conseils 24/7"}
         description={city ? `Articles SEO sur l'ambulance à ${cityName}: urgences, tarifs, quartiers, transport médicalisé.` : "Articles SEO nationaux sur l'ambulance au Maroc: urgences, tarifs, transport médicalisé et conseils."}
-        canonical={`${SITE_URL}${city ? `/blog/villes/${city}` : "/blog"}`}
+        canonical={`${SITE_URL}${city ? `/blog/ambulance-${city}` : "/blog"}`}
         keywords={city ? ["ambulance", city] : ["ambulance Maroc", "urgence ambulance", "transport médicalisé"]}
         image="/default-seo-image.jpg"
         {...(city
@@ -131,7 +131,7 @@ const BlogIndex = () => {
             {cities.map((c) => (
               <Link
                 key={c.slug}
-                to={`/blog/villes/${c.slug}`}
+                to={`/blog/ambulance-${c.slug}`}
                 className={`whitespace-nowrap inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors ${city === c.slug ? "bg-primary/10 text-primary border-primary" : "text-foreground hover:text-primary"}`}
                 aria-current={city === c.slug ? "page" : undefined}
               >

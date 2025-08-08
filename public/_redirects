@@ -35,3 +35,6 @@
 
 # Redirection blog legacy -> nouvelle taxonomie (casablanca par défaut pour contenu existant)
 /blog/:slug /blog/casablanca/:slug 301!
+
+# Redirection catégories ville du blog -> nouveau format avec mot-clé exact
+/blog/villes/:city /blog/ambulance-:city 301!

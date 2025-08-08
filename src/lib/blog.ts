@@ -1,5 +1,8 @@
 import { slugify } from "@/lib/slugify";
 // Lightweight frontmatter parser to avoid Node Buffer polyfills in browser
+// Node/CJS fallback support
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const require: any;
 export type BlogPost = {
   slug: string;
   title: string;
@@ -59,8 +62,28 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
   return { data, content: body };
 }
 
-// Load all markdown files at build time in browser/CSR path (Vite transforms glob)
-const modules = import.meta.glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+// Load all markdown files both in browser (Vite) and Node/SSG fallback
+let modules: Record<string, string> = {} as any;
+try {
+  // @ts-ignore - available in Vite/browser build
+  if (typeof import.meta !== "undefined" && (import.meta as any).glob) {
+    modules = (import.meta as any).glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+  } else {
+    throw new Error("no import.meta.glob");
+  }
+} catch {
+  try {
+    const fs = require("fs");
+    const path = require("path");
+    const dir = path.resolve(process.cwd(), "src/content/blog");
+    const files = fs.readdirSync(dir).filter((f: string) => f.endsWith(".md"));
+    for (const f of files) {
+      const p = require("path").join("/src/content/blog", f);
+      const raw = fs.readFileSync(require("path").join(dir, f), "utf8");
+      modules[p] = raw;
+    }
+  } catch {}
+}
 
 const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
   const { data, content } = parseFrontmatter(raw);

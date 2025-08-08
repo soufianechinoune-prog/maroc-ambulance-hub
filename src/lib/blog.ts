@@ -13,7 +13,7 @@ export type BlogPost = {
 };
 
 // Load all markdown files at build time in browser/CSR path (Vite transforms glob)
-const modules = import.meta.glob("src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+const modules = import.meta.glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
 
 const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
   const { data, content } = matter(raw);

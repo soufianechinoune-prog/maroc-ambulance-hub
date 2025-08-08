@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Index from "./pages/Index";
@@ -13,8 +13,8 @@ import MentionsLegales from "./pages/MentionsLegales";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisation";
 
-const BlogIndex = lazy(() => import("./pages/BlogIndex"));
-const BlogPost = lazy(() => import("./pages/BlogPost"));
+import BlogIndex from "./pages/BlogIndex";
+import BlogPost from "./pages/BlogPost";
 
 const AppRoutes = () => (
   <Routes>
@@ -30,10 +30,10 @@ const AppRoutes = () => (
     <Route path="/contact" element={<Contact />} />
 
     {/* Blog */}
-    <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
-    <Route path="/blog/ambulance-:city" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
-    <Route path="/blog/villes/:city" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
-    <Route path="/blog/:city/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
+    <Route path="/blog" element={<BlogIndex />} />
+    <Route path="/blog/ambulance-:city" element={<BlogIndex />} />
+    <Route path="/blog/villes/:city" element={<BlogIndex />} />
+    <Route path="/blog/:city/:slug" element={<BlogPost />} />
     
 
     {cities.map((city) => (

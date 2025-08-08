@@ -11,6 +11,7 @@ export type BlogPost = {
   coverImage?: string; // public path like /default-seo-image.jpg
   city?: string; // e.g., "casablanca" or "" for general
   service?: string; // optional service slug
+  categories?: string[]; // normalized slugs: ["toutes-les-villes", city]
   readingTime: number; // minutes
   content: string; // markdown body
 };
@@ -80,6 +81,23 @@ const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
   const rt = data.readingTime as unknown;
   const readingTime = typeof rt === "number" ? rt : calcReadingTime(content);
 
+  // Categories: always add "toutes-les-villes" + city slug if provided + any FM categories (normalized)
+  const toSlug = (s: string) =>
+    (s || "")
+      .toString()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9\s-]/g, "")
+      .trim()
+      .replace(/\s+/g, "-");
+  const fmCategories: string[] = Array.isArray(data.categories) ? (data.categories as string[]) : [];
+  const categories = Array.from(new Set([
+    "toutes-les-villes",
+    ...(city ? [toSlug(city)] : []),
+    ...fmCategories.map(toSlug),
+  ]));
+
   return {
     slug,
     title: (data.title as string) || fileSlug,
@@ -92,6 +110,7 @@ const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
     coverImage,
     city,
     service,
+    categories,
     readingTime,
     content,
   } satisfies BlogPost;

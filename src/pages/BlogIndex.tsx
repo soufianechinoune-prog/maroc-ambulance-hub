@@ -21,7 +21,13 @@ const BlogIndex = () => {
 
   const all = getAllPosts();
   const filtered = useMemo(() => {
-    const base = city ? all.filter((p) => (p.city || "") === city) : all;
+    const normalize = (s?: string) => (s || "").toLowerCase();
+    const base = city
+      ? all.filter((p) => {
+          const cats = (p.categories || []).map((c) => c.toLowerCase());
+          return normalize(p.city) === city || cats.includes(city) || cats.includes("toutes-les-villes");
+        })
+      : all;
     if (!q) return base;
     const needle = q.toLowerCase();
     return base.filter((p) =>

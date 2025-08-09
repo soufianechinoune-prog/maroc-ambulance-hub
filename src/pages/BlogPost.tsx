@@ -371,8 +371,9 @@ const BlogPost = () => {
                     const rel = isTel ? "nofollow" : (isExternal || isWhatsApp ? "noopener noreferrer" : undefined);
                     const target = isExternal || isWhatsApp ? "_blank" : undefined;
                     const ariaLabel = (props as any)["aria-label"] || (isTel ? "Appeler Ambulance Maroc" : undefined);
+                    const onClick = isTel ? (() => { try { window.location.href = href; } catch { /* noop */ } }) : undefined;
                     return (
-                      <a {...props} target={target} rel={rel} aria-label={ariaLabel}>
+                      <a {...props} target={target} rel={rel} aria-label={ariaLabel} onClick={onClick}>
                         {children}
                       </a>
                     );

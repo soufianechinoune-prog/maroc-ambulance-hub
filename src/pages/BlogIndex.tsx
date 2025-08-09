@@ -177,7 +177,7 @@ const BlogIndex = () => {
             <Card key={p.slug} className="h-full flex flex-col">
               <CardHeader>
                 <CardTitle>
-                  <Link to={`${p.city ? `/blog/${p.city}/${p.slug}` : `/blog/${p.slug}`}`} className="hover:text-primary">
+                  <Link to={`/blog/${p.slug}`} className="hover:text-primary">
                     {p.title}
                   </Link>
                 </CardTitle>
@@ -186,7 +186,7 @@ const BlogIndex = () => {
               <CardContent className="text-muted-foreground">
                 <p>{p.description}</p>
                 <div className="mt-4">
-                  <Link to={`${p.city ? `/blog/${p.city}/${p.slug}` : `/blog/${p.slug}`}`} className="text-primary font-medium hover:underline">Lire l'article →</Link>
+                  <Link to={`/blog/${p.slug}`} className="text-primary font-medium hover:underline">Lire l'article →</Link>
                 </div>
               </CardContent>
             </Card>

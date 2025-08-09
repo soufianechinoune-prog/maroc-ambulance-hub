@@ -34,9 +34,9 @@ const AppRoutes = () => (
     {/* Blog */}
     <Route path="/blog" element={<BlogIndex />} />
     <Route path="/blog/ambulance-:city" element={<BlogIndex />} />
-    <Route path="/blog/:slug" element={<BlogPost />} />
     <Route path="/blog/debug.json" element={<BlogDebugJSON />} />
     <Route path="/blog/debug-files.json" element={<BlogDebugFilesJSON />} />
+    <Route path="/blog/:slug" element={<BlogPost />} />
 
     {cities.map((city) => (
       <Route

@@ -58,11 +58,11 @@ function readAllMarkdown(): Record<string, string> {
     // Use Vite glob in browser/ESM build
     const anyMeta = (import.meta as any);
     if (anyMeta && typeof anyMeta.glob === "function") {
-      files = anyMeta.glob("/src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
-      if (Object.keys(files).length === 0) {
-        // Fallback relative glob if needed
-        files = anyMeta.glob("./src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
-      }
+      const absQ = anyMeta.glob("/src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+      const relQ = anyMeta.glob("./src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+      const absAs = anyMeta.glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
+      const relAs = anyMeta.glob("./src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
+      files = { ...absQ, ...relQ, ...absAs, ...relAs };
     }
   } catch {}
 
@@ -93,10 +93,19 @@ function readAllMarkdown(): Record<string, string> {
     } catch {}
   }
 
-  // Unconditional log (dev/prod/SSG)
+  // Unconditional log (dev/prod/SSG) + optional DOM inject
   try {
     const keys = Object.keys(files);
     console.log("[BLOG] filesFound:", keys.length, keys);
+    const el = typeof document !== "undefined" && document.getElementById("blog-debug");
+    if (el) (el as HTMLElement).textContent = JSON.stringify(keys, null, 2);
+    console.log("[BLOG] cwd:", typeof process !== "undefined" ? process.cwd() : "no-process");
+    try {
+      // best-effort dir presence check
+      import("fs/promises")
+        .then((fs) => fs.stat("./src/content/blog").then(() => console.log("[BLOG] has dir:", true)).catch(() => console.log("[BLOG] has dir:", false)))
+        .catch(() => {});
+    } catch {}
   } catch {}
 
   return files;
@@ -137,6 +146,12 @@ let CACHE: BlogPost[] | null = null;
 export function getAllPosts(): BlogPost[] {
   if (!CACHE || CACHE.length === 0) CACHE = loadAll();
   return CACHE;
+}
+
+export function getDebugFilesInfo() {
+  const files = readAllMarkdown();
+  const keys = Object.keys(files);
+  return { filesFound: keys.length, keys };
 }
 
 export function getPostsByCity(city: string): BlogPost[] {

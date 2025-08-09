@@ -16,6 +16,7 @@ import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisati
 import BlogIndex from "./pages/BlogIndex";
 import BlogPost from "./pages/BlogPost";
 import BlogDebugJSON from "./pages/BlogDebugJSON";
+import BlogDebugFilesJSON from "./pages/BlogDebugFilesJSON";
 
 const AppRoutes = () => (
   <Routes>
@@ -35,7 +36,7 @@ const AppRoutes = () => (
     <Route path="/blog/ambulance-:city" element={<BlogIndex />} />
     <Route path="/blog/:slug" element={<BlogPost />} />
     <Route path="/blog/debug.json" element={<BlogDebugJSON />} />
-    
+    <Route path="/blog/debug-files.json" element={<BlogDebugFilesJSON />} />
 
     {cities.map((city) => (
       <Route

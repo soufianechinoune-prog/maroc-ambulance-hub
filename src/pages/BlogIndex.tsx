@@ -194,9 +194,12 @@ const BlogIndex = () => {
         </section>
 
         {posts.length === 0 && (
-          <p className="mt-8 text-center text-muted-foreground">
-            Aucun article trouvé. Si vous êtes administrateur, vérifiez la console pour "[BLOG] filesFound" et que les fichiers existent dans src/content/blog.
-          </p>
+          <>
+            <p className="mt-8 text-center text-muted-foreground">
+              Aucun article trouvé. Si vous êtes administrateur, vérifiez la console pour "[BLOG] filesFound" et que les fichiers existent dans src/content/blog.
+            </p>
+            <pre id="blog-debug" className="mt-4 text-xs max-w-full overflow-auto border rounded p-3 bg-card text-card-foreground" />
+          </>
         )}
 
         {totalPages > 1 && (

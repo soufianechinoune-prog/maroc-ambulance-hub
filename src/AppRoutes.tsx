@@ -31,8 +31,7 @@ const AppRoutes = () => (
     <Route path="/zones-d-intervention" element={<Zones />} />
     <Route path="/contact" element={<Contact />} />
 
-    {/* Blog (nested) */}
-    <Route path="/blog" element={<BlogLayout />}> 
+    <Route path="/blog" element={<BlogLayout />}>
       {/* INDEX /blog */}
       <Route index element={<BlogIndex />} />
 

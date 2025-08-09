@@ -22,6 +22,7 @@ const BlogIndex = () => {
     const raw = (cityFromRoute || "").trim();
     return raw || undefined;
   }, [cityFromRoute]);
+  console.log("[BLOG] route city =", city || "(none)");
   const q = params.get("q")?.trim() || "";
   const page = Math.max(1, parseInt(params.get("page") || "1", 10) || 1);
 

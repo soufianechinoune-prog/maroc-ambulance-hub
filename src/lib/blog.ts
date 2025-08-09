@@ -13,9 +13,7 @@ export type BlogPost = {
   _path?: string; // debug only
 };
 
-// Absolute-from-root glob (Vite)
-const files = (import.meta as any).glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
-
+// Minimal front-matter parser (browser-safe, no Buffer)
 function parseFrontmatter(raw: string): { data: Record<string, any>; content: string } {
   if (!raw.startsWith("---")) return { data: {}, content: raw };
   const end = raw.indexOf("\n---", 3);
@@ -54,17 +52,62 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
   return { data, content: body };
 }
 
-function loadAll(): BlogPost[] {
-  const entries = Object.entries(files);
-  let posts: BlogPost[] = entries.map(([path, raw]) => {
-    const { data, content } = parseFrontmatter(raw);
+function readAllMarkdown(): Record<string, string> {
+  let files: Record<string, string> = {};
+  try {
+    // Use Vite glob in browser/ESM build
+    const anyMeta = (import.meta as any);
+    if (anyMeta && typeof anyMeta.glob === "function") {
+      files = anyMeta.glob("/src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+    }
+  } catch {}
 
+  // Node/CJS fallback for SSG build
+  if (Object.keys(files).length === 0) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const req: any = (globalThis as any).require || (eval("require") as any);
+      const fs = req("fs");
+      const path = req("path");
+      const root = path.resolve(process.cwd(), "src/content/blog");
+      const out: Record<string, string> = {};
+      const walk = (dir: string) => {
+        if (!fs.existsSync(dir)) return;
+        for (const entry of fs.readdirSync(dir)) {
+          const full = path.join(dir, entry);
+          const stat = fs.statSync(full);
+          if (stat.isDirectory()) walk(full);
+          else if (entry.endsWith(".md")) {
+            const raw = fs.readFileSync(full, "utf8");
+            const key = "/src/" + full.split("/src/").pop();
+            out[key] = raw;
+          }
+        }
+      };
+      walk(root);
+      files = out;
+    } catch {}
+  }
+
+  try {
+    // Safe dev logging (ignore if unavailable in CJS)
+    if ((import.meta as any)?.env?.DEV) {
+      console.log("[BLOG] filesFound:", Object.keys(files).length, Object.keys(files));
+    }
+  } catch {}
+
+  return files;
+}
+
+function loadAll(): BlogPost[] {
+  const files = readAllMarkdown();
+  const posts: BlogPost[] = Object.entries(files).map(([path, raw]) => {
+    const { data, content } = parseFrontmatter(raw);
     const title = (data.title ?? "Sans titre").toString();
     const description = (data.description ?? "").toString();
     const slug = slugify((data.slug ?? title).toString());
     const date = ((data.date ?? "").toString() || new Date().toISOString().slice(0, 10)).slice(0, 10);
     const updated = ((data.updated ?? date).toString() || date).slice(0, 10);
-
     const citySlug = data.city ? slugify(data.city.toString()) : "";
     const categories = ["toutes-les-villes", ...(citySlug ? [citySlug] : [])];
 
@@ -82,30 +125,21 @@ function loadAll(): BlogPost[] {
     } satisfies BlogPost;
   });
 
-  // Sort newest first by updated or date
+  // Newest first
   posts.sort((a, b) => (b.updated || b.date).localeCompare(a.updated || a.date));
-
-  if ((import.meta as any).env?.DEV) {
-    console.log("[BLOG] filesFound:", Object.keys(files).length, Object.keys(files));
-    console.table(posts.slice(0, 5).map((p) => ({ slug: p.slug, city: p.city, cat: (p.categories || []).join(","), path: p._path })));
-  }
-
   return posts;
 }
 
-let _cache: BlogPost[] | null = null;
+let CACHE: BlogPost[] | null = null;
 export function getAllPosts(): BlogPost[] {
-  if (_cache) return _cache;
-  _cache = loadAll();
-  return _cache;
+  if (CACHE) return CACHE;
+  CACHE = loadAll();
+  return CACHE;
 }
 
 export function getPostsByCity(city: string): BlogPost[] {
   const c = slugify(city);
-  const all = getAllPosts();
-  const list = all.filter((p) => p.categories?.includes(c) || p.categories?.includes("toutes-les-villes"));
-  if ((import.meta as any).env?.DEV) console.log(`[BLOG] list for ${c}:`, list.length);
-  return list;
+  return getAllPosts().filter((p) => p.categories?.includes(c) || p.categories?.includes("toutes-les-villes"));
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

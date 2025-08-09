@@ -38,10 +38,7 @@ const BlogPost = () => {
     ? (city ? getPostByCityAndSlug(city, slug) : getPostBySlug(slug))
     : undefined;
 
-  // Runtime redirect from legacy URL /blog/:slug -> /blog/:city/:slug when applicable
-  if (!city && post && post.city) {
-    return <Navigate to={`/blog/${post.city}/${post.slug}`} replace />;
-  }
+  // No redirect: canonical path is now /blog/:slug only to avoid duplicates
 
   if (!post) {
     return (
@@ -63,7 +60,7 @@ const BlogPost = () => {
     );
   }
 
-  const canonicalPath = post.city ? `/blog/${post.city}/${post.slug}` : `/blog/${post.slug}`;
+  const canonicalPath = `/blog/${post.slug}`;
   const canonical = `${SITE_URL}${canonicalPath}`;
   const image = post.coverImage || "/default-seo-image.jpg";
   const metaDescriptionRaw = post.description || "";
@@ -85,27 +82,15 @@ const BlogPost = () => {
     inLanguage: "fr-MA",
   };
 
-  // Breadcrumbs JSON-LD: Accueil > Blog > [Ville?] > [Article]
+  // Breadcrumbs JSON-LD: Accueil > Blog > [Article]
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: post.city
-      ? [
-          { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
-          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: post.city.charAt(0).toUpperCase() + post.city.slice(1),
-            item: `${SITE_URL}/blog/ambulance-${post.city}`,
-          },
-          { "@type": "ListItem", position: 4, name: post.title, item: canonical },
-        ]
-      : [
-          { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
-          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-          { "@type": "ListItem", position: 3, name: post.title, item: canonical },
-        ],
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title, item: canonical },
+    ],
   } as any;
 
   // Prepare content & TOC
@@ -252,18 +237,6 @@ const BlogPost = () => {
                 <Link to="/blog">Blog</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            {post.city && (
-              <>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link to={`/blog/ambulance-${post.city}`}>
-                      {post.city.charAt(0).toUpperCase() + post.city.slice(1)}
-                    </Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </>
-            )}
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbPage>{post.title}</BreadcrumbPage>
@@ -275,17 +248,6 @@ const BlogPost = () => {
           {/* Colonne principale */}
           <section className="col-span-12 lg:col-span-9 xl:col-span-9">
             <header className="mb-6">
-              {post.city && (
-                <div className="mb-2">
-                  <Link
-                    to={`/blog/ambulance-${post.city}`}
-                    className="inline-flex items-center rounded-full border px-3 py-1 text-xs md:text-sm font-medium text-foreground hover:text-primary transition-colors"
-                    aria-label={`Catégorie ville: ${post.city}`}
-                  >
-                    {post.city.charAt(0).toUpperCase() + post.city.slice(1)}
-                  </Link>
-                </div>
-              )}
               <h1 className="text-3xl md:text-4xl font-bold text-foreground">{post.title}</h1>
               <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                 <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("fr-MA")}</time>
@@ -469,7 +431,7 @@ const BlogPost = () => {
             <h2 className="text-xl font-semibold text-foreground mb-4">Articles similaires</h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => {
-                const path = r.city ? `/blog/${r.city}/${r.slug}` : `/blog/${r.slug}`;
+                const path = `/blog/${r.slug}`;
                 return (
                   <article key={r.slug} className="rounded-lg border bg-card text-card-foreground p-4">
                     <h3 className="text-base font-semibold">
@@ -492,7 +454,7 @@ const BlogPost = () => {
           <nav aria-label="Navigation des articles" className="max-w-5xl mx-auto mt-10 flex justify-between items-center gap-4">
             {prev ? (
               <Link
-                to={prev.city ? `/blog/${prev.city}/${prev.slug}` : `/blog/${prev.slug}`}
+                to={`/blog/${prev.slug}`}
                 rel="prev"
                 className="text-sm font-medium hover:underline"
               >
@@ -503,7 +465,7 @@ const BlogPost = () => {
             )}
             {next && (
               <Link
-                to={next.city ? `/blog/${next.city}/${next.slug}` : `/blog/${next.slug}`}
+                to={`/blog/${next.slug}`}
                 rel="next"
                 className="text-sm font-medium hover:underline"
               >

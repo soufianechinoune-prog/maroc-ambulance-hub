@@ -12,7 +12,6 @@ import { cities } from "./data/cities";
 import MentionsLegales from "./pages/MentionsLegales";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisation";
-import BlogCityRedirect from "./pages/blog/BlogCityRedirect";
 
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -32,12 +31,6 @@ const AppRoutes = () => (
 
     {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
-    <Route path="/blog/ambulance-:city" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
-    <Route path="/blog/ambulance-maroc" element={<BlogCityRedirect />} />
-    <Route path="/blog/ambulance-casa" element={<BlogCityRedirect />} />
-    <Route path="/blog/ambulance-casablance" element={<BlogCityRedirect />} />
-    <Route path="/blog/ambulance-casblanca" element={<BlogCityRedirect />} />
-    <Route path="/blog/villes/:city" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
     <Route path="/blog/:city/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
     <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
 

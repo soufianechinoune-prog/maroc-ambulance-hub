@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { SITE_URL } from "@/lib/config";
 import { getAllPosts } from "@/lib/blog";
-import { Link, useSearchParams, useParams } from "react-router-dom";
-import { useMemo } from "react";
+import { Link, useSearchParams, useParams, useLocation } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
@@ -20,38 +20,17 @@ const slugify = (s: string) =>
     .trim()
     .replace(/\s+/g, "-");
 
-// --- NEW: city inference helpers (no external deps) ---
-const cityAliases: Record<string, string[]> = {
-  casablanca: ["casablanca", "casa", "casa-blanca"],
-  rabat: ["rabat"],
-  marrakech: ["marrakech", "marrakesh"],
-  fes: ["fès", "fes"],
-  tanger: ["tanger", "tangier"],
-  agadir: ["agadir"],
-  meknes: ["meknès", "meknes"],
-  oujda: ["oujda"],
-};
-
+// --- tiny helpers ---
 const normalize = (s?: string) =>
   (s || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 
-function inferCityFromPost(p: any): string | undefined {
-  const slug = normalize(p?.slug);
-  const path = normalize(p?.filepath || p?.path || "");
-  const title = normalize(p?.title);
-  const haystack = `${slug} ${path} ${title}`;
-
-  for (const [city, keys] of Object.entries(cityAliases)) {
-    for (const k of keys) {
-      if (haystack.includes(k)) return city;
-    }
-  }
-  // also catch filenames like ambulance-casablanca-*.md or *-casablanca.md
-  const m = haystack.match(/-(casablanca|rabat|marrakech|fes|tanger|agadir|meknes|oujda)(?:-|\.| |$)/);
-  return m ? m[1] : undefined;
+function extractCityFromPath(pathname: string): string | undefined {
+  // matches /blog/ambulance-casablanca (or any city token after ambulance-)
+  const m = pathname.match(/\/blog\/ambulance-([a-z-]+)/i);
+  return m?.[1];
 }
 // --- end helpers ---
 
@@ -65,31 +44,36 @@ const BlogIndex = () => {
 
   const citySlug = useMemo(() => slugify(city || ""), [city]);
 
+  const location = useLocation();
+  const cityFromUrl = useMemo(() => {
+    const c = extractCityFromPath(location.pathname);
+    return c ? normalize(c) : "";
+  }, [location.pathname]);
+
 const all = useMemo(() => {
   const list = getAllPosts() || [];
-  // enrich with inferred city (without mutating original)
-  return list.map((p: any) => {
-    const cats = Array.isArray(p?.categories) ? p.categories.map((c:any)=>String(c).toLowerCase()) : [];
-    const inferred = inferCityFromPost(p);
-    return { ...p, _cats: cats, _inferredCity: inferred };
-  });
+  // we do not mutate source; we just ensure we have predictable strings to search in
+  return list.map((p: any) => ({
+    ...p,
+    _blob: normalize(`${p?.slug || ""} ${p?.title || ""} ${p?.filepath || p?.path || ""}`),
+    _cats: Array.isArray(p?.categories)
+      ? p.categories.map((c: any) => normalize(String(c)))
+      : [],
+  }));
 }, []);
   const filtered = useMemo(() => {
     let base = all;
-    if (citySlug) {
-      const want = normalize(citySlug);
+    if (cityFromUrl) {
+      const want = cityFromUrl;
       base = all.filter((p: any) => {
-        // 1) explicit categories (front-matter) if present
+        // 1) explicit categories if present
         if (p._cats?.includes(want) || p._cats?.includes("toutes-les-villes")) return true;
-        // 2) inferred city from slug/path/title
-        if (normalize(p._inferredCity) === want) return true;
-        // 3) loose fallback: slug/path/title contains the city token
-        const blob = normalize(`${p?.slug} ${p?.filepath || ""} ${p?.title || ""}`);
-        return blob.includes(want);
+        // 2) naive include on slug/title/path blob
+        return p._blob.includes(want);
       });
-      console.debug("[BLOG] city=", citySlug, "all:", all.length, "filtered:", base.length);
+      console.debug("[BLOG] URL=", location.pathname, "want:", cityFromUrl, "all:", all.length, "filtered:", base.length);
       if (!base.length) {
-        console.debug("[BLOG] sample slugs:", all.slice(0, 8).map((p:any)=>p.slug));
+        console.debug("[BLOG] sample slugs:", all.slice(0, 10).map((p:any)=>p.slug));
       }
     }
     if (!q) return base;
@@ -100,7 +84,7 @@ const all = useMemo(() => {
         .toLowerCase()
         .includes(needle)
     );
-  }, [all, q, citySlug]);
+  }, [all, q, cityFromUrl, location.pathname]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const current = Math.min(page, totalPages);
@@ -240,6 +224,15 @@ const all = useMemo(() => {
             </Card>
           ))}
         </section>
+
+        {posts.length === 0 && (
+          <div className="py-10 text-center text-muted-foreground">
+            Aucun article pour cette ville pour le moment.
+            <div className="mt-2 text-xs opacity-70">
+              Debug: {String(location.pathname)} — ville déduite: {String(cityFromUrl || "aucune")}
+            </div>
+          </div>
+        )}
 
         {totalPages > 1 && (
           <nav className="mt-10 flex justify-center">

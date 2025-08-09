@@ -68,9 +68,19 @@ try {
   // @ts-ignore - available in Vite/browser build
   const anyMeta = (import.meta as any);
   if (anyMeta && typeof anyMeta.glob === "function") {
-    modules = anyMeta.glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
+    const patterns = [
+      "/src/content/blog/*.md",
+      "/src/content/blog/**/*.md",
+      "/src/content/**/*.md",
+    ];
+    for (const pattern of patterns) {
+      // Try both Vite strategies to get raw text
+      const hitQuery = anyMeta.glob(pattern, { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+      const hitAs = anyMeta.glob(pattern, { eager: true, as: "raw" }) as Record<string, string>;
+      Object.assign(modules, hitQuery, hitAs);
+    }
     if (Object.keys(modules).length === 0) {
-      console.warn("[BLOG] No markdown files matched /src/content/blog/**/*.md");
+      console.warn("[BLOG] No markdown files matched patterns", patterns);
     }
   } else {
     throw new Error("no import.meta.glob");

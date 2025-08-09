@@ -15,6 +15,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { useHashScroll } from "@/hooks/useHashScroll";
 
 // Utils
@@ -65,6 +66,9 @@ const BlogPost = () => {
   const canonicalPath = post.city ? `/blog/${post.city}/${post.slug}` : `/blog/${post.slug}`;
   const canonical = `${SITE_URL}${canonicalPath}`;
   const image = post.coverImage || "/default-seo-image.jpg";
+  const metaDescriptionRaw = post.description || "";
+  const metaDescription =
+    metaDescriptionRaw.length > 160 ? `${metaDescriptionRaw.slice(0, 157)}…` : metaDescriptionRaw;
 
   const articleLd = {
     "@context": "https://schema.org",
@@ -175,7 +179,7 @@ const BlogPost = () => {
     <>
       <SEO
         title={`${post.title} | Blog Ambulance Maroc`}
-        description={post.description}
+        description={metaDescription}
         canonical={canonical}
         image={image}
         keywords={post.keywords}
@@ -245,7 +249,7 @@ const BlogPost = () => {
                   alt={`${post.title} – ambulance ${post.city || "Maroc"}`}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-auto rounded-xl shadow-md object-cover mt-4"
+                  className="w-full h-auto rounded-xl shadow-sm object-cover mt-4"
                   sizes="(max-width: 768px) 100vw, 1200px"
                 />
               )}
@@ -270,22 +274,53 @@ const BlogPost = () => {
               </aside>
             </header>
 
+            {/* TOC mobile */}
+            {headings.length > 0 && (
+              <div className="lg:hidden mb-4">
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="toc">
+                    <AccordionTrigger>Sommaire</AccordionTrigger>
+                    <AccordionContent>
+                      <nav aria-label="Table des matières (mobile)">
+                        <ul className="space-y-1">
+                          {headings.map((h) => (
+                            <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
+                              <a
+                                href={`#${h.id}`}
+                                className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
+                              >
+                                {h.text}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </nav>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            )}
+
             <article
               ref={articleRef}
-              className="prose prose-slate prose-lg max-w-none leading-relaxed md:leading-loose prose-headings:font-semibold prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:mt-12 prose-h2:text-2xl md:prose-h2:text-3xl prose-h3:mt-8 prose-p:my-5 prose-li:my-2 prose-img:rounded-xl prose-img:shadow prose-hr:my-10"
+              className="prose prose-slate prose-lg lg:prose-xl max-w-none leading-relaxed md:leading-loose prose-headings:font-semibold prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:mt-10 prose-h2:text-2xl md:prose-h2:text-3xl prose-h3:mt-8 prose-p:mb-6 prose-ul:list-disc prose-ul:pl-6 prose-ul:my-4 prose-ol:pl-6 prose-ol:my-4 prose-li:my-2 prose-img:rounded-xl prose-img:shadow-sm prose-hr:my-10"
             >
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  img: ({ node, ...props }) => (
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      sizes="(max-width: 768px) 100vw, 1200px"
-                      alt={props.alt || `${post.title} – ambulance ${post.city || "Maroc"}`}
-                      {...props}
-                    />
-                  ),
+                  img: ({ node, ...props }) => {
+                    const { className, ...rest } = props as any;
+                    return (
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        sizes="(max-width: 768px) 100vw, 1200px"
+                        className={`${className || ""} w-full h-auto rounded-xl shadow-sm`}
+                        alt={props.alt || `${post.title} – ambulance ${post.city || "Maroc"}`}
+                        {...rest}
+                      />
+                    );
+                  },
                   h1: ({ node, children, ...props }) => {
                     const text = String(children as any);
                     const id = slugify(text);
@@ -328,7 +363,7 @@ const BlogPost = () => {
 
           {/* Sommaire (TOC) */}
           <aside className="hidden lg:block lg:col-span-4 xl:col-span-3">
-            <div className="lg:sticky lg:top-28 border rounded-lg p-4 bg-card text-card-foreground">
+            <div className="lg:sticky lg:top-24 border rounded-lg p-4 bg-card text-card-foreground">
               <p className="text-sm font-semibold mb-2">Sommaire</p>
               {headings.length === 0 ? (
                 <p className="text-sm text-muted-foreground">Aucun sous-titre</p>

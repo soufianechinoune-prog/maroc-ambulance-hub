@@ -363,9 +363,19 @@ const BlogPost = () => {
                       </h3>
                     );
                   },
-                  a: ({ node, ...props }) => (
-                    <a {...props} rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined} />
-                  ),
+                  a: ({ node, children, ...props }) => {
+                    const href = (props as any).href || "";
+                    const isExternal = /^https?:\/\//.test(href) || href.startsWith("//");
+                    const isWhatsApp = href.includes("wa.me") || href.startsWith("whatsapp:");
+                    const isTel = href.startsWith("tel:");
+                    const rel = isExternal || isWhatsApp ? "noopener noreferrer" : undefined;
+                    const target = isExternal || isWhatsApp ? "_blank" : undefined;
+                    return (
+                      <a {...props} target={target} rel={rel}>
+                        {children}
+                      </a>
+                    );
+                  },
                 }}
               >
                 {content}

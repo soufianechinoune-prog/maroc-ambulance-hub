@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { SITE_URL } from "@/lib/config";
 import { getAllPosts } from "@/lib/blog";
-import { Link, useSearchParams, useParams } from "react-router-dom";
+import { Link, useSearchParams, useParams, useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -38,9 +38,14 @@ const BlogIndex = () => {
   const q = params.get("q")?.trim() || "";
   const page = Math.max(1, parseInt(params.get("page") || "1", 10) || 1);
 
-  const citySlug = useMemo(() => slugify(city || ""), [city]);
-
-const normalizedCity = useMemo(() => normalize(citySlug || ""), [citySlug]);
+  const location = useLocation();
+  const cityFromPath = useMemo(() => {
+    const m = location.pathname.match(/\/blog\/ambulance-([a-z0-9-]+)/i);
+    return m?.[1] || "";
+  }, [location.pathname]);
+  const cityToken = (city || cityFromPath) || "";
+  const citySlug = useMemo(() => slugify(cityToken), [cityToken]);
+  const normalizedCity = useMemo(() => normalize(citySlug || ""), [citySlug]);
 
 const all = useMemo(() => {
   const list = getAllPosts() || [];
@@ -98,20 +103,21 @@ useEffect(() => {
   const current = Math.min(page, totalPages);
   const start = (current - 1) * PER_PAGE;
   const posts = filtered.slice(start, start + PER_PAGE);
-  const cityName = city ? city.charAt(0).toUpperCase() + city.slice(1) : null;
-  const selectedCity = city ? cities.find((c) => c.slug === city) : undefined;
+  const hasCity = !!normalizedCity;
+  const cityName = hasCity ? citySlug.charAt(0).toUpperCase() + citySlug.slice(1) : null;
+  const selectedCity = hasCity ? cities.find((c) => c.slug === citySlug) : undefined;
 
   const collectionLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: city ? `Blog Ambulance ${cityName}` : "Blog Ambulance Maroc",
-    description: city
+    name: hasCity ? `Blog Ambulance ${cityName}` : "Blog Ambulance Maroc",
+    description: hasCity
       ? `Guides et conseils sur les services d'ambulance à ${cityName}`
       : "Guides et conseils sur les services d'ambulance au Maroc",
-    url: `${SITE_URL}${city ? `/blog/ambulance-${city}` : "/blog"}`,
+    url: `${SITE_URL}${hasCity ? `/blog/ambulance-${citySlug}` : "/blog"}`,
   } as const;
 
-  const breadcrumbLd = city
+  const breadcrumbLd = hasCity
     ? {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -119,7 +125,7 @@ useEffect(() => {
           { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
           { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
           { "@type": "ListItem", position: 3, name: "Villes" },
-          { "@type": "ListItem", position: 4, name: cityName, item: `${SITE_URL}/blog/ambulance-${city}` },
+          { "@type": "ListItem", position: 4, name: cityName, item: `${SITE_URL}/blog/ambulance-${citySlug}` },
         ],
       }
     : undefined;
@@ -133,19 +139,19 @@ useEffect(() => {
   return (
     <>
       <SEO
-        title={city ? `Blog Ambulance ${cityName} – Guides & Conseils 24/7` : "Blog Ambulance Maroc – Guides & Conseils 24/7"}
-        description={city ? `Articles SEO sur l'ambulance à ${cityName}: urgences, tarifs, quartiers, transport médicalisé.` : "Articles SEO nationaux sur l'ambulance au Maroc: urgences, tarifs, transport médicalisé et conseils."}
-        canonical={`${SITE_URL}${city ? `/blog/ambulance-${city}` : "/blog"}`}
-        keywords={city ? ["ambulance", city] : ["ambulance Maroc", "urgence ambulance", "transport médicalisé"]}
+        title={hasCity ? `Blog Ambulance ${cityName} – Guides & Conseils 24/7` : "Blog Ambulance Maroc – Guides & Conseils 24/7"}
+        description={hasCity ? `Articles SEO sur l'ambulance à ${cityName}: urgences, tarifs, quartiers, transport médicalisé.` : "Articles SEO nationaux sur l'ambulance au Maroc: urgences, tarifs, transport médicalisé et conseils."}
+        canonical={`${SITE_URL}${hasCity ? `/blog/ambulance-${citySlug}` : "/blog"}`}
+        keywords={hasCity ? ["ambulance", citySlug] : ["ambulance Maroc", "urgence ambulance", "transport médicalisé"]}
         image="/default-seo-image.jpg"
-        {...(city
+        {...(hasCity
           ? { jsonLdMultiple: [collectionLd, breadcrumbLd!] }
           : { jsonLd: collectionLd })}
       />
       <Header />
 
       <main className="container mx-auto px-4 py-10">
-        {city && (
+        {hasCity && (
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -171,8 +177,8 @@ useEffect(() => {
           </Breadcrumb>
         )}
         <header className="max-w-3xl mx-auto text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground">{city ? `Blog Ambulance ${cityName}` : "Blog Ambulance Maroc"}</h1>
-          {city ? (
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground">{hasCity ? `Blog Ambulance ${cityName}` : "Blog Ambulance Maroc"}</h1>
+          {hasCity ? (
             <>
               <p className="text-muted-foreground mt-2">{selectedCity?.description || `Guides pratiques et actualités locales pour ${cityName}.`}</p>
               <p className="text-muted-foreground">{`Temps d'intervention moyen: ${selectedCity?.avgEtaMin ?? 12} min · Couverture ${selectedCity?.coverage ?? "étendue"}.`}</p>
@@ -185,8 +191,8 @@ useEffect(() => {
           <nav className="mt-5 flex gap-2 overflow-x-auto py-1" aria-label="Filtrer par ville">
             <Link
               to="/blog"
-              className={`whitespace-nowrap inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors ${!city ? "bg-primary/10 text-primary border-primary" : "text-foreground hover:text-primary"}`}
-              aria-current={!city ? "page" : undefined}
+              className={`whitespace-nowrap inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors ${!hasCity ? "bg-primary/10 text-primary border-primary" : "text-foreground hover:text-primary"}`}
+              aria-current={!hasCity ? "page" : undefined}
             >
               Toutes les villes
             </Link>
@@ -194,8 +200,8 @@ useEffect(() => {
               <Link
                 key={c.slug}
                 to={`/blog/ambulance-${c.slug}`}
-                className={`whitespace-nowrap inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors ${city === c.slug ? "bg-primary/10 text-primary border-primary" : "text-foreground hover:text-primary"}`}
-                aria-current={city === c.slug ? "page" : undefined}
+                className={`whitespace-nowrap inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors ${citySlug === c.slug ? "bg-primary/10 text-primary border-primary" : "text-foreground hover:text-primary"}`}
+                aria-current={citySlug === c.slug ? "page" : undefined}
               >
                 {c.name}
               </Link>

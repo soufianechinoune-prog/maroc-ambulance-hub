@@ -8,6 +8,7 @@ author: "Ambulance Maroc"
 keywords: ["ambulance urgence Casablanca", "intervention rapide ambulance", "service ambulance 24/7 Casablanca"]
 coverImage: "/images/blog/ambulance-urgence-casablanca.jpg"
 city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 readingTime: 5
 tags: ["ambulance", "urgence", "casablanca", "transport médical"]
 ---

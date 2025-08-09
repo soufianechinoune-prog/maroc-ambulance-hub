@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/config";
 import { getAllPosts } from "@/lib/blog";
 import { slugify } from "@/lib/slugify";
 import { Link, useSearchParams, useParams } from "react-router-dom";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
@@ -25,30 +25,39 @@ const BlogIndex = () => {
   const q = params.get("q")?.trim() || "";
   const page = Math.max(1, parseInt(params.get("page") || "1", 10) || 1);
 
-  const all = getAllPosts();
+  const all = useMemo(() => getAllPosts(), []);
+  const citySlug = city ? slugify(city) : "";
   const filtered = useMemo(() => {
-    const citySlug = city ? slugify(city) : "";
-    const base = city
-      ? all.filter((p) => {
-          const cats = (p.categories || []);
-          const pCity = p.city ? slugify(p.city) : "";
-          return pCity === citySlug || cats.includes(citySlug) || cats.includes("toutes-les-villes");
-        })
-      : all;
-    if (!q) return base;
-    const needle = q.toLowerCase();
-    return base.filter((p) =>
-      [p.title, p.description, ...(p.tags || []), ...(p.keywords || [])]
-        .join(" ")
-        .toLowerCase()
-        .includes(needle)
-    );
-  }, [all, q, city]);
+    let arr = all;
+
+    if (citySlug) {
+      arr = arr.filter(
+        (p) => p.categories?.includes(citySlug) || p.categories?.includes("toutes-les-villes")
+      );
+    }
+
+    const needle = q?.toLowerCase().trim();
+    if (needle) {
+      arr = arr.filter(
+        (p) =>
+          p.title.toLowerCase().includes(needle) ||
+          p.description.toLowerCase().includes(needle) ||
+          p.content.toLowerCase().includes(needle)
+      );
+    }
+
+    return arr;
+  }, [all, citySlug, q]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const current = Math.min(page, totalPages);
   const start = (current - 1) * PER_PAGE;
   const posts = filtered.slice(start, start + PER_PAGE);
+
+  useEffect(() => {
+    if (import.meta.env.DEV) console.log("[BLOG] city:", citySlug, "total:", filtered.length);
+  }, [citySlug, filtered.length]);
+
   const cityName = city ? city.charAt(0).toUpperCase() + city.slice(1) : null;
   const selectedCity = city ? cities.find((c) => c.slug === city) : undefined;
 

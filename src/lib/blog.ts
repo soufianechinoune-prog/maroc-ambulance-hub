@@ -68,19 +68,9 @@ try {
   // @ts-ignore - available in Vite/browser build
   const anyMeta = (import.meta as any);
   if (anyMeta && typeof anyMeta.glob === "function") {
-    const patterns = [
-      "/src/content/blog/*.md",
-      "/src/content/blog/**/*.md",
-      "/src/content/**/*.md",
-      "../content/blog/*.md",
-      "../content/blog/**/*.md",
-    ];
-    for (const pattern of patterns) {
-      const hit = anyMeta.glob(pattern, { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
-      Object.assign(modules, hit);
-    }
+    modules = anyMeta.glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
     if (Object.keys(modules).length === 0) {
-      console.warn("Blog loader: no markdown files matched patterns", patterns);
+      console.warn("[BLOG] No markdown files matched /src/content/blog/**/*.md");
     }
   } else {
     throw new Error("no import.meta.glob");
@@ -90,11 +80,19 @@ try {
     const fs = require("fs");
     const path = require("path");
     const dir = path.resolve(process.cwd(), "src/content/blog");
-    const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f: string) => f.endsWith(".md")) : [];
-    for (const f of files) {
-      const raw = fs.readFileSync(path.join(dir, f), "utf8");
-      modules[path.join("/src/content/blog", f)] = raw;
-    }
+    const collect = (d: string) => {
+      if (!fs.existsSync(d)) return;
+      for (const entry of fs.readdirSync(d)) {
+        const full = path.join(d, entry);
+        const stat = fs.statSync(full);
+        if (stat.isDirectory()) collect(full);
+        else if (entry.endsWith(".md")) {
+          const raw = fs.readFileSync(full, "utf8");
+          modules[path.join("/src", full.split("/src")[1] || full)] = raw;
+        }
+      }
+    };
+    collect(dir);
   } catch {}
 }
 
@@ -118,13 +116,11 @@ const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
   const rt = data.readingTime as unknown;
   const readingTime = typeof rt === "number" ? rt : calcReadingTime(content);
 
-  // Categories: always add "toutes-les-villes" + city slug if provided + any FM categories (normalized)
-  const fmCategories: string[] = Array.isArray(data.categories) ? (data.categories as string[]) : [];
-  const categories = Array.from(new Set([
+  // Categories normalized: always ["toutes-les-villes", city?]
+  const categories = [
     "toutes-les-villes",
     ...(city ? [city] : []),
-    ...fmCategories.map(slugify),
-  ]));
+  ];
 
   return {
     slug,
@@ -144,8 +140,17 @@ const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
   } satisfies BlogPost;
 });
 
-// Sort newest first
-posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+// Sort newest first (by updated or date)
+posts.sort((a, b) => ((b.updated || b.date).localeCompare(a.updated || a.date)));
+
+// Dev logs
+try {
+  // @ts-ignore
+  if ((import.meta as any).env?.DEV) {
+    console.log("[BLOG] loaded:", posts.length);
+    console.log("[BLOG] sample:", posts.slice(0, 2).map(p => ({ slug: p.slug, city: p.city, cat: p.categories })));
+  }
+} catch {}
 
 export function getAllPosts(): BlogPost[] {
   return posts;
@@ -156,7 +161,13 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 }
 
 export function getPostsByCity(city: string): BlogPost[] {
-  return posts.filter((p) => (p.city || "") === city);
+  const c = slugify(city);
+  const list = posts.filter((p) => (p.categories || []).includes(c) || (p.categories || []).includes("toutes-les-villes"));
+  try {
+    // @ts-ignore
+    if ((import.meta as any).env?.DEV) console.log(`[BLOG] ${c} count:`, list.length);
+  } catch {}
+  return list;
 }
 
 export function getPostByCityAndSlug(city: string, slug: string): BlogPost | undefined {

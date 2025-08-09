@@ -71,12 +71,14 @@ const BlogPost = () => {
     "@type": "Article",
     headline: post.title,
     description: post.description,
-    image: `${SITE_URL}${image}`,
-    author: { "@type": "Organization", name: post.author || "Ambulance Maroc" },
     datePublished: post.date,
     dateModified: post.updated || post.date,
-    articleSection: post.city || undefined,
+    author: { "@type": "Organization", name: post.author || "Ambulance Maroc" },
+    publisher: { "@type": "Organization", name: "Ambulance Maroc" },
+    image: image ? [`${SITE_URL}${image}`] : undefined,
     mainEntityOfPage: canonical,
+    articleSection: post.city || "toutes-les-villes",
+    inLanguage: "fr-MA",
   };
 
   // Breadcrumbs JSON-LD: Accueil > Blog > [Ville?] > [Article]
@@ -181,7 +183,7 @@ const BlogPost = () => {
         jsonLdMultiple={[articleLd, breadcrumbLd]}
       />
       <Header />
-      <main className="container mx-auto px-4 py-10">
+      <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
         {/* Breadcrumbs */}
         <Breadcrumb>
           <BreadcrumbList>
@@ -215,9 +217,9 @@ const BlogPost = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="grid gap-10 lg:grid-cols-[1fr,280px] lg:items-start mt-6">
-          {/* Article */}
-          <article ref={articleRef} className="prose prose-neutral max-w-3xl">
+        <div className="grid gap-8 lg:grid-cols-12 mt-6">
+          {/* Colonne principale */}
+          <section className="lg:col-span-8 xl:col-span-9">
             <header className="mb-6">
               {post.city && (
                 <div className="mb-2">
@@ -243,7 +245,7 @@ const BlogPost = () => {
                   alt={`${post.title} – ambulance ${post.city || "Maroc"}`}
                   loading="lazy"
                   decoding="async"
-                  className="w-full rounded-lg mt-4"
+                  className="w-full h-auto rounded-xl shadow-md object-cover mt-4"
                   sizes="(max-width: 768px) 100vw, 1200px"
                 />
               )}
@@ -268,66 +270,85 @@ const BlogPost = () => {
               </aside>
             </header>
 
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              components={{
-                img: ({ node, ...props }) => (
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(max-width: 768px) 100vw, 1200px"
-                    alt={props.alt || `${post.title} – ambulance ${post.city || "Maroc"}`}
-                    {...props}
-                  />
-                ),
-                h2: ({ node, children, ...props }) => {
-                  const text = String(children as any);
-                  const id = slugify(text);
-                  return (
-                    <h2 id={id} {...props}>
-                      {children}
-                    </h2>
-                  );
-                },
-                h3: ({ node, children, ...props }) => {
-                  const text = String(children as any);
-                  const id = slugify(text);
-                  return (
-                    <h3 id={id} {...props}>
-                      {children}
-                    </h3>
-                  );
-                },
-                a: ({ node, ...props }) => (
-                  <a {...props} rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined} />
-                ),
-              }}
+            <article
+              ref={articleRef}
+              className="prose prose-slate prose-lg max-w-none leading-relaxed md:leading-loose prose-headings:font-semibold prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:mt-12 prose-h2:text-2xl md:prose-h2:text-3xl prose-h3:mt-8 prose-p:my-5 prose-li:my-2 prose-img:rounded-xl prose-img:shadow prose-hr:my-10"
             >
-              {content}
-            </ReactMarkdown>
-          </article>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  img: ({ node, ...props }) => (
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      sizes="(max-width: 768px) 100vw, 1200px"
+                      alt={props.alt || `${post.title} – ambulance ${post.city || "Maroc"}`}
+                      {...props}
+                    />
+                  ),
+                  h1: ({ node, children, ...props }) => {
+                    const text = String(children as any);
+                    const id = slugify(text);
+                    const { className, ...rest } = props as any;
+                    return (
+                      <h2 id={id} className={`scroll-mt-24 ${className || ""}`} {...rest}>
+                        {children}
+                      </h2>
+                    );
+                  },
+                  h2: ({ node, children, ...props }) => {
+                    const text = String(children as any);
+                    const id = slugify(text);
+                    const { className, ...rest } = props as any;
+                    return (
+                      <h2 id={id} className={`scroll-mt-24 ${className || ""}`} {...rest}>
+                        {children}
+                      </h2>
+                    );
+                  },
+                  h3: ({ node, children, ...props }) => {
+                    const text = String(children as any);
+                    const id = slugify(text);
+                    const { className, ...rest } = props as any;
+                    return (
+                      <h3 id={id} className={`scroll-mt-24 ${className || ""}`} {...rest}>
+                        {children}
+                      </h3>
+                    );
+                  },
+                  a: ({ node, ...props }) => (
+                    <a {...props} rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined} />
+                  ),
+                }}
+              >
+                {content}
+              </ReactMarkdown>
+            </article>
+          </section>
 
-          {/* TOC */}
-          <aside className="hidden lg:block sticky top-24 h-max border rounded-lg p-4 bg-card text-card-foreground">
-            <p className="text-sm font-semibold mb-2">Sommaire</p>
-            {headings.length === 0 ? (
-              <p className="text-sm text-muted-foreground">Aucun sous-titre</p>
-            ) : (
-              <nav aria-label="Table des matières">
-                <ul className="space-y-1">
-                  {headings.map((h) => (
-                    <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
-                      <a
-                        href={`#${h.id}`}
-                        className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
-                      >
-                        {h.text}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            )}
+          {/* Sommaire (TOC) */}
+          <aside className="hidden lg:block lg:col-span-4 xl:col-span-3">
+            <div className="lg:sticky lg:top-28 border rounded-lg p-4 bg-card text-card-foreground">
+              <p className="text-sm font-semibold mb-2">Sommaire</p>
+              {headings.length === 0 ? (
+                <p className="text-sm text-muted-foreground">Aucun sous-titre</p>
+              ) : (
+                <nav aria-label="Table des matières">
+                  <ul className="space-y-1">
+                    {headings.map((h) => (
+                      <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
+                        <a
+                          href={`#${h.id}`}
+                          className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
+                        >
+                          {h.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
+            </div>
           </aside>
         </div>
 

@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { SITE_URL } from "@/lib/config";
 import { getAllPosts } from "@/lib/blog";
-import { Link, useSearchParams, useParams, useLocation } from "react-router-dom";
+import { Link, useSearchParams, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,11 +27,7 @@ const normalize = (s?: string) =>
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 
-function extractCityFromPath(pathname: string): string | undefined {
-  // matches /blog/ambulance-casablanca (or any city token after ambulance-)
-  const m = pathname.match(/\/blog\/ambulance-([a-z-]+)/i);
-  return m?.[1];
-}
+// City is obtained from route params; no path parsing needed
 // --- end helpers ---
 
 const PER_PAGE = 9;
@@ -44,11 +40,7 @@ const BlogIndex = () => {
 
   const citySlug = useMemo(() => slugify(city || ""), [city]);
 
-  const location = useLocation();
-  const cityFromUrl = useMemo(() => {
-    const c = extractCityFromPath(location.pathname);
-    return c ? normalize(c) : "";
-  }, [location.pathname]);
+const normalizedCity = useMemo(() => normalize(citySlug || ""), [citySlug]);
 
 const all = useMemo(() => {
   const list = getAllPosts() || [];
@@ -61,30 +53,37 @@ const all = useMemo(() => {
       : [],
   }));
 }, []);
-  const filtered = useMemo(() => {
-    let base = all;
-    if (cityFromUrl) {
-      const want = cityFromUrl;
-      base = all.filter((p: any) => {
-        // 1) explicit categories if present
-        if (p._cats?.includes(want) || p._cats?.includes("toutes-les-villes")) return true;
-        // 2) naive include on slug/title/path blob
-        return p._blob.includes(want);
-      });
-      console.debug("[BLOG] URL=", location.pathname, "want:", cityFromUrl, "all:", all.length, "filtered:", base.length);
-      if (!base.length) {
-        console.debug("[BLOG] sample slugs:", all.slice(0, 10).map((p:any)=>p.slug));
-      }
-    }
-    if (!q) return base;
-    const needle = q.toLowerCase();
-    return base.filter((p) =>
-      [p.title, p.description, ...(p.tags || []), ...(p.keywords || [])]
-        .join(" ")
-        .toLowerCase()
-        .includes(needle)
+const filtered = useMemo(() => {
+  let base = all;
+  if (normalizedCity) {
+    const want = normalizedCity;
+    base = all.filter((p: any) => {
+      const postCity = normalize(p.city || "");
+      return p._cats?.includes("toutes-les-villes") || p._cats?.includes(want) || postCity === want;
+    });
+  }
+  if (!q) return base;
+  const needle = q.toLowerCase();
+  return base.filter((p) =>
+    [p.title, p.description, ...(p.tags || []), ...(p.keywords || [])]
+      .join(" ")
+      .toLowerCase()
+      .includes(needle)
+  );
+}, [all, q, normalizedCity]);
+
+useEffect(() => {
+  try {
+    console.log(
+      "[BLOG] city =",
+      city || "(none)",
+      "| total =",
+      all.length,
+      "| filtered =",
+      filtered.length
     );
-  }, [all, q, cityFromUrl, location.pathname]);
+  } catch {}
+}, [city, all.length, filtered.length]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const current = Math.min(page, totalPages);
@@ -228,9 +227,6 @@ const all = useMemo(() => {
         {posts.length === 0 && (
           <div className="py-10 text-center text-muted-foreground">
             Aucun article pour cette ville pour le moment.
-            <div className="mt-2 text-xs opacity-70">
-              Debug: {String(location.pathname)} — ville déduite: {String(cityFromUrl || "aucune")}
-            </div>
           </div>
         )}
 

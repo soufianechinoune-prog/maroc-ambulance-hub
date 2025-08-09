@@ -52,64 +52,16 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
   return { data, content: body };
 }
 
-function readAllMarkdown(): Record<string, string> {
-  let files: Record<string, string> = {};
-  try {
-    // Use Vite glob in browser/ESM build
-    const anyMeta = (import.meta as any);
-    if (anyMeta && typeof anyMeta.glob === "function") {
-      const absQ = anyMeta.glob("/src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
-      const relQ = anyMeta.glob("./src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
-      const absAs = anyMeta.glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
-      const relAs = anyMeta.glob("./src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
-      files = { ...absQ, ...relQ, ...absAs, ...relAs };
-    }
-  } catch {}
+export function readAllMarkdown(): Record<string, string> {
+  const abs = import.meta.glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
+  const rel = import.meta.glob("./src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
+  const files = { ...abs, ...rel };
 
-  // Node/CJS fallback for SSG build
-  if (Object.keys(files).length === 0) {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const req: any = (globalThis as any).require || (eval("require") as any);
-      const fs = req("fs");
-      const path = req("path");
-      const root = path.resolve(process.cwd(), "src/content/blog");
-      const out: Record<string, string> = {};
-      const walk = (dir: string) => {
-        if (!fs.existsSync(dir)) return;
-        for (const entry of fs.readdirSync(dir)) {
-          const full = path.join(dir, entry);
-          const stat = fs.statSync(full);
-          if (stat.isDirectory()) walk(full);
-          else if (entry.endsWith(".md")) {
-            const raw = fs.readFileSync(full, "utf8");
-            const key = "/src/" + full.split("/src/").pop();
-            out[key] = raw;
-          }
-        }
-      };
-      walk(root);
-      files = out;
-    } catch {}
-  }
-
-  // Unconditional log (dev/prod/SSG) + optional DOM inject
-  try {
-    const keys = Object.keys(files);
-    console.log("[BLOG] filesFound:", keys.length, keys);
-    const el = typeof document !== "undefined" && document.getElementById("blog-debug");
-    if (el) (el as HTMLElement).textContent = JSON.stringify(keys, null, 2);
-    console.log("[BLOG] cwd:", typeof process !== "undefined" ? process.cwd() : "no-process");
-    try {
-      // best-effort dir presence check
-      import("fs/promises")
-        .then((fs) => fs.stat("./src/content/blog").then(() => console.log("[BLOG] has dir:", true)).catch(() => console.log("[BLOG] has dir:", false)))
-        .catch(() => {});
-    } catch {}
-  } catch {}
-
+  const keys = Object.keys(files);
+  console.log("[BLOG] filesFound:", keys.length, keys);
   return files;
 }
+
 
 function loadAll(): BlogPost[] {
   const files = readAllMarkdown();

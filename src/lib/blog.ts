@@ -59,6 +59,10 @@ function readAllMarkdown(): Record<string, string> {
     const anyMeta = (import.meta as any);
     if (anyMeta && typeof anyMeta.glob === "function") {
       files = anyMeta.glob("/src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+      if (Object.keys(files).length === 0) {
+        // Fallback relative glob if needed
+        files = anyMeta.glob("./src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+      }
     }
   } catch {}
 
@@ -132,8 +136,7 @@ function loadAll(): BlogPost[] {
 
 let CACHE: BlogPost[] | null = null;
 export function getAllPosts(): BlogPost[] {
-  if (CACHE) return CACHE;
-  CACHE = loadAll();
+  if (!CACHE || CACHE.length === 0) CACHE = loadAll();
   return CACHE;
 }
 

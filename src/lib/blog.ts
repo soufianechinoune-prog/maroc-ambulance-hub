@@ -1,4 +1,5 @@
 import { slugify } from "@/lib/slugify";
+import matter from "gray-matter";
 // Lightweight frontmatter parser to avoid Node Buffer polyfills in browser
 // Node/CJS fallback support
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -108,7 +109,7 @@ try {
 }
 
 const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
-  const { data, content } = parseFrontmatter(raw);
+  const { data, content } = matter(raw);
   // slug from frontmatter or filename
   const fileSlug = path.split("/").pop()?.replace(/\.md$/, "") || "";
   const slug: string = (data.slug as string) || fileSlug;

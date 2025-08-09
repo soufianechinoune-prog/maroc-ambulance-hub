@@ -175,6 +175,17 @@ const BlogPost = () => {
     return list.slice(0, max);
   }, [post.city, post.slug, post.service, post.tags, post.date]);
 
+  const { prev, next } = useMemo(() => {
+    const ordered = getAllPosts()
+      .slice()
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const idx = ordered.findIndex((p) => p.slug === post.slug);
+    return {
+      prev: idx > 0 ? ordered[idx - 1] : undefined,
+      next: idx >= 0 && idx < ordered.length - 1 ? ordered[idx + 1] : undefined,
+    };
+  }, [post.slug]);
+
   return (
     <>
       <SEO
@@ -187,7 +198,7 @@ const BlogPost = () => {
         jsonLdMultiple={[articleLd, breadcrumbLd]}
       />
       <Header />
-      <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
+      <main className="container mx-auto px-4 lg:px-8 py-10">
         {/* Breadcrumbs */}
         <Breadcrumb>
           <BreadcrumbList>
@@ -221,9 +232,9 @@ const BlogPost = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="grid gap-8 lg:grid-cols-12 mt-6">
+        <div className="grid grid-cols-12 gap-6 lg:gap-8 mt-6">
           {/* Colonne principale */}
-          <section className="lg:col-span-8 xl:col-span-9">
+          <section className="col-span-12 lg:col-span-9 xl:col-span-9">
             <header className="mb-6">
               {post.city && (
                 <div className="mb-2">
@@ -250,7 +261,7 @@ const BlogPost = () => {
                   loading="lazy"
                   decoding="async"
                   className="w-full h-auto rounded-xl shadow-sm object-cover mt-4"
-                  sizes="(max-width: 768px) 100vw, 1200px"
+                  sizes="(min-width:1280px) 800px, 100vw"
                 />
               )}
 
@@ -287,6 +298,7 @@ const BlogPost = () => {
                             <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
                               <a
                                 href={`#${h.id}`}
+                                aria-current={activeId === h.id ? "true" : undefined}
                                 className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
                               >
                                 {h.text}
@@ -303,7 +315,7 @@ const BlogPost = () => {
 
             <article
               ref={articleRef}
-              className="prose prose-slate prose-lg lg:prose-xl max-w-none leading-relaxed md:leading-loose prose-headings:font-semibold prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:mt-10 prose-h2:text-2xl md:prose-h2:text-3xl prose-h3:mt-8 prose-p:mb-6 prose-ul:list-disc prose-ul:pl-6 prose-ul:my-4 prose-ol:pl-6 prose-ol:my-4 prose-li:my-2 prose-img:rounded-xl prose-img:shadow-sm prose-hr:my-10"
+              className="prose prose-slate prose-lg lg:prose-xl max-w-none leading-relaxed md:leading-loose prose-headings:font-semibold prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:mt-10 prose-h2:text-2xl md:prose-h2:text-3xl prose-h3:mt-6 prose-p:mb-6 prose-ul:list-disc prose-ul:pl-6 prose-ul:my-4 prose-ol:pl-6 prose-ol:my-4 prose-li:my-2 prose-img:rounded-xl prose-img:shadow-sm prose-hr:my-10"
             >
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
@@ -314,7 +326,7 @@ const BlogPost = () => {
                       <img
                         loading="lazy"
                         decoding="async"
-                        sizes="(max-width: 768px) 100vw, 1200px"
+                        sizes="(min-width:1280px) 800px, 100vw"
                         className={`${className || ""} w-full h-auto rounded-xl shadow-sm`}
                         alt={props.alt || `${post.title} – ambulance ${post.city || "Maroc"}`}
                         {...rest}
@@ -362,8 +374,8 @@ const BlogPost = () => {
           </section>
 
           {/* Sommaire (TOC) */}
-          <aside className="hidden lg:block lg:col-span-4 xl:col-span-3">
-            <div className="lg:sticky lg:top-24 border rounded-lg p-4 bg-card text-card-foreground">
+          <aside className="hidden lg:block col-span-3">
+            <div className="sticky top-24 max-h-[80vh] overflow-auto pr-1 border rounded-lg p-4 bg-card text-card-foreground text-sm leading-snug">
               <p className="text-sm font-semibold mb-2">Sommaire</p>
               {headings.length === 0 ? (
                 <p className="text-sm text-muted-foreground">Aucun sous-titre</p>
@@ -374,7 +386,8 @@ const BlogPost = () => {
                       <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
                         <a
                           href={`#${h.id}`}
-                          className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
+                          aria-current={activeId === h.id ? "true" : undefined}
+                          className={`block hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
                         >
                           {h.text}
                         </a>
@@ -410,6 +423,31 @@ const BlogPost = () => {
               })}
             </div>
           </section>
+        )}
+
+        {(prev || next) && (
+          <nav aria-label="Navigation des articles" className="max-w-5xl mx-auto mt-10 flex justify-between items-center gap-4">
+            {prev ? (
+              <Link
+                to={prev.city ? `/blog/${prev.city}/${prev.slug}` : `/blog/${prev.slug}`}
+                rel="prev"
+                className="text-sm font-medium hover:underline"
+              >
+                ← Article précédent: {prev.title}
+              </Link>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <Link
+                to={next.city ? `/blog/${next.city}/${next.slug}` : `/blog/${next.slug}`}
+                rel="next"
+                className="text-sm font-medium hover:underline"
+              >
+                Article suivant: {next.title} →
+              </Link>
+            )}
+          </nav>
         )}
 
         {/* Mobile sticky CTA */}

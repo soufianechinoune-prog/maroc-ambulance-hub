@@ -13,11 +13,10 @@ import MentionsLegales from "./pages/MentionsLegales";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisation";
 
-import BlogIndex from "./pages/BlogIndex";
-import BlogPost from "./pages/BlogPost";
-import BlogDebugJSON from "./pages/BlogDebugJSON";
-import BlogDebugFilesJSON from "./pages/BlogDebugFilesJSON";
-import BlogLayout from "./pages/BlogLayout";
+import BlogLayout from "@/pages/blog/BlogLayout";
+import BlogIndex from "@/pages/blog/BlogIndex";
+import BlogPost from "@/pages/blog/BlogPost";
+
 
 const AppRoutes = () => (
   <Routes>
@@ -33,11 +32,17 @@ const AppRoutes = () => (
     <Route path="/contact" element={<Contact />} />
 
     {/* Blog (nested) */}
-    <Route path="/blog" element={<BlogLayout />}>
+    <Route path="/blog" element={<BlogLayout />}> 
+      {/* INDEX /blog */}
       <Route index element={<BlogIndex />} />
+
+      {/* LISTE PAR VILLE /blog/ambulance-casablanca */}
       <Route path="ambulance-:city" element={<BlogIndex />} />
-      <Route path="debug.json" element={<BlogDebugJSON />} />
-      <Route path="debug-files.json" element={<BlogDebugFilesJSON />} />
+
+      {/* DEBUG (optionnel) */}
+      {/* <Route path="debug-files.json" element={<BlogDebugFiles />} /> */}
+
+      {/* ARTICLE /blog/:slug  (FALLBACK) */}
       <Route path=":slug" element={<BlogPost />} />
     </Route>
 

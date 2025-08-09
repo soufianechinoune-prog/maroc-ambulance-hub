@@ -26,6 +26,7 @@ const slugify = (str: string) =>
     .replace(/\s+/g, "-");
 
 const BlogPost = () => {
+  console.log("[BLOGPOST] rendu avec slug param — si ceci apparaît sur /blog/ambulance-casablanca, c'est MAUVAIS.");
   const { slug = "" } = useParams();
   const post = slug ? getPostBySlug(slug) : undefined;
 

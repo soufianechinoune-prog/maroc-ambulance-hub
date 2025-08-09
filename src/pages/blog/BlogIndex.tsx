@@ -4,7 +4,7 @@ import SEO from "@/components/SEO";
 import { SITE_URL } from "@/lib/config";
 import { getAllPosts } from "@/lib/blog";
 import { slugify } from "@/lib/slugify";
-import { Link, useSearchParams, useParams } from "react-router-dom";
+import { Link, useSearchParams, useParams, useMatches } from "react-router-dom";
 import { useEffect, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,6 +17,7 @@ const PER_PAGE = 9;
 const BlogIndex = () => {
   const [params, setParams] = useSearchParams();
   const { city: cityFromRoute } = useParams();
+  const matches = useMatches();
   const city = useMemo(() => {
     const raw = (cityFromRoute || "").trim();
     return raw || undefined;
@@ -56,13 +57,14 @@ const BlogIndex = () => {
   const posts = filtered.slice(start, start + PER_PAGE);
 
   useEffect(() => {
+    console.log("[BLOG] matches:", matches.map((m: any) => m.pathname || m.pathnameBase || m.id));
     console.log("[BLOG] route city =", city || "(none)", "→", citySlug);
     console.log("[BLOG] counts:", "all", all.length, "filtered", filtered.length, "pagePosts:", posts.length);
     console.log("[BLOG] sample cats:", all.slice(0, 5).map(p => ({ slug: p.slug, city: p.city, cats: p.categories })));
     if (filtered.length === 0) {
       console.log("[BLOG] unique cats:", Array.from(new Set(all.flatMap(p => p.categories || []))));
     }
-  }, [city, citySlug, all.length, filtered.length, posts.length]);
+  }, [matches, city, citySlug, all.length, filtered.length, posts.length]);
 
   const cityName = city ? city.charAt(0).toUpperCase() + city.slice(1) : null;
   const selectedCity = city ? cities.find((c) => c.slug === city) : undefined;

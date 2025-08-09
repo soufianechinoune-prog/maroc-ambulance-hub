@@ -198,7 +198,7 @@ const BlogPost = () => {
         jsonLdMultiple={[articleLd, breadcrumbLd]}
       />
       <Header />
-      <main className="container mx-auto px-4 lg:px-8 py-10">
+      <main className="container mx-auto max-w-screen-2xl px-4 lg:px-8 py-10">
         {/* Breadcrumbs */}
         <Breadcrumb>
           <BreadcrumbList>
@@ -232,7 +232,7 @@ const BlogPost = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="grid grid-cols-12 gap-6 lg:gap-8 mt-6">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-8 mt-6">
           {/* Colonne principale */}
           <section className="col-span-12 lg:col-span-9 xl:col-span-9">
             <header className="mb-6">
@@ -266,7 +266,7 @@ const BlogPost = () => {
               )}
 
               {/* Practical info block */}
-              <aside className="mt-6 rounded-lg border bg-card text-card-foreground p-4">
+              <aside className="mt-6 rounded-xl border bg-card text-card-foreground p-4 shadow-sm">
                 <p className="text-sm text-muted-foreground">Urgence ambulance – 24/7</p>
                 <div className="mt-1 text-lg font-semibold">{PHONE_DISPLAY}</div>
                 {post.city && (
@@ -374,7 +374,7 @@ const BlogPost = () => {
           </section>
 
           {/* Sommaire (TOC) */}
-          <aside className="hidden lg:block col-span-3">
+          <aside className="hidden lg:block lg:col-span-3">
             <div className="sticky top-24 max-h-[80vh] overflow-auto pr-1 border rounded-lg p-4 bg-card text-card-foreground text-sm leading-snug">
               <p className="text-sm font-semibold mb-2">Sommaire</p>
               {headings.length === 0 ? (

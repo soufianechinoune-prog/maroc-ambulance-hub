@@ -59,7 +59,12 @@ const filtered = useMemo(() => {
     const want = normalizedCity;
     base = all.filter((p: any) => {
       const postCity = normalize(p.city || "");
-      return p._cats?.includes("toutes-les-villes") || p._cats?.includes(want) || postCity === want;
+      const inCats = p._cats?.includes("toutes-les-villes") || p._cats?.includes(want) || postCity === want;
+      if (inCats) return true;
+      // Fallback: si la route est /blog/ambulance-casablanca (ou autre ville),
+      // inclure les articles dont le slug contient ce token même si city/categories manquent.
+      const slugNorm = normalize(p.slug || "");
+      return slugNorm.includes(want);
     });
   }
   if (!q) return base;

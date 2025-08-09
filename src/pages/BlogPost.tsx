@@ -17,7 +17,7 @@ import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbP
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { useHashScroll } from "@/hooks/useHashScroll";
-
+import { slugifyHeading, smoothScrollToId } from "@/lib/heading-utils";
 // Utils
 const PHONE_DISPLAY = "0777 22 23 11";
 const PHONE_TEL = "+212777722311";
@@ -127,6 +127,7 @@ const BlogPost = () => {
 
   const [activeId, setActiveId] = useState<string | null>(null);
   const articleRef = useRef<HTMLDivElement>(null);
+  const [toc, setToc] = useState<Array<{ id: string; text: string; depth: 2 | 3 }>>([]);
 
   useEffect(() => {
     const root = articleRef.current;
@@ -144,6 +145,32 @@ const BlogPost = () => {
     const els = root.querySelectorAll("h2[id], h3[id]");
     els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
+  }, [content]);
+
+  useEffect(() => {
+    const root = articleRef.current;
+    if (!root) return;
+
+    const seen = new Map<string, number>();
+    const nodes = Array.from(root.querySelectorAll("h2, h3")) as HTMLElement[];
+
+    nodes.forEach((h) => {
+      const raw = h.textContent || "";
+      let base = slugifyHeading(raw);
+      if (!base) base = "section";
+      const count = (seen.get(base) || 0) + 1;
+      seen.set(base, count);
+      const id = count === 1 ? base : `${base}-${count}`;
+      h.id = id;
+      (h.style as any).scrollMarginTop = "96px";
+    });
+
+    const items = nodes.map((h) => ({
+      id: h.id,
+      text: (h.textContent || "").trim(),
+      depth: h.tagName.toLowerCase() === "h3" ? (3 as 3) : (2 as 2),
+    }));
+    setToc(items);
   }, [content]);
 
   // Smooth hash scroll when navigating TOC links
@@ -286,7 +313,7 @@ const BlogPost = () => {
             </header>
 
             {/* TOC mobile */}
-            {headings.length > 0 && (
+            {toc.length > 0 && (
               <div className="lg:hidden mb-4">
                 <Accordion type="single" collapsible>
                   <AccordionItem value="toc">
@@ -294,10 +321,11 @@ const BlogPost = () => {
                     <AccordionContent>
                       <nav aria-label="Table des matières (mobile)">
                         <ul className="space-y-1">
-                          {headings.map((h) => (
+                          {toc.map((h) => (
                             <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
                               <a
                                 href={`#${h.id}`}
+                                onClick={(e) => { e.preventDefault(); smoothScrollToId(h.id, 96); history.replaceState(null, "", `#${h.id}`); }}
                                 aria-current={activeId === h.id ? "true" : undefined}
                                 className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
                               >
@@ -335,7 +363,7 @@ const BlogPost = () => {
                   },
                   h1: ({ node, children, ...props }) => {
                     const text = String(children as any);
-                    const id = slugify(text);
+                    const id = slugifyHeading(text);
                     const { className, ...rest } = props as any;
                     return (
                       <h2 id={id} className={`scroll-mt-24 ${className || ""}`} {...rest}>
@@ -345,7 +373,7 @@ const BlogPost = () => {
                   },
                   h2: ({ node, children, ...props }) => {
                     const text = String(children as any);
-                    const id = slugify(text);
+                    const id = slugifyHeading(text);
                     const { className, ...rest } = props as any;
                     return (
                       <h2 id={id} className={`scroll-mt-24 ${className || ""}`} {...rest}>
@@ -355,7 +383,7 @@ const BlogPost = () => {
                   },
                   h3: ({ node, children, ...props }) => {
                     const text = String(children as any);
-                    const id = slugify(text);
+                    const id = slugifyHeading(text);
                     const { className, ...rest } = props as any;
                     return (
                       <h3 id={id} className={`scroll-mt-24 ${className || ""}`} {...rest}>
@@ -399,15 +427,16 @@ const BlogPost = () => {
           <aside className="hidden lg:block lg:col-span-3">
             <div className="sticky top-24 max-h-[80vh] overflow-auto pr-1 border rounded-lg p-4 bg-card text-card-foreground text-sm leading-snug">
               <p className="text-sm font-semibold mb-2">Sommaire</p>
-              {headings.length === 0 ? (
+              {toc.length === 0 ? (
                 <p className="text-sm text-muted-foreground">Aucun sous-titre</p>
               ) : (
                 <nav aria-label="Table des matières">
                   <ul className="space-y-1">
-                    {headings.map((h) => (
+                    {toc.map((h) => (
                       <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
                         <a
                           href={`#${h.id}`}
+                          onClick={(e) => { e.preventDefault(); smoothScrollToId(h.id, 96); history.replaceState(null, "", `#${h.id}`); }}
                           aria-current={activeId === h.id ? "true" : undefined}
                           className={`block hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
                         >

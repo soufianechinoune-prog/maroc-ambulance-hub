@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { SITE_URL } from "@/lib/config";
 import { getPostBySlug, getPostsByCity, getAllPosts } from "@/lib/blog";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -28,6 +28,9 @@ const slugify = (str: string) =>
 const BlogPost = () => {
   console.log("[BLOGPOST] rendu avec slug param — si ceci apparaît sur /blog/ambulance-casablanca, c'est MAUVAIS.");
   const { slug = "" } = useParams();
+  if (slug && slug.startsWith("ambulance-")) {
+    return <Navigate to={`/blog/${slug}`} replace />;
+  }
   const post = slug ? getPostBySlug(slug) : undefined;
 
   if (!post) {

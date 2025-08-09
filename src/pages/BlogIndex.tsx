@@ -20,6 +20,41 @@ const slugify = (s: string) =>
     .trim()
     .replace(/\s+/g, "-");
 
+// --- NEW: city inference helpers (no external deps) ---
+const cityAliases: Record<string, string[]> = {
+  casablanca: ["casablanca", "casa", "casa-blanca"],
+  rabat: ["rabat"],
+  marrakech: ["marrakech", "marrakesh"],
+  fes: ["fès", "fes"],
+  tanger: ["tanger", "tangier"],
+  agadir: ["agadir"],
+  meknes: ["meknès", "meknes"],
+  oujda: ["oujda"],
+};
+
+const normalize = (s?: string) =>
+  (s || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+function inferCityFromPost(p: any): string | undefined {
+  const slug = normalize(p?.slug);
+  const path = normalize(p?.filepath || p?.path || "");
+  const title = normalize(p?.title);
+  const haystack = `${slug} ${path} ${title}`;
+
+  for (const [city, keys] of Object.entries(cityAliases)) {
+    for (const k of keys) {
+      if (haystack.includes(k)) return city;
+    }
+  }
+  // also catch filenames like ambulance-casablanca-*.md or *-casablanca.md
+  const m = haystack.match(/-(casablanca|rabat|marrakech|fes|tanger|agadir|meknes|oujda)(?:-|\.| |$)/);
+  return m ? m[1] : undefined;
+}
+// --- end helpers ---
+
 const PER_PAGE = 9;
 
 const BlogIndex = () => {
@@ -30,14 +65,33 @@ const BlogIndex = () => {
 
   const citySlug = useMemo(() => slugify(city || ""), [city]);
 
-  const all = getAllPosts();
+const all = useMemo(() => {
+  const list = getAllPosts() || [];
+  // enrich with inferred city (without mutating original)
+  return list.map((p: any) => {
+    const cats = Array.isArray(p?.categories) ? p.categories.map((c:any)=>String(c).toLowerCase()) : [];
+    const inferred = inferCityFromPost(p);
+    return { ...p, _cats: cats, _inferredCity: inferred };
+  });
+}, []);
   const filtered = useMemo(() => {
-    const base = citySlug
-      ? all.filter((p: any) => {
-          const cats = Array.isArray((p as any).categories) ? (p as any).categories : [];
-          return cats.includes(citySlug) || slugify(p.city || "") === citySlug;
-        })
-      : all;
+    let base = all;
+    if (citySlug) {
+      const want = normalize(citySlug);
+      base = all.filter((p: any) => {
+        // 1) explicit categories (front-matter) if present
+        if (p._cats?.includes(want) || p._cats?.includes("toutes-les-villes")) return true;
+        // 2) inferred city from slug/path/title
+        if (normalize(p._inferredCity) === want) return true;
+        // 3) loose fallback: slug/path/title contains the city token
+        const blob = normalize(`${p?.slug} ${p?.filepath || ""} ${p?.title || ""}`);
+        return blob.includes(want);
+      });
+      console.debug("[BLOG] city=", citySlug, "all:", all.length, "filtered:", base.length);
+      if (!base.length) {
+        console.debug("[BLOG] sample slugs:", all.slice(0, 8).map((p:any)=>p.slug));
+      }
+    }
     if (!q) return base;
     const needle = q.toLowerCase();
     return base.filter((p) =>

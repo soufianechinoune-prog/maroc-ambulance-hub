@@ -39,11 +39,12 @@ const BlogIndex = () => {
   const page = Math.max(1, parseInt(params.get("page") || "1", 10) || 1);
 
   const location = useLocation();
+  const isCasablancaPath = useMemo(() => location.pathname.toLowerCase().includes("/blog/ambulance-casablanca"), [location.pathname]);
   const cityFromPath = useMemo(() => {
     const m = location.pathname.match(/\/blog\/ambulance-([a-z0-9-]+)/i);
     return m?.[1] || "";
   }, [location.pathname]);
-  const cityToken = (city || cityFromPath) || "";
+  const cityToken = (city || cityFromPath || (isCasablancaPath ? "casablanca" : "")) || "";
   const citySlug = useMemo(() => slugify(cityToken), [cityToken]);
   const normalizedCity = useMemo(() => normalize(citySlug || ""), [citySlug]);
 

@@ -68,19 +68,20 @@ try {
   // @ts-ignore - available in Vite/browser build
   const anyMeta = (import.meta as any);
   if (anyMeta && typeof anyMeta.glob === "function") {
-    const patterns = [
-      "/src/content/blog/*.md",
-      "/src/content/blog/**/*.md",
-      "/src/content/**/*.md",
-    ];
-    for (const pattern of patterns) {
-      // Try both Vite strategies to get raw text
-      const hitQuery = anyMeta.glob(pattern, { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
-      const hitAs = anyMeta.glob(pattern, { eager: true, as: "raw" }) as Record<string, string>;
-      Object.assign(modules, hitQuery, hitAs);
-    }
+    modules = {
+      ...anyMeta.glob("/src/content/blog/*.md", { eager: true, as: "raw" }),
+      ...anyMeta.glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }),
+      ...anyMeta.glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }),
+      ...anyMeta.glob("/src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }),
+      ...anyMeta.glob("../content/blog/*.md", { eager: true, as: "raw" }),
+      ...anyMeta.glob("../content/blog/**/*.md", { eager: true, as: "raw" }),
+      ...anyMeta.glob("../content/blog/*.md", { eager: true, query: "?raw", import: "default" }),
+      ...anyMeta.glob("../content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }),
+    } as Record<string, string>;
     if (Object.keys(modules).length === 0) {
-      console.warn("[BLOG] No markdown files matched patterns", patterns);
+      console.warn("[BLOG] No markdown files matched literal globs under /src/content/blog/");
+    } else if (anyMeta.env?.DEV) {
+      console.log("[BLOG] module keys: ", Object.keys(modules).slice(0, 5));
     }
   } else {
     throw new Error("no import.meta.glob");

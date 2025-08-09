@@ -3,7 +3,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { SITE_URL } from "@/lib/config";
-import { getPostBySlug, getPostsByCity, getAllPosts } from "@/lib/blog";
+import {
+  addInternalLinks,
+  getPostBySlug,
+  getPostByCityAndSlug,
+  getPostsByCity,
+  getAllPosts,
+} from "@/lib/blog";
 import { useParams, Link, Navigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -26,12 +32,15 @@ const slugify = (str: string) =>
     .replace(/\s+/g, "-");
 
 const BlogPost = () => {
-  console.log("[BLOGPOST] rendu avec slug param — si ceci apparaît sur /blog/ambulance-casablanca, c'est MAUVAIS.");
-  const { slug = "" } = useParams();
-  if (slug && slug.startsWith("ambulance-")) {
-    return <Navigate to={`/blog/${slug}`} replace />;
+  const { city, slug = "" } = useParams();
+  const post = slug
+    ? (city ? getPostByCityAndSlug(city, slug) : getPostBySlug(slug))
+    : undefined;
+
+  // Runtime redirect from legacy URL /blog/:slug -> /blog/:city/:slug when applicable
+  if (!city && post && post.city) {
+    return <Navigate to={`/blog/${post.city}/${post.slug}`} replace />;
   }
-  const post = slug ? getPostBySlug(slug) : undefined;
 
   if (!post) {
     return (
@@ -39,7 +48,7 @@ const BlogPost = () => {
         <SEO
           title="Article introuvable – Blog Ambulance Maroc"
           description="Article introuvable. Découvrez nos guides sur l'ambulance au Maroc."
-          canonical={`${SITE_URL}/blog/${slug || ""}`}
+          canonical={`${SITE_URL}${city ? `/blog/${city}/${slug || ""}` : `/blog/${slug || ""}`}`}
           noIndex
         />
         <Header />
@@ -53,7 +62,7 @@ const BlogPost = () => {
     );
   }
 
-  const canonicalPath = `/blog/${post.slug}`;
+  const canonicalPath = post.city ? `/blog/${post.city}/${post.slug}` : `/blog/${post.slug}`;
   const canonical = `${SITE_URL}${canonicalPath}`;
   const image = post.coverImage || "/default-seo-image.jpg";
 
@@ -63,6 +72,7 @@ const BlogPost = () => {
     headline: post.title,
     description: post.description,
     image: `${SITE_URL}${image}`,
+    author: { "@type": "Organization", name: post.author || "Ambulance Maroc" },
     datePublished: post.date,
     dateModified: post.updated || post.date,
     articleSection: post.city || undefined,
@@ -92,7 +102,8 @@ const BlogPost = () => {
         ],
   } as any;
 
-  const content = post.content;
+  // Prepare content & TOC
+  const content = addInternalLinks(post.content);
   const headings = useMemo(() => {
     const lines = post.content.split(/\n+/);
     const hs: Array<{ depth: 2 | 3; text: string; id: string }> = [];
@@ -134,10 +145,29 @@ const BlogPost = () => {
 
   const related = useMemo(() => {
     const max = 3;
-    const byCity = post.city ? getPostsByCity(post.city).filter((p) => p.slug !== post.slug) : [];
-    const others = getAllPosts().filter((p) => p.slug !== post.slug && (!post.city || p.city !== post.city));
-    return [...byCity, ...others].slice(0, max);
-  }, [post.city, post.slug]);
+    const byCity: typeof post[] = post.city ? getPostsByCity(post.city).filter((p) => p.slug !== post.slug) : [] as any;
+
+    const currentTags = new Set(post.tags || []);
+    const tagScore = (p: { tags?: string[]; service?: string; date: string }) => {
+      let s = 0;
+      if (post.service && p.service && p.service === post.service) s += 2;
+      s += (p.tags || []).reduce((acc, t) => acc + (currentTags.has(t) ? 1 : 0), 0);
+      s += new Date(p.date).getTime() / 1_000_000_000; // slight freshness bias
+      return s;
+    };
+
+    let list = [...byCity].sort((a, b) => tagScore(b) - tagScore(a));
+    if (list.length < max) {
+      const others = getAllPosts()
+        .filter((p) => p.slug !== post.slug && (!post.city || p.city !== post.city))
+        .sort((a, b) => tagScore(b) - tagScore(a));
+      for (const p of others) {
+        if (list.length >= max) break;
+        if (!list.find((x) => x.slug === p.slug)) list.push(p);
+      }
+    }
+    return list.slice(0, max);
+  }, [post.city, post.slug, post.service, post.tags, post.date]);
 
   return (
     <>
@@ -146,10 +176,12 @@ const BlogPost = () => {
         description={post.description}
         canonical={canonical}
         image={image}
+        keywords={post.keywords}
+        author={post.author}
         jsonLdMultiple={[articleLd, breadcrumbLd]}
       />
       <Header />
-      <main className="container mx-auto px-4 lg:px-6 max-w-6xl py-10">
+      <main className="container mx-auto px-4 py-10">
         {/* Breadcrumbs */}
         <Breadcrumb>
           <BreadcrumbList>
@@ -183,9 +215,9 @@ const BlogPost = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:items-start mt-6">
+        <div className="grid gap-10 lg:grid-cols-[1fr,280px] lg:items-start mt-6">
           {/* Article */}
-          <article ref={articleRef} className="lg:col-span-8 xl:col-span-9 prose prose-lg lg:prose-xl leading-relaxed dark:prose-invert max-w-none [--tw-prose-body:75ch]">
+          <article ref={articleRef} className="prose prose-neutral max-w-3xl">
             <header className="mb-6">
               {post.city && (
                 <div className="mb-2">
@@ -201,6 +233,8 @@ const BlogPost = () => {
               <h1 className="text-3xl md:text-4xl font-bold text-foreground">{post.title}</h1>
               <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                 <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("fr-MA")}</time>
+                <span aria-hidden>•</span>
+                <span>{post.readingTime} min</span>
               </div>
               {/* Cover image */}
               {image && (
@@ -209,7 +243,7 @@ const BlogPost = () => {
                   alt={`${post.title} – ambulance ${post.city || "Maroc"}`}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-auto rounded-xl mt-4"
+                  className="w-full rounded-lg mt-4"
                   sizes="(max-width: 768px) 100vw, 1200px"
                 />
               )}
@@ -274,28 +308,26 @@ const BlogPost = () => {
           </article>
 
           {/* TOC */}
-          <aside className="hidden lg:block lg:col-span-4 xl:col-span-3 lg:sticky lg:top-24">
-            <div className="border rounded-lg p-4 bg-card text-card-foreground w-full lg:w-[260px] xl:w-[300px]">
-              <p className="text-sm font-semibold mb-2">Sommaire</p>
-              {headings.length === 0 ? (
-                <p className="text-sm text-muted-foreground">Aucun sous-titre</p>
-              ) : (
-                <nav aria-label="Table des matières">
-                  <ul className="space-y-1">
-                    {headings.map((h) => (
-                      <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
-                        <a
-                          href={`#${h.id}`}
-                          className={`block text-sm leading-snug hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
-                        >
-                          {h.text}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              )}
-            </div>
+          <aside className="hidden lg:block sticky top-24 h-max border rounded-lg p-4 bg-card text-card-foreground">
+            <p className="text-sm font-semibold mb-2">Sommaire</p>
+            {headings.length === 0 ? (
+              <p className="text-sm text-muted-foreground">Aucun sous-titre</p>
+            ) : (
+              <nav aria-label="Table des matières">
+                <ul className="space-y-1">
+                  {headings.map((h) => (
+                    <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
+                      <a
+                        href={`#${h.id}`}
+                        className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
+                      >
+                        {h.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
           </aside>
         </div>
 
@@ -305,7 +337,7 @@ const BlogPost = () => {
             <h2 className="text-xl font-semibold text-foreground mb-4">Articles similaires</h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => {
-                const path = `/blog/${r.slug}`;
+                const path = r.city ? `/blog/${r.city}/${r.slug}` : `/blog/${r.slug}`;
                 return (
                   <article key={r.slug} className="rounded-lg border bg-card text-card-foreground p-4">
                     <h3 className="text-base font-semibold">
@@ -314,6 +346,8 @@ const BlogPost = () => {
                     <p className="mt-1 text-sm text-muted-foreground line-clamp-3">{r.description}</p>
                     <div className="mt-2 text-xs text-muted-foreground flex items-center gap-2">
                       <time dateTime={r.date}>{new Date(r.date).toLocaleDateString("fr-MA")}</time>
+                      <span aria-hidden>•</span>
+                      <span>{r.readingTime} min</span>
                     </div>
                   </article>
                 );

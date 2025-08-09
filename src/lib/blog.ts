@@ -1,19 +1,20 @@
-import { slugify } from "@/lib/slugify";
-
+// Lightweight frontmatter parser to avoid Node Buffer polyfills in browser
 export type BlogPost = {
   slug: string;
   title: string;
   description: string;
   date: string; // YYYY-MM-DD
   updated: string; // YYYY-MM-DD
-  city?: string; // slug: casablanca
-  categories?: string[]; // ["toutes-les-villes", city?]
-  coverImage?: string;
-  content: string;
-  _path?: string; // debug only
+  author?: string;
+  tags?: string[];
+  keywords?: string[];
+  coverImage?: string; // public path like /default-seo-image.jpg
+  city?: string; // e.g., "casablanca" or "" for general
+  service?: string; // optional service slug
+  readingTime: number; // minutes
+  content: string; // markdown body
 };
 
-// Minimal front-matter parser (browser-safe, no Buffer)
 function parseFrontmatter(raw: string): { data: Record<string, any>; content: string } {
   if (!raw.startsWith("---")) return { data: {}, content: raw };
   const end = raw.indexOf("\n---", 3);
@@ -26,10 +27,12 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
     if (idx === -1) continue;
     const key = line.slice(0, idx).trim();
     let value = line.slice(idx + 1).trim();
+    // quoted string
     if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
       data[key] = value.slice(1, -1);
       continue;
     }
+    // array
     if (value.startsWith("[") && value.endsWith("]")) {
       try {
         const json = value.replace(/'/g, '"');
@@ -39,10 +42,12 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
       }
       continue;
     }
+    // booleans
     if (value === "true" || value === "false") {
       data[key] = value === "true";
       continue;
     }
+    // numbers
     if (/^-?\d+(?:\.\d+)?$/.test(value)) {
       data[key] = Number(value);
       continue;
@@ -52,87 +57,76 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
   return { data, content: body };
 }
 
-export function readAllMarkdown(): Record<string, string> {
-  const abs = import.meta.glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
-  const rel = import.meta.glob("./src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
-  const files = { ...abs, ...rel };
+// Load all markdown files at build time in browser/CSR path (Vite transforms glob)
+const modules = import.meta.glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
 
-  const keys = Object.keys(files);
-  console.log("[BLOG] filesFound:", keys.length, keys);
-  return files;
-}
+const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
+  const { data, content } = parseFrontmatter(raw);
+  // slug from frontmatter or filename
+  const fileSlug = path.split("/").pop()?.replace(/\.md$/, "") || "";
+  const slug: string = (data.slug as string) || fileSlug;
 
+  const date = (data.date as string) || new Date().toISOString().slice(0, 10);
+  const updated = (data.updated as string) || date;
+  const cityRaw = data.city as string | undefined;
+  const city = cityRaw === "" ? "" : (cityRaw || "casablanca");
+  const service = ((data.service as string | undefined) || "");
+  const coverImage = ((data.cover as string) || (data.coverImage as string) || "/default-seo-image.jpg");
 
-function loadAll(): BlogPost[] {
-  const files = readAllMarkdown();
-  const posts: BlogPost[] = Object.entries(files).map(([path, raw]) => {
-    const { data, content } = parseFrontmatter(raw || "");
+  const calcReadingTime = (txt: string) => {
+    const words = txt.split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.ceil(words / 200));
+  };
+  const rt = data.readingTime as unknown;
+  const readingTime = typeof rt === "number" ? rt : calcReadingTime(content);
 
-    const title = (data.title ?? "Sans titre").toString();
-    const description = (data.description ?? "").toString();
-    const slug = slugify((data.slug ?? title).toString());
-    const date = ((data.date ?? "").toString() || new Date().toISOString().slice(0, 10)).slice(0, 10);
-    const updated = ((data.updated ?? date).toString() || date).slice(0, 10);
+  return {
+    slug,
+    title: (data.title as string) || fileSlug,
+    description: (data.description as string) || "",
+    date,
+    updated,
+    author: data.author as string | undefined,
+    tags: (data.tags as string[]) || [],
+    keywords: (data.keywords as string[]) || [],
+    coverImage,
+    city,
+    service,
+    readingTime,
+    content,
+  } satisfies BlogPost;
+});
 
-    // Normalize categories and city
-    const toArray = (v: any): string[] =>
-      Array.isArray(v) ? v : v ? [v] : [];
-    const tagsRaw = toArray(data.tags);
-    const catsRaw = toArray(data.categories);
+// Sort newest first
+posts.sort((a, b) => (a.date < b.date ? 1 : -1));
 
-    let citySlug = data.city ? slugify(String(data.city)) : "";
-    if (!citySlug) {
-      // Try infer from slug pattern: ambulance-<city>-...
-      const m = slug.match(/^ambulance-([a-z0-9-]+?)(?:-|$)/);
-      if (m) citySlug = m[1];
-    }
-
-    const catSet = new Set<string>();
-    [...tagsRaw, ...catsRaw].forEach((v) => {
-      const s = slugify(String(v || ""));
-      if (s) catSet.add(s);
-    });
-    catSet.add("toutes-les-villes");
-    if (citySlug) catSet.add(citySlug);
-    const categories = Array.from(catSet);
-
-    return {
-      slug,
-      title,
-      description,
-      date,
-      updated,
-      city: citySlug || undefined,
-      categories,
-      coverImage: (data.cover || data.coverImage || "/default-seo-image.jpg") as string,
-      content,
-      _path: path,
-    } satisfies BlogPost;
-  });
-
-  // Newest first
-  posts.sort((a, b) => (b.updated || b.date).localeCompare(a.updated || a.date));
+export function getAllPosts(): BlogPost[] {
   return posts;
 }
 
-let CACHE: BlogPost[] | null = null;
-export function getAllPosts(): BlogPost[] {
-  if (!CACHE || CACHE.length === 0) CACHE = loadAll();
-  return CACHE;
-}
-
-export function getDebugFilesInfo() {
-  const files = readAllMarkdown();
-  const keys = Object.keys(files);
-  return { filesFound: keys.length, keys };
+export function getPostBySlug(slug: string): BlogPost | undefined {
+  return posts.find((p) => p.slug === slug);
 }
 
 export function getPostsByCity(city: string): BlogPost[] {
-  const c = slugify(city);
-  return getAllPosts().filter((p) => p.categories?.includes(c) || p.categories?.includes("toutes-les-villes"));
+  return posts.filter((p) => (p.city || "") === city);
 }
 
-export function getPostBySlug(slug: string): BlogPost | undefined {
-  const s = slugify(slug);
-  return getAllPosts().find((p) => p.slug === s);
+export function getPostByCityAndSlug(city: string, slug: string): BlogPost | undefined {
+  return posts.find((p) => p.slug === slug && (p.city || "") === city);
+}
+
+// Very light auto-internal-linking for a few primary keywords
+export function addInternalLinks(md: string): string {
+  const replacements: Array<{ re: RegExp; link: string }> = [
+    { re: /ambulance\s+casablanca/gi, link: "[ambulance Casablanca](/ambulance-casablanca)" },
+    { re: /ambulance\s+priv[ée]e/gi, link: "[ambulance privée](/services)" },
+    { re: /transport\s+m[ée]dicalis[ée]/gi, link: "[transport médicalisé](/services#longue-distance)" },
+    { re: /rapatriement\s+sanitaire/gi, link: "[rapatriement sanitaire](/rapatriement-sanitaire)" },
+  ];
+  let out = md;
+  for (const { re, link } of replacements) {
+    out = out.replace(re, link);
+  }
+  return out;
 }

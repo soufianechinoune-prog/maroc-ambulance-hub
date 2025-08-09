@@ -364,16 +364,26 @@ const BlogPost = () => {
                     );
                   },
                   a: ({ node, children, ...props }) => {
-                    const href = (props as any).href || "";
-                    const isExternal = /^https?:\/\//.test(href) || href.startsWith("//");
-                    const isWhatsApp = href.includes("wa.me") || href.startsWith("whatsapp:");
-                    const isTel = href.startsWith("tel:");
+                    const rawHref = (props as any).href || "";
+                    const isExternal = /^https?:\/\//i.test(rawHref) || rawHref.startsWith("//");
+                    const isWhatsApp = rawHref.includes("wa.me") || rawHref.startsWith("whatsapp:") || rawHref.startsWith("wa:");
+                    const isTel = rawHref.startsWith("tel:");
+                    // Normalize tel: to E.164 (keep leading + and digits only, remove spaces/parentheses)
+                    const normalizeTel = (h: string) => {
+                      const num = h
+                        .replace(/^tel:/i, "")
+                        .replace(/[^\d+]/g, "") // keep + and digits
+                        .replace(/(?!^)\+/g, ""); // remove any + not at start
+                      return `tel:${num}`;
+                    };
+                    const href = isTel ? normalizeTel(rawHref) : rawHref;
                     const rel = isTel ? "nofollow" : (isExternal || isWhatsApp ? "noopener noreferrer" : undefined);
                     const target = isExternal || isWhatsApp ? "_blank" : undefined;
                     const ariaLabel = (props as any)["aria-label"] || (isTel ? "Appeler Ambulance Maroc" : undefined);
                     const onClick = isTel ? (() => { try { window.location.href = href; } catch { /* noop */ } }) : undefined;
+                    const { href: _href, ...rest } = props as any;
                     return (
-                      <a {...props} target={target} rel={rel} aria-label={ariaLabel} onClick={onClick}>
+                      <a {...rest} href={href} target={target} rel={rel} aria-label={ariaLabel} onClick={onClick}>
                         {children}
                       </a>
                     );

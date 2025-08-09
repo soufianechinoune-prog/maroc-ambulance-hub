@@ -193,6 +193,12 @@ const BlogIndex = () => {
           ))}
         </section>
 
+        {posts.length === 0 && (
+          <p className="mt-8 text-center text-muted-foreground">
+            Aucun article trouvé. Si vous êtes administrateur, vérifiez la console pour "[BLOG] filesFound" et que les fichiers existent dans src/content/blog.
+          </p>
+        )}
+
         {totalPages > 1 && (
           <nav className="mt-10 flex justify-center">
             <Pagination>

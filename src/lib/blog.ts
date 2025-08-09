@@ -93,11 +93,10 @@ function readAllMarkdown(): Record<string, string> {
     } catch {}
   }
 
+  // Unconditional log (dev/prod/SSG)
   try {
-    // Safe dev logging (ignore if unavailable in CJS)
-    if ((import.meta as any)?.env?.DEV) {
-      console.log("[BLOG] filesFound:", Object.keys(files).length, Object.keys(files));
-    }
+    const keys = Object.keys(files);
+    console.log("[BLOG] filesFound:", keys.length, keys);
   } catch {}
 
   return files;

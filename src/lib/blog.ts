@@ -66,14 +66,35 @@ export function readAllMarkdown(): Record<string, string> {
 function loadAll(): BlogPost[] {
   const files = readAllMarkdown();
   const posts: BlogPost[] = Object.entries(files).map(([path, raw]) => {
-    const { data, content } = parseFrontmatter(raw);
+    const { data, content } = parseFrontmatter(raw || "");
+
     const title = (data.title ?? "Sans titre").toString();
     const description = (data.description ?? "").toString();
     const slug = slugify((data.slug ?? title).toString());
     const date = ((data.date ?? "").toString() || new Date().toISOString().slice(0, 10)).slice(0, 10);
     const updated = ((data.updated ?? date).toString() || date).slice(0, 10);
-    const citySlug = data.city ? slugify(data.city.toString()) : "";
-    const categories = ["toutes-les-villes", ...(citySlug ? [citySlug] : [])];
+
+    // Normalize categories and city
+    const toArray = (v: any): string[] =>
+      Array.isArray(v) ? v : v ? [v] : [];
+    const tagsRaw = toArray(data.tags);
+    const catsRaw = toArray(data.categories);
+
+    let citySlug = data.city ? slugify(String(data.city)) : "";
+    if (!citySlug) {
+      // Try infer from slug pattern: ambulance-<city>-...
+      const m = slug.match(/^ambulance-([a-z0-9-]+?)(?:-|$)/);
+      if (m) citySlug = m[1];
+    }
+
+    const catSet = new Set<string>();
+    [...tagsRaw, ...catsRaw].forEach((v) => {
+      const s = slugify(String(v || ""));
+      if (s) catSet.add(s);
+    });
+    catSet.add("toutes-les-villes");
+    if (citySlug) catSet.add(citySlug);
+    const categories = Array.from(catSet);
 
     return {
       slug,

@@ -274,7 +274,7 @@ const BlogPost = () => {
                 )}
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Button asChild>
-                    <a href={`tel:${PHONE_TEL}`} aria-label="Appeler maintenant">Appeler</a>
+                    <a href={`tel:${PHONE_TEL}`} aria-label="Appeler maintenant" rel="nofollow">Appeler</a>
                   </Button>
                   <Button variant="secondary" asChild>
                     <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
@@ -368,10 +368,11 @@ const BlogPost = () => {
                     const isExternal = /^https?:\/\//.test(href) || href.startsWith("//");
                     const isWhatsApp = href.includes("wa.me") || href.startsWith("whatsapp:");
                     const isTel = href.startsWith("tel:");
-                    const rel = isExternal || isWhatsApp ? "noopener noreferrer" : undefined;
+                    const rel = isTel ? "nofollow" : (isExternal || isWhatsApp ? "noopener noreferrer" : undefined);
                     const target = isExternal || isWhatsApp ? "_blank" : undefined;
+                    const ariaLabel = (props as any)["aria-label"] || (isTel ? "Appeler Ambulance Maroc" : undefined);
                     return (
-                      <a {...props} target={target} rel={rel}>
+                      <a {...props} target={target} rel={rel} aria-label={ariaLabel}>
                         {children}
                       </a>
                     );
@@ -464,7 +465,7 @@ const BlogPost = () => {
         <div className="md:hidden fixed inset-x-0 bottom-0 z-40 border-t bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto px-4 py-3 flex gap-2">
             <Button asChild className="flex-1">
-              <a href={`tel:${PHONE_TEL}`} aria-label="Appeler maintenant">Appeler</a>
+              <a href={`tel:${PHONE_TEL}`} aria-label="Appeler maintenant" rel="nofollow">Appeler</a>
             </Button>
             <Button variant="secondary" asChild className="flex-1">
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WhatsApp</a>

@@ -1,4 +1,3 @@
-import matter from "gray-matter";
 import { slugify } from "@/lib/slugify";
 
 export type BlogPost = {
@@ -14,17 +13,51 @@ export type BlogPost = {
   _path?: string; // debug only
 };
 
-// Single, robust loader: only one content root
-let modules = (import.meta as any).glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
-if (Object.keys(modules).length === 0) {
-  modules = (import.meta as any).glob("src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
+// Absolute-from-root glob (Vite)
+const files = (import.meta as any).glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }) as Record<string, string>;
+
+function parseFrontmatter(raw: string): { data: Record<string, any>; content: string } {
+  if (!raw.startsWith("---")) return { data: {}, content: raw };
+  const end = raw.indexOf("\n---", 3);
+  if (end === -1) return { data: {}, content: raw };
+  const fm = raw.slice(3, end).trim();
+  const body = raw.slice(end + 4).replace(/^\s*\n/, "");
+  const data: Record<string, any> = {};
+  for (const line of fm.split("\n")) {
+    const idx = line.indexOf(":");
+    if (idx === -1) continue;
+    const key = line.slice(0, idx).trim();
+    let value = line.slice(idx + 1).trim();
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      data[key] = value.slice(1, -1);
+      continue;
+    }
+    if (value.startsWith("[") && value.endsWith("]")) {
+      try {
+        const json = value.replace(/'/g, '"');
+        data[key] = JSON.parse(json);
+      } catch {
+        data[key] = [];
+      }
+      continue;
+    }
+    if (value === "true" || value === "false") {
+      data[key] = value === "true";
+      continue;
+    }
+    if (/^-?\d+(?:\.\d+)?$/.test(value)) {
+      data[key] = Number(value);
+      continue;
+    }
+    data[key] = value;
+  }
+  return { data, content: body };
 }
 
-
 function loadAll(): BlogPost[] {
-  const entries = Object.entries(modules);
+  const entries = Object.entries(files);
   let posts: BlogPost[] = entries.map(([path, raw]) => {
-    const { data, content } = matter(raw);
+    const { data, content } = parseFrontmatter(raw);
 
     const title = (data.title ?? "Sans titre").toString();
     const description = (data.description ?? "").toString();
@@ -53,7 +86,7 @@ function loadAll(): BlogPost[] {
   posts.sort((a, b) => (b.updated || b.date).localeCompare(a.updated || a.date));
 
   if ((import.meta as any).env?.DEV) {
-    console.log("[BLOG] filesFound:", entries.length);
+    console.log("[BLOG] filesFound:", Object.keys(files).length, Object.keys(files));
     console.table(posts.slice(0, 5).map((p) => ({ slug: p.slug, city: p.city, cat: (p.categories || []).join(","), path: p._path })));
   }
 

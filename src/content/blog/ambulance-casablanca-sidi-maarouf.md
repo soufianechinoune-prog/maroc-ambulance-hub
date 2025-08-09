@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Sidi Maarouf","urgence zone industrielle Casablanca"]
 tags: ["Sidi Maarouf","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Sécurité en entreprise

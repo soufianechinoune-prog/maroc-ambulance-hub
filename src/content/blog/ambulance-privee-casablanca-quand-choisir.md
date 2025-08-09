@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance privée Casablanca","événementiel","transfert planifié"]
 tags: ["Ambulance privée","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Utilisations

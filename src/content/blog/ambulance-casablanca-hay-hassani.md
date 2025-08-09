@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Hay Hassani","urgence Casablanca"]
 tags: ["Hay Hassani","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Préparation

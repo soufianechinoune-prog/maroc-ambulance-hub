@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Casablanca Ain Diab","urgence Ain Diab"]
 tags: ["Ain Diab","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Points clés à Ain Diab

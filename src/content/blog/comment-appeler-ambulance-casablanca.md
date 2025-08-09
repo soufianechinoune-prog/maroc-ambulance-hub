@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["appeler ambulance Casablanca","numéro ambulance","urgence Casablanca"]
 tags: ["Conseils","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Étapes

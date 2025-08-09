@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Derb Ghallef","urgence Casablanca"]
 tags: ["Derb Ghallef","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Astuces

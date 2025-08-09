@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["inter-hôpitaux Casablanca","transfert patient"]
 tags: ["Inter-hôpitaux","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Procédure

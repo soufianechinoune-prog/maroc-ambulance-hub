@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Casablanca Centre","urgence centre-ville"]
 tags: ["Centre","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Repères utiles

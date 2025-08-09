@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Californie Casablanca","urgence Californie"]
 tags: ["Californie","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Préparer l’intervention

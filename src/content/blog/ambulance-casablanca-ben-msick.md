@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Ben Msick","urgence Casablanca"]
 tags: ["Ben Msick","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Bonnes pratiques

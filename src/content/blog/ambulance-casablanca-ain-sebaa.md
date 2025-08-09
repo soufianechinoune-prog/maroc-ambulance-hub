@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Ain Sebaa","urgence industrielle"]
 tags: ["Aïn Sebaâ","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Sécurité

@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["délai ambulance Casablanca","temps intervention ambulance"]
 tags: ["Délais","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Facteurs principaux

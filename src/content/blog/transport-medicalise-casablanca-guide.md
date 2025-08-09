@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["transport médicalisé Casablanca","ambulance médicale"]
 tags: ["Transport médicalisé","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Indications

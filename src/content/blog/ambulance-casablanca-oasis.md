@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Oasis Casablanca","urgence Oasis"]
 tags: ["Oasis","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Conseils clés

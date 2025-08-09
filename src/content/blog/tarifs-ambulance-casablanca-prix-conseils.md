@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["tarif ambulance Casablanca","prix ambulance","ambulance privée Casablanca"]
 tags: ["Tarifs","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 Les tarifs d’une ambulance Casablanca dépendent de la distance, de l’urgence, du matériel (oxygène, monitorage) et du personnel (infirmier, médecin).

@@ -7,12 +7,6 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Casablanca Maarif","urgence Maarif"]
 tags: ["Maarif","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
-
-## Zones couvertes
-
-Quartier Maarif, Twin Center, Gauthier limitrophe. Indiquez l’entrée exacte de l’immeuble pour réduire le temps d’accès.
-
-### Itinéraires
-
-Utilisation d’axes rapides selon l’état du trafic: boulevard Bir Anzarane, Zerktouni, route El Fida.

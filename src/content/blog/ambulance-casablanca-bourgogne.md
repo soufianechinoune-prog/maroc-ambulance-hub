@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Bourgogne Casablanca","urgence Bourgogne"]
 tags: ["Bourgogne","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Itinéraires conseillés

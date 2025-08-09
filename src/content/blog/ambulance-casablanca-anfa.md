@@ -7,6 +7,8 @@ author: "Ambulance Maroc"
 keywords: ["ambulance Anfa","ambulance Casablanca Anfa"]
 tags: ["Anfa","Casablanca"]
 coverImage: "/default-seo-image.jpg"
+city: "casablanca"
+categories: ["toutes-les-villes","casablanca"]
 ---
 
 ## Conseils

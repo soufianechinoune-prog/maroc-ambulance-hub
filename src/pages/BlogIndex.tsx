@@ -16,12 +16,11 @@ const PER_PAGE = 9;
 
 const BlogIndex = () => {
   const [params, setParams] = useSearchParams();
-  const { city: cityParam, cityCategory } = useParams();
+  const { city: cityFromRoute } = useParams();
   const city = useMemo(() => {
-    const raw = (cityParam || cityCategory || "").trim();
-    if (!raw) return undefined;
-    return raw.replace(/^ambulance-/, "");
-  }, [cityParam, cityCategory]);
+    const raw = (cityFromRoute || "").trim();
+    return raw || undefined;
+  }, [cityFromRoute]);
   const q = params.get("q")?.trim() || "";
   const page = Math.max(1, parseInt(params.get("page") || "1", 10) || 1);
 
@@ -31,9 +30,11 @@ const BlogIndex = () => {
     let arr = all;
 
     if (citySlug) {
-      arr = arr.filter(
-        (p) => p.categories?.includes(citySlug) || p.categories?.includes("toutes-les-villes")
-      );
+      arr = arr.filter((p) => {
+        const cats = p.categories || [];
+        const cityField = slugify(p.city || "");
+        return cats.includes("toutes-les-villes") || cats.includes(citySlug) || cityField === citySlug;
+      });
     }
 
     const needle = q?.toLowerCase().trim();
@@ -55,8 +56,13 @@ const BlogIndex = () => {
   const posts = filtered.slice(start, start + PER_PAGE);
 
   useEffect(() => {
-    console.log("[BLOG] filter city:", citySlug || "(none)", "filtered:", filtered.length, "pagePosts:", posts.length);
-  }, [citySlug, filtered.length, posts.length]);
+    console.log("[BLOG] params city=", city || "(none)", "→", citySlug, "all:", all.length);
+    console.log("[BLOG] sample cats:", all.slice(0, 5).map(p => ({ slug: p.slug, city: p.city, cats: p.categories })));
+    console.log("[BLOG] filtered(", citySlug || "ALL", ") =", filtered.length, "pagePosts:", posts.length);
+    if (filtered.length === 0) {
+      console.log("[BLOG] unique cats:", Array.from(new Set(all.flatMap(p => p.categories || []))));
+    }
+  }, [city, citySlug, all.length, filtered.length, posts.length]);
 
   const cityName = city ? city.charAt(0).toUpperCase() + city.slice(1) : null;
   const selectedCity = city ? cities.find((c) => c.slug === city) : undefined;

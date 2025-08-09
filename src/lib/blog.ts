@@ -74,16 +74,31 @@ try {
       ...anyMeta.glob("/src/content/blog/**/*.md", { eager: true, as: "raw" }),
       ...anyMeta.glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }),
       ...anyMeta.glob("/src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }),
-      ...anyMeta.glob("../content/blog/*.md", { eager: true, as: "raw" }),
-      ...anyMeta.glob("../content/blog/**/*.md", { eager: true, as: "raw" }),
-      ...anyMeta.glob("../content/blog/*.md", { eager: true, query: "?raw", import: "default" }),
-      ...anyMeta.glob("../content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }),
+      ...anyMeta.glob("src/content/blog/*.md", { eager: true, as: "raw" }),
+      ...anyMeta.glob("src/content/blog/**/*.md", { eager: true, as: "raw" }),
+      ...anyMeta.glob("src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }),
+      ...anyMeta.glob("src/content/blog/**/*.md", { eager: true, query: "?raw", import: "default" }),
     } as Record<string, string>;
-    if (Object.keys(modules).length === 0) {
-      console.warn("[BLOG] No markdown files matched literal globs under /src/content/blog/");
-    } else if (anyMeta.env?.DEV) {
-      console.log("[BLOG] module keys: ", Object.keys(modules).slice(0, 5));
+
+    // User-requested debug logs for patterns
+    for (const p of [
+      "/src/content/blog/**/*.md",
+      "/content/blog/**/*.md",
+      "/src/blog/**/*.md",
+      "/public/blog/**/*.md",
+    ]) {
+      try {
+        const o = anyMeta.glob(p, { eager: true, as: "raw" });
+        console.log(`[BLOG] glob(${p}) ->`, Object.keys(o).length, Object.keys(o).slice(0, 4));
+      } catch (e) {
+        console.log(`[BLOG] glob(${p}) failed`, e);
+      }
     }
+
+    if (Object.keys(modules).length === 0) {
+      console.warn("[BLOG] No markdown files matched any of: /src|src/content/blog/**/*.md");
+    }
+
   } else {
     throw new Error("no import.meta.glob");
   }
@@ -108,7 +123,7 @@ try {
   } catch {}
 }
 
-const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
+const posts: BlogPost[] = Object.entries(modules).filter(([, v]) => typeof v === "string").map(([path, raw]) => {
   const { data, content } = matter(raw);
   // slug from frontmatter or filename
   const fileSlug = path.split("/").pop()?.replace(/\.md$/, "") || "";

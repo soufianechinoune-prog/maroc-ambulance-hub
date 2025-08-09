@@ -13,6 +13,7 @@ export type BlogPost = {
   service?: string; // optional service slug
   readingTime: number; // minutes
   content: string; // markdown body
+  categories?: string[]; // normalized categories incl. city and 'toutes-les-villes'
 };
 
 function parseFrontmatter(raw: string): { data: Record<string, any>; content: string } {
@@ -55,6 +56,40 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
     data[key] = value;
   }
   return { data, content: body };
+}
+
+// Villes connues (slugifiées)
+export const KNOWN_CITIES = ["casablanca", "rabat", "marrakech", "tanger", "fes", "agadir", "meknes", "oujda"];
+
+export const slugify = (s: string) =>
+  (s || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+
+function inferCityFromSlug(slug: string) {
+  const s = slugify(slug || "");
+  for (const c of KNOWN_CITIES) {
+    if (s.includes(`-${c}`) || s.startsWith(`${c}-`) || s.endsWith(`-${c}`)) return c;
+  }
+  return "";
+}
+
+function normalizeCityAndCategories(meta: any, helpers: { slug: string; filepath?: string }) {
+  const set = new Set<string>(Array.isArray(meta?.categories) ? meta.categories.map(slugify) : []);
+  const cityFront = slugify(meta?.city || (meta?.ville as string) || "");
+  const cityFromPath = inferCityFromSlug(helpers.slug || helpers.filepath || "");
+  const city = cityFront || cityFromPath;
+  if (city) set.add(city);
+  set.add("toutes-les-villes");
+  return {
+    ...meta,
+    city: city || meta.city || undefined,
+    categories: Array.from(set),
+  };
 }
 
 // Load all markdown files at build time in browser/CSR path (Vite transforms glob)
@@ -101,7 +136,11 @@ const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
 posts.sort((a, b) => (a.date < b.date ? 1 : -1));
 
 export function getAllPosts(): BlogPost[] {
-  return posts;
+  // Normalize city and categories for each post
+  return posts.map((p: any) => {
+    const meta = normalizeCityAndCategories(p, { slug: p.slug });
+    return { ...p, ...meta } as BlogPost;
+  });
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
@@ -109,11 +148,20 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 }
 
 export function getPostsByCity(city: string): BlogPost[] {
-  return posts.filter((p) => (p.city || "") === city);
+  const c = slugify(city || "");
+  return getAllPosts().filter((p: any) => {
+    const cats = Array.isArray((p as any).categories) ? (p as any).categories : [];
+    return cats.includes(c) || slugify(p.city || "") === c;
+  });
 }
 
 export function getPostByCityAndSlug(city: string, slug: string): BlogPost | undefined {
-  return posts.find((p) => p.slug === slug && (p.city || "") === city);
+  const c = slugify(city || "");
+  const s = slugify(slug || "");
+  return getAllPosts().find((p: any) => {
+    const cats = Array.isArray((p as any).categories) ? (p as any).categories : [];
+    return slugify(p.slug) === s && (cats.includes(c) || slugify(p.city || "") === c);
+  });
 }
 
 // Very light auto-internal-linking for a few primary keywords

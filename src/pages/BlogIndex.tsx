@@ -11,6 +11,15 @@ import { Pagination, PaginationContent, PaginationItem, PaginationLink, Paginati
 import { cities } from "@/data/cities";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 
+const slugify = (s: string) =>
+  (s || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+
 const PER_PAGE = 9;
 
 const BlogIndex = () => {
@@ -19,9 +28,16 @@ const BlogIndex = () => {
   const q = params.get("q")?.trim() || "";
   const page = Math.max(1, parseInt(params.get("page") || "1", 10) || 1);
 
+  const citySlug = useMemo(() => slugify(city || ""), [city]);
+
   const all = getAllPosts();
   const filtered = useMemo(() => {
-    const base = city ? all.filter((p) => (p.city || "") === city) : all;
+    const base = citySlug
+      ? all.filter((p: any) => {
+          const cats = Array.isArray((p as any).categories) ? (p as any).categories : [];
+          return cats.includes(citySlug) || slugify(p.city || "") === citySlug;
+        })
+      : all;
     if (!q) return base;
     const needle = q.toLowerCase();
     return base.filter((p) =>
@@ -30,7 +46,7 @@ const BlogIndex = () => {
         .toLowerCase()
         .includes(needle)
     );
-  }, [all, q, city]);
+  }, [all, q, citySlug]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const current = Math.min(page, totalPages);

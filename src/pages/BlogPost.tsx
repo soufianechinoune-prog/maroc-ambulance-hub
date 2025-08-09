@@ -151,20 +151,24 @@ const BlogPost = () => {
     const root = articleRef.current;
     if (!root) return;
 
-    const seen = new Map<string, number>();
-    const nodes = Array.from(root.querySelectorAll("h2, h3")) as HTMLElement[];
+    // Lire les headings déjà rendus (avec leurs ids posés par ReactMarkdown)
+    const nodes = Array.from(root.querySelectorAll("h2[id], h3[id]")) as HTMLElement[];
 
+    // Si un heading n'a pas d'ID, on lui en crée un (dédoublonnage local)
+    const seen = new Map<string, number>();
     nodes.forEach((h) => {
-      const raw = h.textContent || "";
-      let base = slugifyHeading(raw);
-      if (!base) base = "section";
-      const count = (seen.get(base) || 0) + 1;
-      seen.set(base, count);
-      const id = count === 1 ? base : `${base}-${count}`;
-      h.id = id;
+      if (!h.id) {
+        const raw = h.textContent || "";
+        let base = slugifyHeading(raw) || "section";
+        const count = (seen.get(base) || 0) + 1;
+        seen.set(base, count);
+        h.id = count === 1 ? base : `${base}-${count}`;
+      }
+      // marge de scroll pour éviter que le header sticky masque le titre
       (h.style as any).scrollMarginTop = "96px";
     });
 
+    // Construire le TOC à partir du DOM
     const items = nodes.map((h) => ({
       id: h.id,
       text: (h.textContent || "").trim(),
@@ -172,6 +176,14 @@ const BlogPost = () => {
     }));
     setToc(items);
   }, [content]);
+
+  // Helper pour scroller proprement vers un heading
+  const scrollToHeading = (id: string) => {
+    requestAnimationFrame(() => {
+      smoothScrollToId(id, 96);
+      history.replaceState(null, "", `#${id}`);
+    });
+  };
 
   // Smooth hash scroll when navigating TOC links
   useHashScroll(88);
@@ -325,7 +337,7 @@ const BlogPost = () => {
                             <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
                               <a
                                 href={`#${h.id}`}
-                                onClick={(e) => { e.preventDefault(); smoothScrollToId(h.id, 96); history.replaceState(null, "", `#${h.id}`); }}
+                                onClick={(e) => { e.preventDefault(); scrollToHeading(h.id); }}
                                 aria-current={activeId === h.id ? "true" : undefined}
                                 className={`block text-sm hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
                               >
@@ -436,7 +448,7 @@ const BlogPost = () => {
                       <li key={h.id} className={h.depth === 3 ? "pl-4" : undefined}>
                         <a
                           href={`#${h.id}`}
-                          onClick={(e) => { e.preventDefault(); smoothScrollToId(h.id, 96); history.replaceState(null, "", `#${h.id}`); }}
+                          onClick={(e) => { e.preventDefault(); scrollToHeading(h.id); }}
                           aria-current={activeId === h.id ? "true" : undefined}
                           className={`block hover:text-primary transition-colors ${activeId === h.id ? "text-primary font-medium" : "text-muted-foreground"}`}
                         >

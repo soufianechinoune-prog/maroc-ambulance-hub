@@ -57,15 +57,19 @@ const filtered = useMemo(() => {
   let base = all;
   if (normalizedCity) {
     const want = normalizedCity;
-    base = all.filter((p: any) => {
-      const postCity = normalize(p.city || "");
-      const inCats = p._cats?.includes("toutes-les-villes") || p._cats?.includes(want) || postCity === want;
-      if (inCats) return true;
-      // Fallback: si la route est /blog/ambulance-casablanca (ou autre ville),
-      // inclure les articles dont le slug contient ce token même si city/categories manquent.
-      const slugNorm = normalize(p.slug || "");
-      return slugNorm.includes(want);
-    });
+    if (want === "casablanca") {
+      // Exigence: la page /blog/ambulance-casablanca doit afficher tous les articles visibles sur /blog
+      base = all;
+    } else {
+      base = all.filter((p: any) => {
+        const postCity = normalize(p.city || "");
+        const inCats = p._cats?.includes("toutes-les-villes") || p._cats?.includes(want) || postCity === want;
+        if (inCats) return true;
+        // Fallback: inclure les articles dont le slug contient le token ville si meta absentes
+        const slugNorm = normalize(p.slug || "");
+        return slugNorm.includes(want);
+      });
+    }
   }
   if (!q) return base;
   const needle = q.toLowerCase();

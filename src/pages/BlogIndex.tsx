@@ -56,9 +56,9 @@ const BlogIndex = () => {
   const posts = filtered.slice(start, start + PER_PAGE);
 
   useEffect(() => {
-    console.log("[BLOG] params city=", city || "(none)", "→", citySlug, "all:", all.length);
+    console.log("[BLOG] route city =", city || "(none)", "→", citySlug);
+    console.log("[BLOG] counts:", "all", all.length, "filtered", filtered.length, "pagePosts:", posts.length);
     console.log("[BLOG] sample cats:", all.slice(0, 5).map(p => ({ slug: p.slug, city: p.city, cats: p.categories })));
-    console.log("[BLOG] filtered(", citySlug || "ALL", ") =", filtered.length, "pagePosts:", posts.length);
     if (filtered.length === 0) {
       console.log("[BLOG] unique cats:", Array.from(new Set(all.flatMap(p => p.categories || []))));
     }
@@ -150,7 +150,7 @@ const BlogIndex = () => {
           {/* Cities chips */}
           <nav className="mt-5 flex gap-2 overflow-x-auto py-1" aria-label="Filtrer par ville">
             <Link
-              to="/blog"
+              to="."
               className={`whitespace-nowrap inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors ${!city ? "bg-primary/10 text-primary border-primary" : "text-foreground hover:text-primary"}`}
               aria-current={!city ? "page" : undefined}
             >
@@ -159,7 +159,7 @@ const BlogIndex = () => {
             {cities.map((c) => (
               <Link
                 key={c.slug}
-                to={`/blog/ambulance-${c.slug}`}
+                to={`ambulance-${c.slug}`}
                 className={`whitespace-nowrap inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors ${city === c.slug ? "bg-primary/10 text-primary border-primary" : "text-foreground hover:text-primary"}`}
                 aria-current={city === c.slug ? "page" : undefined}
               >

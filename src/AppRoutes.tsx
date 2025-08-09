@@ -17,6 +17,7 @@ import BlogIndex from "./pages/BlogIndex";
 import BlogPost from "./pages/BlogPost";
 import BlogDebugJSON from "./pages/BlogDebugJSON";
 import BlogDebugFilesJSON from "./pages/BlogDebugFilesJSON";
+import BlogLayout from "./pages/BlogLayout";
 
 const AppRoutes = () => (
   <Routes>
@@ -31,12 +32,14 @@ const AppRoutes = () => (
     <Route path="/zones-d-intervention" element={<Zones />} />
     <Route path="/contact" element={<Contact />} />
 
-    {/* Blog */}
-    <Route path="/blog" element={<BlogIndex />} />
-    <Route path="/blog/ambulance-:city" element={<BlogIndex />} />
-    <Route path="/blog/debug.json" element={<BlogDebugJSON />} />
-    <Route path="/blog/debug-files.json" element={<BlogDebugFilesJSON />} />
-    <Route path="/blog/:slug" element={<BlogPost />} />
+    {/* Blog (nested) */}
+    <Route path="/blog" element={<BlogLayout />}>
+      <Route index element={<BlogIndex />} />
+      <Route path="ambulance-:city" element={<BlogIndex />} />
+      <Route path="debug.json" element={<BlogDebugJSON />} />
+      <Route path="debug-files.json" element={<BlogDebugFilesJSON />} />
+      <Route path=":slug" element={<BlogPost />} />
+    </Route>
 
     {cities.map((city) => (
       <Route

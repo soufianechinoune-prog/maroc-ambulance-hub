@@ -8,11 +8,16 @@ import { useMemo } from "react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { Button } from "@/components/ui/button";
+import { MapPin, List } from "lucide-react";
 
 const PER_PAGE = 10;
 const SELECTED_SLUGS = [
   // Liste manuelle d'articles pour la catégorie Casablanca
   "transport-medicalise-casablanca",
+  "ambulance-urgence-casablanca",
+  "ambulance-privee-casablanca",
+  "rapatriement-sanitaire-maroc",
 ];
 
 const BlogCategoryCasablanca = () => {
@@ -75,12 +80,37 @@ const BlogCategoryCasablanca = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <header className="max-w-3xl mt-6 mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground">Articles sur Casablanca</h1>
+        <header className="max-w-3xl mt-6 mb-6">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground">Blog Ambulance Casablanca</h1>
           <p className="text-muted-foreground mt-2">
-            Sélection manuelle d'articles liés à Casablanca.
+            Guides pratiques, urgences, quartiers et tarifs à Casablanca.
           </p>
         </header>
+
+        <nav aria-label="Navigation catégories" className="mt-2 flex flex-wrap gap-2">
+          <Button asChild variant="outline" size="sm">
+            <Link to="/blog">
+              <span className="inline-flex items-center"><List size={16} className="mr-2" />Tous les articles</span>
+            </Link>
+          </Button>
+          <Button asChild variant="secondary" size="sm">
+            <Link to="/blog/casablanca">
+              <span className="inline-flex items-center"><MapPin size={16} className="mr-2" />Casablanca</span>
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/blog?q=rabat">Rabat</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/blog?q=marrakech">Marrakech</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/blog?q=fès">Fès</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/blog?q=tanger">Tanger</Link>
+          </Button>
+        </nav>
 
         {/* Liste des articles */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

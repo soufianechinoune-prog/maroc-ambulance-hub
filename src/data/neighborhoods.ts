@@ -10,54 +10,28 @@ export type CityNeighborhoods = Record<string, Neighborhood[]>
 
 export const neighborhoodsByCity: CityNeighborhoods = {
   casablanca: [
-    {
-      slug: "maarif",
-      name: "Maarif",
-      intro:
-        "Quartier central commerçant, axes rapides (Bd Massira, Bd Anfa). Idéal pour une intervention rapide en journée.",
-      highlights: ["Twin Center", "Bd Al Massira", "Bd Anfa"],
-      nearby: ["Gauthier", "Bourgogne", "Anfa"],
-    },
-    {
-      slug: "anfa",
-      name: "Anfa",
-      intro:
-        "Zone résidentielle et cliniques privées. Accès rapide via la Corniche et Bd Gandhi.",
-      highlights: ["Anfa Supérieur", "Corniche", "Bd Gandhi"],
-      nearby: ["Maarif", "Racine", "Ain Diab"],
-    },
-    {
-      slug: "ain-diab",
-      name: "Aïn Diab",
-      intro:
-        "Secteur littoral, trafic variable le week‑end. Itinéraires alternatifs par Bd la Corniche et routes arrière‑plage.",
-      highlights: ["La Corniche", "Sidi Abderrahmane"],
-      nearby: ["Anfa", "Oasis"],
-    },
-    {
-      slug: "bourgogne",
-      name: "Bourgogne",
-      intro:
-        "Haute densité, nombreuses résidences. Itinéraires privilégiés : Bd Zerktouni, Bd Moulay Youssef.",
-      highlights: ["Bd Zerktouni", "Bd Moulay Youssef"],
-      nearby: ["Gauthier", "Anfa"],
-    },
-    {
-      slug: "oasis",
-      name: "Oasis",
-      intro:
-        "Accès hôpitaux et cliniques, voiries plus résidentielles. Connexions rapides vers l’Aéroport et Autoroute.",
-      highlights: ["Clinique Oasis", "Gare Oasis"],
-      nearby: ["Aïn Chock", "Aïn Diab"],
-    },
-    {
-      slug: "sidi-bernoussi",
-      name: "Sidi Bernoussi",
-      intro:
-        "Périphérie industrielle et résidentielle. Axes : N1, Route côtière. Prévoir créneaux de trafic en pointe.",
-      highlights: ["Zone industrielle", "Rte Côtière"],
-      nearby: ["Aïn Sebaâ", "Mohammedia"],
-    },
+    { slug: "maarif", name: "Maarif" },
+    { slug: "anfa", name: "Anfa" },
+    { slug: "ain-diab", name: "Aïn Diab" },
+    { slug: "bourgogne", name: "Bourgogne" },
+    { slug: "sidi-belyout", name: "Sidi Belyout" },
+    { slug: "ain-sebaa", name: "Aïn Sebaâ" },
+    { slug: "californie", name: "Californie" },
+    { slug: "hay-hassani", name: "Hay Hassani" },
+    { slug: "derb-sultan", name: "Derb Sultan" },
+    { slug: "sidi-moumen", name: "Sidi Moumen" },
+    { slug: "2-mars", name: "2 Mars" },
+    { slug: "ain-chock", name: "Aïn Chock" },
+    { slug: "boujdour", name: "Boujdour" },
+    { slug: "bouskoura", name: "Bouskoura" },
+    { slug: "ciel", name: "Ciel" },
+    { slug: "derb-ghallef", name: "Derb Ghallef" },
+    { slug: "gauthier", name: "Gauthier" },
+    { slug: "hay-mohammadi", name: "Hay Mohammadi" },
+    { slug: "ville-verte-bouskoura", name: "Ville Verte Bouskoura" },
+    { slug: "sidi-maarouf", name: "Sidi Maarouf" },
+    { slug: "oasis", name: "Oasis" },
+    { slug: "sidi-bernoussi", name: "Sidi Bernoussi" },
   ],
   rabat: [
     {

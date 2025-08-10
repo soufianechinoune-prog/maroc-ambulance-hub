@@ -38,7 +38,7 @@ const AppRoutes = () => (
     <Route path="/transport-inter-hopitaux" element={<Services />} />
     <Route path="/zones-d-intervention" element={<Zones />} />
      <Route path="/contact" element={<Contact />} />
-     <Route path="/ambulance-casablanca-:district" element={<NeighborhoodPage />} />
+     <Route path="/ambulance-:city-:district" element={<NeighborhoodPage />} />
 
      {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />

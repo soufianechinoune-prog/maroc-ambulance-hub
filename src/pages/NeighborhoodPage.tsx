@@ -5,36 +5,42 @@ import Footer from "@/components/Footer"
 import SEO from "@/components/SEO"
 import { SITE_URL } from "@/lib/config"
 import { Button } from "@/components/ui/button"
-import { neighborhoodsCasablanca } from "@/data/neighborhoodsCasablanca"
+import { neighborhoodsByCity } from "@/data/neighborhoods"
 
 const PHONE_DISPLAY = "0777 22 23 11"
 const PHONE_TEL = "+212777722311"
-const WHATSAPP = `https://wa.me/212777722311?text=${encodeURIComponent(
-  "Bonjour, j’ai besoin d’une ambulance à Casablanca."
-)}`
 
 export default function NeighborhoodPage() {
-  const { district } = useParams()
+  const { city: cityParam, district } = useParams()
+  const citySlug = (cityParam || "casablanca").toLowerCase()
+  const list = neighborhoodsByCity[citySlug] || neighborhoodsByCity["casablanca"]
   const n = useMemo(
-    () => neighborhoodsCasablanca.find((q) => q.slug === (district || "").toLowerCase()),
-    [district]
+    () => list.find((q) => q.slug === (district || "").toLowerCase()),
+    [district, list]
   )
 
   // Si aucun quartier ne correspond, redirige vers la page ville
-  if (!n) return <Navigate to="/ambulance-casablanca" replace />
+  if (!n) return <Navigate to={`/ambulance-${citySlug}`} replace />
 
-  const title = `Ambulance ${n.name} (Casablanca) – Intervention 24/7`
+  const toTitle = (s: string) => s.split('-').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ')
+  const cityName = toTitle(citySlug)
+
+  const title = `Ambulance ${n.name} (${cityName}) – Intervention 24/7`
   const description =
     n.intro ||
-    `Ambulance ${n.name} à Casablanca : intervention rapide 24h/24 et 7j/7, transport médicalisé et inter‑hôpitaux, numéros utiles et zones couvertes.`
-  const canonical = `${SITE_URL}/ambulance-casablanca-${n.slug}`
+    `Ambulance ${n.name} à ${cityName} : intervention rapide 24h/24 et 7j/7, transport médicalisé et inter‑hôpitaux, numéros utiles et zones couvertes.`
+  const canonical = `${SITE_URL}/ambulance-${citySlug}-${n.slug}`
+
+  const WHATSAPP = `https://wa.me/212777722311?text=${encodeURIComponent(
+    `Bonjour, j’ai besoin d’une ambulance à ${cityName}.`
+  )}`
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Ambulance Casablanca", item: `${SITE_URL}/ambulance-casablanca` },
+      { "@type": "ListItem", position: 2, name: `Ambulance ${cityName}`, item: `${SITE_URL}/ambulance-${citySlug}` },
       { "@type": "ListItem", position: 3, name: n.name, item: canonical },
     ],
   }
@@ -42,8 +48,8 @@ export default function NeighborhoodPage() {
   const serviceLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `Ambulance ${n.name} – Casablanca`,
-    areaServed: { "@type": "City", name: "Casablanca", address: { "@type": "PostalAddress", addressLocality: n.name } },
+    name: `Ambulance ${n.name} – ${cityName}`,
+    areaServed: { "@type": "City", name: cityName, address: { "@type": "PostalAddress", addressLocality: n.name } },
     provider: { "@type": "Organization", name: "Ambulance Maroc" },
     url: canonical,
   }
@@ -56,13 +62,13 @@ export default function NeighborhoodPage() {
         {/* Fil d’Ariane light */}
         <nav aria-label="Fil d’Ariane" className="text-sm text-muted-foreground mb-4">
           <Link to="/" className="hover:underline">Accueil</Link> <span aria-hidden>›</span>{" "}
-          <Link to="/ambulance-casablanca" className="hover:underline">Ambulance Casablanca</Link>{" "}
+          <Link to={`/ambulance-${citySlug}`} className="hover:underline">Ambulance {cityName}</Link>{" "}
           <span aria-hidden>›</span> <span className="text-foreground">{n.name}</span>
         </nav>
 
         <header className="mb-6">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground">
-            Ambulance {n.name} – Casablanca
+            Ambulance {n.name} – {cityName}
           </h1>
           <p className="mt-2 text-muted-foreground max-w-3xl">
             Intervention 24h/24 et 7j/7, transport sanitaire et médicalisé, transferts inter‑hôpitaux. Zones
@@ -88,7 +94,7 @@ export default function NeighborhoodPage() {
 
               <h2>Urgence ambulance à {n.name}</h2>
               <p>
-                Une équipe disponible <strong>24/7</strong> sur {n.name} et les quartiers voisins ({(n.nearby || []).join(", ") || "Casablanca centre"}).
+                Une équipe disponible <strong>24/7</strong> sur {n.name} et les quartiers voisins ({(n.nearby || []).join(", ") || `${cityName} centre`}).
                 Délais d’intervention optimisés selon le trafic local et les axes recommandés.
               </p>
 
@@ -101,7 +107,7 @@ export default function NeighborhoodPage() {
               <h3>Itinéraires & axes</h3>
               <ul>
                 {(n.highlights || []).map((h) => <li key={h}>{h}</li>)}
-                {(!n.highlights || n.highlights.length === 0) && <li>Axes principaux et voies rapides de Casablanca</li>}
+                {(!n.highlights || n.highlights.length === 0) && <li>Axes principaux et voies rapides de {cityName}</li>}
               </ul>
 
               <h2>Tarifs indicatifs</h2>
@@ -124,8 +130,8 @@ export default function NeighborhoodPage() {
               <p className="font-semibold mb-2">Autres quartiers proches</p>
               <ul className="space-y-1">
                 {(n.nearby || []).map((q) => {
-                  const nb = neighborhoodsCasablanca.find((x) => x.name.toLowerCase().replace(/\s+/g, "-") === q.toLowerCase().replace(/\s+/g, "-"))
-                  const href = nb ? `/ambulance-casablanca-${nb.slug}` : "/ambulance-casablanca"
+                  const nb = list.find((x) => x.name.toLowerCase().replace(/\s+/g, "-") === q.toLowerCase().replace(/\s+/g, "-"))
+                  const href = nb ? `/ambulance-${citySlug}-${nb.slug}` : `/ambulance-${citySlug}`
                   return (
                     <li key={q}>
                       <a href={href} className="hover:text-primary transition-colors">Ambulance {q}</a>
@@ -133,7 +139,7 @@ export default function NeighborhoodPage() {
                   )
                 })}
                 {(!n.nearby || n.nearby.length === 0) && (
-                  <li><a href="/ambulance-casablanca" className="hover:text-primary">Ambulance Casablanca</a></li>
+                  <li><a href={`/ambulance-${citySlug}`} className="hover:text-primary">Ambulance {cityName}</a></li>
                 )}
               </ul>
             </div>

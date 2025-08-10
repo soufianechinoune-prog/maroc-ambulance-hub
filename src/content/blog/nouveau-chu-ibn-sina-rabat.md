@@ -7,6 +7,7 @@ date: "2025-08-10"
 updated: "2025-08-10"
 slug: "nouveau-chu-ibn-sina-rabat"
 categories: ["toutes-les-villes", "rabat"]
+cover: "/lovable-uploads/34f65124-2fe2-42f2-aa89-4b991a31ec68.png"
 ---
 
 # Le chantier du nouvel hôpital Ibn Sina à Rabat : une révolution hospitalière en construction

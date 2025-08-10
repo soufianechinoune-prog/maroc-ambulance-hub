@@ -113,15 +113,15 @@ useEffect(() => {
                 <span className="inline-flex items-center"><MapPin size={16} className="mr-2" />Casablanca</span>
               </Link>
             </Button>
-            <Button asChild variant="outline" size="sm"><Link to="/blog?q=rabat">Rabat</Link></Button>
-            <Button asChild variant="outline" size="sm"><Link to="/blog?q=marrakech">Marrakech</Link></Button>
-            <Button asChild variant="outline" size="sm"><Link to="/blog?q=fès">Fès</Link></Button>
-            <Button asChild variant="outline" size="sm"><Link to="/blog?q=tanger">Tanger</Link></Button>
-            <Button asChild variant="outline" size="sm"><Link to="/blog?q=meknès">Meknès</Link></Button>
-            <Button asChild variant="outline" size="sm"><Link to="/blog?q=agadir">Agadir</Link></Button>
-            <Button asChild variant="outline" size="sm"><Link to="/blog?q=kenitra">Kenitra</Link></Button>
-            <Button asChild variant="outline" size="sm"><Link to="/blog?q=salé">Salé</Link></Button>
-            <Button asChild variant="outline" size="sm"><Link to="/blog?q=oujda">Oujda</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog/rabat">Rabat</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog/marrakech">Marrakech</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog/fes">Fès</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog/tanger">Tanger</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog/meknes">Meknès</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog/agadir">Agadir</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog/kenitra">Kenitra</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog/sale">Salé</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog/oujda">Oujda</Link></Button>
           </nav>
 
           <div className="mt-6">

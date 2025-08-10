@@ -12,50 +12,62 @@ import { Button } from "@/components/ui/button";
 import { MapPin, List } from "lucide-react";
 
 const PER_PAGE = 10;
-const SELECTED_SLUGS = [
-  // Liste manuelle d'articles pour la catégorie Casablanca
-  "transport-medicalise-casablanca",
-  "ambulance-urgence-casablanca",
-  "ambulance-privee-casablanca",
-  "rapatriement-sanitaire-maroc",
+
+interface Props {
+  cityName: string;
+  citySlug: string;
+  selectedSlugs?: string[];
+}
+
+const ALL_CITIES = [
+  { name: "Casablanca", slug: "casablanca" },
+  { name: "Rabat", slug: "rabat" },
+  { name: "Marrakech", slug: "marrakech" },
+  { name: "Fès", slug: "fes" },
+  { name: "Tanger", slug: "tanger" },
+  { name: "Meknès", slug: "meknes" },
+  { name: "Agadir", slug: "agadir" },
+  { name: "Kenitra", slug: "kenitra" },
+  { name: "Salé", slug: "sale" },
+  { name: "Oujda", slug: "oujda" },
 ];
 
-const BlogCategoryCasablanca = () => {
+const BlogCategoryCity = ({ cityName, citySlug, selectedSlugs = [] }: Props) => {
   const [params] = useSearchParams();
   const page = Math.max(1, parseInt(params.get("page") || "1", 10) || 1);
 
   const allSelected = useMemo(() => {
     const all = getAllPosts();
     return all
-      .filter((p) => SELECTED_SLUGS.includes(p.slug))
+      .filter((p) => selectedSlugs.includes(p.slug))
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }, []);
+  }, [selectedSlugs]);
 
   const totalPages = Math.max(1, Math.ceil(allSelected.length / PER_PAGE));
   const current = Math.min(page, totalPages);
   const start = (current - 1) * PER_PAGE;
   const posts = allSelected.slice(start, start + PER_PAGE);
 
-  const canonical = `${SITE_URL}/blog/casablanca`;
+  const canonical = `${SITE_URL}/blog/${citySlug}`;
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE_URL}/` },
       { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-      { "@type": "ListItem", position: 3, name: "Casablanca", item: canonical },
+      { "@type": "ListItem", position: 3, name: cityName, item: canonical },
     ],
   } as const;
 
   return (
     <>
       <SEO
-        title="Blog Ambulance Maroc – Casablanca"
-        description="Retrouvez tous nos articles sur les ambulances et services d'urgence à Casablanca."
+        title={`Blog Ambulance Maroc – ${cityName}`}
+        description={`Retrouvez tous nos articles sur les ambulances et services d'urgence à ${cityName}.`}
         canonical={canonical}
         image="/default-seo-image.jpg"
         jsonLd={breadcrumbLd}
-        keywords={["blog ambulance Casablanca", "urgence Casablanca", "transport medicalise Casablanca"]}
+        keywords={[`blog ambulance ${cityName}`, `urgence ${cityName}`, `transport medicalise ${cityName}`]}
       />
       <Header />
       <main className="container mx-auto px-4 py-10">
@@ -75,15 +87,15 @@ const BlogCategoryCasablanca = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>Casablanca</BreadcrumbPage>
+              <BreadcrumbPage>{cityName}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
 
         <header className="max-w-3xl mt-6 mb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground">Blog Ambulance Casablanca</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground">Blog Ambulance {cityName}</h1>
           <p className="text-muted-foreground mt-2">
-            Guides pratiques, urgences, quartiers et tarifs à Casablanca.
+            Guides pratiques, urgences, quartiers et tarifs à {cityName}.
           </p>
         </header>
 
@@ -93,20 +105,16 @@ const BlogCategoryCasablanca = () => {
               <span className="inline-flex items-center"><List size={16} className="mr-2" />Tous les articles</span>
             </Link>
           </Button>
-          <Button asChild variant="secondary" size="sm">
-            <Link to="/blog/casablanca">
-              <span className="inline-flex items-center"><MapPin size={16} className="mr-2" />Casablanca</span>
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size="sm"><Link to="/blog/rabat">Rabat</Link></Button>
-          <Button asChild variant="outline" size="sm"><Link to="/blog/marrakech">Marrakech</Link></Button>
-          <Button asChild variant="outline" size="sm"><Link to="/blog/fes">Fès</Link></Button>
-          <Button asChild variant="outline" size="sm"><Link to="/blog/tanger">Tanger</Link></Button>
-          <Button asChild variant="outline" size="sm"><Link to="/blog/meknes">Meknès</Link></Button>
-          <Button asChild variant="outline" size="sm"><Link to="/blog/agadir">Agadir</Link></Button>
-          <Button asChild variant="outline" size="sm"><Link to="/blog/kenitra">Kenitra</Link></Button>
-          <Button asChild variant="outline" size="sm"><Link to="/blog/sale">Salé</Link></Button>
-          <Button asChild variant="outline" size="sm"><Link to="/blog/oujda">Oujda</Link></Button>
+          {ALL_CITIES.map((c) => (
+            <Button key={c.slug} asChild variant={c.slug === citySlug ? "secondary" : "outline"} size="sm">
+              <Link to={`/blog/${c.slug}`}>
+                <span className="inline-flex items-center">
+                  {c.slug === citySlug ? <MapPin size={16} className="mr-2" /> : null}
+                  {c.name}
+                </span>
+              </Link>
+            </Button>
+          ))}
         </nav>
 
         {/* Liste des articles */}
@@ -116,7 +124,7 @@ const BlogCategoryCasablanca = () => {
               {p.coverImage && (
                 <img
                   src={p.coverImage}
-                  alt={`${p.title} – Casablanca`}
+                  alt={`${p.title} – ${cityName}`}
                   loading="lazy"
                   decoding="async"
                   className="w-full h-44 object-cover"
@@ -185,4 +193,4 @@ const BlogCategoryCasablanca = () => {
   );
 };
 
-export default BlogCategoryCasablanca;
+export default BlogCategoryCity;

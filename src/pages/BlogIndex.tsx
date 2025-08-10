@@ -136,7 +136,16 @@ useEffect(() => {
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((p) => (
-            <Card key={p.slug} className="h-full flex flex-col">
+            <Card key={p.slug} className="h-full flex flex-col overflow-hidden">
+              {p.coverImage && (
+                <img
+                  src={p.coverImage}
+                  alt={`${p.title}`}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-44 object-cover"
+                />
+              )}
               <CardHeader>
                 <CardTitle>
                   <Link to={`${p.city ? `/blog/${p.city}/${p.slug}` : `/blog/${p.slug}`}`} className="hover:text-primary">

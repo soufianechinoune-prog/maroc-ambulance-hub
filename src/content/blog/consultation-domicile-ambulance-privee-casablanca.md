@@ -7,7 +7,7 @@ date: "2025-08-10"
 updated: "2025-08-10"
 slug: "consultation-domicile-ambulance-privee-casablanca"
 categories: ["toutes-les-villes", "casablanca"]
-cover: "/images/blog/ambulance-privee-casablanca.jpg"
+cover: "/lovable-uploads/c70f65a3-e23d-4e57-8241-b36e2d2cd774.png"
 ---
 
 # Consultation médicale à domicile & ambulance Casablanca privée : confort, rapidité, sécurité

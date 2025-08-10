@@ -18,6 +18,7 @@ const SELECTED_SLUGS = [
   "ambulance-urgence-casablanca",
   "ambulance-privee-casablanca",
   "rapatriement-sanitaire-maroc",
+  "consultation-domicile-ambulance-privee-casablanca",
 ];
 
 const BlogCategoryCasablanca = () => {

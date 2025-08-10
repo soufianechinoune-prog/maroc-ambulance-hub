@@ -61,7 +61,7 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
                 Zones d'intervention
                 <ChevronDown className="ml-1 h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-56">
+              <DropdownMenuContent align="start" className="w-56 bg-card shadow-md z-50">
                 <DropdownMenuItem asChild>
                   <Link to="/zones-d-intervention" className="w-full">
                     Toutes les zones
@@ -84,18 +84,10 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
             </Link>
           </nav>
 
-          {/* Maillage interne - Villes principales */}
-          <div className="hidden xl:block absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border/50">
-            <div className="container mx-auto px-4 py-2">
-              {neighborhoodList ? (
-                <ul className="flex gap-4 text-sm text-foreground/80 justify-center">
-                  {neighborhoodList.map((d) => (
-                    <li key={d.slug}>
-                      <a href={`/ambulance-${currentCitySlug}-${d.slug}`} className="hover:text-primary transition-colors">{d.name}</a>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
+          {/* Maillage interne - Villes principales (affiché uniquement hors pages villes) */}
+          {!currentCitySlug && (
+            <div className="hidden xl:block absolute top-full left-0 right-0 bg-background/95 border-b border-border/50 z-40">
+              <div className="container mx-auto px-4 py-2">
                 <ul className="flex gap-4 text-sm text-foreground/80 justify-center">
                   <li><Link to="/ambulance-casablanca" className="hover:text-primary transition-colors">Casablanca</Link></li>
                   <li><Link to="/ambulance-rabat" className="hover:text-primary transition-colors">Rabat</Link></li>
@@ -106,9 +98,9 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
                   <li><Link to="/ambulance-meknes" className="hover:text-primary transition-colors">Meknès</Link></li>
                   <li><Link to="/ambulance-oujda" className="hover:text-primary transition-colors">Oujda</Link></li>
                 </ul>
-              )}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Emergency Contact */}
           <div className="hidden lg:flex items-center space-x-3">

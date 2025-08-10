@@ -6,8 +6,10 @@ import { getAllPosts } from "@/lib/blog";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { MapPin } from "lucide-react";
 
 const slugify = (s: string) =>
   (s || "")
@@ -107,6 +109,18 @@ useEffect(() => {
               onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
+
+          <nav aria-label="Catégories par ville" className="mt-6 flex flex-wrap gap-2">
+            <Button asChild variant="secondary" size="sm">
+              <Link to="/blog/casablanca">
+                <span className="inline-flex items-center"><MapPin size={16} className="mr-2" />Casablanca</span>
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" disabled title="Bientôt">Rabat</Button>
+            <Button variant="outline" size="sm" disabled title="Bientôt">Marrakech</Button>
+            <Button variant="outline" size="sm" disabled title="Bientôt">Fès</Button>
+            <Button variant="outline" size="sm" disabled title="Bientôt">Tanger</Button>
+          </nav>
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

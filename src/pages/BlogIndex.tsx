@@ -9,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import { MapPin } from "lucide-react";
+
+import { MapPin, List } from "lucide-react";
 
 const slugify = (s: string) =>
   (s || "")
@@ -101,6 +102,28 @@ useEffect(() => {
           <h1 className="text-3xl md:text-4xl font-bold text-foreground">Blog Ambulance Maroc</h1>
           <p className="text-muted-foreground mt-2">Guides pratiques, urgences, quartiers et tarifs pour bien vous orienter au Maroc.</p>
 
+          <nav aria-label="Catégories par ville" className="mt-6 flex flex-wrap gap-2 justify-center">
+            <Button asChild variant="secondary" size="sm">
+              <Link to="/blog">
+                <span className="inline-flex items-center"><List size={16} className="mr-2" />Tous les articles</span>
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/blog/casablanca">
+                <span className="inline-flex items-center"><MapPin size={16} className="mr-2" />Casablanca</span>
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog?q=rabat">Rabat</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog?q=marrakech">Marrakech</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog?q=fès">Fès</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog?q=tanger">Tanger</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog?q=meknès">Meknès</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog?q=agadir">Agadir</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog?q=kenitra">Kenitra</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog?q=salé">Salé</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/blog?q=oujda">Oujda</Link></Button>
+          </nav>
+
           <div className="mt-6">
             <Input
               type="search"
@@ -109,18 +132,6 @@ useEffect(() => {
               onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
-
-          <nav aria-label="Catégories par ville" className="mt-6 flex flex-wrap gap-2">
-            <Button asChild variant="secondary" size="sm">
-              <Link to="/blog/casablanca">
-                <span className="inline-flex items-center"><MapPin size={16} className="mr-2" />Casablanca</span>
-              </Link>
-            </Button>
-            <Button variant="outline" size="sm" disabled title="Bientôt">Rabat</Button>
-            <Button variant="outline" size="sm" disabled title="Bientôt">Marrakech</Button>
-            <Button variant="outline" size="sm" disabled title="Bientôt">Fès</Button>
-            <Button variant="outline" size="sm" disabled title="Bientôt">Tanger</Button>
-          </nav>
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

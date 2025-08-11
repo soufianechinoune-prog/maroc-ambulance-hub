@@ -15,7 +15,6 @@ const NEIGHBORHOOD_SLUG = "ain-diab"; // slug kebab-case sans accents
  */
 export default function NeighborhoodAinDiab() {
   const title = `Ambulance à ${NEIGHBORHOOD_NAME} – Casablanca`;
-  const url = `${SITE_URL}/ambulance-casablanca-${NEIGHBORHOOD_SLUG}`;
 
   return (
     <>

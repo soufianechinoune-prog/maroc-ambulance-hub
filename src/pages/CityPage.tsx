@@ -34,9 +34,10 @@ const CityPage = () => {
     return m ? m[1] : "";
   };
   
-  const slug = citySlug || extractSlugFromPath();
-  const city = cities.find(c => c.slug === slug);
-  const relatedCities = getRandomCities(slug, 4);
+  const rawSlug = citySlug || extractSlugFromPath();
+  const normalizedSlug = rawSlug.startsWith('casablanca-') ? 'casablanca' : rawSlug;
+  const city = cities.find(c => c.slug === normalizedSlug);
+  const relatedCities = getRandomCities(normalizedSlug, 4);
   const siteUrl = SITE_URL;
 
   // SEO data optimisé pour chaque ville

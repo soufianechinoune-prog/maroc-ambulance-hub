@@ -13,6 +13,7 @@ import ServicesSection from "@/components/ServicesSection"
 import TestimonialsSection from "@/components/TestimonialsSection"
 import ContactForm from "@/components/ContactForm"
 import { Phone, MessageCircle, MapPin, Clock } from "lucide-react"
+import { toSlug } from "@/lib/slug"
 
 const PHONE_DISPLAY = "0777 22 23 11"
 const PHONE_TEL = "+212777722311"
@@ -30,16 +31,17 @@ export default function NeighborhoodPage() {
     if (!s) return null
     const idx = s.indexOf('-')
     if (idx === -1) return null
-    const city = s.slice(0, idx).toLowerCase()
-    const dist = s.slice(idx + 1).toLowerCase()
+    const city = toSlug(s.slice(0, idx))
+    const dist = toSlug(s.slice(idx + 1))
     return { city, district: dist }
   }, [cityParam, district, slugParam, location.pathname])
 
   const citySlug = (cityParam || parsed?.city || "casablanca").toLowerCase()
   const list = neighborhoodsByCity[citySlug] || neighborhoodsByCity["casablanca"]
+  const districtSlug = toSlug((district || parsed?.district || "") as string)
   const n = useMemo(
-    () => list.find((q) => q.slug === ((district || parsed?.district || "") as string).toLowerCase()),
-    [district, parsed, list]
+    () => list.find((q) => q.slug === districtSlug),
+    [districtSlug, list]
   )
 
   // Si aucun quartier ne correspond, redirige vers la page ville

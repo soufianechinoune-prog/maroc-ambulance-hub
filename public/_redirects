@@ -37,3 +37,6 @@
 /blog/ambulance-:city /blog 301!
 /blog/villes/:city /blog 301!
 /blog/:city/:slug /blog/:slug 301!
+
+# SPA fallback to index.html
+/* /index.html 200

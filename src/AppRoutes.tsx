@@ -38,8 +38,8 @@ const AppRoutes = () => (
     <Route path="/transport-inter-hopitaux" element={<Services />} />
     <Route path="/zones-d-intervention" element={<Zones />} />
      <Route path="/contact" element={<Contact />} />
-     {/* Catch-all for patterns like /ambulance-casablanca-anfa, /ambulance-rabat-agdal, etc. */}
-     <Route path="/ambulance-*" element={<NeighborhoodPage />} />
+     {/* Neighborhood pages like /ambulance-casablanca-anfa */}
+     <Route path="/ambulance-:city-:district" element={<NeighborhoodPage />} />
 
      {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />

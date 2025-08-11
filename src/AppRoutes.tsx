@@ -12,6 +12,7 @@ import { cities } from "./data/cities";
 import MentionsLegales from "./pages/MentionsLegales";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisation";
+import NeighborhoodAinDiab from "./pages/NeighborhoodAinDiab";
 
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -37,6 +38,9 @@ const AppRoutes = () => (
     <Route path="/transport-inter-hopitaux" element={<Services />} />
     <Route path="/zones-d-intervention" element={<Zones />} />
     <Route path="/contact" element={<Contact />} />
+
+    {/* Quartier (alias de contenu Casablanca) */}
+    <Route path="/ambulance-casablanca-ain-diab" element={<NeighborhoodAinDiab />} />
 
     {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />

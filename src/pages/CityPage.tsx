@@ -231,7 +231,17 @@ const CityPage = () => {
                   Couverture {city.region}
                 </div>
               </div>
-            </div>
+              {city.slug === 'casablanca' && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a
+                    href="/ambulance-casablanca-ain-diab"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary"
+                  >
+                    Ain Diab
+                  </a>
+                </div>
+              )}
+             </div>
           </div>
         </div>
 

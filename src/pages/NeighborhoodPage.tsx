@@ -306,12 +306,12 @@ const cityName = toTitle(citySlug)
                   const href = nb ? `/ambulance-${citySlug}-${nb.slug}` : `/ambulance-${citySlug}`
                   return (
                     <li key={q}>
-                      <a href={href} className="hover:text-primary transition-colors">Ambulance {q}</a>
+                      <Link to={href} className="hover:text-primary transition-colors">Ambulance {q}</Link>
                     </li>
                   )
                 })}
                 {(!n.nearby || n.nearby.length === 0) && (
-                  <li><a href={`/ambulance-${citySlug}`} className="hover:text-primary">Ambulance {cityName}</a></li>
+                  <li><Link to={`/ambulance-${citySlug}`} className="hover:text-primary">Ambulance {cityName}</Link></li>
                 )}
               </ul>
             </div>
@@ -375,13 +375,13 @@ const cityName = toTitle(citySlug)
               <li key={q.slug} className="group bg-card hover:bg-accent rounded-lg p-4 shadow-sm hover:shadow-md transition-colors ring-1 ring-border">
                 <div className="text-lg font-medium text-foreground">{q.name}</div>
                 <div className="text-sm text-muted-foreground">🚑 Intervention 24/7</div>
-                <a
-                  href={`/ambulance-${citySlug}-${q.slug}`}
+                <Link
+                  to={`/ambulance-${citySlug}-${q.slug}`}
                   className="mt-2 inline-flex items-center gap-1 text-sm text-primary underline hover:text-primary/80 transition-colors"
                   aria-label={`Voir la page Ambulance ${q.name}`}
                 >
                   👉 Voir la page
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

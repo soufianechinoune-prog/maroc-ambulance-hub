@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { neighborhoodsByCity, type Neighborhood } from "@/data/neighborhoods";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
@@ -28,12 +29,12 @@ const NeighborhoodCarousel: React.FC<NeighborhoodCarouselProps> = ({ citySlug, c
             <CarouselContent className="-ml-2">
               {items.map((n) => (
                 <CarouselItem key={n.slug} className="pl-2 basis-1/2 sm:basis-1/3 md:basis-1/5">
-                  <a
-                    href={`/ambulance-${citySlug}-${n.slug}`}
+                  <Link
+                    to={`/ambulance-${citySlug}-${n.slug}`}
                     className="block rounded-md border bg-card px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors whitespace-nowrap text-center"
                   >
                     {n.name}
-                  </a>
+                  </Link>
                 </CarouselItem>
               ))}
 
@@ -66,13 +67,13 @@ const NeighborhoodCarousel: React.FC<NeighborhoodCarouselProps> = ({ citySlug, c
           )}
         >
           {items.map((n) => (
-            <a
+            <Link
               key={`grid-${n.slug}`}
-              href={`/ambulance-${citySlug}-${n.slug}`}
+              to={`/ambulance-${citySlug}-${n.slug}`}
               className="rounded-md border bg-card px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
             >
               {n.name}
-            </a>
+            </Link>
           ))}
         </div>
       </div>

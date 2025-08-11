@@ -13,6 +13,7 @@ import MentionsLegales from "./pages/MentionsLegales";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisation";
 import NeighborhoodAinDiab from "./pages/NeighborhoodAinDiab";
+import NeighborhoodCalifornie from "./pages/NeighborhoodCalifornie";
 
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -41,6 +42,7 @@ const AppRoutes = () => (
 
     {/* Quartier (alias de contenu Casablanca) */}
     <Route path="/ambulance-casablanca-ain-diab" element={<NeighborhoodAinDiab />} />
+    <Route path="/ambulance-casablanca-californie" element={<NeighborhoodCalifornie />} />
 
     {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />

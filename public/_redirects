@@ -38,5 +38,9 @@
 /blog/villes/:city /blog 301!
 /blog/:city/:slug /blog/:slug 301!
 
+# Quartiers de Casablanca (alias vers contenu Casablanca)
+/ambulance-casablanca-ain-diab /ambulance-casablanca 301!
+/ambulance-casablanca-californie /ambulance-casablanca 301!
+
 # SPA fallback
 /* /index.html 200

@@ -1,5 +1,5 @@
 
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { cities } from "@/data/cities";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -234,12 +234,12 @@ const CityPage = () => {
               </div>
               {city.slug === 'casablanca' && (
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <a
-                    href="/ambulance-casablanca-ain-diab"
-                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary"
+                  <Link
+                    to="/ambulance-casablanca-ain-diab"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
                   >
                     Ain Diab
-                  </a>
+                  </Link>
                 </div>
               )}
              </div>

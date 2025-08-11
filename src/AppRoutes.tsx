@@ -40,6 +40,8 @@ const AppRoutes = () => (
      <Route path="/contact" element={<Contact />} />
      {/* Neighborhood pages like /ambulance-casablanca-anfa */}
      <Route path="/ambulance-:city-:district" element={<NeighborhoodPage />} />
+     {/* Fallback for generic /ambulance-:slug (e.g., 'casablanca-californie') */}
+     <Route path="/ambulance-:slug" element={<NeighborhoodPage />} />
 
      {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />

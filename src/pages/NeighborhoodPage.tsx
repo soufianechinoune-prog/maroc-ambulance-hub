@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { useParams, Link, Navigate } from "react-router-dom"
+import { useParams, Link, Navigate, useLocation } from "react-router-dom"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import SEO from "@/components/SEO"
@@ -18,12 +18,28 @@ const PHONE_DISPLAY = "0777 22 23 11"
 const PHONE_TEL = "+212777722311"
 
 export default function NeighborhoodPage() {
-  const { city: cityParam, district } = useParams()
-  const citySlug = (cityParam || "casablanca").toLowerCase()
+  const { city: cityParam, district, slug: slugParam } = useParams()
+  const location = useLocation()
+
+  // Support both patterns:
+  // 1) /ambulance-:city-:district (cityParam + district provided)
+  // 2) /ambulance-:slug where slug = "city-district" (fallback)
+  const parsed = useMemo(() => {
+    if (cityParam || district) return null
+    const s = slugParam || (location.pathname.startsWith('/ambulance-') ? location.pathname.replace('/ambulance-', '').replace(/\/$/, '') : '')
+    if (!s) return null
+    const idx = s.indexOf('-')
+    if (idx === -1) return null
+    const city = s.slice(0, idx).toLowerCase()
+    const dist = s.slice(idx + 1).toLowerCase()
+    return { city, district: dist }
+  }, [cityParam, district, slugParam, location.pathname])
+
+  const citySlug = (cityParam || parsed?.city || "casablanca").toLowerCase()
   const list = neighborhoodsByCity[citySlug] || neighborhoodsByCity["casablanca"]
   const n = useMemo(
-    () => list.find((q) => q.slug === (district || "").toLowerCase()),
-    [district, list]
+    () => list.find((q) => q.slug === ((district || parsed?.district || "") as string).toLowerCase()),
+    [district, parsed, list]
   )
 
   // Si aucun quartier ne correspond, redirige vers la page ville

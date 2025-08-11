@@ -39,6 +39,8 @@ const AppRoutes = () => (
     <Route path="/zones-d-intervention" element={<Zones />} />
      <Route path="/contact" element={<Contact />} />
      <Route path="/ambulance-:city-:district" element={<NeighborhoodPage />} />
+     {/* Fallback matcher for routes like /ambulance-casablanca-californie in a single param */}
+     <Route path="/ambulance-:slug" element={<NeighborhoodPage />} />
 
      {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />

@@ -247,6 +247,13 @@ const CityPage = () => {
                   >
                     Californie
                   </Link>
+                  <Link
+                    to="/ambulance-casablanca-maarif"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
+                    aria-label="Ambulance Casablanca Maârif"
+                  >
+                    Maârif
+                  </Link>
                 </div>
               )}
              </div>

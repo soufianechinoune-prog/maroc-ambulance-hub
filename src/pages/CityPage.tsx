@@ -254,6 +254,20 @@ const CityPage = () => {
                   >
                     Maârif
                   </Link>
+                  <Link
+                    to="/ambulance-casablanca-bourgogne"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
+                    aria-label="Ambulance Casablanca Bourgogne"
+                  >
+                    Bourgogne
+                  </Link>
+                  <Link
+                    to="/ambulance-casablanca-sidi-belyout"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
+                    aria-label="Ambulance Casablanca Sidi Belyout"
+                  >
+                    Sidi Belyout
+                  </Link>
                 </div>
               )}
              </div>

@@ -15,6 +15,8 @@ import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisati
 import NeighborhoodAinDiab from "./pages/NeighborhoodAinDiab";
 import NeighborhoodCalifornie from "./pages/NeighborhoodCalifornie";
 import NeighborhoodMaarif from "./pages/NeighborhoodMaarif";
+import NeighborhoodBourgogne from "./pages/NeighborhoodBourgogne";
+import NeighborhoodSidiBelyout from "./pages/NeighborhoodSidiBelyout";
 
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -45,6 +47,8 @@ const AppRoutes = () => (
     <Route path="/ambulance-casablanca-ain-diab" element={<NeighborhoodAinDiab />} />
     <Route path="/ambulance-casablanca-californie" element={<NeighborhoodCalifornie />} />
     <Route path="/ambulance-casablanca-maarif" element={<NeighborhoodMaarif />} />
+    <Route path="/ambulance-casablanca-bourgogne" element={<NeighborhoodBourgogne />} />
+    <Route path="/ambulance-casablanca-sidi-belyout" element={<NeighborhoodSidiBelyout />} />
 
     {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />

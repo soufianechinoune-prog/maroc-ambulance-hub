@@ -240,6 +240,13 @@ const CityPage = () => {
                   >
                     Ain Diab
                   </Link>
+                  <Link
+                    to="/ambulance-casablanca-californie"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
+                    aria-label="Ambulance Casablanca Californie"
+                  >
+                    Californie
+                  </Link>
                 </div>
               )}
              </div>

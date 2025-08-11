@@ -37,8 +37,32 @@ const CityPage = () => {
   const rawSlug = citySlug || extractSlugFromPath();
   const normalizedSlug = rawSlug.startsWith('casablanca-') ? 'casablanca' : rawSlug;
   const city = cities.find(c => c.slug === normalizedSlug);
-  const relatedCities = getRandomCities(normalizedSlug, 4);
-  const siteUrl = SITE_URL;
+const relatedCities = getRandomCities(normalizedSlug, 4);
+const siteUrl = SITE_URL;
+
+const neighborhoodsCasablanca = [
+  { name: "Ain Diab", slug: "ain-diab" },
+  { name: "Maârif", slug: "maarif" },
+  { name: "Anfa", slug: "anfa" },
+  { name: "Bourgogne", slug: "bourgogne" },
+  { name: "Sidi Belyout", slug: "sidi-belyout" },
+  { name: "Aïn Sebaâ", slug: "ain-sebaa" },
+  { name: "Californie", slug: "californie" },
+  { name: "Hay Hassani", slug: "hay-hassani" },
+  { name: "Derb Sultan", slug: "derb-sultan" },
+  { name: "Sidi Moumen", slug: "sidi-moumen" },
+  { name: "Aïn Chock", slug: "ain-chock" },
+  { name: "Boujdour", slug: "boujdour" },
+  { name: "Bouskoura", slug: "bouskoura" },
+  { name: "CIL", slug: "cil" },
+  { name: "Gauthier", slug: "gauthier" },
+  { name: "Hay Mohammadi", slug: "hay-mohammadi" },
+  { name: "Ville Verte Bouskoura", slug: "ville-verte-bouskoura" },
+  { name: "Sidi Maarouf", slug: "sidi-maarouf" },
+  { name: "Oasis", slug: "oasis" },
+  { name: "Sidi Bernoussi", slug: "sidi-bernoussi" },
+];
+
 
   // SEO data optimisé pour chaque ville
   const seoData = {
@@ -234,12 +258,15 @@ const CityPage = () => {
               </div>
               {city.slug === 'casablanca' && (
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <Link
-                    to="/ambulance-casablanca-ain-diab"
-                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
-                  >
-                    Ain Diab
-                  </Link>
+                  {neighborhoodsCasablanca.map((n) => (
+                    <Link
+                      key={n.slug}
+                      to={`/ambulance-casablanca-${n.slug}`}
+                      className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
+                    >
+                      {n.name}
+                    </Link>
+                  ))}
                 </div>
               )}
              </div>

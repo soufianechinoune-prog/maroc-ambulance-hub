@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle } from "lucide-react";
 import { SITE_URL } from "@/lib/config";
-import NeighborhoodCarousel from "@/components/NeighborhoodCarousel";
 const getRandomCities = (currentSlug: string, count = 4) => {
   const pool = cities
     .filter((c) => c.slug !== currentSlug)
@@ -127,9 +126,6 @@ const CityPage = () => {
     <div className="min-h-screen bg-background">
       <SEO title={title} description={description} canonical={canonical} jsonLdMultiple={jsonLdArray} />
       <Header city={city.name} />
-
-      {/* Bande contextuelle des quartiers (carrousel) */}
-      <NeighborhoodCarousel citySlug={city.slug} cityName={city.name} />
       
       {/* Hero Section - Identique à la Home Page mais personnalisée */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden" aria-label={`Service d'ambulance à ${city.name}`}>

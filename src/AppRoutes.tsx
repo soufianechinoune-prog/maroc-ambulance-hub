@@ -12,7 +12,6 @@ import { cities } from "./data/cities";
 import MentionsLegales from "./pages/MentionsLegales";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import ConditionsGeneralesUtilisation from "./pages/ConditionsGeneralesUtilisation";
-import NeighborhoodPage from "./pages/NeighborhoodPage";
 
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -37,13 +36,9 @@ const AppRoutes = () => (
     <Route path="/rapatriement-sanitaire" element={<Services />} />
     <Route path="/transport-inter-hopitaux" element={<Services />} />
     <Route path="/zones-d-intervention" element={<Zones />} />
-     <Route path="/contact" element={<Contact />} />
-     {/* Neighborhood pages like /ambulance-casablanca-anfa */}
-     <Route path="/ambulance-:city-:district" element={<NeighborhoodPage />} />
-     {/* Fallback for generic /ambulance-:slug (e.g., 'casablanca-californie') */}
-     <Route path="/ambulance-:slug" element={<NeighborhoodPage />} />
+    <Route path="/contact" element={<Contact />} />
 
-     {/* Blog */}
+    {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
     <Route path="/blog/casablanca" element={<Suspense fallback={null}><BlogCategoryCasablanca /></Suspense>} />
     <Route path="/blog/rabat" element={<Suspense fallback={null}><BlogCategoryRabat /></Suspense>} />

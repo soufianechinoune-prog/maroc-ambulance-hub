@@ -14,6 +14,8 @@ export const neighborhoodsByCity: Record<string, Neighborhood[]> = {
     { slug: "oasis", label: "Oasis" },
     { slug: "sidi-maarouf", label: "Sidi Maarouf" },
     { slug: "sidi-bernoussi", label: "Sidi Bernoussi" },
+    { slug: "gauthier", label: "Gauthier" },
+    { slug: "bouskoura", label: "Bouskoura" },
   ],
   rabat: [
     { slug: "agdal", label: "Agdal" },

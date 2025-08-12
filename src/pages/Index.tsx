@@ -251,6 +251,149 @@ const Index = () => {
             </nav>
           </div>
         </section>
+        {/* Bloc éditorial SEO national */}
+        <section
+          className="py-8 md:py-12"
+          role="region"
+          aria-labelledby="seo-editorial-heading"
+        >
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-4xl">
+              <h2
+                id="seo-editorial-heading"
+                className="text-2xl md:text-3xl font-semibold text-foreground"
+              >
+                Ambulance au Maroc : un service d’urgence et de transport médicalisé 24h/24
+              </h2>
+
+              {/* Intro */}
+              <p className="text-muted-foreground mt-6 mb-6">
+                🚑 Avec <strong>Ambulance Maroc</strong>, vous accédez à un réseau national d’ambulances disponibles
+                en <strong>urgence 24h/24</strong> et pour le <strong>transport médicalisé</strong> planifié. Présents dans les
+                grandes agglomérations et leurs périphéries, nous assurons une <strong>prise en charge rapide</strong>,
+                coordonnée et sécurisée. Notre <strong>temps de réponse rapide</strong> en zone urbaine est en moyenne de 8 à 15 minutes,
+                avec une disponibilité continue, y compris la nuit, les week‑ends et jours fériés.
+              </p>
+              <p className="text-muted-foreground mb-6">
+                Grâce à une organisation rigoureuse et à des partenaires locaux qualifiés, <strong>l’ambulance au Maroc</strong>
+                conjugue proximité, réactivité et conformité aux protocoles. Que vous soyez en centre‑ville ou dans une
+                zone plus isolée, la centrale identifie l’équipe la plus proche et la mieux adaptée à la situation.
+              </p>
+
+              {/* H3 – Interventions rapides */}
+              <h3
+                id="interventions-rapides"
+                className="text-xl md:text-2xl font-semibold text-foreground mt-10"
+              >
+                ⏱️ Des interventions rapides dans toutes les grandes villes
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                En milieu urbain, nos équipes atteignent généralement le lieu d’intervention en 8 à 15 minutes, selon
+                la distance et le trafic. Notre dispositif fonctionne <strong>24h/24 et 7j/7</strong> et couvre les principales
+                métropoles du pays — Casablanca, Rabat, Marrakech, Tanger, Fès, Agadir, Meknès, Oujda — ainsi que leurs
+                périphéries (zones industrielles, communes limitrophes, axes autoroutiers). Chaque appel est priorisé et
+                orienté vers l’ambulance la plus proche pour réduire les délais.
+              </p>
+
+              {/* H3 – Réseau national */}
+              <h3
+                id="reseau-national-ambulances"
+                className="text-xl md:text-2xl font-semibold text-foreground mt-10"
+              >
+                🚑 Un réseau national d’ambulances équipées
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Nos véhicules sont modernes et dotés de l’équipement nécessaire à un <strong>transport médicalisé</strong> sûr :
+                brancards, oxygène, monitorage, défibrillateurs et consommables d’urgence. Selon le niveau requis,
+                l’équipe embarquée adapte le matériel pour garantir une prise en charge optimale, du simple transfert à
+                la surveillance rapprochée.
+              </p>
+              <ul className="list-disc pl-5 text-muted-foreground mb-6">
+                <li>Brancards, matelas coquille et immobilisation</li>
+                <li>Oxygénothérapie et aspirations</li>
+                <li>Monitoring et défibrillation si besoin</li>
+                <li>Hygiène et désinfection selon protocole</li>
+              </ul>
+              <p className="text-muted-foreground mb-6">
+                Maillage national avec des pages locales dédiées :
+                <a className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm" href="/ambulance-casablanca">Ambulance à Casablanca</a>,
+                <a className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm" href="/ambulance-rabat">Ambulance à Rabat</a>,
+                <a className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm" href="/ambulance-marrakech">Ambulance à Marrakech</a>,
+                <a className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm" href="/ambulance-tanger">Ambulance à Tanger</a>,
+                <a className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm" href="/ambulance-fes">Ambulance à Fès</a>,
+                <a className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm" href="/ambulance-agadir">Ambulance à Agadir</a>,
+                <a className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm" href="/ambulance-meknes">Ambulance à Meknès</a>,
+                <a className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm" href="/ambulance-oujda">Ambulance à Oujda</a>.
+              </p>
+
+              {/* H3 – Personnel médical */}
+              <h3
+                id="personnel-medical-forme"
+                className="text-xl md:text-2xl font-semibold text-foreground mt-10"
+              >
+                👩‍⚕️ Un personnel médical formé et certifié
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Les interventions sont réalisées par des <strong>auxiliaires ambulanciers</strong>, <strong>infirmiers</strong> et, lorsque
+                nécessaire, par un <strong>médecin urgentiste</strong>. Les équipes appliquent des protocoles validés et conformes
+                aux recommandations du Ministère de la Santé, avec une traçabilité des gestes effectués et un dossier de
+                transmission remis à l’établissement receveur.
+              </p>
+
+              {/* H3 – Coordination */}
+              <h3
+                id="coordination-hopitaux-cliniques"
+                className="text-xl md:text-2xl font-semibold text-foreground mt-10"
+              >
+                🏥 Coordination avec les hôpitaux et cliniques
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Du premier appel à l’admission, nous assurons une <strong>coordination hôpitaux</strong> et cliniques fluide :
+                choix de la structure la plus adaptée, transmission des informations utiles, préparation à l’accueil du
+                patient. Nos équipes interviennent aussi en entreprises, hôtels, établissements scolaires, maisons de
+                retraite et <strong>zones industrielles</strong>, en lien avec les référents sécurité.
+              </p>
+
+              {/* H3 – Comment demander ? */}
+              <h3
+                id="comment-demander-ambulance-maroc"
+                className="text-xl md:text-2xl font-semibold text-foreground mt-10"
+              >
+                📞 Comment demander une ambulance au Maroc ?
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Pour une prise en charge immédiate, appelez le
+                <a
+                  href="tel:+212777722311"
+                  className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm"
+                  aria-label="Appeler Ambulance Maroc"
+                >
+                  +212 7777 223 11
+                </a>
+                , écrivez sur
+                <a
+                  href="https://wa.me/212777722311"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm"
+                  aria-label="Contacter Ambulance Maroc sur WhatsApp"
+                >
+                  WhatsApp
+                </a>
+                , ou utilisez le
+                <a
+                  href="#demande-ambulance"
+                  className="ml-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-sm"
+                  aria-label="Ouvrir le formulaire Demander une ambulance"
+                >
+                  formulaire en ligne
+                </a>
+                . Notre centrale évalue la situation, précise la localisation et oriente vers <strong>l’ambulance au Maroc</strong>
+                la plus proche, afin d’assurer un départ immédiat et un transfert sécurisé.
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

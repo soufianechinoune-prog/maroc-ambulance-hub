@@ -59,6 +59,10 @@ const AppRoutes = () => (
     <Route path="/ambulance-casablanca-sidi-bernoussi" element={<NeighborhoodSidiBernoussi />} />
 
 
+    {/* Route générique pour alias quartiers: /ambulance-:city-:district */}
+    <Route path="/ambulance-:city-:district" element={<CityPage />} />
+
+
     {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
     <Route path="/blog/casablanca" element={<Suspense fallback={null}><BlogCategoryCasablanca /></Suspense>} />

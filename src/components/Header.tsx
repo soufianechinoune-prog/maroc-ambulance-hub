@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cities } from "@/data/cities";
+import { neighborhoodsByCity } from "@/data/neighborhoods";
 import logo from "@/assets/logo.jpg";
 
 interface HeaderProps {
@@ -19,6 +20,10 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const isHomepage = location.pathname === '/';
+  const path = location.pathname;
+  const matchCityPage = path.match(/^\/ambulance-([a-z-]+)$/);
+  const currentCitySlug = matchCityPage?.[1] && cities.some(c => c.slug === matchCityPage[1]) ? matchCityPage[1] : null;
+  const isCityPage = !!currentCitySlug;
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -78,21 +83,35 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
             </Link>
           </nav>
 
-          {/* Maillage interne - Villes principales */}
-          <div className="hidden xl:block absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border/50">
-            <div className="container mx-auto px-4 py-2">
-              <ul className="flex gap-4 text-sm text-foreground/80 justify-center">
-                <li><Link to="/ambulance-casablanca" className="hover:text-primary transition-colors">Casablanca</Link></li>
-                <li><Link to="/ambulance-rabat" className="hover:text-primary transition-colors">Rabat</Link></li>
-                <li><Link to="/ambulance-marrakech" className="hover:text-primary transition-colors">Marrakech</Link></li>
-                <li><Link to="/ambulance-fes" className="hover:text-primary transition-colors">Fès</Link></li>
-                <li><Link to="/ambulance-tanger" className="hover:text-primary transition-colors">Tanger</Link></li>
-                <li><Link to="/ambulance-agadir" className="hover:text-primary transition-colors">Agadir</Link></li>
-                <li><Link to="/ambulance-meknes" className="hover:text-primary transition-colors">Meknès</Link></li>
-                <li><Link to="/ambulance-oujda" className="hover:text-primary transition-colors">Oujda</Link></li>
-              </ul>
-            </div>
-          </div>
+{/* Maillage interne - Vitrine contextuelle */}
+<div className="hidden xl:block absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border/50">
+  <div className="container mx-auto px-4 py-2">
+    {isCityPage && neighborhoodsByCity[currentCitySlug as keyof typeof neighborhoodsByCity]?.length ? (
+      <div className="overflow-x-auto">
+        <ul className="flex gap-4 text-sm text-foreground/80 justify-start whitespace-nowrap">
+          {neighborhoodsByCity[currentCitySlug as keyof typeof neighborhoodsByCity].map((n) => (
+            <li key={n.slug}>
+              <Link to={`/ambulance-${currentCitySlug}-${n.slug}`} className="hover:text-primary transition-colors">
+                {n.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <ul className="flex gap-4 text-sm text-foreground/80 justify-center">
+        <li><Link to="/ambulance-casablanca" className="hover:text-primary transition-colors">Casablanca</Link></li>
+        <li><Link to="/ambulance-rabat" className="hover:text-primary transition-colors">Rabat</Link></li>
+        <li><Link to="/ambulance-marrakech" className="hover:text-primary transition-colors">Marrakech</Link></li>
+        <li><Link to="/ambulance-fes" className="hover:text-primary transition-colors">Fès</Link></li>
+        <li><Link to="/ambulance-tanger" className="hover:text-primary transition-colors">Tanger</Link></li>
+        <li><Link to="/ambulance-agadir" className="hover:text-primary transition-colors">Agadir</Link></li>
+        <li><Link to="/ambulance-meknes" className="hover:text-primary transition-colors">Meknès</Link></li>
+        <li><Link to="/ambulance-oujda" className="hover:text-primary transition-colors">Oujda</Link></li>
+      </ul>
+    )}
+  </div>
+</div>
 
           {/* Emergency Contact */}
           <div className="hidden lg:flex items-center space-x-3">

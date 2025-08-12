@@ -194,9 +194,21 @@ const Index = () => {
             Couverture nationale (Casablanca, Rabat, Marrakech, Tanger, Fès, Agadir…) et délais optimisés dans les grandes villes.
           </p>
 
-          <p>
-            Préférence WhatsApp ? <WhatsAppButton phone="+212777722311" className="underline">Écrivez‑nous immédiatement</WhatsAppButton>.
-          </p>
+          <div className="pt-2 flex justify-center">
+            <a
+              href="https://wa.me/212777722311?utm_source=site&utm_medium=whatsapp&utm_campaign=cta_principal"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Contactez-nous sur WhatsApp"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold text-white shadow-md transition-colors hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/40"
+              style={{ backgroundColor: "#25D366" }}
+            >
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.471-.149-.67.149-.198.297-.767.967-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.676 6.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.003-5.45 4.444-9.89 9.893-9.89 2.64.001 5.122 1.03 6.988 2.898a9.825 9.825 0 012.9 6.994c-.003 5.45-4.444 9.89-9.897 9.89M20.52 3.482A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.336 11.893-11.893A11.82 11.82 0 0020.52 3.482"></path>
+              </svg>
+              <span>Contactez-nous sur WhatsApp</span>
+            </a>
+          </div>
         </section>
         {/* KPI cards */}
         <section className="py-12 bg-secondary/30" role="region" aria-labelledby="kpi-heading">

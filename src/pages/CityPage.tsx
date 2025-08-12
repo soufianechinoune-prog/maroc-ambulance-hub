@@ -11,7 +11,7 @@ import SEO from "@/components/SEO";
 import { generateLocalBusinessSchema } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, Zap } from "lucide-react";
 import { SITE_URL } from "@/lib/config";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 const getRandomCities = (currentSlug: string, count = 4) => {
@@ -854,8 +854,28 @@ const CityPage = () => {
       )}
 
       {/* Reassurance Section */}
-      <ReassuranceSection />
-
+{city.slug === 'casablanca' ? (
+        <ReassuranceSection
+          title="Pourquoi nous faire confiance à Casablanca ?"
+          subtitle="Notre engagement : vous offrir un service d’ambulance professionnel, rapide et fiable sur tout Casablanca."
+          features={[
+            { icon: Clock, title: "Disponible 24/7 à Casablanca", description: "Service d’urgence opérationnel jour et nuit, tous les jours.", color: "text-primary" },
+            { icon: Zap, title: "Intervention rapide en ville", description: "Temps de réponse moyen 8–12 min en zone urbaine (selon trafic & distance).", color: "text-emergency" },
+            { icon: Users, title: "Personnel qualifié", description: "Équipes formées aux premiers secours et au transport médicalisé.", color: "text-success" },
+            { icon: MapPin, title: "Couverture Grand Casablanca", description: "Intervention dans tous les quartiers et communes limitrophes.", color: "text-primary" },
+            { icon: Shield, title: "Coordination avec hôpitaux & cliniques", description: "Prise en charge et transfert vers les établissements de santé de la ville.", color: "text-success" },
+            { icon: Star, title: "Normes sanitaires", description: "Procédures et matériel conformes aux exigences médicales.", color: "text-emergency" },
+          ]}
+          stats={[
+            { value: "8–12 min", label: "Temps de réponse moyen" },
+            { value: "Tous quartiers", label: "Casablanca & périphérie" },
+            { value: "24/7", label: "Service continu" },
+            { value: "Urgences & programmées", label: "Interventions immédiates et sur réservation" },
+          ]}
+        />
+      ) : (
+        <ReassuranceSection />
+      )}
       {/* Services Section */}
       <ServicesSection />
 

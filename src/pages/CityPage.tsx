@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle } from "lucide-react";
 import { SITE_URL } from "@/lib/config";
+import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 const getRandomCities = (currentSlug: string, count = 4) => {
   const pool = cities
     .filter((c) => c.slug !== currentSlug)
@@ -114,7 +115,7 @@ const CityPage = () => {
               Cette ville n'est pas encore dans notre zone de couverture.
             </p>
             <Button asChild>
-              <a href="tel:+212777722311">Contactez-nous</a>
+            <CallButton phone="+212777722311">Contactez-nous</CallButton>
             </Button>
           </div>
         </div>
@@ -187,10 +188,10 @@ const CityPage = () => {
                   className="text-lg px-8 py-4 h-auto"
                   asChild
                 >
-                  <a href="tel:+212777722311" className="flex items-center justify-center">
+                  <CallButton phone="+212777722311" className="flex items-center justify-center">
                     <Phone className="h-6 w-6 mr-3" />
                     📞 Appelez maintenant
-                  </a>
+                  </CallButton>
                 </Button>
                 
                 <Button 
@@ -199,10 +200,10 @@ const CityPage = () => {
                   className="text-lg px-8 py-4 h-auto"
                   asChild
                 >
-                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                  <WhatsAppButton phone="+212777722311" className="flex items-center justify-center">
                     <MessageCircle className="h-6 w-6 mr-3" />
                     💬 WhatsApp direct
-                  </a>
+                  </WhatsAppButton>
                 </Button>
                 
                 <Button 
@@ -239,9 +240,9 @@ const CityPage = () => {
         {/* Floating Emergency Contact (Mobile) */}
         <div className="fixed bottom-4 right-4 z-50 lg:hidden">
           <Button variant="emergency" size="lg" className="rounded-full shadow-2xl" asChild>
-            <a href="tel:+212777722311">
+            <CallButton phone="+212777722311">
               <Phone className="h-6 w-6" />
-            </a>
+            </CallButton>
           </Button>
         </div>
       </section>

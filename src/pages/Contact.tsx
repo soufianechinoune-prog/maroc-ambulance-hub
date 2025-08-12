@@ -5,6 +5,7 @@ import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, Mail, MapPin, Clock } from "lucide-react";
+import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 
 const Contact = () => {
   return (
@@ -42,16 +43,16 @@ const Contact = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <a href="tel:+212777722311" className="flex items-center gap-2">
+              <CallButton phone="+212777722311" className="flex items-center gap-2">
                 <Phone className="h-5 w-5" />
                 Urgence: +212 7777 223 11
-              </a>
+              </CallButton>
             </Button>
             <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white/20" asChild>
-              <a href="https://wa.me/212777722311" className="flex items-center gap-2">
+              <WhatsAppButton phone="+212777722311" className="flex items-center gap-2">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
-              </a>
+              </WhatsAppButton>
             </Button>
           </div>
         </div>
@@ -140,10 +141,10 @@ const Contact = () => {
             En cas d'urgence médicale, ne remplissez pas le formulaire - appelez directement !
           </p>
           <Button size="lg" variant="secondary" asChild>
-            <a href="tel:+212777722311" className="flex items-center gap-2">
+            <CallButton phone="+212777722311" className="flex items-center gap-2">
               <Phone className="h-5 w-5" />
               Appelez immédiatement: +212 7777 223 11
-            </a>
+            </CallButton>
           </Button>
         </div>
       </section>

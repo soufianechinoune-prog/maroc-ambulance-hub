@@ -1,6 +1,7 @@
 import { Ambulance, Hospital, Route, Calendar } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { CallButton } from "@/components/ContactCTA";
 import { Link } from "react-router-dom";
 
 const ServicesSection = () => {
@@ -143,9 +144,9 @@ const ServicesSection = () => {
                         asChild
                       >
                         {service.urgent ? (
-                          <a href="tel:+212777722311" aria-label={`Appeler pour ${service.title}`}>
+                          <CallButton phone="+212777722311" aria-label={`Appeler pour ${service.title}`}>
                             Appeler maintenant
-                          </a>
+                          </CallButton>
                         ) : (
                           <Link to="/services" aria-label={`En savoir plus sur ${service.title}`}>
                             Demander un devis
@@ -171,10 +172,10 @@ const ServicesSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="emergency" size="lg" asChild>
-              <a href="tel:+212777722311" className="flex items-center" aria-label="Appeler immédiatement pour urgence médicale">
+              <CallButton phone="+212777722311" className="flex items-center" aria-label="Appeler immédiatement pour urgence médicale">
                 <Ambulance className="h-5 w-5 mr-2" aria-hidden="true" />
                 Urgence : +212 7777 223 11
-              </a>
+              </CallButton>
             </Button>
             <Button variant="cta" size="lg" asChild>
               <a href="#demande-ambulance" aria-label="Accéder au formulaire de demande d'ambulance">

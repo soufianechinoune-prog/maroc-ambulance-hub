@@ -1,5 +1,6 @@
 import { Phone, MessageCircle, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 import ambulanceHero from "@/assets/ambulance-hero.jpg";
 
 interface HeroSectionProps {
@@ -83,10 +84,10 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle }: HeroSectionProps) =>
                 className="text-lg px-8 py-4 h-auto"
                 asChild
               >
-                <a href="tel:+212777722311" className="flex items-center justify-center">
+                <CallButton phone="+212777722311" className="flex items-center justify-center">
                   <Phone className="h-6 w-6 mr-3" />
                   📞 Appelez maintenant
-                </a>
+                </CallButton>
               </Button>
               
               <Button 
@@ -95,10 +96,10 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle }: HeroSectionProps) =>
                 className="text-lg px-8 py-4 h-auto"
                 asChild
               >
-                <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                <WhatsAppButton phone="+212777722311" className="flex items-center justify-center">
                   <MessageCircle className="h-6 w-6 mr-3" />
                   💬 WhatsApp direct
-                </a>
+                </WhatsAppButton>
               </Button>
               
               <Button 
@@ -135,10 +136,10 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle }: HeroSectionProps) =>
       {/* Floating Emergency Contact (Mobile) */}
       <div className="fixed bottom-4 right-4 z-50 lg:hidden">
         <Button variant="emergency" size="lg" className="rounded-full shadow-2xl" asChild>
-          <a href="tel:+212777722311" aria-label="Appel d'urgence">
+          <CallButton phone="+212777722311" className="rounded-full shadow-2xl" aria-label="Appel d'urgence">
             <Phone className="h-6 w-6" />
             <span className="sr-only">Appeler maintenant</span>
-          </a>
+          </CallButton>
         </Button>
       </div>
     </section>

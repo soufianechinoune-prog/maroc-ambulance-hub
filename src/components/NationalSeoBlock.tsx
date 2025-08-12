@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CallButton } from "@/components/ContactCTA";
 
 export default function NationalSeoBlock() {
   return (
@@ -74,7 +75,7 @@ export default function NationalSeoBlock() {
       <h3 className="mt-8">Comment demander une ambulance au Maroc ?</h3>
       <p>
         Pour une prise en charge immédiate, appelez le{" "}
-        <a className="text-primary underline" href="tel:+212777722311">+212 7777 223 11</a>,
+        <CallButton phone="+212777722311" className="text-primary underline">+212 7777 223 11</CallButton>,
         écrivez sur WhatsApp (bouton en haut de page) ou utilisez le{" "}
         <a className="text-primary underline" href="#demande-ambulance">formulaire d’intervention</a>.
         Nos équipes confirment la destination, l’état du patient et orientent vers l’<strong>ambulance au Maroc</strong>

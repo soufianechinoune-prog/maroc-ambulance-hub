@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.jpg";
 import { cities } from "@/data/cities";
-import { track } from "@/lib/track";
+import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -18,22 +18,22 @@ const Footer = () => {
               <div className="flex items-center space-x-2">
                 <Phone className="h-5 w-5" />
                 <span className="font-semibold">Urgence 24/7 :</span>
-                <a href="tel:+212777722311" className="text-lg font-bold hover:underline" onClick={() => track('click_call')}>
+                <CallButton phone="+212777722311" className="text-lg font-bold hover:underline">
                   +212 7777 223 11
-                </a>
+                </CallButton>
               </div>
               <div className="flex space-x-3">
                 <Button variant="secondary" size="sm" asChild>
-                  <a href="tel:+212777722311" onClick={() => track('click_call')}>
+                  <CallButton phone="+212777722311">
                     <Phone className="h-4 w-4 mr-2" />
                     Appeler
-                  </a>
+                  </CallButton>
                 </Button>
                 <Button variant="secondary" size="sm" asChild>
-                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" onClick={() => track('click_whatsapp')}>
+                  <WhatsAppButton phone="+212777722311">
                     <MessageCircle className="h-4 w-4 mr-2" />
                     WhatsApp
-                  </a>
+                  </WhatsAppButton>
                 </Button>
               </div>
             </div>
@@ -126,9 +126,9 @@ const Footer = () => {
                   <Phone className="h-4 w-4 mt-0.5 text-emergency flex-shrink-0" />
                   <div>
                     <p className="font-medium">Urgence 24/7</p>
-                    <a href="tel:+212777722311" className="text-background/80 hover:text-success" onClick={() => track('click_call')}>
-                      +212 7777 223 11
-                    </a>
+                      <CallButton phone="+212777722311" className="text-background/80 hover:text-success">
+                        +212 7777 223 11
+                      </CallButton>
                   </div>
                 </div>
                   <div className="flex items-start space-x-2">

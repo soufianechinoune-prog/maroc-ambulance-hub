@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import { track } from "@/lib/track";
+import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,10 +58,10 @@ const ContactForm = () => {
                   Pour toute urgence médicale, appelez immédiatement notre numéro d'urgence.
                 </p>
                 <Button variant="emergency" className="w-full" asChild>
-                  <a href="tel:+212777722311" className="flex items-center justify-center" onClick={() => track('click_call')}>
+                  <CallButton phone="+212777722311" className="flex items-center justify-center">
                     <Phone className="h-4 w-4 mr-2" />
                     +212 7777 223 11
-                  </a>
+                  </CallButton>
                 </Button>
                 <p className="text-xs text-center text-muted-foreground">
                   Disponible 24h/24 - 7j/7
@@ -80,10 +81,10 @@ const ContactForm = () => {
                   Contactez-nous via WhatsApp pour une réponse rapide.
                 </p>
                 <Button variant="success" className="w-full" asChild>
-                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center" onClick={() => track('click_whatsapp')}>
+                  <WhatsAppButton phone="+212777722311" className="flex items-center justify-center">
                     <MessageCircle className="h-4 w-4 mr-2" />
                     Ouvrir WhatsApp
-                  </a>
+                  </WhatsAppButton>
                 </Button>
               </CardContent>
             </Card>

@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { SITE_URL } from "@/lib/config";
+import { CallButton } from "@/components/ContactCTA";
 
 const ZonesSection = () => {
   const cities = [
@@ -252,10 +253,10 @@ const ZonesSection = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="default" size="lg" asChild>
-              <a href="tel:+212777722311" className="flex items-center">
+              <CallButton phone="+212777722311" className="flex items-center">
                 <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
                 +212 7777 223 11
-              </a>
+              </CallButton>
             </Button>
             <Button variant="outline" size="lg" asChild>
               <Link to="/contact">

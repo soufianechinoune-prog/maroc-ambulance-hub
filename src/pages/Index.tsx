@@ -199,58 +199,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Réassurance */}
-        <ReassuranceSection />
-
-        {/* Services */}
-        <ServicesSection />
-        {/* Témoignages */}
-        <TestimonialsSection />
-
-        {/* CTA urgence bande rouge */}
-        <section className="py-8 bg-emergency text-emergency-foreground" role="region" aria-label="Urgence médicale">
-          <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-lg font-semibold">Urgence médicale ? Appelez +212 7777 223 11 ou WhatsApp Direct</p>
-            <div className="flex gap-3">
-              <Button variant="emergency" asChild>
-                <a href="tel:+212777722311" aria-label="Appeler +212 7777 223 11">Appeler</a>
-              </Button>
-              <Button variant="success" asChild>
-                <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir WhatsApp direct">WhatsApp</a>
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Formulaire ancré */}
-        <ContactForm />
-
-        {/* Maillage interne */}
-        <section className="py-16" role="region" aria-labelledby="popular-pages-heading">
-          <div className="container mx-auto px-4">
-            <h2 id="popular-pages-heading" className="text-2xl md:text-3xl font-semibold text-foreground">Pages populaires</h2>
-            <nav className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" aria-label="Pages populaires">
-              {[
-                { name: "Casablanca", slug: "casablanca" },
-                { name: "Rabat", slug: "rabat" },
-                { name: "Marrakech", slug: "marrakech" },
-                { name: "Tanger", slug: "tanger" },
-                { name: "Fès", slug: "fes" },
-                { name: "Oujda", slug: "oujda" },
-              ].map((c) => (
-                <a 
-                  key={c.slug}
-                  href={`/ambulance-${c.slug}`}
-                  className="rounded-lg border bg-card px-4 py-3 hover:text-primary transition-colors"
-                  aria-label={`Ambulance à ${c.name}`}
-                >
-                  Ambulance {c.name}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </section>
-        {/* Bloc éditorial SEO national */}
+        {/* Bloc éditorial SEO national – déplacé ici */}
         <section
           className="py-8 md:py-12"
           role="region"
@@ -391,6 +340,58 @@ const Index = () => {
                 la plus proche, afin d’assurer un départ immédiat et un transfert sécurisé.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Réassurance */}
+        <ReassuranceSection />
+
+        {/* Services */}
+        <ServicesSection />
+        {/* Témoignages */}
+        <TestimonialsSection />
+
+        {/* CTA urgence bande rouge */}
+        <section className="py-8 bg-emergency text-emergency-foreground" role="region" aria-label="Urgence médicale">
+          <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-lg font-semibold">Urgence médicale ? Appelez +212 7777 223 11 ou WhatsApp Direct</p>
+            <div className="flex gap-3">
+              <Button variant="emergency" asChild>
+                <a href="tel:+212777722311" aria-label="Appeler +212 7777 223 11">Appeler</a>
+              </Button>
+              <Button variant="success" asChild>
+                <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir WhatsApp direct">WhatsApp</a>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Formulaire ancré */}
+        <ContactForm />
+
+        {/* Maillage interne */}
+        <section className="py-16" role="region" aria-labelledby="popular-pages-heading">
+          <div className="container mx-auto px-4">
+            <h2 id="popular-pages-heading" className="text-2xl md:text-3xl font-semibold text-foreground">Pages populaires</h2>
+            <nav className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" aria-label="Pages populaires">
+              {[
+                { name: "Casablanca", slug: "casablanca" },
+                { name: "Rabat", slug: "rabat" },
+                { name: "Marrakech", slug: "marrakech" },
+                { name: "Tanger", slug: "tanger" },
+                { name: "Fès", slug: "fes" },
+                { name: "Oujda", slug: "oujda" },
+              ].map((c) => (
+                <a 
+                  key={c.slug}
+                  href={`/ambulance-${c.slug}`}
+                  className="rounded-lg border bg-card px-4 py-3 hover:text-primary transition-colors"
+                  aria-label={`Ambulance à ${c.name}`}
+                >
+                  Ambulance {c.name}
+                </a>
+              ))}
+            </nav>
           </div>
         </section>
       </main>

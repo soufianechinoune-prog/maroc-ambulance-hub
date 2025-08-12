@@ -9,4 +9,4 @@ Disallow: /node_modules/
 Disallow: /src/
 Allow: /
 
-Sitemap: __SITE_URL__/sitemap.xml
+Sitemap: https://www.ambulance-maroc.ma/sitemap.xml

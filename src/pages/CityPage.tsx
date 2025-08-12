@@ -282,6 +282,20 @@ const CityPage = () => {
                   >
                     Oasis
                   </Link>
+                  <Link
+                    to="/ambulance-casablanca-sidi-maarouf"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
+                    aria-label="Ambulance Casablanca Sidi Maarouf"
+                  >
+                    Sidi Maarouf
+                  </Link>
+                  <Link
+                    to="/ambulance-casablanca-sidi-bernoussi"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
+                    aria-label="Ambulance Casablanca Sidi Bernoussi"
+                  >
+                    Sidi Bernoussi
+                  </Link>
 
                 </div>
               )}

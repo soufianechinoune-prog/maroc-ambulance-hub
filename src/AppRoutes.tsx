@@ -19,6 +19,8 @@ import NeighborhoodBourgogne from "./pages/NeighborhoodBourgogne";
 import NeighborhoodSidiBelyout from "./pages/NeighborhoodSidiBelyout";
 import NeighborhoodAinSebaa from "./pages/NeighborhoodAinSebaa";
 import NeighborhoodOasis from "./pages/NeighborhoodOasis";
+import NeighborhoodSidiMaarouf from "./pages/NeighborhoodSidiMaarouf";
+import NeighborhoodSidiBernoussi from "./pages/NeighborhoodSidiBernoussi";
 
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -53,6 +55,9 @@ const AppRoutes = () => (
     <Route path="/ambulance-casablanca-sidi-belyout" element={<NeighborhoodSidiBelyout />} />
     <Route path="/ambulance-casablanca-ain-sebaa" element={<NeighborhoodAinSebaa />} />
     <Route path="/ambulance-casablanca-oasis" element={<NeighborhoodOasis />} />
+    <Route path="/ambulance-casablanca-sidi-maarouf" element={<NeighborhoodSidiMaarouf />} />
+    <Route path="/ambulance-casablanca-sidi-bernoussi" element={<NeighborhoodSidiBernoussi />} />
+
 
     {/* Blog */}
     <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />

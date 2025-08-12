@@ -873,6 +873,25 @@ const CityPage = () => {
             { value: "Urgences & programmées", label: "Interventions immédiates et sur réservation" },
           ]}
         />
+      ) : city.slug === 'rabat' ? (
+        <ReassuranceSection
+          title="Pourquoi nous faire confiance à Rabat ?"
+          subtitle="Notre engagement : vous offrir un service d’ambulance rapide, fiable et professionnel dans toute la région de Rabat-Salé-Kénitra."
+          features={[
+            { icon: Clock, title: "Disponible 24/7", description: "Service d’urgence disponible jour et nuit, y compris les jours fériés, sur toute la région de Rabat.", color: "text-primary" },
+            { icon: Zap, title: "Intervention rapide", description: "Temps de réponse moyen de moins de 15 minutes dans les zones urbaines de Rabat et Salé.", color: "text-emergency" },
+            { icon: Users, title: "Personnel qualifié", description: "Équipe composée d’auxiliaires ambulanciers, infirmiers et médecins d’urgence certifiés.", color: "text-success" },
+            { icon: MapPin, title: "Couverture régionale étendue", description: "Intervention sur tous les quartiers de Rabat, Salé, Témara, Skhirat et périphérie.", color: "text-primary" },
+            { icon: Shield, title: "Normes sanitaires strictes", description: "Respect total des protocoles du Ministère de la Santé et normes internationales.", color: "text-success" },
+            { icon: Star, title: "Excellence reconnue", description: "Service recommandé par nos patients et partenaires hospitaliers de la région.", color: "text-emergency" },
+          ]}
+          stats={[
+            { value: "24/7", label: "Service continu" },
+            { value: "< 15 min", label: "Temps de réponse moyen" },
+            { value: "+5000", label: "Interventions/an" },
+            { value: "12", label: "Quartiers principaux couverts" },
+          ]}
+        />
       ) : (
         <ReassuranceSection />
       )}

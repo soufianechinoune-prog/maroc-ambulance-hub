@@ -4,6 +4,7 @@ import React from "react";
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   phone?: string;
   text?: string; // for WhatsApp preset message
+  utm?: string; // optional UTM query (e.g., "utm_source=site&utm_medium=whatsapp&utm_campaign=cta_principal")
 };
 
 export function CallButton({
@@ -34,6 +35,7 @@ export function CallButton({
 export function WhatsAppButton({
   phone = "+212777722311",
   text = "Bonjour",
+  utm,
   children,
   className,
   target,
@@ -42,7 +44,11 @@ export function WhatsAppButton({
   ...rest
 }: AnchorProps) {
   const phoneDigits = phone.replace(/\D/g, "");
-  const url = `https://wa.me/${phoneDigits}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
+  const params: string[] = [];
+  if (text) params.push(`text=${encodeURIComponent(text)}`);
+  if (utm) params.push(utm.replace(/^\?/, ""));
+  const query = params.length ? `?${params.join("&")}` : "";
+  const url = `https://wa.me/${phoneDigits}${query}`;
   const finalTarget = target ?? "_blank";
   const finalRel = rel ?? "noopener noreferrer";
 

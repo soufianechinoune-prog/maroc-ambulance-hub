@@ -14,7 +14,7 @@ import { SITE_URL } from "@/lib/config";
 import heroImage from "@/assets/ambulance-hero.jpg";
 import medicalTeam from "@/assets/medical-team.jpg";
 import NationalSeoBlock from "@/components/NationalSeoBlock";
-import { track } from "@/lib/track";
+import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 
 const Index = () => {
   // SEO
@@ -48,6 +48,45 @@ const Index = () => {
     provider: { "@type": "Organization", name: "Ambulance Maroc", url: SITE_URL },
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Comment appeler une ambulance au Maroc ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Appelez le +212 777 722 311 ou contactez-nous sur WhatsApp. Notre centre d'appel est opérationnel 24/7 pour une prise en charge immédiate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "En combien de temps arrive l’ambulance ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Selon la localisation, nous visons en moyenne moins de 15 minutes dans les grandes villes. Nos équipes sont mobilisées 24/7."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels sont les tarifs d’un transport médicalisé ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le tarif dépend de la distance, du matériel requis et du niveau d’assistance. Un devis clair et transparent est fourni avant intervention."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Peut-on réserver une ambulance privée ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oui, l'ambulance privée est disponible sur réservation pour transferts programmés, consultations spécialisées et inter-hôpitaux."
+        }
+      }
+    ]
+  };
+
   const jsonLdMultiple = [org, website, service];
 
   // Cities split
@@ -57,7 +96,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title={title} description={description} canonical={canonical} image={seoImage} jsonLdMultiple={jsonLdMultiple} />
+      <SEO
+        title="Ambulance au Maroc – Urgences 24h/24 | Ambulance privée & transport médicalisé"
+        description="Service d'ambulance au Maroc disponible 24h/24 et 7j/7. Intervention rapide, ambulance privée, urgences médicales et transport médicalisé dans toutes les grandes villes."
+        canonical="https://www.ambulance-maroc.ma/"
+        jsonLdMultiple={[...(jsonLdMultiple || []), faqJsonLd]}
+      />
       <Header />
 
       <main>
@@ -82,7 +126,7 @@ const Index = () => {
               </div>
 
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                Ambulance au Maroc — Intervention 24h/24 et 7j/7
+                Ambulance au Maroc – Urgences 24h/24, ambulance privée et transport médicalisé
               </h1>
 
               <p className="text-xl md:text-2xl text-white/90">
@@ -92,14 +136,14 @@ const Index = () => {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button variant="emergency" size="lg" className="text-lg px-8 py-4 h-auto" asChild>
-                  <a href="tel:+212777722311" aria-label="Appeler maintenant Ambulance Maroc" onClick={() => track('click_call')}>
-                    <Phone className="h-6 w-6 mr-3" /> 📞 Appelez maintenant
-                  </a>
+                    <CallButton aria-label="Appeler maintenant Ambulance Maroc" phone="+212777722311">
+                      <Phone className="h-6 w-6 mr-3" /> 📞 Appelez maintenant
+                    </CallButton>
                 </Button>
                 <Button variant="success" size="lg" className="text-lg px-8 py-4 h-auto" asChild>
-                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp direct Ambulance Maroc" onClick={() => track('click_whatsapp')}>
-                    <MessageCircle className="h-6 w-6 mr-3" /> 💬 WhatsApp direct
-                  </a>
+                    <WhatsAppButton phone="+212777722311" aria-label="WhatsApp direct Ambulance Maroc">
+                      <MessageCircle className="h-6 w-6 mr-3" /> 💬 WhatsApp direct
+                    </WhatsAppButton>
                 </Button>
                 <Button variant="cta" size="lg" className="text-lg px-8 py-4 h-auto bg-white text-primary hover:bg-white/90" asChild>
                   <a href="#demande-ambulance" aria-label="Demander une ambulance (formulaire)">🚑 Demander une ambulance</a>
@@ -119,14 +163,25 @@ const Index = () => {
           {/* Floating call button (mobile) */}
           <div className="fixed bottom-4 right-4 z-50 lg:hidden">
             <Button variant="emergency" size="lg" className="rounded-full shadow-2xl" asChild>
-              <a href="tel:+212777722311" aria-label="Appel d'urgence">
+              <CallButton aria-label="Appel d'urgence" phone="+212777722311">
                 <Phone className="h-6 w-6" />
                 <span className="sr-only">Appeler maintenant</span>
-              </a>
+              </CallButton>
             </Button>
           </div>
         </section>
 
+        <section className="max-w-4xl mx-auto px-4 py-6 space-y-4">
+          <p>
+            Notre service d’ambulance au Maroc est disponible <strong>24 heures sur 24 et 7 jours sur 7</strong> pour répondre à toutes vos urgences médicales, transferts inter-hôpitaux, et besoins en <strong>ambulance privée</strong>. Que ce soit pour une intervention urgente, un <strong>transport médicalisé</strong> longue distance ou un rapatriement sanitaire, nos équipes interviennent avec rapidité, sécurité et professionnalisme.
+          </p>
+          <p>
+            Présents dans <strong>toutes les grandes villes du Maroc</strong> – Casablanca, Rabat, Marrakech, Tanger, Fès, Agadir et plus encore – nous optimisons les délais d’intervention grâce à une flotte moderne équipée de matériel d’urgence. Chaque mission est assurée par du personnel qualifié, pour un accompagnement adapté au patient.
+          </p>
+          <p>
+            En choisissant <strong>Ambulance Maroc</strong>, vous bénéficiez d’un service fiable et transparent, orienté vers votre sécurité. Appelez-nous ou écrivez-nous sur WhatsApp pour une prise en charge immédiate.
+          </p>
+        </section>
         {/* KPI cards */}
         <section className="py-12 bg-secondary/30" role="region" aria-labelledby="kpi-heading">
           <div className="container mx-auto px-4">
@@ -180,6 +235,9 @@ const Index = () => {
               <CityGrid />
             </div>
 
+            <div className="text-center mt-4">
+              <a href="/zones-d-intervention" className="underline">Voir toutes nos zones d’intervention</a>
+            </div>
             {/* Autres villes couvertes */}
             {otherCities.length > 0 && (
               <div className="mt-10">
@@ -218,10 +276,10 @@ const Index = () => {
             <p className="text-lg font-semibold">Urgence médicale ? Appelez +212 7777 223 11 ou WhatsApp Direct</p>
             <div className="flex gap-3">
               <Button variant="emergency" asChild>
-                <a href="tel:+212777722311" aria-label="Appeler +212 7777 223 11" onClick={() => track('click_call')}>Appeler</a>
+                <CallButton aria-label="Appeler +212 7777 223 11" phone="+212777722311">Appeler</CallButton>
               </Button>
               <Button variant="success" asChild>
-                <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir WhatsApp direct" onClick={() => track('click_whatsapp')}>WhatsApp</a>
+                <WhatsAppButton phone="+212777722311" aria-label="Ouvrir WhatsApp direct">WhatsApp</WhatsAppButton>
               </Button>
             </div>
           </div>
@@ -253,6 +311,27 @@ const Index = () => {
                 </a>
               ))}
             </nav>
+          </div>
+        </section>
+        <section className="max-w-4xl mx-auto px-4 py-8">
+          <h2 className="text-2xl font-semibold mb-4">Questions fréquentes sur nos services d’ambulance au Maroc</h2>
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-xl font-medium">Comment appeler une ambulance au Maroc ?</h3>
+              <p>Contactez-nous au <strong>+212 777 722 311</strong> ou sur WhatsApp. Centre d’appel disponible 24/7.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium">En combien de temps arrive l’ambulance ?</h3>
+              <p>Nous visons en moyenne <strong>moins de 15 minutes</strong> dans les grandes villes, selon la localisation et le trafic.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium">Quels sont les tarifs d’un transport médicalisé ?</h3>
+              <p>Selon distance, équipements et assistance nécessaire. Un devis clair est fourni avant toute intervention.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium">Peut-on réserver une ambulance privée ?</h3>
+              <p>Oui, sur réservation pour transferts programmés, consultations spécialisées et inter-hôpitaux.</p>
+            </div>
           </div>
         </section>
       </main>

@@ -204,7 +204,6 @@ const Index = () => {
 
         {/* Services */}
         <ServicesSection />
-
         {/* Témoignages */}
         <TestimonialsSection />
 

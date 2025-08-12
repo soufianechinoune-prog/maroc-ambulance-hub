@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, MapPin, Clock, ShieldCheck, Users } from "lucide-react";
 import CityGrid, { mainCitySlugs } from "@/components/CityGrid";
 
@@ -173,13 +174,23 @@ const Index = () => {
 
         <section className="max-w-4xl mx-auto px-4 py-6 space-y-4">
           <p>
-            Notre service d’ambulance au Maroc est disponible <strong>24 heures sur 24 et 7 jours sur 7</strong> pour répondre à toutes vos urgences médicales, transferts inter-hôpitaux, et besoins en <strong>ambulance privée</strong>. Que ce soit pour une intervention urgente, un <strong>transport médicalisé</strong> longue distance ou un rapatriement sanitaire, nos équipes interviennent avec rapidité, sécurité et professionnalisme.
+            Besoin d’une <strong>ambulance au Maroc</strong> maintenant ? Nous intervenons
+            <strong> 24h/24 et 7j/7</strong> avec des équipes qualifiées et une flotte équipée d’urgence.
           </p>
-          <p>
-            Présents dans <strong>toutes les grandes villes du Maroc</strong> – Casablanca, Rabat, Marrakech, Tanger, Fès, Agadir et plus encore – nous optimisons les délais d’intervention grâce à une flotte moderne équipée de matériel d’urgence. Chaque mission est assurée par du personnel qualifié, pour un accompagnement adapté au patient.
+
+          <ul className="list-disc pl-6 space-y-1">
+            <li>Urgences et premiers secours</li>
+            <li>Ambulance privée sur réservation</li>
+            <li>Transport médicalisé court & longue distance</li>
+            <li>Transferts inter‑hôpitaux et rapatriement</li>
+          </ul>
+
+          <p className="text-muted-foreground">
+            Couverture nationale (Casablanca, Rabat, Marrakech, Tanger, Fès, Agadir…) et délais optimisés dans les grandes villes.
           </p>
+
           <p>
-            En choisissant <strong>Ambulance Maroc</strong>, vous bénéficiez d’un service fiable et transparent, orienté vers votre sécurité. Appelez-nous ou écrivez-nous sur WhatsApp pour une prise en charge immédiate.
+            Préférence WhatsApp ? <a href="https://wa.me/212777722311" className="underline">Écrivez‑nous immédiatement</a>.
           </p>
         </section>
         {/* KPI cards */}
@@ -315,24 +326,32 @@ const Index = () => {
         </section>
         <section className="max-w-4xl mx-auto px-4 py-8">
           <h2 className="text-2xl font-semibold mb-4">Questions fréquentes sur nos services d’ambulance au Maroc</h2>
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-xl font-medium">Comment appeler une ambulance au Maroc ?</h3>
-              <p>Contactez-nous au <strong>+212 777 722 311</strong> ou sur WhatsApp. Centre d’appel disponible 24/7.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-medium">En combien de temps arrive l’ambulance ?</h3>
-              <p>Nous visons en moyenne <strong>moins de 15 minutes</strong> dans les grandes villes, selon la localisation et le trafic.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-medium">Quels sont les tarifs d’un transport médicalisé ?</h3>
-              <p>Selon distance, équipements et assistance nécessaire. Un devis clair est fourni avant toute intervention.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-medium">Peut-on réserver une ambulance privée ?</h3>
-              <p>Oui, sur réservation pour transferts programmés, consultations spécialisées et inter-hôpitaux.</p>
-            </div>
-          </div>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Comment appeler une ambulance au Maroc ?</AccordionTrigger>
+              <AccordionContent>
+                Contactez-nous au <strong>+212 777 722 311</strong> ou sur WhatsApp. Centre d’appel disponible 24/7.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>En combien de temps arrive l’ambulance ?</AccordionTrigger>
+              <AccordionContent>
+                Nous visons en moyenne <strong>moins de 15 minutes</strong> dans les grandes villes, selon la localisation et le trafic.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>Quels sont les tarifs d’un transport médicalisé ?</AccordionTrigger>
+              <AccordionContent>
+                Selon distance, équipements et assistance nécessaire. Un devis clair est fourni avant toute intervention.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger>Peut-on réserver une ambulance privée ?</AccordionTrigger>
+              <AccordionContent>
+                Oui, sur réservation pour transferts programmés, consultations spécialisées et inter-hôpitaux.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </section>
       </main>
 

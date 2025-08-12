@@ -268,6 +268,21 @@ const CityPage = () => {
                   >
                     Sidi Belyout
                   </Link>
+                  <Link
+                    to="/ambulance-casablanca-ain-sebaa"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
+                    aria-label="Ambulance Casablanca Aïn Sebaâ"
+                  >
+                    Aïn Sebaâ
+                  </Link>
+                  <Link
+                    to="/ambulance-casablanca-oasis"
+                    className="inline-flex items-center rounded-full border px-3 py-1 text-sm hover:text-primary story-link hover-scale"
+                    aria-label="Ambulance Casablanca Oasis"
+                  >
+                    Oasis
+                  </Link>
+
                 </div>
               )}
              </div>

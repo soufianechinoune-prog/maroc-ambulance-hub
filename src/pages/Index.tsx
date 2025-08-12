@@ -14,6 +14,7 @@ import { SITE_URL } from "@/lib/config";
 import heroImage from "@/assets/ambulance-hero.jpg";
 import medicalTeam from "@/assets/medical-team.jpg";
 import NationalSeoBlock from "@/components/NationalSeoBlock";
+import { track } from "@/lib/track";
 
 const Index = () => {
   // SEO
@@ -91,12 +92,12 @@ const Index = () => {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button variant="emergency" size="lg" className="text-lg px-8 py-4 h-auto" asChild>
-                  <a href="tel:+212777722311" aria-label="Appeler maintenant Ambulance Maroc">
+                  <a href="tel:+212777722311" aria-label="Appeler maintenant Ambulance Maroc" onClick={() => track('click_call')}>
                     <Phone className="h-6 w-6 mr-3" /> 📞 Appelez maintenant
                   </a>
                 </Button>
                 <Button variant="success" size="lg" className="text-lg px-8 py-4 h-auto" asChild>
-                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp direct Ambulance Maroc">
+                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp direct Ambulance Maroc" onClick={() => track('click_whatsapp')}>
                     <MessageCircle className="h-6 w-6 mr-3" /> 💬 WhatsApp direct
                   </a>
                 </Button>
@@ -217,10 +218,10 @@ const Index = () => {
             <p className="text-lg font-semibold">Urgence médicale ? Appelez +212 7777 223 11 ou WhatsApp Direct</p>
             <div className="flex gap-3">
               <Button variant="emergency" asChild>
-                <a href="tel:+212777722311" aria-label="Appeler +212 7777 223 11">Appeler</a>
+                <a href="tel:+212777722311" aria-label="Appeler +212 7777 223 11" onClick={() => track('click_call')}>Appeler</a>
               </Button>
               <Button variant="success" asChild>
-                <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir WhatsApp direct">WhatsApp</a>
+                <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir WhatsApp direct" onClick={() => track('click_whatsapp')}>WhatsApp</a>
               </Button>
             </div>
           </div>

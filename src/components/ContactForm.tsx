@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
+import { track } from "@/lib/track";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -15,6 +16,7 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    track('lead_form_submit');
     
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -55,7 +57,7 @@ const ContactForm = () => {
                   Pour toute urgence médicale, appelez immédiatement notre numéro d'urgence.
                 </p>
                 <Button variant="emergency" className="w-full" asChild>
-                  <a href="tel:+212777722311" className="flex items-center justify-center">
+                  <a href="tel:+212777722311" className="flex items-center justify-center" onClick={() => track('click_call')}>
                     <Phone className="h-4 w-4 mr-2" />
                     +212 7777 223 11
                   </a>
@@ -78,7 +80,7 @@ const ContactForm = () => {
                   Contactez-nous via WhatsApp pour une réponse rapide.
                 </p>
                 <Button variant="success" className="w-full" asChild>
-                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                  <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center" onClick={() => track('click_whatsapp')}>
                     <MessageCircle className="h-4 w-4 mr-2" />
                     Ouvrir WhatsApp
                   </a>

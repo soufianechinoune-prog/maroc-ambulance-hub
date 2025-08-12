@@ -1,7 +1,7 @@
 import { Phone, MessageCircle, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,12 +20,24 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const isHomepage = location.pathname === '/';
+  const navigate = useNavigate();
   const path = location.pathname;
-  const matchCityPage = path.match(/^\/ambulance-([a-z-]+)$/);
-  const currentCitySlug = matchCityPage?.[1] && cities.some(c => c.slug === matchCityPage[1]) ? matchCityPage[1] : null;
+  let currentCitySlug: string | null = null;
+  if (path.startsWith('/ambulance-')) {
+    const rest = path.replace('/ambulance-', '');
+    const cityCandidate = rest.split('-')[0];
+    if (cities.some((c) => c.slug === cityCandidate)) {
+      currentCitySlug = cityCandidate;
+    }
+  }
   const isCityPage = !!currentCitySlug;
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const handleNavigate = (href: string) => (e: any) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    navigate(href);
+  };
 
   return (
     <header className="bg-card shadow-sm sticky top-0 z-50 border-b">
@@ -88,14 +100,31 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
   <div className="container mx-auto px-4 py-2">
     {isCityPage && neighborhoodsByCity[currentCitySlug as keyof typeof neighborhoodsByCity]?.length ? (
       <div className="overflow-x-auto">
-        <ul className="flex gap-4 text-sm text-foreground/80 justify-start whitespace-nowrap">
-          {neighborhoodsByCity[currentCitySlug as keyof typeof neighborhoodsByCity].map((n) => (
-            <li key={n.slug}>
-              <Link to={`/ambulance-${currentCitySlug}-${n.slug}`} className="hover:text-primary transition-colors">
-                {n.label}
-              </Link>
-            </li>
-          ))}
+        <ul className="flex gap-4 text-sm text-foreground/80 justify-start whitespace-nowrap items-center">
+          <li>
+            <a
+              href="/zones-d-intervention"
+              className="hover:text-primary transition-colors"
+              onClick={handleNavigate('/zones-d-intervention')}
+            >
+              ← Retour aux villes
+            </a>
+          </li>
+          {neighborhoodsByCity[currentCitySlug as keyof typeof neighborhoodsByCity].map((n) => {
+            const href = `/ambulance-${currentCitySlug}-${n.slug}`;
+            return (
+              <li key={n.slug}>
+                <a
+                  href={href}
+                  className="hover:text-primary transition-colors"
+                  aria-label={`Ambulance ${currentCitySlug} ${n.label}`}
+                  onClick={handleNavigate(href)}
+                >
+                  {n.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     ) : (

@@ -19,6 +19,7 @@ export type ServicesSectionProps = {
   services?: ServiceOverride[]; // order must match the 4 base services
   urgentPhone?: string;
   ctaLabel?: string; // default: "Demander un devis"
+  seoNote?: ReactNode;
 };
 
 const ServicesSection: React.FC<ServicesSectionProps> = ({
@@ -27,6 +28,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
   services: servicesOverride,
   urgentPhone = "+212777722311",
   ctaLabel = "Demander un devis",
+  seoNote,
 }) => {
   // Base services (icons, pricing, urgent flag stay as-is to preserve layout)
   const baseServices = [
@@ -201,6 +203,14 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
             );
           })}
         </div>
+
+        {seoNote && (
+          <div className="mt-8 text-center animate-fade-in">
+            <p className="mx-auto max-w-3xl md:max-w-4xl text-sm sm:text-base text-muted-foreground italic">
+              {seoNote}
+            </p>
+          </div>
+        )}
 
         {/* Bottom CTA */}
         <div className="mt-12 text-center bg-accent/50 rounded-2xl p-8">

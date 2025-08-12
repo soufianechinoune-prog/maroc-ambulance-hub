@@ -47,10 +47,10 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
           <Link to="/" className="flex items-center space-x-3">
             <img src={logo} alt="Ambulance Maroc – Accueil" className="h-10 w-10 rounded-lg" loading="lazy" />
             {isHomepage ? (
-              <h1 className="flex flex-col">
+              <div className="flex flex-col" aria-label="Ambulance Maroc – Accueil">
                 <span className="text-lg font-bold text-foreground">Ambulance Maroc</span>
                 <span className="text-xs text-muted-foreground">Service 24/7</span>
-              </h1>
+              </div>
             ) : (
               <div>
                 <div className="text-lg font-bold text-foreground">Ambulance Maroc</div>
@@ -103,10 +103,10 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
         <ul className="flex gap-4 text-sm text-foreground/80 justify-start whitespace-nowrap items-center">
           <li>
             <a
-              href="/zones-d-intervention"
+              href="/"
               className="hover:text-primary transition-colors"
-              onClick={handleNavigate('/zones-d-intervention')}
-            >
+              onClick={handleNavigate('/')}>
+
               ← Retour aux villes
             </a>
           </li>

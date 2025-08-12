@@ -2,75 +2,56 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { Phone, MessageCircle } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Clock, ShieldCheck, Users } from "lucide-react";
+import CityGrid, { mainCitySlugs } from "@/components/CityGrid";
+
+import ReassuranceSection from "@/components/ReassuranceSection";
+import ServicesSection from "@/components/ServicesSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import ContactForm from "@/components/ContactForm";
 import { cities } from "@/data/cities";
 import { SITE_URL } from "@/lib/config";
+import heroImage from "@/assets/ambulance-hero.jpg";
+import medicalTeam from "@/assets/medical-team.jpg";
 
 const Index = () => {
-  const title = "Ambulance au Maroc — Intervention 24/7, Transport médicalisé | Ambulance Maroc";
-  const description = "Besoin d’une ambulance au Maroc ? Intervention 24h/24 et 7j/7, transport médicalisé, coordination avec hôpitaux et cliniques. Délais rapides. Appelez +212 7777 223 11.";
-  const canonical = `/`;
+  // SEO
+  const title = "Ambulance au Maroc — Intervention 24h/24 & 7j/7 | Ambulance Maroc";
+  const description = "Besoin d’une ambulance en urgence ou d’un transport médicalisé au Maroc ? Intervention 24h/24 et 7j/7, prise en charge rapide, coordination hôpitaux et cliniques. Appelez +212 7777 223 11.";
+  const canonical = "/";
   const seoImage = "/default-seo-image.jpg";
 
-  const jsonLdOrganization = {
+  // JSON-LD
+  const org = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Ambulance Maroc",
     url: SITE_URL,
     logo: `${SITE_URL}/favicon.ico`,
+    sameAs: [SITE_URL, "https://wa.me/212777722311", "tel:+212777722311"],
   };
 
-  const jsonLdFaq = {
+  const website = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "En combien de temps l’ambulance arrive‑t‑elle ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "En moyenne 8 à 15 minutes en zone urbaine (selon trafic et distance). En périphérie, un délai estimatif est annoncé à l’appel.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Avez‑vous des ambulances médicalisées ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Oui. Selon la situation, le transport peut être simple, assisté ou médicalisé (infirmier·e ou médecin à bord, matériel de réanimation).",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Pouvez‑vous m’emmener dans la clinique de mon choix ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Oui, sauf contre‑indication médicale. En cas d’urgence vitale, la priorité est l’établissement le plus adapté.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Intervenez‑vous la nuit et les jours fériés ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Oui. Service 24h/24 et 7j/7 sur tout le territoire couvert.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Quel est le coût d’un transport ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Il dépend de la distance, du niveau d’équipement et du personnel requis. Le tarif est annoncé dès la prise de contact.",
-        },
-      },
-    ],
+    "@type": "WebSite",
+    name: "Ambulance Maroc",
+    url: SITE_URL,
   };
 
-  const jsonLdMultiple = [jsonLdOrganization, jsonLdFaq];
+  const service = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Ambulance & Transport Sanitaire",
+    areaServed: { "@type": "Country", name: "MA" },
+    provider: { "@type": "Organization", name: "Ambulance Maroc", url: SITE_URL },
+  };
 
-  const mainCities = cities.filter((c) => c.isMain);
-  const otherCities = cities.filter((c) => !c.isMain);
+  const jsonLdMultiple = [org, website, service];
+
+  // Cities split
+  const orderSet = new Set(mainCitySlugs);
+  const mainCities = cities.filter(c => orderSet.has(c.slug));
+  const otherCities = cities.filter(c => !orderSet.has(c.slug));
 
   return (
     <div className="min-h-screen bg-background">
@@ -79,237 +60,195 @@ const Index = () => {
 
       <main>
         {/* Hero */}
-        <section className="border-b">
-          <div className="container mx-auto px-4 py-16 md:py-24 grid gap-6 md:grid-cols-2 items-center">
-            <div>
-              <p className="inline-flex items-center text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded-md">
+        <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden" aria-label="Présentation – Ambulance Maroc">
+          {/* Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${heroImage})` }}
+            role="img"
+            aria-label="Ambulance au Maroc – intervention d'urgence"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent"></div>
+          </div>
+          <img src={heroImage} alt="Ambulance en intervention au Maroc, de nuit" className="sr-only" loading="lazy" />
+
+          <div className="relative container mx-auto px-4 py-20">
+            <div className="max-w-4xl space-y-6">
+              <div className="inline-flex items-center bg-card/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium">
+                <MapPin className="h-4 w-4 mr-2 text-primary" />
                 Service disponible partout au Maroc — 24/7
-              </p>
-              <h1 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+              </div>
+
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
                 Ambulance au Maroc — Intervention 24h/24 et 7j/7
               </h1>
-              <p className="mt-4 text-muted-foreground max-w-prose">
-                Besoin d’une ambulance en urgence ou d’un transport médicalisé ? Nos équipes partenaires interviennent partout au Maroc, 24h/24 et 7j/7 : prise en charge rapide, coordination avec les hôpitaux et cliniques, transport sécurisé et accompagnement humain.
+
+              <p className="text-xl md:text-2xl text-white/90">
+                Temps de réponse moyen : 8–15 min • Couverture nationale • Personnel qualifié
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Button variant="emergency" size="lg" asChild>
-                  <a href="tel:+212777722311" aria-label="Appeler Ambulance Maroc">
-                    <Phone className="h-5 w-5 mr-2" /> Appeler
+
+              {/* CTA */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button variant="emergency" size="lg" className="text-lg px-8 py-4 h-auto" asChild>
+                  <a href="tel:+212777722311" aria-label="Appeler maintenant Ambulance Maroc">
+                    <Phone className="h-6 w-6 mr-3" /> 📞 Appelez maintenant
                   </a>
                 </Button>
-                <Button variant="success" size="lg" asChild>
+                <Button variant="success" size="lg" className="text-lg px-8 py-4 h-auto" asChild>
                   <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp direct Ambulance Maroc">
-                    <MessageCircle className="h-5 w-5 mr-2" /> WhatsApp direct
+                    <MessageCircle className="h-6 w-6 mr-3" /> 💬 WhatsApp direct
                   </a>
                 </Button>
+                <Button variant="cta" size="lg" className="text-lg px-8 py-4 h-auto bg-white text-primary hover:bg-white/90" asChild>
+                  <a href="#demande-ambulance" aria-label="Demander une ambulance (formulaire)">🚑 Demander une ambulance</a>
+                </Button>
+              </div>
+
+              {/* Trust mini row */}
+              <div className="pt-6 flex flex-wrap gap-6 text-white/80 text-sm">
+                <div className="flex items-center"><div className="h-2 w-2 bg-success rounded-full mr-2"></div>Agréé</div>
+                <div className="flex items-center"><div className="h-2 w-2 bg-success rounded-full mr-2"></div>Qualité protocolaire</div>
+                <div className="flex items-center"><div className="h-2 w-2 bg-success rounded-full mr-2"></div>Intervention rapide</div>
+                <div className="flex items-center"><div className="h-2 w-2 bg-success rounded-full mr-2"></div>Couverture nationale</div>
               </div>
             </div>
-            <div className="rounded-xl border bg-card p-6 text-muted-foreground">
-              <p className="font-medium text-foreground">Bloc visuel placeholder</p>
-              <p className="mt-2">Espace réservé (image/illustration à intégrer plus tard).</p>
-            </div>
+          </div>
+
+          {/* Floating call button (mobile) */}
+          <div className="fixed bottom-4 right-4 z-50 lg:hidden">
+            <Button variant="emergency" size="lg" className="rounded-full shadow-2xl" asChild>
+              <a href="tel:+212777722311" aria-label="Appel d'urgence">
+                <Phone className="h-6 w-6" />
+                <span className="sr-only">Appeler maintenant</span>
+              </a>
+            </Button>
           </div>
         </section>
 
-        {/* Présentation SEO */}
-        <section className="container mx-auto px-4 py-12 md:py-16">
-          <article className="prose prose-neutral dark:prose-invert max-w-none">
-            <h2>Ambulance au Maroc — Intervention 24/7</h2>
-            <p>
-              Nos équipes partenaires interviennent partout au Maroc, 24h/24 et 7j/7 : prise en charge rapide, coordination avec les hôpitaux et cliniques, transport sécurisé et accompagnement humain.
-            </p>
-            <ul>
-              <li>⏱️ Temps de réponse moyen : 8–15 min en zone urbaine</li>
-              <li>🏥 Couverture nationale : grandes villes et périphéries</li>
-              <li>👩‍⚕️ Personnel qualifié : auxiliaires, infirmiers, médecin selon le besoin</li>
-              <li>🚑 Véhicules équipés : brancard, oxygène, monitorage, défibrillateur</li>
-              <li>☎️ Centrale d’appel : +212 7777 223 11 (24/7) ou WhatsApp direct</li>
-            </ul>
-
-            <hr />
-
-            <h2>Nos services d’ambulance</h2>
-            <h3>Ambulance d’urgence (24/7)</h3>
-            <p>
-              Intervention immédiate à domicile, sur la voie publique, en entreprise ou dans un hôtel. Stabilisation, premiers soins, transfert vers l’établissement adapté.
-            </p>
-            <h3>Transport inter‑hôpitaux</h3>
-            <p>
-              Transferts planifiés ou urgents entre cliniques et hôpitaux, avec coordination médicale et dossier de transmission.
-            </p>
-            <h3>Transport médicalisé / surveillance</h3>
-            <p>
-              Ambulance avec personnel dédié (infirmier·e / médecin si nécessaire), matériel de réanimation et monitoring.
-            </p>
-            <h3>Longue distance & rapatriement privé</h3>
-            <p>
-              Transport inter‑villes sécurisé au Maroc, préparation logistique et accompagnement administratif si besoin.
-            </p>
-            <h3>Événements & dispositifs préventifs</h3>
-            <p>
-              Poste de secours mobile, équipe dédiée, coordination avec les organisateurs (sport, culture, entreprises).
-            </p>
-            <p>
-              Appeler maintenant : <a href="tel:+212777722311">+212 7777 223 11</a> · WhatsApp : <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer">wa.me/212777722311</a>
-            </p>
-
-            <hr />
-
-            <h2>Où intervenons‑nous ?</h2>
-            <p>
-              Nous couvrons l’ensemble du territoire avec des équipes locales dans les grandes agglomérations et leurs périphéries.
-            </p>
-            <p>
-              Villes principales : Casablanca, Rabat, Marrakech, Tanger, Fès, Agadir, Meknès, Oujda, Tétouan, Kénitra, Mohammedia…<br />
-              Périphéries : zones industrielles, communes limitrophes, axes autoroutiers.
-            </p>
-            <p>
-              Sélectionnez votre ville depuis le bandeau en haut de page pour voir le détail local (quartiers, délais moyens, infos pratiques).
-            </p>
-          </article>
-        </section>
-
-        {/* Villes principales */}
-        <section className="bg-muted/30 border-y">
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">Villes principales</h2>
-            <nav className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" aria-label="Villes principales">
-              {mainCities.map((c) => (
-                <a
-                  key={c.slug}
-                  href={`/ambulance-${c.slug}`}
-                  className="rounded-lg border bg-card px-4 py-3 hover:text-primary transition-colors"
-                  aria-label={`Ambulance ${c.name}`}
-                >
-                  Ambulance {c.name}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </section>
-
-        {/* Autres villes couvertes */}
-        <section>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">Autres villes couvertes</h2>
-            <nav className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" aria-label="Autres villes couvertes">
-              {otherCities.map((c) => (
-                <a
-                  key={c.slug}
-                  href={`/ambulance-${c.slug}`}
-                  className="rounded-lg border bg-card px-4 py-3 hover:text-primary transition-colors"
-                  aria-label={`Ambulance ${c.name}`}
-                >
-                  Ambulance {c.name}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </section>
-
-        {/* Arguments & preuves sociales */}
-        <section className="bg-muted/30 border-t">
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">Pourquoi nous faire confiance ?</h2>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="rounded-lg border bg-card p-4">
-                <p className="text-sm text-muted-foreground">Disponibilité</p>
-                <p className="text-xl font-bold text-foreground">Service 24/7</p>
-              </div>
-              <div className="rounded-lg border bg-card p-4">
+        {/* KPI cards */}
+        <section className="py-12 bg-secondary/30" role="region" aria-labelledby="kpi-heading">
+          <div className="container mx-auto px-4">
+            <h2 id="kpi-heading" className="sr-only">Indicateurs clés</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="rounded-xl border bg-card p-6 text-center">
                 <p className="text-sm text-muted-foreground">Temps de réponse</p>
-                <p className="text-xl font-bold text-foreground">&lt; 15 minutes</p>
+                <p className="text-2xl md:text-3xl font-bold text-foreground">8–15 min</p>
               </div>
-              <div className="rounded-lg border bg-card p-4">
-                <p className="text-sm text-muted-foreground">Interventions/an</p>
-                <p className="text-xl font-bold text-foreground">5 000+</p>
+              <div className="rounded-xl border bg-card p-6 text-center">
+                <p className="text-sm text-muted-foreground">Couverture</p>
+                <p className="text-2xl md:text-3xl font-bold text-foreground">100% grandes villes</p>
               </div>
-              <div className="rounded-lg border bg-card p-4">
-                <p className="text-sm text-muted-foreground">Satisfaction</p>
-                <p className="text-xl font-bold text-foreground">98 %</p>
+              <div className="rounded-xl border bg-card p-6 text-center">
+                <p className="text-sm text-muted-foreground">Villes couvertes</p>
+                <p className="text-2xl md:text-3xl font-bold text-foreground">{cities.length}</p>
               </div>
-            </div>
-
-            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-              <article>
-                <h3 className="text-xl font-semibold text-foreground">Qualité de soins</h3>
-                <p className="text-muted-foreground">Protocoles d’urgence, hygiène contrôlée, matériel adapté.</p>
-              </article>
-              <article>
-                <h3 className="text-xl font-semibold text-foreground">Parcours coordonné</h3>
-                <p className="text-muted-foreground">Choix de la structure adaptée et transmission au service receveur.</p>
-              </article>
-              <article>
-                <h3 className="text-xl font-semibold text-foreground">Réseau national</h3>
-                <p className="text-muted-foreground">Équipes proches, délais maîtrisés, couverture urbaine et périurbaine.</p>
-              </article>
-              <article>
-                <h3 className="text-xl font-semibold text-foreground">Accompagnement humain</h3>
-                <p className="text-muted-foreground">Information des proches et gestion du stress.</p>
-              </article>
+              <div className="rounded-xl border bg-card p-6 text-center">
+                <p className="text-sm text-muted-foreground">Disponibilité</p>
+                <p className="text-2xl md:text-3xl font-bold text-foreground">24/7</p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">Comment ça marche ?</h2>
-            <ol className="mt-6 list-decimal pl-5 space-y-2 text-muted-foreground">
-              <li>Contact 24/7 — Appelez +212 7777 223 11 ou WhatsApp.</li>
-              <li>Évaluation — Quelques questions pour qualifier l’urgence et la localisation.</li>
-              <li>Déclenchement — Ambulance envoyée, consignes de sécurité transmises.</li>
-              <li>Prise en charge — Équipe qualifiée, matériel adapté, dossier de transmission.</li>
-              <li>Transfert — Vers la clinique/hôpital le plus pertinent ou selon votre choix.</li>
-            </ol>
-          </div>
-        </section>
-
-        <section className="bg-muted/30 border-y">
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">Infos pratiques</h2>
-            <ul className="mt-6 list-disc pl-5 space-y-2 text-muted-foreground">
-              <li>Documents utiles (si possible) : pièce d’identité, carte de mutuelle, ordonnances.</li>
-              <li>Accès : précisez l’adresse exacte, code d’immeuble, point de repère.</li>
-              <li>Paiement : espèces, virement, ou prise en charge selon contrat (si applicable).</li>
-            </ul>
-          </div>
-        </section>
-
-        <section>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">Qui sommes‑nous ?</h2>
-            <p className="mt-4 text-muted-foreground max-w-prose">
-              Ambulance Maroc est une plateforme de mise en relation entre utilisateurs et services d’ambulance privés partenaires. Nous ne sommes pas une société d’ambulance : notre rôle est d’orienter, coordonner et vous connecter à l’équipe la plus proche et la plus adaptée, en assurant un standard de qualité uniforme (délais, équipement, protocole).
-            </p>
-            <p className="mt-4 text-muted-foreground">Pour toute demande : <a href="tel:+212777722311">+212 7777 223 11</a> — 24h/24</p>
-          </div>
-        </section>
-
-        <section className="bg-muted/30 border-t">
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground">Questions fréquentes (FAQ)</h2>
-            <div className="mt-6 space-y-4">
-              <details className="rounded-lg border bg-card p-4">
-                <summary className="font-medium cursor-pointer">En combien de temps l’ambulance arrive‑t‑elle ?</summary>
-                <p className="mt-2 text-muted-foreground">En moyenne 8 à 15 minutes en zone urbaine (selon trafic et distance). En périphérie, nous annonçons un délai estimatif à l’appel.</p>
-              </details>
-              <details className="rounded-lg border bg-card p-4">
-                <summary className="font-medium cursor-pointer">Avez‑vous des ambulances médicalisées ?</summary>
-                <p className="mt-2 text-muted-foreground">Oui. Selon la situation, le transport peut être simple, assisté ou médicalisé (infirmier·e ou médecin à bord, matériel de réanimation).</p>
-              </details>
-              <details className="rounded-lg border bg-card p-4">
-                <summary className="font-medium cursor-pointer">Pouvez‑vous m’emmener dans la clinique de mon choix ?</summary>
-                <p className="mt-2 text-muted-foreground">Oui, sauf contre‑indication médicale. En cas d’urgence vitale, la priorité est l’établissement le plus adapté.</p>
-              </details>
-              <details className="rounded-lg border bg-card p-4">
-                <summary className="font-medium cursor-pointer">Intervenez‑vous la nuit et les jours fériés ?</summary>
-                <p className="mt-2 text-muted-foreground">Oui. Service 24h/24 et 7j/7 sur tout le territoire couvert.</p>
-              </details>
-              <details className="rounded-lg border bg-card p-4">
-                <summary className="font-medium cursor-pointer">Quel est le coût d’un transport ?</summary>
-                <p className="mt-2 text-muted-foreground">Il dépend de la distance, du niveau d’équipement et du personnel requis. Nous annonçons le tarif dès la prise de contact.</p>
-              </details>
+        {/* Intro two-columns */}
+        <section className="py-16" role="region" aria-labelledby="intro-heading">
+          <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <h2 id="intro-heading" className="text-2xl md:text-3xl font-semibold text-foreground">Service d’ambulance national</h2>
+              <ul className="mt-6 space-y-3 text-muted-foreground">
+                <li className="flex items-start"><Clock className="h-5 w-5 text-success mt-0.5 mr-3" />Réponse en 8–15 min en zone urbaine</li>
+                <li className="flex items-start"><ShieldCheck className="h-5 w-5 text-primary mt-0.5 mr-3" />Coordination cliniques & hôpitaux</li>
+                <li className="flex items-start"><ShieldCheck className="h-5 w-5 text-primary mt-0.5 mr-3" />Ambulances équipées (oxygène, monitoring, défibrillateur)</li>
+                <li className="flex items-start"><Users className="h-5 w-5 text-primary mt-0.5 mr-3" />Personnel certifié (auxiliaires, infirmiers, médecin si besoin)</li>
+                <li className="flex items-start"><MapPin className="h-5 w-5 text-primary mt-0.5 mr-3" />Couverture grandes villes & périphéries</li>
+              </ul>
             </div>
+            <div className="relative">
+              <img src={medicalTeam} alt="Équipe médicale au Maroc" className="rounded-2xl shadow-xl w-full h-80 object-cover" loading="lazy" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/20 to-transparent"></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Grille des villes */}
+        <section className="py-16 bg-muted/30 border-y" role="region" aria-labelledby="cities-heading">
+          <div className="container mx-auto px-4">
+            <h2 id="cities-heading" className="text-2xl md:text-3xl font-semibold text-foreground">Villes principales</h2>
+            <div className="mt-6">
+              <CityGrid />
+            </div>
+
+            {/* Autres villes couvertes */}
+            {otherCities.length > 0 && (
+              <div className="mt-10">
+                <h3 className="text-lg font-semibold text-foreground">Autres villes couvertes</h3>
+                <nav className="mt-4 flex flex-wrap gap-2" aria-label="Autres villes couvertes">
+                  {otherCities.map((c) => (
+                    <a
+                      key={c.slug}
+                      href={`/ambulance-${c.slug}`}
+                      className="rounded-full border bg-card px-3 py-1 text-sm hover:text-primary transition-colors"
+                      aria-label={`Ambulance à ${c.name}`}
+                    >
+                      {c.name}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Réassurance */}
+        <ReassuranceSection />
+
+        {/* Services */}
+        <ServicesSection />
+
+        {/* Témoignages */}
+        <TestimonialsSection />
+
+        {/* CTA urgence bande rouge */}
+        <section className="py-8 bg-emergency text-emergency-foreground" role="region" aria-label="Urgence médicale">
+          <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-lg font-semibold">Urgence médicale ? Appelez +212 7777 223 11 ou WhatsApp Direct</p>
+            <div className="flex gap-3">
+              <Button variant="emergency" asChild>
+                <a href="tel:+212777722311" aria-label="Appeler +212 7777 223 11">Appeler</a>
+              </Button>
+              <Button variant="success" asChild>
+                <a href="https://wa.me/212777722311" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir WhatsApp direct">WhatsApp</a>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Formulaire ancré */}
+        <ContactForm />
+
+        {/* Maillage interne */}
+        <section className="py-16" role="region" aria-labelledby="popular-pages-heading">
+          <div className="container mx-auto px-4">
+            <h2 id="popular-pages-heading" className="text-2xl md:text-3xl font-semibold text-foreground">Pages populaires</h2>
+            <nav className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" aria-label="Pages populaires">
+              {[
+                { name: "Casablanca", slug: "casablanca" },
+                { name: "Rabat", slug: "rabat" },
+                { name: "Marrakech", slug: "marrakech" },
+                { name: "Tanger", slug: "tanger" },
+                { name: "Fès", slug: "fes" },
+                { name: "Oujda", slug: "oujda" },
+              ].map((c) => (
+                <a 
+                  key={c.slug}
+                  href={`/ambulance-${c.slug}`}
+                  className="rounded-lg border bg-card px-4 py-3 hover:text-primary transition-colors"
+                  aria-label={`Ambulance à ${c.name}`}
+                >
+                  Ambulance {c.name}
+                </a>
+              ))}
+            </nav>
           </div>
         </section>
       </main>

@@ -275,7 +275,7 @@ const Index = () => {
                 avec une disponibilité continue, y compris la nuit, les week‑ends et jours fériés.
               </p>
               <p className="text-muted-foreground mb-6">
-                Grâce à une organisation rigoureuse et à des partenaires locaux qualifiés, <strong>l’ambulance au Maroc</strong>
+                Grâce à une organisation rigoureuse et à des partenaires locaux qualifiés, <strong>l’ambulance au Maroc</strong>{" "}
                 conjugue proximité, réactivité et conformité aux protocoles. Que vous soyez en centre‑ville ou dans une
                 zone plus isolée, la centrale identifie l’équipe la plus proche et la mieux adaptée à la situation.
               </p>

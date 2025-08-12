@@ -1010,7 +1010,89 @@ const CityPage = () => {
         <ReassuranceSection />
       )}
       {/* Services Section */}
-      <ServicesSection />
+      {city.slug === 'casablanca' ? (
+        <ServicesSection
+          title="🚑 Nos Services d’Ambulance à Casablanca – Urgence 24/7 et Transport Médicalisé"
+          description={
+            <>
+              Notre <strong>service d’ambulance à Casablanca</strong> est disponible 24h/24 et 7j/7 pour toutes urgences médicales,
+              transferts hospitaliers et besoins de <strong>transport médicalisé privé</strong>. Avec un temps de réponse moyen de
+              <strong> moins de 15 minutes</strong> en zone urbaine, nous assurons une intervention rapide, sécurisée et conforme
+              aux normes sanitaires. Que vous cherchiez une <strong>ambulance privée à Casablanca</strong>, un transport longue distance
+              ou un transfert inter-hôpitaux, notre équipe qualifiée est prête à intervenir immédiatement.
+            </>
+          }
+          services={[
+            {
+              title: "🚨 Ambulance Médicale d’Urgence à Casablanca",
+              description: (
+                <>
+                  Intervention immédiate pour toute urgence médicale dans la ville de Casablanca et sa périphérie.
+                  Équipe de secours qualifiée, disponible 24h/24, équipée pour la réanimation cardio-pulmonaire,
+                  les soins pré-hospitaliers et le transport vers l’hôpital le plus proche.
+                </>
+              ),
+              features: [
+                "Réanimation cardio-pulmonaire",
+                "Soins d’urgence pré-hospitaliers",
+                "Transport rapide vers hôpital",
+                "Équipement médical de pointe",
+              ],
+            },
+            {
+              title: "🏥 Transport Inter-hôpitaux à Casablanca",
+              description: (
+                <>
+                  Service sécurisé de <strong>transport médicalisé à Casablanca</strong> pour le transfert de patients entre établissements de santé.
+                  Coordination complète avec les hôpitaux, suivi médical spécialisé et respect strict des normes sanitaires.
+                </>
+              ),
+              features: [
+                "Transport médicalisé",
+                "Accompagnement médical spécialisé",
+                "Coordination avec hôpitaux",
+                "Suivi médical pendant transport",
+              ],
+              ctaHref: "/devis?ville=casablanca",
+            },
+            {
+              title: "🚌 Transport Médical Longue Distance depuis Casablanca",
+              description: (
+                <>
+                  Déplacements inter-villes avec <strong>ambulance équipée</strong> et personnel médical qualifié.
+                  Confort optimal du patient, assistance continue et coordination logistique complète pour trajets longs.
+                </>
+              ),
+              features: [
+                "Ambulances adaptées aux longs trajets",
+                "Personnel médical qualifié",
+                "Confort et sécurité du patient",
+                "Coordination logistique",
+              ],
+              ctaHref: "/devis?ville=casablanca&type=longue-distance",
+            },
+            {
+              title: "🎯 Couverture Médicale pour Événements à Casablanca",
+              description: (
+                <>
+                  Assistance médicale pour événements sportifs, concerts, rassemblements et manifestations publiques à Casablanca.
+                  Mise en place de postes de secours, équipe médicale dédiée et intervention rapide en cas d’urgence.
+                </>
+              ),
+              features: [
+                "Poste de secours mobile",
+                "Équipe médicale dédiée",
+                "Intervention préventive",
+                "Coordination avec organisateurs",
+              ],
+              ctaHref: "/devis?ville=casablanca&type=evenements",
+            },
+          ]}
+        />
+      ) : (
+        <ServicesSection />
+      )}
+
 
       {/* Emergency CTA */}
       <section className="bg-emergency text-white py-16">

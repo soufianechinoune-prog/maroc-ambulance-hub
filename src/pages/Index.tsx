@@ -172,10 +172,15 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="max-w-4xl mx-auto px-4 py-6 space-y-4">
+        <section className="max-w-[800px] mx-auto px-4 py-10 space-y-4">
+          <div className="inline-flex items-center gap-2 text-muted-foreground">
+            <ShieldCheck className="h-4 w-4 text-primary" />
+            <span>Service certifié • Assistance 24/7</span>
+          </div>
+          <h2 className="text-2xl font-semibold">Service d’ambulance au Maroc – Rapidité et professionnalisme</h2>
           <p>
-            Besoin d’une <strong>ambulance au Maroc</strong> maintenant ? Nous intervenons
-            <strong> 24h/24 et 7j/7</strong> avec des équipes qualifiées et une flotte équipée d’urgence.
+            Besoin d’une <strong>ambulance</strong> au <strong>Maroc</strong> maintenant ? Nous intervenons
+            <strong> 24h/24 et 7j/7</strong> avec des équipes qualifiées et une flotte équipée pour toute <strong>urgence médicale</strong>.
           </p>
 
           <ul className="list-disc pl-6 space-y-1">
@@ -190,7 +195,7 @@ const Index = () => {
           </p>
 
           <p>
-            Préférence WhatsApp ? <a href="https://wa.me/212777722311" className="underline">Écrivez‑nous immédiatement</a>.
+            Préférence WhatsApp ? <WhatsAppButton phone="+212777722311" className="underline">Écrivez‑nous immédiatement</WhatsAppButton>.
           </p>
         </section>
         {/* KPI cards */}
@@ -324,29 +329,29 @@ const Index = () => {
             </nav>
           </div>
         </section>
-        <section className="max-w-4xl mx-auto px-4 py-8">
+        <section className="max-w-[800px] mx-auto px-4 py-10">
           <h2 className="text-2xl font-semibold mb-4">Questions fréquentes sur nos services d’ambulance au Maroc</h2>
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full space-y-2 mt-4">
             <AccordionItem value="item-1">
-              <AccordionTrigger>Comment appeler une ambulance au Maroc ?</AccordionTrigger>
+              <AccordionTrigger><h3 className="text-left text-base md:text-lg font-medium">Comment appeler une ambulance au Maroc ?</h3></AccordionTrigger>
               <AccordionContent>
                 Contactez-nous au <strong>+212 777 722 311</strong> ou sur WhatsApp. Centre d’appel disponible 24/7.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
-              <AccordionTrigger>En combien de temps arrive l’ambulance ?</AccordionTrigger>
+              <AccordionTrigger><h3 className="text-left text-base md:text-lg font-medium">En combien de temps arrive l’ambulance ?</h3></AccordionTrigger>
               <AccordionContent>
                 Nous visons en moyenne <strong>moins de 15 minutes</strong> dans les grandes villes, selon la localisation et le trafic.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-              <AccordionTrigger>Quels sont les tarifs d’un transport médicalisé ?</AccordionTrigger>
+              <AccordionTrigger><h3 className="text-left text-base md:text-lg font-medium">Quels sont les tarifs d’un transport médicalisé ?</h3></AccordionTrigger>
               <AccordionContent>
                 Selon distance, équipements et assistance nécessaire. Un devis clair est fourni avant toute intervention.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
-              <AccordionTrigger>Peut-on réserver une ambulance privée ?</AccordionTrigger>
+              <AccordionTrigger><h3 className="text-left text-base md:text-lg font-medium">Peut-on réserver une ambulance privée ?</h3></AccordionTrigger>
               <AccordionContent>
                 Oui, sur réservation pour transferts programmés, consultations spécialisées et inter-hôpitaux.
               </AccordionContent>

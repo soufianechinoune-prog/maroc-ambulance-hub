@@ -119,16 +119,16 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
   return (
     <section className="py-16 bg-background" aria-label="Liste des services d'ambulance">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <header className="mb-10 md:mb-12 text-center animate-in fade-in-50 slide-in-from-bottom-2 duration-300">
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight mb-4 md:mb-5">
             {title ?? "Nos Services d'Ambulance"}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="mx-auto max-w-3xl md:max-w-4xl text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed md:leading-8">
             {description ?? (
               <>Une gamme complète de services médicaux d'urgence et de transport sanitaire adaptés à tous vos besoins.</>
             )}
           </p>
-        </div>
+        </header>
 
         {/* Services grid - keep structure and styles */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

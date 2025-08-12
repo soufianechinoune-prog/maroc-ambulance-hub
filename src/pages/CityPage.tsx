@@ -892,6 +892,120 @@ const CityPage = () => {
             { value: "12", label: "Quartiers principaux couverts" },
           ]}
         />
+      ) : city.slug === 'marrakech' ? (
+        <ReassuranceSection
+          title="Ambulance à Marrakech – Pourquoi nous faire confiance ?"
+          subtitle="Notre engagement : offrir un service d’ambulance rapide, professionnel et disponible 24/7 dans toute la région de Marrakech-Safi."
+          features={[
+            { icon: Clock, title: "Disponible 24/7", description: "Service d’urgence de jour comme de nuit, y compris les jours fériés.", color: "text-primary" },
+            { icon: Zap, title: "Intervention rapide", description: "Temps moyen d’arrivée inférieur à 15 minutes dans Marrakech intra-muros.", color: "text-emergency" },
+            { icon: Users, title: "Personnel qualifié", description: "Équipe formée aux urgences vitales, avec expérience hospitalière.", color: "text-success" },
+            { icon: MapPin, title: "Couverture régionale", description: "Marrakech, Tameslouht, Aït Ourir, Chichaoua, Amizmiz, et périphérie.", color: "text-primary" },
+            { icon: Shield, title: "Normes sanitaires", description: "Protocoles certifiés par le Ministère de la Santé.", color: "text-success" },
+            { icon: Star, title: "Excellence reconnue", description: "Recommandé par patients et cliniques locales.", color: "text-emergency" },
+          ]}
+          stats={[
+            { value: "24/7", label: "Service continu" },
+            { value: "< 15 min", label: "Temps de réponse" },
+            { value: "+5000", label: "Interventions/an" },
+            { value: "15", label: "Zones couvertes" },
+          ]}
+        />
+      ) : city.slug === 'fes' ? (
+        <ReassuranceSection
+          title="Ambulance à Fès – Pourquoi nous faire confiance ?"
+          subtitle="Notre engagement : répondre à vos urgences médicales partout à Fès et sa région avec efficacité et sécurité."
+          features={[
+            { icon: Clock, title: "Disponible 24/7", description: "Service d’urgence permanent.", color: "text-primary" },
+            { icon: Zap, title: "Intervention rapide", description: "Moins de 15 min en zone urbaine.", color: "text-emergency" },
+            { icon: Users, title: "Personnel qualifié", description: "Ambulanciers et médecins d’urgence certifiés.", color: "text-success" },
+            { icon: MapPin, title: "Couverture régionale", description: "Fès, Sefrou, Imouzzer Kandar, Bhalil, et périphérie.", color: "text-primary" },
+            { icon: Shield, title: "Normes sanitaires", description: "Protocoles rigoureux et matériel médical certifié.", color: "text-success" },
+            { icon: Star, title: "Excellence reconnue", description: "Service recommandé par établissements de santé.", color: "text-emergency" },
+          ]}
+          stats={[
+            { value: "24/7", label: "Service continu" },
+            { value: "< 15 min", label: "Temps de réponse" },
+            { value: "+4500", label: "Interventions/an" },
+            { value: "10", label: "Zones couvertes" },
+          ]}
+        />
+      ) : city.slug === 'tanger' ? (
+        <ReassuranceSection
+          title="Ambulance à Tanger – Pourquoi nous faire confiance ?"
+          subtitle="Notre engagement : assurer un transport médicalisé rapide et sûr dans toute la région de Tanger-Tétouan-Al Hoceïma."
+          features={[
+            { icon: Clock, title: "Disponible 24/7", description: "Intervention jour et nuit, toute l’année.", color: "text-primary" },
+            { icon: Zap, title: "Intervention rapide", description: "Moins de 15 min en moyenne dans Tanger.", color: "text-emergency" },
+            { icon: Users, title: "Personnel qualifié", description: "Professionnels expérimentés en urgences vitales.", color: "text-success" },
+            { icon: MapPin, title: "Couverture régionale", description: "Tanger, Asilah, Tétouan, Fnideq, M’diq.", color: "text-primary" },
+            { icon: Shield, title: "Normes sanitaires", description: "Équipements certifiés et désinfection après chaque intervention.", color: "text-success" },
+            { icon: Star, title: "Excellence reconnue", description: "Partenariats avec hôpitaux locaux.", color: "text-emergency" },
+          ]}
+          stats={[
+            { value: "24/7", label: "Service continu" },
+            { value: "< 15 min", label: "Temps de réponse" },
+            { value: "+4000", label: "Interventions/an" },
+            { value: "9", label: "Zones couvertes" },
+          ]}
+        />
+      ) : city.slug === 'agadir' ? (
+        <ReassuranceSection
+          title="Ambulance à Agadir – Pourquoi nous faire confiance ?"
+          subtitle="Notre engagement : offrir un service rapide et fiable dans toute la région Souss-Massa."
+          features={[
+            { icon: Clock, title: "Disponible 24/7", description: "Urgences médicales prises en charge à toute heure.", color: "text-primary" },
+            { icon: Zap, title: "Intervention rapide", description: "Moins de 15 min dans Agadir centre.", color: "text-emergency" },
+            { icon: Users, title: "Personnel qualifié", description: "Équipe certifiée en transport médicalisé.", color: "text-success" },
+            { icon: MapPin, title: "Couverture régionale", description: "Agadir, Inezgane, Aït Melloul, Taroudant, Tiznit.", color: "text-primary" },
+            { icon: Shield, title: "Normes sanitaires", description: "Standards stricts d’hygiène et sécurité.", color: "text-success" },
+            { icon: Star, title: "Excellence reconnue", description: "Témoignages positifs de nos patients.", color: "text-emergency" },
+          ]}
+          stats={[
+            { value: "24/7", label: "Service continu" },
+            { value: "< 15 min", label: "Temps de réponse" },
+            { value: "+3500", label: "Interventions/an" },
+            { value: "8", label: "Zones couvertes" },
+          ]}
+        />
+      ) : city.slug === 'meknes' ? (
+        <ReassuranceSection
+          title="Ambulance à Meknès – Pourquoi nous faire confiance ?"
+          subtitle="Notre engagement : garantir un service médical d’urgence fiable dans tout Meknès et ses environs."
+          features={[
+            { icon: Clock, title: "Disponible 24/7", description: "Intervention 365 jours/an.", color: "text-primary" },
+            { icon: Zap, title: "Intervention rapide", description: "Moins de 15 min en ville.", color: "text-emergency" },
+            { icon: Users, title: "Personnel qualifié", description: "Infirmiers, médecins et ambulanciers expérimentés.", color: "text-success" },
+            { icon: MapPin, title: "Couverture régionale", description: "Meknès, El Hajeb, Ifrane, Azrou, Khenifra.", color: "text-primary" },
+            { icon: Shield, title: "Normes sanitaires", description: "Respect strict des protocoles médicaux.", color: "text-success" },
+            { icon: Star, title: "Excellence reconnue", description: "Approuvé par la communauté locale.", color: "text-emergency" },
+          ]}
+          stats={[
+            { value: "24/7", label: "Service continu" },
+            { value: "< 15 min", label: "Temps de réponse" },
+            { value: "+3200", label: "Interventions/an" },
+            { value: "7", label: "Zones couvertes" },
+          ]}
+        />
+      ) : city.slug === 'oujda' ? (
+        <ReassuranceSection
+          title="Ambulance à Oujda – Pourquoi nous faire confiance ?"
+          subtitle="Notre engagement : desservir Oujda et toute la région de l’Oriental avec rapidité et professionnalisme."
+          features={[
+            { icon: Clock, title: "Disponible 24/7", description: "Urgences couvertes jour et nuit.", color: "text-primary" },
+            { icon: Zap, title: "Intervention rapide", description: "Moins de 15 min en ville.", color: "text-emergency" },
+            { icon: Users, title: "Personnel qualifié", description: "Équipe formée aux interventions d’urgence.", color: "text-success" },
+            { icon: MapPin, title: "Couverture régionale", description: "Oujda, Berkane, Nador, Taourirt, Saïdia.", color: "text-primary" },
+            { icon: Shield, title: "Normes sanitaires", description: "Protocoles certifiés et contrôles réguliers.", color: "text-success" },
+            { icon: Star, title: "Excellence reconnue", description: "Service apprécié par patients et hôpitaux locaux.", color: "text-emergency" },
+          ]}
+          stats={[
+            { value: "24/7", label: "Service continu" },
+            { value: "< 15 min", label: "Temps de réponse" },
+            { value: "+3000", label: "Interventions/an" },
+            { value: "6", label: "Zones couvertes" },
+          ]}
+        />
       ) : (
         <ReassuranceSection />
       )}

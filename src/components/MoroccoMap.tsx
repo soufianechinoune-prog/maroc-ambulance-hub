@@ -100,6 +100,8 @@ const MoroccoMap = () => {
     };
   }, [selectedCity]);
 
+  console.log('MoroccoMap rendering with selectedCity:', selectedCity);
+
   return (
     <section className="py-16 bg-gradient-to-b from-background to-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

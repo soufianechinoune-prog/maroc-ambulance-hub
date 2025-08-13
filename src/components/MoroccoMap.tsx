@@ -10,8 +10,6 @@ import { Label } from "@/components/ui/label";
 
 const MoroccoMap = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
-  const [mapboxToken, setMapboxToken] = useState<string>('');
-  const [isMapInitialized, setIsMapInitialized] = useState(false);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
@@ -34,63 +32,26 @@ const MoroccoMap = () => {
 
   const selectedCityData = selectedCity ? cities.find(c => c.slug === selectedCity) : null;
 
-  const initializeMap = () => {
-    if (!mapContainerRef.current || !mapboxToken.trim()) return;
+  useEffect(() => {
+    if (!mapContainerRef.current) return;
 
-    // Clean up existing map
-    if (mapRef.current) {
-      markersRef.current.forEach(marker => marker.remove());
-      markersRef.current = [];
-      mapRef.current.remove();
-    }
-
-    mapboxgl.accessToken = mapboxToken.trim();
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic29jaWFsZXhwbG9yZXIiLCJhIjoiREFQbXBISSJ9.dwFTwfSaWsHvktHrRtpydQ';
     
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: [-6.2, 32.0], // Centre optimisé pour le Maroc
-      zoom: 5.8,
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [-6.2, 32.0],
+      zoom: 5.5,
       projection: 'mercator',
       maxBounds: [
-        [-17.0, 21.0], // Sud-ouest
-        [2.0, 37.0]    // Nord-est
-      ]
+        [-17.0, 21.0],
+        [2.0, 37.0]
+      ],
+      attributionControl: true
     });
 
     // Add navigation controls
     mapRef.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
-    // Add country borders and better styling
-    mapRef.current.on('load', () => {
-      setIsMapInitialized(true);
-      
-      // Add Morocco boundary highlight
-      mapRef.current?.addSource('morocco-bounds', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'Polygon',
-            coordinates: [[
-              [-17.0, 21.0], [-17.0, 37.0], [2.0, 37.0], [2.0, 21.0], [-17.0, 21.0]
-            ]]
-          }
-        }
-      });
-
-      mapRef.current?.addLayer({
-        id: 'morocco-boundary',
-        type: 'line',
-        source: 'morocco-bounds',
-        paint: {
-          'line-color': '#1d4ed8',
-          'line-width': 2,
-          'line-opacity': 0.8
-        }
-      });
-    });
 
     // Add city markers
     Object.entries(cityPositions).forEach(([citySlug, position]) => {
@@ -109,19 +70,6 @@ const MoroccoMap = () => {
           ${city.isMain ? '<div class="absolute inset-0 w-5 h-5 bg-blue-400 rounded-full animate-ping opacity-30"></div>' : ''}
         </div>
       `;
-
-      // Add pulse animation style
-      const style = document.createElement('style');
-      style.textContent = `
-        .pulse-animation {
-          animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.7; }
-        }
-      `;
-      document.head.appendChild(style);
 
       // Create marker
       const marker = new mapboxgl.Marker(markerEl)
@@ -142,9 +90,7 @@ const MoroccoMap = () => {
 
       markersRef.current.push(marker);
     });
-  };
 
-  useEffect(() => {
     return () => {
       // Cleanup markers
       markersRef.current.forEach(marker => marker.remove());
@@ -152,7 +98,7 @@ const MoroccoMap = () => {
       // Cleanup map
       mapRef.current?.remove();
     };
-  }, []);
+  }, [selectedCity]);
 
   return (
     <section className="py-16 bg-gradient-to-b from-background to-muted/30">
@@ -165,39 +111,6 @@ const MoroccoMap = () => {
             Découvrez nos zones d'intervention à travers le territoire marocain
           </p>
         </div>
-
-        {/* Champ de saisie pour le token Mapbox */}
-        {!isMapInitialized && (
-          <div className="mb-8 max-w-md mx-auto">
-            <Card className="p-6">
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="mapbox-token">Token Mapbox</Label>
-                  <Input
-                    id="mapbox-token"
-                    type="text"
-                    placeholder="Entrez votre token Mapbox"
-                    value={mapboxToken}
-                    onChange={(e) => setMapboxToken(e.target.value)}
-                  />
-                </div>
-                <button
-                  onClick={initializeMap}
-                  disabled={!mapboxToken.trim()}
-                  className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Charger la carte
-                </button>
-                <p className="text-xs text-muted-foreground">
-                  Obtenez votre token gratuit sur{' '}
-                  <a href="https://account.mapbox.com/access-tokens/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    mapbox.com
-                  </a>
-                </p>
-              </div>
-            </Card>
-          </div>
-        )}
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Carte Mapbox */}

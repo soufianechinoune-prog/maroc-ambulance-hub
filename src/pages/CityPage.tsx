@@ -1473,7 +1473,7 @@ const CityPage = () => {
             <>📌 Pour toute urgence, contactez notre <strong>ambulance à Agadir</strong> au <a href="tel:+212777722311">numéro d’urgence +212 7777 223 11</a>. Nous proposons un service rapide et abordable, avec des tarifs transparents. Que ce soit pour un transfert médical, une urgence ou un événement, notre <strong>ambulance privée à Agadir</strong> est disponible 24/7.</>
           }
         />
-      ) : city.slug === 'fes' ? (
+) : city.slug === 'fes' ? (
         <ServicesSection
           title="🚑 Nos Services d’Ambulance à Fès – Urgence 24/7 et Transport Médicalisé"
           description={
@@ -1546,6 +1546,81 @@ const CityPage = () => {
           ]}
           seoNote={
             <>📌 Pour toute urgence, contactez notre <strong>ambulance à Fès</strong> au <a href="tel:+212777722311">numéro d’urgence +212 7777 223 11</a>. Nous proposons un service rapide et abordable, avec des tarifs transparents. Que ce soit pour un transfert médical, une urgence ou un événement, notre <strong>ambulance privée à Fès</strong> est disponible 24/7.</>
+          }
+        />
+      ) : city.slug === 'meknes' ? (
+        <ServicesSection
+          title="🚑 Nos Services d’Ambulance à Meknès – Urgence 24/7 et Transport Médicalisé"
+          description={
+            <>
+              Notre <strong>service d’ambulance à Meknès</strong> est disponible 24h/24 et 7j/7 pour toutes urgences médicales, transferts hospitaliers et besoins de <strong>transport médicalisé privé</strong>. Avec un temps de réponse moyen de <strong>moins de 15 minutes</strong> en zone urbaine, nous assurons une intervention rapide, sécurisée et conforme aux normes sanitaires.
+              <br />
+              Que vous cherchiez une <strong>ambulance privée à Meknès</strong>, un transport longue distance ou un transfert inter-hôpitaux, notre équipe qualifiée est prête à intervenir immédiatement dans toute la ville et sa région.
+            </>
+          }
+          services={[
+            {
+              title: "🚨 Ambulance Médicale d’Urgence à Meknès",
+              description: (
+                <>
+                  Intervention immédiate pour toute urgence médicale dans la ville de Meknès et sa périphérie. Équipe de secours qualifiée, disponible 24h/24, équipée pour la réanimation cardio-pulmonaire, les soins pré-hospitaliers et le transport rapide vers l’hôpital le plus proche.
+                </>
+              ),
+              features: [
+                "Réanimation cardio-pulmonaire",
+                "Soins d’urgence pré-hospitaliers",
+                "Transport rapide vers hôpital",
+                "Équipement médical de pointe",
+              ],
+            },
+            {
+              title: "🏥 Transport Inter-hôpitaux à Meknès",
+              description: (
+                <>
+                  Service sécurisé de <strong>transport médicalisé à Meknès</strong> pour le transfert de patients entre établissements de santé. Coordination complète avec les hôpitaux, suivi médical spécialisé et respect strict des normes sanitaires.
+                </>
+              ),
+              features: [
+                "Transport médicalisé",
+                "Accompagnement médical spécialisé",
+                "Coordination avec hôpitaux",
+                "Suivi médical pendant transport",
+              ],
+              ctaHref: "/devis?ville=meknes",
+            },
+            {
+              title: "🚐 Transport Médical Longue Distance depuis Meknès",
+              description: (
+                <>
+                  Déplacements inter-villes avec <strong>ambulance équipée</strong> et personnel médical qualifié. Confort optimal du patient, assistance continue et coordination logistique complète pour trajets longs.
+                </>
+              ),
+              features: [
+                "Ambulances adaptées aux longs trajets",
+                "Personnel médical qualifié",
+                "Confort et sécurité du patient",
+                "Coordination logistique",
+              ],
+              ctaHref: "/devis?ville=meknes&type=longue-distance",
+            },
+            {
+              title: "🎯 Couverture Médicale pour Événements à Meknès",
+              description: (
+                <>
+                  Assistance médicale pour événements sportifs, concerts, rassemblements et manifestations publiques à Meknès. Mise en place de postes de secours, équipe médicale dédiée et intervention rapide en cas d’urgence.
+                </>
+              ),
+              features: [
+                "Poste de secours mobile",
+                "Équipe médicale dédiée",
+                "Intervention préventive",
+                "Coordination avec organisateurs",
+              ],
+              ctaHref: "/devis?ville=meknes&type=evenements",
+            },
+          ]}
+          seoNote={
+            <>📌 Pour toute urgence, contactez notre <strong>ambulance à Meknès</strong> au <a href="tel:+212777722311">numéro d’urgence +212 7777 223 11</a>. Nous proposons un service rapide et abordable, avec des tarifs transparents. Que ce soit pour un transfert médical, une urgence ou un événement, notre <strong>ambulance privée à Meknès</strong> est disponible 24/7.</>
           }
         />
       ) : (

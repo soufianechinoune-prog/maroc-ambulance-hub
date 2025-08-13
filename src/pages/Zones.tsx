@@ -8,6 +8,7 @@ import CityCardOptimized from "@/components/CityCardOptimized";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ZonesFAQ from "@/components/ZonesFAQ";
 import QuickContactForm from "@/components/QuickContactForm";
+import MoroccoMap from "@/components/MoroccoMap";
 import { cities } from "@/data/cities";
 
 const Zones = () => {
@@ -121,6 +122,9 @@ const Zones = () => {
           </div>
         </div>
       </section>
+
+      {/* Carte interactive du Maroc */}
+      <MoroccoMap />
 
       {/* Pourquoi nous choisir */}
       <WhyChooseUsSection />

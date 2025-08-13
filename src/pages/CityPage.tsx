@@ -1069,7 +1069,7 @@ const CityPage = () => {
             </div>
             <div className="relative">
               <img 
-                src="/src/assets/medical-team.jpg" 
+                src="/assets/medical-team.jpg" 
                 alt={`Équipe médicale ${city.name}`}
                 className="rounded-lg shadow-xl"
               />

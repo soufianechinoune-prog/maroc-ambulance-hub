@@ -14,6 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, Zap } from "lucide-react";
 import { SITE_URL } from "@/lib/config";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
+import HeroSection from "@/components/HeroSection";
 const getRandomCities = (currentSlug: string, count = 4) => {
   const pool = cities
     .filter((c) => c.slug !== currentSlug)
@@ -271,145 +272,25 @@ const CityPage = () => {
       <SEO title={title} description={description} canonical={canonical} jsonLdMultiple={jsonLdArray} keywords={keywords} />
       <Header city={city.name} />
       
-      {/* Hero Section - Identique à la Home Page mais personnalisée */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden" aria-label={`Service d'ambulance à ${city.name}`}>
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/src/assets/ambulance-hero.jpg')",
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent"></div>
-        </div>
-        <img src="/src/assets/ambulance-hero.jpg" alt={`Ambulance à ${city.name} – intervention rapide au Maroc`} className="sr-only" />
-
-        <div className="relative container mx-auto px-4 py-20">
-          <div className="max-w-4xl">
-            <div className="space-y-6">
-              {/* Location Badge */}
-              <div className="inline-flex items-center bg-card/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium">
-                <MapPin className="h-4 w-4 mr-2 text-primary" />
-                Service disponible à {city.name}
-              </div>
-
-               {/* Main Heading */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                {isCalifornieVariant ? (
-                  <>Ambulance <span className="text-emergency">Casablanca Californie</span> – Intervention 24/7</>
-                ) : isAinDiabVariant ? (
-                  <>Ambulance <span className="text-emergency">Casablanca Ain Diab</span> – Intervention 24/7</>
-                ) : isMaarifVariant ? (
-                  <>Ambulance <span className="text-emergency">Casablanca Maârif</span> – Intervention 24/7</>
-                ) : isGauthierVariant ? (
-                  <>Ambulance <span className="text-emergency">Casablanca Gauthier</span> – Intervention 24/7</>
-                ) : isBourgogeVariant ? (
-                  <>Ambulance <span className="text-emergency">Casablanca Bourgogne</span> – Intervention 24/7</>
-                 ) : isAinSebaaVariant ? (
-                   <>Ambulance <span className="text-emergency">Casablanca Aïn Sebaâ</span> – Intervention 24/7</>
-                 ) : isOasisVariant ? (
-                   <>Ambulance <span className="text-emergency">Casablanca Oasis</span> – Intervention 24/7</>
-                 ) : isSidiMaaroufVariant ? (
-                   <>Ambulance <span className="text-emergency">Casablanca Sidi Maârouf</span> – Intervention 24/7</>
-                  ) : isAinChockVariant ? (
-                    <>Ambulance <span className="text-emergency">Casablanca Aïn Chock</span> – Intervention 24/7</>
-                  ) : isBouskouraVariant ? (
-                    <>Ambulance <span className="text-emergency">Bouskoura</span> – Intervention 24/7</>
-                  ) : (
-                   <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
-                 )}
-              </h1>
-              
-              <div className="text-xl md:text-2xl text-white/90 space-y-2">
-                <p>Intervention rapide 24h/24 et 7j/7</p>
-                <p className="font-semibold">Temps de réponse : {city.responseTime}</p>
-              </div>
-
-              {/* Key Features */}
-              <div className="flex flex-wrap gap-4 text-white/90">
-                <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">
-                  <Clock className="h-5 w-5 mr-2 text-success" />
-                  <span className="font-medium">Réponse {city.responseTime}</span>
-                </div>
-                <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">
-                  <div className="h-5 w-5 mr-2 bg-success rounded-full flex items-center justify-center">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                  </div>
-                  <span className="font-medium">Personnel qualifié</span>
-                </div>
-                <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">
-                  <div className="h-5 w-5 mr-2 bg-emergency rounded-full flex items-center justify-center text-white text-xs font-bold">
-                    +
-                  </div>
-                  <span className="font-medium">Équipement médical</span>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Button 
-                  variant="emergency" 
-                  size="lg" 
-                  className="text-lg px-8 py-4 h-auto"
-                  asChild
-                >
-                  <CallButton phone="+212777722311" className="flex items-center justify-center">
-                    <Phone className="h-6 w-6 mr-3" />
-                    📞 Appelez maintenant
-                  </CallButton>
-                </Button>
-                
-                <Button 
-                  variant="success" 
-                  size="lg" 
-                  className="text-lg px-8 py-4 h-auto"
-                  asChild
-                >
-                  <WhatsAppButton phone="+212777722311" className="flex items-center justify-center">
-                    <MessageCircle className="h-6 w-6 mr-3" />
-                    💬 WhatsApp direct
-                  </WhatsAppButton>
-                </Button>
-                
-                <Button 
-                  variant="cta" 
-                  size="lg" 
-                  className="text-lg px-8 py-4 h-auto bg-white text-primary hover:bg-white/90"
-                  asChild
-                >
-                  <a href="#demande-ambulance" className="flex items-center justify-center">
-                    🚑 Demander une ambulance
-                  </a>
-                </Button>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="pt-8 flex flex-wrap gap-6 text-white/80 text-sm">
-                <div className="flex items-center">
-                  <div className="h-2 w-2 bg-success rounded-full mr-2"></div>
-                  Agréé par le Ministère de la Santé
-                </div>
-                <div className="flex items-center">
-                  <div className="h-2 w-2 bg-success rounded-full mr-2"></div>
-                  + de 5000 interventions/an
-                </div>
-                <div className="flex items-center">
-                  <div className="h-2 w-2 bg-success rounded-full mr-2"></div>
-                  Couverture {city.region}
-                </div>
-              </div>
-             </div>
-          </div>
-        </div>
-
-        {/* Floating Emergency Contact (Mobile) */}
-        <div className="fixed bottom-4 right-4 z-50 lg:hidden">
-          <Button variant="emergency" size="lg" className="rounded-full shadow-2xl" asChild>
-            <CallButton phone="+212777722311">
-              <Phone className="h-6 w-6" />
-            </CallButton>
-          </Button>
-        </div>
-      </section>
+      {/* Hero Section optimisé par quartier */}
+      <HeroSection 
+        city={city.name} 
+        quarterVariant={
+          isCalifornieVariant ? 'californie' :
+          isAinDiabVariant ? 'ain-diab' :
+          isMaarifVariant ? 'maarif' :
+          isGauthierVariant ? 'gauthier' :
+          isBourgogeVariant ? 'bourgogne' :
+          isAinSebaaVariant ? 'ain-sebaa' :
+          isOasisVariant ? 'oasis' :
+          isSidiMaaroufVariant ? 'sidi-maarouf' :
+          isAinChockVariant ? 'ain-chock' :
+          isBouskouraVariant ? 'bouskoura' :
+          isSidiBernoussiVariant ? 'sidi-bernoussi' :
+          isDerbSultanVariant ? 'derb-sultan' :
+          undefined
+        }
+      />
 
       {/* City Stats */}
       <section className="py-16 bg-gray-50">

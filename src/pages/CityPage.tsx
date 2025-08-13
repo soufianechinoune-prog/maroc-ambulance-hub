@@ -1824,6 +1824,171 @@ const CityPage = () => {
                   </div>
                 </div>
               </>
+            ) : isHayRiadVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat Hay Riad 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc met à votre disposition un service d'ambulance à Rabat Hay Riad ultra-réactif, sécurisé et adapté à toutes les situations : urgences vitales, transferts médicaux, hospitalisations programmées ou assistance médicale à domicile. Nous couvrons l'ensemble du quartier de Hay Riad ainsi que ses zones environnantes, pour garantir un service rapide et fiable à toute heure.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Rabat Hay Riad avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont parfaitement équipées pour le transport médicalisé dans le quartier de Hay Riad. Chaque intervention est assurée par un personnel médical expérimenté : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon les besoins. Nous respectons des normes strictes pour assurer sécurité, confort et qualité de service, aussi bien pour les particuliers que pour les entreprises.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité à Hay Riad et ses alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons rapidement dans toutes les zones résidentielles, administratives et commerciales de Hay Riad, ainsi que dans les quartiers voisins : Souissi, Agdal et Centre-Ville. Notre centrale d'appel est disponible 24h/24 et 7j/7 pour organiser un transfert médical ou envoyer une ambulance immédiatement.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande dans le quartier Hay Riad à Rabat, appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une prise en charge immédiate.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Rabat Hay Riad ?</h3>
+                <ul className="list-none mb-8 text-gray-700 space-y-3">
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Réactivité 24h/24 et 7j/7 dans tout le quartier</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Personnel médical qualifié et expérimenté</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Ambulances modernes et bien équipées</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Couverture complète de Hay Riad et des zones voisines</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Service d'ambulance privée Rabat pour particuliers et entreprises</span>
+                  </li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Rabat – Quartier Hay Riad et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : isSouissiVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat Souissi 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc vous propose un service d'ambulance à Rabat Souissi rapide, fiable et conforme aux normes médicales les plus strictes. Que ce soit pour des urgences vitales, des transferts hospitaliers, des hospitalisations prévues ou des soins à domicile, nous assurons une intervention efficace 24h/24 et 7j/7 dans tout Souissi et ses environs.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Rabat Souissi avec équipe expérimentée</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont dotées d'équipements médicaux modernes et conduites par un personnel qualifié : auxiliaires ambulanciers, infirmiers diplômés, médecins d'urgence selon la gravité du cas. Nous garantissons un service sécurisé et adapté aux besoins des particuliers et des entreprises.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité à Souissi et zones proches</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous couvrons toutes les zones résidentielles, diplomatiques et commerciales de Souissi, ainsi que les quartiers avoisinants : Hay Riad, Agdal et Centre-Ville. Notre centrale d'appel est joignable en continu pour planifier un transfert ou dépêcher une ambulance sur place.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou cliquez sur notre bouton WhatsApp pour une prise en charge immédiate dans le quartier Souissi.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Rabat Souissi ?</h3>
+                <ul className="list-none mb-8 text-gray-700 space-y-3">
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Disponibilité 24h/24 et 7j/7</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Personnel médical formé et expérimenté</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Ambulances équipées aux normes internationales</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Couverture complète de Souissi et des quartiers voisins</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Service d'ambulance privée Rabat pour particuliers et entreprises</span>
+                  </li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Rabat – Quartier Souissi et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : isHassanVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat Hassan 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc met en œuvre un service d'ambulance à Rabat Hassan rapide, sécurisé et parfaitement adapté à toutes les situations médicales : urgences vitales, transferts hospitaliers, hospitalisations programmées ou assistance à domicile. Présents en permanence, nous intervenons dans tout le quartier Hassan et ses environs en moins de 15 minutes.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Rabat Hassan avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont conçues pour répondre à tous les besoins de transport médicalisé dans le quartier Hassan. Chaque mission est gérée par un personnel de santé qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon les cas. Nous appliquons des protocoles stricts pour assurer confort, sécurité et efficacité.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité à Hassan et alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les zones administratives, résidentielles et touristiques de Hassan, ainsi que dans les quartiers voisins : Centre-Ville, Agdal et Océan. Notre standard est disponible 24h/24 et 7j/7 pour répondre à toute demande d'ambulance privée ou médicalisée.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute intervention dans le quartier Hassan à Rabat, appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour un contact immédiat.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Rabat Hassan ?</h3>
+                <ul className="list-none mb-8 text-gray-700 space-y-3">
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Réactivité 24h/24 et 7j/7</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Équipe médicale qualifiée et expérimentée</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Véhicules modernes et médicalement équipés</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Couverture complète de Hassan et des zones voisines</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Service d'ambulance privée Rabat pour particuliers et entreprises</span>
+                  </li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Rabat – Quartier Hassan et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
             ) : (
               <>
                 <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat Yacoub El Mansour 24h/24 et 7j/7</h2>

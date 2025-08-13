@@ -97,6 +97,7 @@ const CityPage = () => {
   const isCalifornieVariant = location?.pathname?.includes("/ambulance-casablanca-californie");
   const isAinDiabVariant = location?.pathname?.includes("/ambulance-casablanca-ain-diab");
   const isMaarifVariant = location?.pathname?.includes("/ambulance-casablanca-maarif");
+  const isGauthierVariant = location?.pathname?.includes("/ambulance-casablanca-gauthier");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -107,6 +108,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Ain Diab – Ambulance privée Ain Diab 24/7"
     : isMaarifVariant
     ? "Ambulance Casablanca Maârif – Ambulance privée Maârif 24/7"
+    : isGauthierVariant
+    ? "Ambulance Casablanca Gauthier – Ambulance privée Gauthier 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -115,6 +118,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Ain Diab: intervention rapide 24/7 à Ain Diab. Ambulance privée Ain Diab, transport médicalisé. Appelez +212 7777 223 11."
     : isMaarifVariant
     ? "Ambulance Casablanca Maârif: intervention rapide 24/7 à Maârif. Ambulance privée Maârif, transport médicalisé. Appelez +212 7777 223 11."
+    : isGauthierVariant
+    ? "Ambulance Casablanca Gauthier: intervention rapide 24/7 à Gauthier. Ambulance privée Gauthier, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -123,6 +128,8 @@ const CityPage = () => {
     ? ["Ambulance Casablanca Ain Diab","ambulance privée Ain Diab","ambulance casablanca","ambulance privée casablanca"]
     : isMaarifVariant
     ? ["Ambulance Casablanca Maârif","ambulance privée Maârif","ambulance casablanca","ambulance privée casablanca"]
+    : isGauthierVariant
+    ? ["Ambulance Casablanca Gauthier","ambulance privée Gauthier","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -131,6 +138,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-ain-diab`
     : isMaarifVariant
     ? `${siteUrl}/ambulance-casablanca-maarif`
+    : isGauthierVariant
+    ? `${siteUrl}/ambulance-casablanca-gauthier`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -139,6 +148,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Ain Diab – Intervention 24/7"
     : isMaarifVariant
     ? "Ambulance Casablanca Maârif – Intervention 24/7"
+    : isGauthierVariant
+    ? "Ambulance Casablanca Gauthier – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -201,6 +212,8 @@ const CityPage = () => {
                   <>Ambulance <span className="text-emergency">Casablanca Ain Diab</span> – Intervention 24/7</>
                 ) : isMaarifVariant ? (
                   <>Ambulance <span className="text-emergency">Casablanca Maârif</span> – Intervention 24/7</>
+                ) : isGauthierVariant ? (
+                  <>Ambulance <span className="text-emergency">Casablanca Gauthier</span> – Intervention 24/7</>
                 ) : (
                   <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
                 )}
@@ -440,6 +453,36 @@ const CityPage = () => {
                     </ul>
                   </div>
                 </>
+              ) : isGauthierVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Casablanca – Quartier Gauthier
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier central de Gauthier à Casablanca bénéficie de notre service d'ambulance professionnel et efficace, avec une couverture optimale pour répondre rapidement à toutes les urgences médicales. Notre équipe qualifiée assure une prise en charge rapide et sécurisée, 24h/24 et 7j/7, dans ce secteur stratégique de la ville.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture des zones résidentielles et commerciales</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Accès privilégié vers Maârif, Racine et Centre-Ville</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté aux bureaux et résidences du quartier</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Proximité avec les établissements médicaux de Gauthier</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
               ) : (
                 <>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
@@ -553,6 +596,46 @@ const CityPage = () => {
                   <div className="space-y-2 text-gray-700">
                     <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                     <p>📍 Casablanca – Quartier Maârif et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : isGauthierVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Gauthier 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc propose un <strong>service d'ambulance à Casablanca Gauthier</strong> rapide, sécurisé et parfaitement adapté à toutes les situations : urgences vitales, transferts médicaux, hospitalisations planifiées ou soins à domicile. Nous couvrons l'ensemble du quartier de Gauthier ainsi que ses zones voisines, garantissant un service fiable à toute heure, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Gauthier avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont équipées pour le <strong>transport médicalisé dans le quartier de Gauthier</strong>. Chaque intervention est assurée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon les besoins. Nous respectons des protocoles stricts pour assurer la sécurité et le confort des patients, que ce soit pour les particuliers ou pour les entreprises.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans tout Gauthier et ses alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les zones résidentielles et commerciales de Gauthier, ainsi que dans les quartiers voisins : Maârif, Racine, Bourgogne et Centre-Ville. <strong>Notre centrale d'appel reste disponible 24h/24 et 7j/7</strong> pour organiser un transfert ou envoyer une ambulance immédiatement.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande dans le quartier Gauthier à Casablanca, <strong>appelez le <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une réponse rapide.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Gauthier ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et bien équipées</li>
+                  <li>Couverture complète de Gauthier et des zones voisines</li>
+                  <li>Service d'<strong>ambulance privée Casablanca</strong> pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Gauthier et alentours</p>
                     <p>🕐 Service : 24h/24 – 7j/7</p>
                   </div>
                 </div>

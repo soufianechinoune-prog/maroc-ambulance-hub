@@ -1,3 +1,4 @@
+import React, { memo, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, MapPin } from "lucide-react";
@@ -12,7 +13,7 @@ interface CityCardOptimizedProps {
   neighborhoods?: string[];
 }
 
-const CityCardOptimized = ({ 
+const CityCardOptimized = memo(({ 
   name, 
   slug, 
   responseTime, 
@@ -21,6 +22,21 @@ const CityCardOptimized = ({
   isMain = false,
   neighborhoods = []
 }: CityCardOptimizedProps) => {
+  const handlePrefetch = useCallback(() => {
+    if (!window.prefetchedPages) window.prefetchedPages = new Set();
+    if (!window.prefetchedPages.has(slug)) {
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = `/ambulance-${slug}`;
+      document.head.appendChild(link);
+      window.prefetchedPages.add(slug);
+    }
+  }, [slug]);
+
+  const handleClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = `/ambulance-${slug}`;
+  }, [slug]);
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       <CardContent className="p-6">
@@ -71,22 +87,25 @@ const CityCardOptimized = ({
           </div>
         )}
 
-        <a
-          href={`/ambulance-${slug}`}
-          className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-          onMouseEnter={() => {
-            // Préchargement de la page au hover
-            const link = document.createElement('link');
-            link.rel = 'prefetch';
-            link.href = `/ambulance-${slug}`;
-            document.head.appendChild(link);
-          }}
+        <button
+          onClick={handleClick}
+          onMouseEnter={handlePrefetch}
+          onFocus={handlePrefetch}
+          className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors bg-transparent border-none cursor-pointer p-0 text-left"
         >
           Voir le service Ambulance à {name} →
-        </a>
+        </button>
       </CardContent>
     </Card>
   );
-};
+});
+
+CityCardOptimized.displayName = 'CityCardOptimized';
+
+declare global {
+  interface Window {
+    prefetchedPages: Set<string>;
+  }
+}
 
 export default CityCardOptimized;

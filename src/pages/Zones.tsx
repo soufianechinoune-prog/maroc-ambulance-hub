@@ -10,7 +10,9 @@ import ZonesFAQ from "@/components/ZonesFAQ";
 import QuickContactForm from "@/components/QuickContactForm";
 import MoroccoMap from "@/components/MoroccoMap";
 import { cities } from "@/data/cities";
-import { useMemo } from "react";
+import { useMemo, lazy, Suspense } from "react";
+
+const LazyMoroccoMap = lazy(() => import("@/components/MoroccoMap"));
 
 const Zones = () => {
   // Mémorisation des données filtrées pour éviter les recalculs
@@ -129,7 +131,9 @@ const Zones = () => {
       </section>
 
       {/* Carte interactive du Maroc */}
-      <MoroccoMap />
+      <Suspense fallback={<div className="py-16 flex justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
+        <LazyMoroccoMap />
+      </Suspense>
 
       {/* Pourquoi nous choisir */}
       <WhyChooseUsSection />

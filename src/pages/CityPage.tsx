@@ -15,11 +15,64 @@ import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, 
 import { SITE_URL } from "@/lib/config";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 import HeroSection from "@/components/HeroSection";
+// Mapping des quartiers selon la logique fournie
+const neighborhoodMapping = {
+  'ain-diab': ['bourgogne', 'maarif', 'anfa', 'gauthier'],
+  'bourgogne': ['ain-diab', 'maarif', 'racine', 'gauthier'],
+  'maarif': ['bourgogne', 'racine', 'ain-diab', 'gauthier'],
+  'racine': ['maarif', 'gauthier', 'bourgogne', 'anfa'],
+  'anfa': ['ain-diab', 'racine', 'gauthier', 'maarif'],
+  'gauthier': ['bourgogne', 'racine', 'maarif', 'anfa'],
+  'ain-sebaa': ['sidi-bernoussi', 'roches-noires', 'hay-mohammadi', 'belvedere'],
+  'sidi-bernoussi': ['ain-sebaa', 'roches-noires', 'hay-mohammadi', 'derb-sultan'],
+  'roches-noires': ['belvedere', 'ain-sebaa', 'sidi-bernoussi', 'hay-mohammadi'],
+  'belvedere': ['roches-noires', 'derb-sultan', 'hay-mohammadi', 'centre-ville'],
+  'hay-mohammadi': ['roches-noires', 'belvedere', 'ain-sebaa', 'derb-sultan'],
+  'derb-sultan': ['belvedere', 'hay-mohammadi', 'centre-ville', 'sidi-bernoussi'],
+  'centre-ville': ['belvedere', 'gauthier', 'racine', 'maarif'],
+  'oasis': ['sidi-maarouf', 'californie', 'bouskoura', 'ain-chock'],
+  'sidi-maarouf': ['oasis', 'californie', 'bouskoura', 'ain-chock'],
+  'californie': ['oasis', 'sidi-maarouf', 'bouskoura', 'ain-chock'],
+  'bouskoura': ['oasis', 'sidi-maarouf', 'californie', 'ain-chock'],
+  'ain-chock': ['oasis', 'sidi-maarouf', 'californie', 'bouskoura'],
+  'sidi-belyout': ['gauthier', 'maarif', 'centre-ville', 'racine']
+};
+
+const neighborhoodLabels = {
+  'ain-diab': 'Aïn Diab',
+  'bourgogne': 'Bourgogne',
+  'maarif': 'Maârif',
+  'racine': 'Racine',
+  'anfa': 'Anfa',
+  'gauthier': 'Gauthier',
+  'ain-sebaa': 'Aïn Sebaâ',
+  'sidi-bernoussi': 'Sidi Bernoussi',
+  'roches-noires': 'Roches Noires',
+  'belvedere': 'Belvédère',
+  'hay-mohammadi': 'Hay Mohammadi',
+  'derb-sultan': 'Derb Sultan',
+  'centre-ville': 'Centre-ville',
+  'oasis': 'Oasis',
+  'sidi-maarouf': 'Sidi Maârouf',
+  'californie': 'Californie',
+  'bouskoura': 'Bouskoura',
+  'ain-chock': 'Aïn Chock',
+  'sidi-belyout': 'Sidi Belyout'
+};
+
 const getRandomCities = (currentSlug: string, count = 4) => {
   const pool = cities
     .filter((c) => c.slug !== currentSlug)
     .map((c) => ({ name: c.name, slug: c.slug }));
   return pool.sort(() => 0.5 - Math.random()).slice(0, count);
+};
+
+const getRelatedNeighborhoods = (currentNeighborhood: string) => {
+  const related = neighborhoodMapping[currentNeighborhood] || [];
+  return related.map(slug => ({
+    name: neighborhoodLabels[slug] || slug,
+    slug: `ambulance-casablanca-${slug}`
+  }));
 };
 
 const CityPage = () => {
@@ -41,6 +94,12 @@ const CityPage = () => {
   const normalizedSlug = cities.some(c => c.slug === baseCandidate) ? baseCandidate : rawSlug;
   const city = cities.find(c => c.slug === normalizedSlug);
   const relatedCities = getRandomCities(normalizedSlug, 4);
+  
+  // Détection du quartier actuel pour le maillage interne
+  const currentNeighborhood = location?.pathname?.includes("/ambulance-casablanca-") 
+    ? location.pathname.replace("/ambulance-casablanca-", "").replace(/\/$/, "")
+    : null;
+  const relatedNeighborhoods = currentNeighborhood ? getRelatedNeighborhoods(currentNeighborhood) : [];
   const siteUrl = SITE_URL;
   // SEO data optimisé pour chaque ville
   const seoData = {
@@ -2646,22 +2705,24 @@ const CityPage = () => {
         </div>
       </div>
 
-      {/* Maillage interne: autres villes */}
-      <section className="mt-16 px-4 sm:px-6 lg:px-8 py-10 bg-muted/50 border-t border-border" aria-label="Autres villes couvertes">
+      {/* Maillage interne: quartiers ou villes selon le contexte */}
+      <section className="mt-16 px-4 sm:px-6 lg:px-8 py-10 bg-muted/50 border-t border-border" aria-label={currentNeighborhood ? "Autres quartiers de Casablanca" : "Autres villes couvertes"}>
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-xl font-bold mb-6 text-center">🏙️ Autres Villes Couvertes</h2>
+          <h2 className="text-xl font-bold mb-6 text-center">
+            {currentNeighborhood ? "🏘️ Autres Quartiers de Casablanca" : "🏙️ Autres Villes Couvertes"}
+          </h2>
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {relatedCities.map((c) => (
+            {(currentNeighborhood ? relatedNeighborhoods : relatedCities).map((item) => (
               <li
-                key={c.slug}
+                key={item.slug}
                 className="group bg-card hover:bg-accent rounded-lg p-4 shadow-sm hover:shadow-md transition-colors ring-1 ring-border"
               >
-                <div className="text-lg font-medium text-foreground">{c.name}</div>
+                <div className="text-lg font-medium text-foreground">{item.name}</div>
                 <div className="text-sm text-muted-foreground">🚑 Intervention 15–30 min</div>
                 <a
-                  href={`/ambulance-${c.slug}`}
+                  href={currentNeighborhood ? `/${item.slug}` : `/ambulance-${item.slug}`}
                   className="mt-2 inline-flex items-center gap-1 text-sm text-primary underline hover:text-primary/80 transition-colors"
-                  aria-label={`Voir la page Ambulance à ${c.name}`}
+                  aria-label={`Voir la page Ambulance à ${item.name}`}
                 >
                   👉 Voir la page
                 </a>

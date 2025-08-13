@@ -101,6 +101,7 @@ const CityPage = () => {
   const isBourgogeVariant = location?.pathname?.includes("/ambulance-casablanca-bourgogne");
   const isAinSebaaVariant = location?.pathname?.includes("/ambulance-casablanca-ain-sebaa");
   const isOasisVariant = location?.pathname?.includes("/ambulance-casablanca-oasis");
+  const isSidiMaaroufVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-maarouf");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -119,6 +120,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Aïn Sebaâ – Ambulance privée Aïn Sebaâ 24/7"
     : isOasisVariant
     ? "Ambulance Casablanca Oasis – Ambulance privée Oasis 24/7"
+    : isSidiMaaroufVariant
+    ? "Ambulance Casablanca Sidi Maârouf – Ambulance privée Sidi Maârouf 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -135,6 +138,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Aïn Sebaâ: intervention rapide 24/7 à Aïn Sebaâ. Ambulance privée Aïn Sebaâ, transport médicalisé. Appelez +212 7777 223 11."
     : isOasisVariant
     ? "Ambulance Casablanca Oasis: intervention rapide 24/7 à Oasis. Ambulance privée Oasis, transport médicalisé. Appelez +212 7777 223 11."
+    : isSidiMaaroufVariant
+    ? "Ambulance Casablanca Sidi Maârouf: intervention rapide 24/7 à Sidi Maârouf. Ambulance privée Sidi Maârouf, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -151,6 +156,8 @@ const CityPage = () => {
     ? ["Ambulance Casablanca Aïn Sebaâ","ambulance privée Aïn Sebaâ","ambulance casablanca","ambulance privée casablanca"]
     : isOasisVariant
     ? ["Ambulance Casablanca Oasis","ambulance privée Oasis","ambulance casablanca","ambulance privée casablanca"]
+    : isSidiMaaroufVariant
+    ? ["Ambulance Casablanca Sidi Maârouf","ambulance privée Sidi Maârouf","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -167,6 +174,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-ain-sebaa`
     : isOasisVariant
     ? `${siteUrl}/ambulance-casablanca-oasis`
+    : isSidiMaaroufVariant
+    ? `${siteUrl}/ambulance-casablanca-sidi-maarouf`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -183,6 +192,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Aïn Sebaâ – Intervention 24/7"
     : isOasisVariant
     ? "Ambulance Casablanca Oasis – Intervention 24/7"
+    : isSidiMaaroufVariant
+    ? "Ambulance Casablanca Sidi Maârouf – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -253,6 +264,8 @@ const CityPage = () => {
                    <>Ambulance <span className="text-emergency">Casablanca Aïn Sebaâ</span> – Intervention 24/7</>
                  ) : isOasisVariant ? (
                    <>Ambulance <span className="text-emergency">Casablanca Oasis</span> – Intervention 24/7</>
+                 ) : isSidiMaaroufVariant ? (
+                   <>Ambulance <span className="text-emergency">Casablanca Sidi Maârouf</span> – Intervention 24/7</>
                  ) : (
                    <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
                  )}
@@ -856,6 +869,46 @@ const CityPage = () => {
                     <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                     <p>📍 Casablanca – Quartier Ain Diab et alentours</p>
                     <p>🕐 Service 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : isSidiMaaroufVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Sidi Maârouf 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc met à votre disposition un service d'ambulance à Casablanca Sidi Maârouf rapide, sûr et disponible à tout moment, pour tous types d'interventions : urgences vitales, transferts médicaux, hospitalisations prévues ou assistance à domicile. Nous desservons l'ensemble du quartier de Sidi Maârouf ainsi que les zones environnantes, afin de garantir une prise en charge efficace, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Sidi Maârouf avec équipe qualifiée</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont spécialement équipées pour le transport médicalisé dans le quartier de Sidi Maârouf. Chaque mission est assurée par un personnel médical expérimenté : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon la situation. Nous respectons des protocoles stricts pour garantir sécurité, confort et qualité de service, que ce soit pour les particuliers ou les entreprises implantées localement.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité à Sidi Maârouf et dans les secteurs proches</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les zones résidentielles et professionnelles de Sidi Maârouf, ainsi que dans les quartiers limitrophes : Aïn Chock, Californie, Oasis et Hay Hassani. Notre centrale d'appel fonctionne en continu, 24h/24 et 7j/7, pour planifier un transfert ou envoyer une ambulance immédiatement.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'ambulance dans le quartier Sidi Maârouf à Casablanca, appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une réponse instantanée.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Sidi Maârouf ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le secteur</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et parfaitement équipées</li>
+                  <li>Couverture complète de Sidi Maârouf et des zones voisines</li>
+                  <li>Service d'ambulance privée Casablanca pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Sidi Maârouf et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
                   </div>
                 </div>
               </>

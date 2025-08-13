@@ -2719,13 +2719,13 @@ const CityPage = () => {
               >
                 <div className="text-lg font-medium text-foreground">{item.name}</div>
                 <div className="text-sm text-muted-foreground">🚑 Intervention 15–30 min</div>
-                <a
-                  href={currentNeighborhood ? `/${item.slug}` : `/ambulance-${item.slug}`}
+                <Link
+                  to={currentNeighborhood ? `/${item.slug}` : `/ambulance-${item.slug}`}
                   className="mt-2 inline-flex items-center gap-1 text-sm text-primary underline hover:text-primary/80 transition-colors"
                   aria-label={`Voir la page Ambulance à ${item.name}`}
                 >
                   👉 Voir la page
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

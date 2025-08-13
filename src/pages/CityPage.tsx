@@ -99,6 +99,7 @@ const CityPage = () => {
   const isMaarifVariant = location?.pathname?.includes("/ambulance-casablanca-maarif");
   const isGauthierVariant = location?.pathname?.includes("/ambulance-casablanca-gauthier");
   const isBourgogeVariant = location?.pathname?.includes("/ambulance-casablanca-bourgogne");
+  const isAinSebaaVariant = location?.pathname?.includes("/ambulance-casablanca-ain-sebaa");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -113,6 +114,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Gauthier – Ambulance privée Gauthier 24/7"
     : isBourgogeVariant
     ? "Ambulance Casablanca Bourgogne – Ambulance privée Bourgogne 24/7"
+    : isAinSebaaVariant
+    ? "Ambulance Casablanca Aïn Sebaâ – Ambulance privée Aïn Sebaâ 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -125,6 +128,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Gauthier: intervention rapide 24/7 à Gauthier. Ambulance privée Gauthier, transport médicalisé. Appelez +212 7777 223 11."
     : isBourgogeVariant
     ? "Ambulance Casablanca Bourgogne: intervention rapide 24/7 à Bourgogne. Ambulance privée Bourgogne, transport médicalisé. Appelez +212 7777 223 11."
+    : isAinSebaaVariant
+    ? "Ambulance Casablanca Aïn Sebaâ: intervention rapide 24/7 à Aïn Sebaâ. Ambulance privée Aïn Sebaâ, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -137,6 +142,8 @@ const CityPage = () => {
     ? ["Ambulance Casablanca Gauthier","ambulance privée Gauthier","ambulance casablanca","ambulance privée casablanca"]
     : isBourgogeVariant
     ? ["Ambulance Casablanca Bourgogne","ambulance privée Bourgogne","ambulance casablanca","ambulance privée casablanca"]
+    : isAinSebaaVariant
+    ? ["Ambulance Casablanca Aïn Sebaâ","ambulance privée Aïn Sebaâ","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -149,6 +156,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-gauthier`
     : isBourgogeVariant
     ? `${siteUrl}/ambulance-casablanca-bourgogne`
+    : isAinSebaaVariant
+    ? `${siteUrl}/ambulance-casablanca-ain-sebaa`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -161,6 +170,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Gauthier – Intervention 24/7"
     : isBourgogeVariant
     ? "Ambulance Casablanca Bourgogne – Intervention 24/7"
+    : isAinSebaaVariant
+    ? "Ambulance Casablanca Aïn Sebaâ – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -227,6 +238,8 @@ const CityPage = () => {
                   <>Ambulance <span className="text-emergency">Casablanca Gauthier</span> – Intervention 24/7</>
                 ) : isBourgogeVariant ? (
                   <>Ambulance <span className="text-emergency">Casablanca Bourgogne</span> – Intervention 24/7</>
+                ) : isAinSebaaVariant ? (
+                  <>Ambulance <span className="text-emergency">Casablanca Aïn Sebaâ</span> – Intervention 24/7</>
                 ) : (
                   <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
                 )}
@@ -526,6 +539,36 @@ const CityPage = () => {
                     </ul>
                   </div>
                 </>
+              ) : isAinSebaaVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Casablanca – Quartier Aïn Sebaâ
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier industriel et résidentiel d'Aïn Sebaâ à Casablanca bénéficie de notre service d'ambulance professionnel et réactif, avec une couverture étendue pour répondre efficacement à toutes les urgences médicales. Notre équipe expérimentée assure une prise en charge rapide et sécurisée, 24h/24 et 7j/7, dans ce secteur stratégique de la ville.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture des zones résidentielles et industrielles</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Accès au Port et zones industrielles</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté aux entreprises et particuliers</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Liaison directe avec les centres médicaux d'Aïn Sebaâ</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
               ) : (
                 <>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
@@ -639,6 +682,46 @@ const CityPage = () => {
                   <div className="space-y-2 text-gray-700">
                     <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                     <p>📍 Casablanca – Quartier Maârif et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : isAinSebaaVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Aïn Sebaâ 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc propose un <strong>service d'ambulance à Casablanca Aïn Sebaâ</strong> rapide, fiable et sécurisé, parfaitement adapté à toutes les situations : urgences vitales, transferts médicaux, hospitalisations planifiées ou soins à domicile. Nous couvrons l'ensemble du quartier d'Aïn Sebaâ ainsi que ses zones voisines, pour assurer un service efficace à toute heure, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Aïn Sebaâ avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont équipées pour le <strong>transport médicalisé dans le quartier d'Aïn Sebaâ</strong>. Chaque intervention est assurée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon les besoins. Nous suivons des protocoles stricts pour garantir la sécurité et le confort des patients, que ce soit pour des particuliers ou pour des entreprises.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans tout Aïn Sebaâ et ses alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les zones résidentielles, industrielles et commerciales d'Aïn Sebaâ, ainsi que dans les quartiers proches : Hay Mohammadi, Sidi Bernoussi, Roches Noires et le Port de Casablanca. <strong>Notre centrale d'appel est disponible 24h/24 et 7j/7</strong> pour organiser un transfert ou envoyer une ambulance immédiatement.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'ambulance dans le quartier Aïn Sebaâ à Casablanca, <strong>appelez le <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une réponse rapide.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Aïn Sebaâ ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et bien équipées</li>
+                  <li>Couverture complète d'Aïn Sebaâ et des zones voisines</li>
+                  <li>Service d'<strong>ambulance privée Casablanca</strong> pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Aïn Sebaâ et alentours</p>
                     <p>🕐 Service : 24h/24 – 7j/7</p>
                   </div>
                 </div>

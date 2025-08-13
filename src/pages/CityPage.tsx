@@ -102,6 +102,7 @@ const CityPage = () => {
   const isAinSebaaVariant = location?.pathname?.includes("/ambulance-casablanca-ain-sebaa");
   const isOasisVariant = location?.pathname?.includes("/ambulance-casablanca-oasis");
   const isSidiMaaroufVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-maarouf");
+  const isAinChockVariant = location?.pathname?.includes("/ambulance-casablanca-ain-chock");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -122,6 +123,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Oasis – Ambulance privée Oasis 24/7"
     : isSidiMaaroufVariant
     ? "Ambulance Casablanca Sidi Maârouf – Ambulance privée Sidi Maârouf 24/7"
+    : isAinChockVariant
+    ? "Ambulance Casablanca Aïn Chock – Ambulance privée Aïn Chock 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -140,6 +143,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Oasis: intervention rapide 24/7 à Oasis. Ambulance privée Oasis, transport médicalisé. Appelez +212 7777 223 11."
     : isSidiMaaroufVariant
     ? "Ambulance Casablanca Sidi Maârouf: intervention rapide 24/7 à Sidi Maârouf. Ambulance privée Sidi Maârouf, transport médicalisé. Appelez +212 7777 223 11."
+    : isAinChockVariant
+    ? "Ambulance Casablanca Aïn Chock: intervention rapide 24/7 à Aïn Chock. Ambulance privée Aïn Chock, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -158,6 +163,8 @@ const CityPage = () => {
     ? ["Ambulance Casablanca Oasis","ambulance privée Oasis","ambulance casablanca","ambulance privée casablanca"]
     : isSidiMaaroufVariant
     ? ["Ambulance Casablanca Sidi Maârouf","ambulance privée Sidi Maârouf","ambulance casablanca","ambulance privée casablanca"]
+    : isAinChockVariant
+    ? ["Ambulance Casablanca Aïn Chock","ambulance privée Aïn Chock","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -176,6 +183,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-oasis`
     : isSidiMaaroufVariant
     ? `${siteUrl}/ambulance-casablanca-sidi-maarouf`
+    : isAinChockVariant
+    ? `${siteUrl}/ambulance-casablanca-ain-chock`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -194,6 +203,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Oasis – Intervention 24/7"
     : isSidiMaaroufVariant
     ? "Ambulance Casablanca Sidi Maârouf – Intervention 24/7"
+    : isAinChockVariant
+    ? "Ambulance Casablanca Aïn Chock – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -266,6 +277,8 @@ const CityPage = () => {
                    <>Ambulance <span className="text-emergency">Casablanca Oasis</span> – Intervention 24/7</>
                  ) : isSidiMaaroufVariant ? (
                    <>Ambulance <span className="text-emergency">Casablanca Sidi Maârouf</span> – Intervention 24/7</>
+                 ) : isAinChockVariant ? (
+                   <>Ambulance <span className="text-emergency">Casablanca Aïn Chock</span> – Intervention 24/7</>
                  ) : (
                    <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
                  )}
@@ -869,6 +882,46 @@ const CityPage = () => {
                     <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                     <p>📍 Casablanca – Quartier Ain Diab et alentours</p>
                     <p>🕐 Service 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : isAinChockVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Aïn Chock 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc vous propose un service d'ambulance à Casablanca Aïn Chock rapide, sécurisé et disponible à tout moment, pour tous types d'interventions médicales : urgences vitales, transferts vers hôpitaux, hospitalisations programmées ou assistance médicale à domicile. Nous intervenons dans tout le quartier d'Aïn Chock ainsi que dans les zones avoisinantes, garantissant une prise en charge efficace, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Aïn Chock avec équipe expérimentée</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont spécialement équipées pour assurer un transport médicalisé dans le quartier d'Aïn Chock. Chaque mission est menée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon la situation. Nous appliquons des protocoles stricts afin de garantir le confort et la sécurité des patients, que ce soit pour des particuliers ou pour des entreprises locales.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité à Aïn Chock et ses environs</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les zones résidentielles et universitaires d'Aïn Chock, ainsi que dans les quartiers voisins : Sidi Maârouf, Californie, Hay Hassani et Oasis. Notre centrale d'appel est joignable 24h/24 et 7j/7 pour organiser un transfert médical ou envoyer immédiatement une ambulance sur place.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'ambulance dans le quartier Aïn Chock à Casablanca, appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une réponse immédiate.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Aïn Chock ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et parfaitement équipées</li>
+                  <li>Couverture complète d'Aïn Chock et des zones voisines</li>
+                  <li>Service d'ambulance privée Casablanca pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Aïn Chock et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
                   </div>
                 </div>
               </>

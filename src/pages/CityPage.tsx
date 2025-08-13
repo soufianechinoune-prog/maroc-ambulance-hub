@@ -103,6 +103,7 @@ const CityPage = () => {
   const isOasisVariant = location?.pathname?.includes("/ambulance-casablanca-oasis");
   const isSidiMaaroufVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-maarouf");
   const isAinChockVariant = location?.pathname?.includes("/ambulance-casablanca-ain-chock");
+  const isBouskouraVariant = location?.pathname?.includes("/ambulance-casablanca-bouskoura");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -125,6 +126,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Sidi Maârouf – Ambulance privée Sidi Maârouf 24/7"
     : isAinChockVariant
     ? "Ambulance Casablanca Aïn Chock – Ambulance privée Aïn Chock 24/7"
+    : isBouskouraVariant
+    ? "Ambulance Bouskoura – Ambulance privée Bouskoura 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -145,6 +148,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Sidi Maârouf: intervention rapide 24/7 à Sidi Maârouf. Ambulance privée Sidi Maârouf, transport médicalisé. Appelez +212 7777 223 11."
     : isAinChockVariant
     ? "Ambulance Casablanca Aïn Chock: intervention rapide 24/7 à Aïn Chock. Ambulance privée Aïn Chock, transport médicalisé. Appelez +212 7777 223 11."
+    : isBouskouraVariant
+    ? "Ambulance Bouskoura: intervention rapide 24/7 à Bouskoura. Ambulance privée Bouskoura, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -165,6 +170,8 @@ const CityPage = () => {
     ? ["Ambulance Casablanca Sidi Maârouf","ambulance privée Sidi Maârouf","ambulance casablanca","ambulance privée casablanca"]
     : isAinChockVariant
     ? ["Ambulance Casablanca Aïn Chock","ambulance privée Aïn Chock","ambulance casablanca","ambulance privée casablanca"]
+    : isBouskouraVariant
+    ? ["Ambulance Bouskoura","ambulance privée Bouskoura","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -185,6 +192,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-sidi-maarouf`
     : isAinChockVariant
     ? `${siteUrl}/ambulance-casablanca-ain-chock`
+    : isBouskouraVariant
+    ? `${siteUrl}/ambulance-casablanca-bouskoura`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -205,6 +214,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Sidi Maârouf – Intervention 24/7"
     : isAinChockVariant
     ? "Ambulance Casablanca Aïn Chock – Intervention 24/7"
+    : isBouskouraVariant
+    ? "Ambulance Bouskoura – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -277,9 +288,11 @@ const CityPage = () => {
                    <>Ambulance <span className="text-emergency">Casablanca Oasis</span> – Intervention 24/7</>
                  ) : isSidiMaaroufVariant ? (
                    <>Ambulance <span className="text-emergency">Casablanca Sidi Maârouf</span> – Intervention 24/7</>
-                 ) : isAinChockVariant ? (
-                   <>Ambulance <span className="text-emergency">Casablanca Aïn Chock</span> – Intervention 24/7</>
-                 ) : (
+                  ) : isAinChockVariant ? (
+                    <>Ambulance <span className="text-emergency">Casablanca Aïn Chock</span> – Intervention 24/7</>
+                  ) : isBouskouraVariant ? (
+                    <>Ambulance <span className="text-emergency">Bouskoura</span> – Intervention 24/7</>
+                  ) : (
                    <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
                  )}
               </h1>

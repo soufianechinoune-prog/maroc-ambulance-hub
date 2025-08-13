@@ -68,8 +68,8 @@ const MoroccoMap = () => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v11',
-      center: [-6.2, 32.0], // Centre du Maroc
-      zoom: 5.5,
+      center: [-7.6, 33.5], // Centre sur Casablanca pour débugger
+      zoom: 5,
       projection: 'mercator'
     });
 
@@ -78,6 +78,10 @@ const MoroccoMap = () => {
 
     // Chargement des données et ajout des couches
     map.current.on('load', () => {
+      console.log('Mapbox map loaded, adding sources and layers...');
+      console.log('Main cities data:', mainCitiesData);
+      console.log('Other cities data:', otherCitiesData);
+      
       // Ajout des sources de données
       map.current.addSource('main-cities', {
         type: 'geojson',
@@ -88,6 +92,8 @@ const MoroccoMap = () => {
         type: 'geojson',
         data: otherCitiesData
       });
+
+      console.log('Sources added successfully');
 
       // Couche des villes principales (bleu)
       map.current.addLayer({
@@ -101,6 +107,7 @@ const MoroccoMap = () => {
           'circle-stroke-width': 2
         }
       });
+      console.log('Main cities layer added');
 
       // Couche des autres villes (rouge)
       map.current.addLayer({
@@ -114,6 +121,7 @@ const MoroccoMap = () => {
           'circle-stroke-width': 2
         }
       });
+      console.log('Other cities layer added');
 
       // Labels pour les villes principales avec halo blanc
       map.current.addLayer({
@@ -133,6 +141,7 @@ const MoroccoMap = () => {
           'text-halo-width': 2
         }
       });
+      console.log('Main cities labels added');
 
       // Labels pour les autres villes avec halo blanc
       map.current.addLayer({
@@ -152,6 +161,9 @@ const MoroccoMap = () => {
           'text-halo-width': 2
         }
       });
+      console.log('Other cities labels added');
+      
+      console.log('All layers added successfully. Map should now display points.');
     });
 
     // Cleanup function

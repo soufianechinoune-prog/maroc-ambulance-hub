@@ -100,6 +100,7 @@ const CityPage = () => {
   const isGauthierVariant = location?.pathname?.includes("/ambulance-casablanca-gauthier");
   const isBourgogeVariant = location?.pathname?.includes("/ambulance-casablanca-bourgogne");
   const isAinSebaaVariant = location?.pathname?.includes("/ambulance-casablanca-ain-sebaa");
+  const isOasisVariant = location?.pathname?.includes("/ambulance-casablanca-oasis");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -116,6 +117,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Bourgogne – Ambulance privée Bourgogne 24/7"
     : isAinSebaaVariant
     ? "Ambulance Casablanca Aïn Sebaâ – Ambulance privée Aïn Sebaâ 24/7"
+    : isOasisVariant
+    ? "Ambulance Casablanca Oasis – Ambulance privée Oasis 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -130,6 +133,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Bourgogne: intervention rapide 24/7 à Bourgogne. Ambulance privée Bourgogne, transport médicalisé. Appelez +212 7777 223 11."
     : isAinSebaaVariant
     ? "Ambulance Casablanca Aïn Sebaâ: intervention rapide 24/7 à Aïn Sebaâ. Ambulance privée Aïn Sebaâ, transport médicalisé. Appelez +212 7777 223 11."
+    : isOasisVariant
+    ? "Ambulance Casablanca Oasis: intervention rapide 24/7 à Oasis. Ambulance privée Oasis, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -144,6 +149,8 @@ const CityPage = () => {
     ? ["Ambulance Casablanca Bourgogne","ambulance privée Bourgogne","ambulance casablanca","ambulance privée casablanca"]
     : isAinSebaaVariant
     ? ["Ambulance Casablanca Aïn Sebaâ","ambulance privée Aïn Sebaâ","ambulance casablanca","ambulance privée casablanca"]
+    : isOasisVariant
+    ? ["Ambulance Casablanca Oasis","ambulance privée Oasis","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -158,6 +165,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-bourgogne`
     : isAinSebaaVariant
     ? `${siteUrl}/ambulance-casablanca-ain-sebaa`
+    : isOasisVariant
+    ? `${siteUrl}/ambulance-casablanca-oasis`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -172,6 +181,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Bourgogne – Intervention 24/7"
     : isAinSebaaVariant
     ? "Ambulance Casablanca Aïn Sebaâ – Intervention 24/7"
+    : isOasisVariant
+    ? "Ambulance Casablanca Oasis – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -238,11 +249,13 @@ const CityPage = () => {
                   <>Ambulance <span className="text-emergency">Casablanca Gauthier</span> – Intervention 24/7</>
                 ) : isBourgogeVariant ? (
                   <>Ambulance <span className="text-emergency">Casablanca Bourgogne</span> – Intervention 24/7</>
-                ) : isAinSebaaVariant ? (
-                  <>Ambulance <span className="text-emergency">Casablanca Aïn Sebaâ</span> – Intervention 24/7</>
-                ) : (
-                  <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
-                )}
+                 ) : isAinSebaaVariant ? (
+                   <>Ambulance <span className="text-emergency">Casablanca Aïn Sebaâ</span> – Intervention 24/7</>
+                 ) : isOasisVariant ? (
+                   <>Ambulance <span className="text-emergency">Casablanca Oasis</span> – Intervention 24/7</>
+                 ) : (
+                   <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
+                 )}
               </h1>
               
               <div className="text-xl md:text-2xl text-white/90 space-y-2">
@@ -886,6 +899,46 @@ const CityPage = () => {
                     <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                     <p>📍 Casablanca & périphérie</p>
                     <p>🕐 Service 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : isOasisVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Oasis 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc met à votre disposition un service d'ambulance à Casablanca Oasis rapide, sécurisé et fiable, adapté à toutes les situations : urgences vitales, transferts médicaux, hospitalisations programmées ou soins à domicile. Nous couvrons l'ensemble du quartier d'Oasis ainsi que ses environs, afin d'assurer une prise en charge efficace à toute heure, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Oasis avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont équipées pour le transport médicalisé dans le quartier d'Oasis. Chaque mission est effectuée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence en fonction des besoins. Nous appliquons des protocoles stricts afin de garantir sécurité, confort et qualité de service, que ce soit pour des particuliers ou pour des entreprises implantées dans le secteur.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans tout Oasis et ses alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les zones résidentielles et commerciales d'Oasis, ainsi que dans les quartiers voisins : Californie, Aïn Chock, Maârif et Hay Hassani. Notre centrale d'appel reste joignable 24h/24 et 7j/7 pour organiser un transfert médical ou envoyer immédiatement une ambulance sur place.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'ambulance dans le quartier Oasis à Casablanca, composez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une prise en charge rapide.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Oasis ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et entièrement équipées</li>
+                  <li>Couverture complète d'Oasis et des zones avoisinantes</li>
+                  <li>Service d'ambulance privée Casablanca pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Oasis et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
                   </div>
                 </div>
               </>

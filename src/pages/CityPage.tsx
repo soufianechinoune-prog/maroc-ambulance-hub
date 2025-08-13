@@ -1749,43 +1749,76 @@ const CityPage = () => {
       {city.slug === 'rabat' && (
         <section className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat 24h/24 et 7j/7</h2>
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat Yacoub El Mansour 24h/24 et 7j/7</h2>
             <p className="mb-6 text-gray-700 leading-relaxed">
-              Vous êtes à Rabat et avez besoin d'une intervention médicale rapide ? <strong>Notre service d'ambulance à Rabat</strong> couvre toutes les zones : Agdal, Hay Riad, Souissi, Centre-Ville, Yacoub El Mansour, Océan, et même Salé. Disponibles 24h/24 et 7j/7, nous intervenons en moins de 15 minutes.
+              Vous êtes à Yacoub El Mansour et avez besoin d'une intervention médicale rapide ? Notre service d'ambulance à Rabat Yacoub El Mansour est disponible en continu pour répondre à toutes vos urgences : urgences vitales, transferts hospitaliers, soins programmés ou assistance médicale à domicile. Nous couvrons tout le secteur de Yacoub El Mansour ainsi que ses environs immédiats, avec un temps d'intervention moyen inférieur à 15 minutes.
             </p>
 
-            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Rabat avec équipement complet</h3>
+            <div className="border-l-4 border-primary pl-4 mb-8">
+              <div className="h-px bg-gray-300 my-4"></div>
+            </div>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Rabat Yacoub El Mansour avec équipement complet</h3>
             <p className="mb-6 text-gray-700 leading-relaxed">
-              Nos véhicules sont climatisés, équipés de tout le matériel nécessaire, et accompagnés d'un personnel formé : auxiliaires, infirmiers et médecins selon les besoins. 
-              <strong>Transferts cliniques, urgences à domicile, évacuations</strong> : nous répondons à tous les besoins.
+              Nos véhicules d'intervention sont climatisés, parfaitement équipés et accompagnés d'un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon la situation. Transferts cliniques, évacuations, interventions à domicile : nous adaptons nos services à vos besoins, en toute sécurité et selon les normes médicales en vigueur.
             </p>
 
-            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zones couvertes à Rabat et périphérie</h3>
+            <div className="border-l-4 border-primary pl-4 mb-8">
+              <div className="h-px bg-gray-300 my-4"></div>
+            </div>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zones couvertes à Yacoub El Mansour et alentours</h3>
             <p className="mb-6 text-gray-700 leading-relaxed">
-              Nous intervenons à Rabat, mais aussi dans les zones périphériques comme Salé, Témara, Skhirat, Ain Atiq, Harhoura, et plus encore. 
-              Notre standard est disponible <strong>24h/24</strong> pour toute demande d'ambulance privée ou médicalisée.
+              Nous intervenons dans toutes les zones résidentielles et commerciales de Yacoub El Mansour, ainsi que dans les quartiers proches : Hay Riad, Agdal, Souissi, Centre-Ville et Océan. Notre standard est accessible 24h/24 pour toute demande d'ambulance privée ou de transport médicalisé.
             </p>
+
+            <div className="border-l-4 border-primary pl-4 mb-8">
+              <div className="h-px bg-gray-300 my-4"></div>
+            </div>
 
             <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Contact rapide</h3>
             <p className="mb-6 text-gray-700 leading-relaxed">
-              Appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez le bouton WhatsApp sur notre site pour nous contacter immédiatement.
+              Appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour obtenir une réponse immédiate et une prise en charge rapide.
             </p>
 
-            <h3 className="text-2xl font-semibold mb-4 text-gray-900">Pourquoi choisir Ambulance Maroc à Rabat ?</h3>
-            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
-              <li>✅ Réponse rapide 24h/24 – 7j/7</li>
-              <li>✅ Couverture large : Rabat + périphérie</li>
-              <li>✅ Ambulances équipées, climatisées, sécurisées</li>
-              <li>✅ Personnel professionnel multilingue (FR/AR)</li>
-              <li>✅ Adapté aux particuliers, entreprises, événements</li>
+            <div className="border-l-4 border-primary pl-4 mb-8">
+              <div className="h-px bg-gray-300 my-4"></div>
+            </div>
+
+            <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc à Yacoub El Mansour ?</h3>
+            <ul className="list-none mb-8 text-gray-700 space-y-3">
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <span>🚑 Intervention rapide 24h/24 – 7j/7</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <span>🏥 Couverture complète : Yacoub El Mansour & alentours</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <span>🚐 Ambulances modernes, climatisées et sécurisées</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <span>👨‍⚕️ Personnel médical formé et expérimenté</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <span>📌 Service adapté aux particuliers, entreprises et événements</span>
+              </li>
             </ul>
+
+            <div className="border-l-4 border-primary pl-4 mb-8">
+              <div className="h-px bg-gray-300 my-4"></div>
+            </div>
 
             <div className="bg-gray-100 p-6 rounded-lg">
               <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
               <div className="space-y-2 text-gray-700">
                 <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
-                <p>📍 Rabat & régions alentours</p>
-                <p>🕐 Disponible 24h/24 – 7j/7</p>
+                <p>📍 Rabat – Quartier Yacoub El Mansour et alentours</p>
+                <p>🕐 Service disponible : 24h/24 – 7j/7</p>
               </div>
             </div>
           </div>

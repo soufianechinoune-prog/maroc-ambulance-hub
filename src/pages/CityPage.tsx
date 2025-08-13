@@ -895,6 +895,156 @@ const CityPage = () => {
                     </ul>
                   </div>
                 </>
+              ) : isAgdalVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Rabat – Quartier Agdal
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier moderne d'Agdal à Rabat bénéficie de notre service d'ambulance spécialisé et réactif, avec une couverture optimale pour ce secteur universitaire et résidentiel stratégique. Notre équipe qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture campus universitaires et zones étudiantes</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Hassan, Hay Riad et zones universitaires</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté étudiants, professeurs et résidents</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès privilégié aux centres de santé universitaires</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isHassanVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Rabat – Quartier Hassan
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier administratif de Hassan à Rabat bénéficie de notre service d'ambulance hautement professionnel, avec une couverture renforcée pour ce secteur gouvernemental et institutionnel. Notre équipe expérimentée assure une prise en charge rapide et sécurisée, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture ministères, administrations et centre-ville</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Médina, Agdal et zones gouvernementales</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service premium adapté fonctionnaires et professionnels</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès facilité aux centres médicaux du centre-ville</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isHayRiadVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Rabat – Quartier Hay Riad
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier résidentiel haut standing de Hay Riad à Rabat bénéficie de notre service d'ambulance premium, avec une couverture adaptée pour ce secteur moderne et familial. Notre équipe qualifiée assure une prise en charge rapide et confortable, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture résidences modernes et centres commerciaux</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Souissi, Agdal et Madinat Al Irfane</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté familles et résidents aisés</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès privilégié aux cliniques privées du secteur</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isSouissiVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Rabat – Quartier Souissi
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier diplomatique de Souissi à Rabat bénéficie de notre service d'ambulance spécialisé et sécurisé, avec une couverture adaptée aux exigences de ce secteur sensible et résidentiel. Notre équipe expérimentée assure une prise en charge discrète et professionnelle, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture ambassades, résidences diplomatiques et villas</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Hay Riad et zones sécurisées</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service VIP adapté diplomates et hauts fonctionnaires</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Coordination avec services médicaux spécialisés</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isYacoubElMansourVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Rabat – Quartier Yacoub El Mansour
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier populaire de Yacoub El Mansour à Rabat bénéficie de notre service d'ambulance accessible et réactif, avec une couverture complète pour ce secteur résidentiel dynamique. Notre équipe dévouée assure une prise en charge rapide et efficace, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture quartiers résidentiels et commerces de proximité</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Hassan et centre-ville</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté familles et communauté locale</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès aux centres de santé communautaires</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
               ) : (
                 <>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
@@ -929,7 +1079,7 @@ const CityPage = () => {
         </div>
       </section>
 
-      {city.slug === 'casablanca' && (
+      {city.slug === 'casablanca' ? (
         <section className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-6">
             {isCalifornieVariant ? (

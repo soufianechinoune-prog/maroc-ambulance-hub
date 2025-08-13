@@ -326,6 +326,68 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
             { icon: "✔", text: "Couverture Bouregreg" }
           ]
         };
+      
+      // Quartiers de Rabat
+      case 'agdal':
+        return {
+          title: "🚑 Ambulance Rabat Agdal – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (10-15 min) dans Agdal et zones universitaires — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Spécialiste zones universitaires" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Couverture Agdal & Hassan" }
+          ]
+        };
+      case 'hassan':
+        return {
+          title: "🚑 Ambulance Rabat Hassan – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (8-12 min) dans Hassan et centre administratif — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Spécialiste centre administratif" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Couverture Hassan & Medina" }
+          ]
+        };
+      case 'hay-riad':
+        return {
+          title: "🚑 Ambulance Rabat Hay Riad – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (10-15 min) dans Hay Riad et résidences — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Spécialiste résidences modernes" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Couverture Hay Riad & Souissi" }
+          ]
+        };
+      case 'souissi':
+        return {
+          title: "🚑 Ambulance Rabat Souissi – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (12-18 min) dans Souissi et quartier diplomatique — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Spécialiste quartier diplomatique" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Couverture Souissi & Hay Riad" }
+          ]
+        };
+      case 'yacoub-el-mansour':
+        return {
+          title: "🚑 Ambulance Rabat Yacoub El Mansour – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (10-15 min) dans Yacoub El Mansour et zones résidentielles — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Spécialiste zones résidentielles" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Couverture Yacoub El Mansour & Hassan" }
+          ]
+        };
       default:
         return {
           title: h1 || `🚑 Ambulance ${city} – Urgences 24h/24, ambulance privée et transport médicalisé`,

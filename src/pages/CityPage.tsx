@@ -324,23 +324,57 @@ const CityPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Service d'Ambulance à {city.name}
-              </h2>
-              <p className="text-xl text-gray-600 mb-8">
-                {city.description}
-              </p>
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
-                <ul className="space-y-3">
-                  {city.specificities.map((spec, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                      <span className="text-gray-700">{spec}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+{isCalifornieVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d’Ambulance à Casablanca – Quartier Californie
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le prestigieux quartier Californie à Casablanca bénéficie de notre service d’ambulance haut de gamme, avec une présence renforcée pour répondre rapidement à toutes les urgences médicales. Grâce à notre flotte moderne et nos équipes qualifiées, nous assurons un temps d’intervention réduit et une prise en charge sécurisée, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 5 ambulances dédiées au quartier Californie, prêtes à intervenir en permanence</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Couverture complète des résidences, écoles internationales et zones résidentielles haut standing</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Partenariats privilégiés avec les cliniques privées et hôpitaux proches de Californie</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">👨‍💼 Service VIP et assistance premium pour particuliers et entreprises locales</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à {city.name}
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    {city.description}
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      {city.specificities.map((spec, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                          <span className="text-gray-700">{spec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </>
+              )}
             </div>
             <div className="relative">
               <img 

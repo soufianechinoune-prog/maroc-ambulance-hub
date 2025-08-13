@@ -170,6 +170,18 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
             { icon: "✔", text: "Couverture Derb Sultan & Centre-Ville" }
           ]
         };
+      case 'casablanca':
+        return {
+          title: "🚑 Ambulance Casablanca – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 8–15 min • Couverture nationale • Personnel qualifié",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Qualité protocolaire" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Couverture nationale" }
+          ]
+        };
       default:
         return {
           title: h1 || `Ambulance à ${city} – Intervention 24/7`,

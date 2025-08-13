@@ -300,7 +300,7 @@ const CityPage = () => {
           isSidiBernoussiVariant ? 'sidi-bernoussi' :
           isDerbSultanVariant ? 'derb-sultan' :
           isSidiBelyoutVariant ? 'sidi-belyout' :
-          undefined
+          (city?.slug === 'casablanca' ? 'casablanca' : undefined)
         }
       />
 

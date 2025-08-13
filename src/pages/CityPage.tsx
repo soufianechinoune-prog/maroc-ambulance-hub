@@ -1749,7 +1749,84 @@ const CityPage = () => {
       {city.slug === 'rabat' && (
         <section className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat Yacoub El Mansour 24h/24 et 7j/7</h2>
+            {isAgdalVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat Agdal 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Vous êtes à Agdal et avez besoin d'une intervention médicale rapide ? Notre service d'ambulance à Rabat Agdal couvre toutes les situations : urgences vitales, transferts médicaux, hospitalisations programmées ou soins à domicile. Présents 24h/24 et 7j/7, nous intervenons dans tout Agdal et ses environs en moins de 15 minutes pour assurer une prise en charge rapide et sécurisée.
+                </p>
+
+                <div className="border-l-4 border-primary pl-4 mb-8">
+                  <div className="h-px bg-gray-300 my-4"></div>
+                </div>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Rabat Agdal avec équipement complet</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont climatisées, dotées de matériel médical de pointe et accompagnées d'un personnel qualifié : auxiliaires ambulanciers, infirmiers, médecins urgentistes selon le besoin. Transports médicalisés, urgences à domicile, transferts cliniques : nous assurons des interventions conformes aux normes nationales et internationales.
+                </p>
+
+                <div className="border-l-4 border-primary pl-4 mb-8">
+                  <div className="h-px bg-gray-300 my-4"></div>
+                </div>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zones couvertes à Agdal et alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les rues et zones résidentielles, universitaires et commerciales d'Agdal, ainsi que dans les quartiers voisins : Hay Riad, Souissi, Centre-Ville et Yacoub El Mansour. Notre centrale d'appel est disponible 24h/24 et 7j/7 pour organiser un transfert ou dépêcher une ambulance immédiatement.
+                </p>
+
+                <div className="border-l-4 border-primary pl-4 mb-8">
+                  <div className="h-px bg-gray-300 my-4"></div>
+                </div>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Contact rapide</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp sur le site pour nous contacter directement et obtenir une intervention immédiate.
+                </p>
+
+                <div className="border-l-4 border-primary pl-4 mb-8">
+                  <div className="h-px bg-gray-300 my-4"></div>
+                </div>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc à Rabat Agdal ?</h3>
+                <ul className="list-none mb-8 text-gray-700 space-y-3">
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Réponse rapide 24h/24 – 7j/7</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Couverture large : Agdal + quartiers voisins</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Ambulances modernes, climatisées, parfaitement équipées</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Personnel formé et expérimenté, bilingue FR/AR</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span>•</span>
+                    <span>Service d'ambulance privée adapté aux particuliers, entreprises et événements</span>
+                  </li>
+                </ul>
+
+                <div className="border-l-4 border-primary pl-4 mb-8">
+                  <div className="h-px bg-gray-300 my-4"></div>
+                </div>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Rabat – Quartier Agdal et environs</p>
+                    <p>🕐 Disponible 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat Yacoub El Mansour 24h/24 et 7j/7</h2>
             <p className="mb-6 text-gray-700 leading-relaxed">
               Vous êtes à Yacoub El Mansour et avez besoin d'une intervention médicale rapide ? Notre service d'ambulance à Rabat Yacoub El Mansour est disponible en continu pour répondre à toutes vos urgences : urgences vitales, transferts hospitaliers, soins programmés ou assistance médicale à domicile. Nous couvrons tout le secteur de Yacoub El Mansour ainsi que ses environs immédiats, avec un temps d'intervention moyen inférieur à 15 minutes.
             </p>
@@ -1821,6 +1898,8 @@ const CityPage = () => {
                 <p>🕐 Service disponible : 24h/24 – 7j/7</p>
               </div>
             </div>
+              </>
+            )}
           </div>
         </section>
       )}

@@ -94,9 +94,30 @@ const CityPage = () => {
   };
 
   const cityData = seoData[city?.slug] || {};
-  const title = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
-  const description = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
-  const canonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
+  const isCalifornieVariant = location?.pathname?.includes("/ambulance-casablanca-californie");
+  const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
+  const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
+  const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
+
+  const title = isCalifornieVariant
+    ? "Ambulance Casablanca Californie – Ambulance privée Californie 24/7"
+    : baseTitle;
+
+  const description = isCalifornieVariant
+    ? "Ambulance Casablanca Californie: intervention rapide 24/7 à Californie. Ambulance privée Californie, transport médicalisé. Appelez +212 7777 223 11."
+    : baseDescription;
+
+  const keywords = isCalifornieVariant
+    ? ["Ambulance Casablanca Californie","ambulance privée Californie","ambulance casablanca","ambulance privée casablanca"]
+    : undefined;
+
+  const canonical = isCalifornieVariant
+    ? `${siteUrl}/ambulance-casablanca-californie`
+    : baseCanonical;
+
+  const h1Text = isCalifornieVariant
+    ? "Ambulance Casablanca Californie – Intervention 24/7"
+    : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
   const emergencySchema = city ? generateLocalBusinessSchema(city) : undefined;
@@ -126,7 +147,7 @@ const CityPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title={title} description={description} canonical={canonical} jsonLdMultiple={jsonLdArray} />
+      <SEO title={title} description={description} canonical={canonical} jsonLdMultiple={jsonLdArray} keywords={keywords} />
       <Header city={city.name} />
       
       {/* Hero Section - Identique à la Home Page mais personnalisée */}
@@ -152,7 +173,11 @@ const CityPage = () => {
 
                {/* Main Heading */}
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7
+                {isCalifornieVariant ? (
+                  <>Ambulance <span className="text-emergency">Casablanca Californie</span> – Intervention 24/7</>
+                ) : (
+                  <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
+                )}
               </h1>
               
               <div className="text-xl md:text-2xl text-white/90 space-y-2">

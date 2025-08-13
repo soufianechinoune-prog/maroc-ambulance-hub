@@ -182,16 +182,160 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
             { icon: "✔", text: "Couverture nationale" }
           ]
         };
+      case 'rabat':
+        return {
+          title: "🚑 Ambulance Rabat – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 10–15 min • Couverture Rabat-Salé-Kénitra • Personnel qualifié",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Service prioritaire institutions" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Transport diplomatique autorisé" }
+          ]
+        };
+      case 'marrakech':
+        return {
+          title: "🚑 Ambulance Marrakech – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 12–18 min • Équipes multilingues • Accès médina optimisé",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Équipes multilingues (FR/EN/AR)" },
+            { icon: "✔", text: "Accès optimisé médina" },
+            { icon: "✔", text: "Service touristique 24h/24" }
+          ]
+        };
+      case 'tanger':
+        return {
+          title: "🚑 Ambulance Tanger – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 15–20 min • Service transfrontalier • Couverture zone industrielle",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Service transfrontalier" },
+            { icon: "✔", text: "Couverture zone industrielle TFZ" },
+            { icon: "✔", text: "Coordination internationale" }
+          ]
+        };
+      case 'fes':
+        return {
+          title: "🚑 Ambulance Fès – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 15–20 min • Véhicules adaptés médina • Service universitaire renforcé",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Véhicules adaptés médina" },
+            { icon: "✔", text: "Service universitaire renforcé" },
+            { icon: "✔", text: "Couverture zones historiques" }
+          ]
+        };
+      case 'agadir':
+        return {
+          title: "🚑 Ambulance Agadir – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 12–18 min • Urgences aquatiques • Service zones hôtelières",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Urgences aquatiques et nautiques" },
+            { icon: "✔", text: "Service zones hôtelières" },
+            { icon: "✔", text: "Équipes formées tourisme" }
+          ]
+        };
+      case 'meknes':
+        return {
+          title: "🚑 Ambulance Meknès – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 18–25 min • Couverture zones agricoles • Service sites historiques",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Couverture zones agricoles" },
+            { icon: "✔", text: "Service sites historiques" },
+            { icon: "✔", text: "Coordination avec Fès" }
+          ]
+        };
+      case 'oujda':
+        return {
+          title: "🚑 Ambulance Oujda – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 20–25 min • Service transfrontalier • Couverture zones commerciales",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Service transfrontalier" },
+            { icon: "✔", text: "Couverture zones commerciales" },
+            { icon: "✔", text: "Service zones rurales" }
+          ]
+        };
+      case 'tetouan':
+        return {
+          title: "🚑 Ambulance Tétouan – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 20–30 min • Interventions en altitude • Service zones montagneuses",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Interventions en altitude" },
+            { icon: "✔", text: "Service zones montagneuses" },
+            { icon: "✔", text: "Urgences rurales Rif" }
+          ]
+        };
+      case 'laayoune':
+        return {
+          title: "🚑 Ambulance Laâyoune – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 15–25 min • Véhicules tout-terrain • Service conditions désertiques",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Véhicules tout-terrain" },
+            { icon: "✔", text: "Service conditions désertiques" },
+            { icon: "✔", text: "Transport longue distance" }
+          ]
+        };
+      case 'mohammedia':
+        return {
+          title: "🚑 Ambulance Mohammedia – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 15–20 min • Coordination avec Casablanca • Service zones résidentielles",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Coordination avec Casablanca" },
+            { icon: "✔", text: "Service zones résidentielles" },
+            { icon: "✔", text: "Couverture littorale" }
+          ]
+        };
+      case 'kenitra':
+        return {
+          title: "🚑 Ambulance Kénitra – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 18–25 min • Service zones agricoles • Coordination avec Rabat",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Service zones agricoles" },
+            { icon: "✔", text: "Coordination avec Rabat" },
+            { icon: "✔", text: "Couverture Gharb" }
+          ]
+        };
+      case 'sale':
+        return {
+          title: "🚑 Ambulance Salé – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Temps de réponse moyen : 12–18 min • Coordination avec Rabat • Service zones résidentielles",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Coordination avec Rabat" },
+            { icon: "✔", text: "Service zones résidentielles" },
+            { icon: "✔", text: "Couverture Bouregreg" }
+          ]
+        };
       default:
         return {
-          title: h1 || `Ambulance à ${city} – Intervention 24/7`,
-          subtitle: subtitle || "Intervention rapide 24h/24 et 7j/7",
+          title: h1 || `🚑 Ambulance ${city} – Urgences 24h/24, ambulance privée et transport médicalisé`,
+          subtitle: subtitle || `Temps de réponse moyen : 15–25 min • Couverture régionale • Personnel qualifié`,
           badge: "Service disponible partout au Maroc — 24/7",
           features: [
             { icon: "✔", text: "Agréé" },
             { icon: "✔", text: "Qualité protocolaire" },
             { icon: "✔", text: "Intervention rapide" },
-            { icon: "✔", text: "Couverture nationale" }
+            { icon: "✔", text: "Couverture régionale" }
           ]
         };
     }

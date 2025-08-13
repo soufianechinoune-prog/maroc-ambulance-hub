@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label";
 
 const MoroccoMap = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [mapboxToken, setMapboxToken] = useState<string>('');
+  const [isMapInitialized, setIsMapInitialized] = useState(false);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
@@ -32,10 +34,17 @@ const MoroccoMap = () => {
 
   const selectedCityData = selectedCity ? cities.find(c => c.slug === selectedCity) : null;
 
-  useEffect(() => {
-    if (!mapContainerRef.current) return;
+  const initializeMap = () => {
+    if (!mapContainerRef.current || !mapboxToken.trim()) return;
 
-    mapboxgl.accessToken = 'pk.eyJ1Ijoic29jaWFsZXhwbG9yZXIiLCJhIjoiREFQbXBISSJ9.dwFTwfSaWsHvktHrRtpydQ';
+    // Clean up existing map
+    if (mapRef.current) {
+      markersRef.current.forEach(marker => marker.remove());
+      markersRef.current = [];
+      mapRef.current.remove();
+    }
+
+    mapboxgl.accessToken = mapboxToken.trim();
     
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
@@ -54,6 +63,8 @@ const MoroccoMap = () => {
 
     // Add country borders and better styling
     mapRef.current.on('load', () => {
+      setIsMapInitialized(true);
+      
       // Add Morocco boundary highlight
       mapRef.current?.addSource('morocco-bounds', {
         type: 'geojson',
@@ -131,7 +142,9 @@ const MoroccoMap = () => {
 
       markersRef.current.push(marker);
     });
+  };
 
+  useEffect(() => {
     return () => {
       // Cleanup markers
       markersRef.current.forEach(marker => marker.remove());
@@ -139,7 +152,7 @@ const MoroccoMap = () => {
       // Cleanup map
       mapRef.current?.remove();
     };
-  }, [selectedCity]);
+  }, []);
 
   return (
     <section className="py-16 bg-gradient-to-b from-background to-muted/30">
@@ -152,6 +165,39 @@ const MoroccoMap = () => {
             Découvrez nos zones d'intervention à travers le territoire marocain
           </p>
         </div>
+
+        {/* Champ de saisie pour le token Mapbox */}
+        {!isMapInitialized && (
+          <div className="mb-8 max-w-md mx-auto">
+            <Card className="p-6">
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="mapbox-token">Token Mapbox</Label>
+                  <Input
+                    id="mapbox-token"
+                    type="text"
+                    placeholder="Entrez votre token Mapbox"
+                    value={mapboxToken}
+                    onChange={(e) => setMapboxToken(e.target.value)}
+                  />
+                </div>
+                <button
+                  onClick={initializeMap}
+                  disabled={!mapboxToken.trim()}
+                  className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Charger la carte
+                </button>
+                <p className="text-xs text-muted-foreground">
+                  Obtenez votre token gratuit sur{' '}
+                  <a href="https://account.mapbox.com/access-tokens/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                    mapbox.com
+                  </a>
+                </p>
+              </div>
+            </Card>
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Carte Mapbox */}

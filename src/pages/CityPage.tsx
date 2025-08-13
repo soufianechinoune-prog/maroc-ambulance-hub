@@ -104,6 +104,7 @@ const CityPage = () => {
   const isSidiMaaroufVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-maarouf");
   const isAinChockVariant = location?.pathname?.includes("/ambulance-casablanca-ain-chock");
   const isBouskouraVariant = location?.pathname?.includes("/ambulance-casablanca-bouskoura");
+  const isSidiBernoussiVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-bernoussi");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -128,6 +129,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Aïn Chock – Ambulance privée Aïn Chock 24/7"
     : isBouskouraVariant
     ? "Ambulance Bouskoura – Ambulance privée Bouskoura 24/7"
+    : isSidiBernoussiVariant
+    ? "Ambulance Casablanca Sidi Bernoussi – Ambulance privée Sidi Bernoussi 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -150,6 +153,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Aïn Chock: intervention rapide 24/7 à Aïn Chock. Ambulance privée Aïn Chock, transport médicalisé. Appelez +212 7777 223 11."
     : isBouskouraVariant
     ? "Ambulance Bouskoura: intervention rapide 24/7 à Bouskoura. Ambulance privée Bouskoura, transport médicalisé. Appelez +212 7777 223 11."
+    : isSidiBernoussiVariant
+    ? "Ambulance Casablanca Sidi Bernoussi: intervention rapide 24/7 à Sidi Bernoussi. Ambulance privée Sidi Bernoussi, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -172,6 +177,8 @@ const CityPage = () => {
     ? ["Ambulance Casablanca Aïn Chock","ambulance privée Aïn Chock","ambulance casablanca","ambulance privée casablanca"]
     : isBouskouraVariant
     ? ["Ambulance Bouskoura","ambulance privée Bouskoura","ambulance casablanca","ambulance privée casablanca"]
+    : isSidiBernoussiVariant
+    ? ["Ambulance Casablanca Sidi Bernoussi","ambulance privée Sidi Bernoussi","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -194,6 +201,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-ain-chock`
     : isBouskouraVariant
     ? `${siteUrl}/ambulance-casablanca-bouskoura`
+    : isSidiBernoussiVariant
+    ? `${siteUrl}/ambulance-casablanca-sidi-bernoussi`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -216,6 +225,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Aïn Chock – Intervention 24/7"
     : isBouskouraVariant
     ? "Ambulance Bouskoura – Intervention 24/7"
+    : isSidiBernoussiVariant
+    ? "Ambulance Casablanca Sidi Bernoussi – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -1014,6 +1025,46 @@ const CityPage = () => {
                   <div className="space-y-2 text-gray-700">
                     <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                     <p>📍 Casablanca – Quartier Oasis et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : isSidiBernoussiVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Sidi Bernoussi 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc propose un service d'ambulance à Casablanca Sidi Bernoussi rapide, sûr et opérationnel en permanence, pour tous types de besoins médicaux : urgences vitales, transferts vers des hôpitaux, hospitalisations planifiées ou assistance médicale à domicile. Nous intervenons sur l'ensemble du quartier de Sidi Bernoussi ainsi que dans les secteurs environnants, afin d'assurer une prise en charge efficace à toute heure, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Sidi Bernoussi avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont parfaitement équipées pour le transport médicalisé dans la zone de Sidi Bernoussi. Chaque intervention est effectuée par un personnel médical expérimenté : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon les besoins. Nous respectons des protocoles stricts afin de garantir sécurité, confort et qualité de service, que ce soit pour des particuliers ou pour des entreprises installées dans la zone.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité à Sidi Bernoussi et alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous couvrons toutes les zones résidentielles, industrielles et commerciales de Sidi Bernoussi, ainsi que les quartiers proches : Aïn Sebaâ, Hay Mohammadi, Roches Noires et le Port de Casablanca. Notre centrale d'appel reste disponible 24h/24 et 7j/7 pour organiser un transfert médical ou envoyer immédiatement une ambulance sur place.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'ambulance dans le quartier Sidi Bernoussi à Casablanca, appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une prise en charge immédiate.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Sidi Bernoussi ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et parfaitement équipées</li>
+                  <li>Couverture complète de Sidi Bernoussi et des zones voisines</li>
+                  <li>Service d'ambulance privée Casablanca pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Sidi Bernoussi et alentours</p>
                     <p>🕐 Service : 24h/24 – 7j/7</p>
                   </div>
                 </div>

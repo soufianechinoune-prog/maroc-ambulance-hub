@@ -559,12 +559,32 @@ const CityPage = () => {
               </>
             ) : isAinDiabVariant ? (
               <>
-                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Maârif 24h/24 et 7j/7</h2>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Ain Diab 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc propose un <strong>service d'ambulance à Casablanca Ain Diab</strong> ultra-réactif, sécurisé et adapté à toutes les situations : urgences vitales, transferts médicaux, hospitalisations planifiées ou soins à domicile. Nous couvrons l'ensemble du quartier d'Ain Diab, ses zones résidentielles et touristiques, pour garantir un service rapide, fiable et disponible à toute heure.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Ain Diab avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont équipées pour le <strong>transport médicalisé à Casablanca Ain Diab</strong>. Chaque mission est assurée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon les besoins. Nous intervenons dans un cadre strictement conforme aux normes sanitaires et de sécurité, offrant un service premium aux particuliers comme aux entreprises.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans tout Ain Diab et ses environs</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons rapidement dans toutes les zones d'Ain Diab, y compris la Corniche, le Morocco Mall, les complexes hôteliers et résidentiels, ainsi que dans les quartiers voisins : Anfa, Bourgogne et Aïn Sebaâ. <strong>Notre centrale d'appel est disponible 24h/24 et 7j/7</strong> pour toute demande urgente ou organisation de transfert médical.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande dans le quartier Ain Diab à Casablanca, <strong>appelez le <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une prise en charge immédiate.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Ain Diab ?</h3>
                 <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
                   <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
                   <li>Personnel médical qualifié et expérimenté</li>
-                  <li>Ambulances modernes et bien équipées</li>
-                  <li>Couverture complète de Maârif et des zones voisines</li>
+                  <li>Ambulances modernes et parfaitement équipées</li>
+                  <li>Couverture complète d'Ain Diab et des zones voisines</li>
                   <li>Service d'<strong>ambulance privée Casablanca</strong> pour particuliers et entreprises</li>
                 </ul>
 
@@ -572,8 +592,8 @@ const CityPage = () => {
                   <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
                   <div className="space-y-2 text-gray-700">
                     <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
-                    <p>📍 Casablanca – Quartier Maârif et alentours</p>
-                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                    <p>📍 Casablanca – Quartier Ain Diab et alentours</p>
+                    <p>🕐 Service 24h/24 – 7j/7</p>
                   </div>
                 </div>
               </>

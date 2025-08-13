@@ -39,7 +39,7 @@ const MoroccoMap = () => {
     
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/streets-v12',
+      style: 'mapbox://styles/mapbox/light-v11',
       center: [-6.2, 32.0], // Centre optimisé pour le Maroc
       zoom: 5.8,
       projection: 'mercator',

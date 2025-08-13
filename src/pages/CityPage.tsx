@@ -536,6 +536,216 @@ const CityPage = () => {
                     </ul>
                   </div>
                 </>
+              ) : isOasisVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Casablanca – Quartier Oasis
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier moderne d'Oasis à Casablanca bénéficie de notre service d'ambulance professionnel et réactif, avec une couverture adaptée pour répondre efficacement à toutes les urgences médicales. Notre équipe expérimentée assure une prise en charge rapide et sécurisée, 24h/24 et 7j/7, dans ce secteur résidentiel en développement.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture des nouvelles zones résidentielles et espaces verts</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Hay Hassani et Oulfa</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté aux familles et résidences modernes</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès facilité aux centres médicaux environnants</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isSidiMaaroufVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Casablanca – Quartier Sidi Maârouf
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier d'affaires de Sidi Maârouf à Casablanca bénéficie de notre service d'ambulance spécialisé et hautement réactif, avec une couverture optimale pour répondre aux urgences dans ce pôle économique majeur. Notre équipe expérimentée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture CFC, zones d'affaires et sièges sociaux</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Aïn Chock et Nouaceur</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service premium adapté aux entreprises et cadres</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Liaison directe avec les cliniques privées du secteur</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isAinChockVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Casablanca – Quartier Aïn Chock
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier universitaire d'Aïn Chock à Casablanca bénéficie de notre service d'ambulance adapté et réactif, avec une couverture spécialisée pour répondre aux besoins spécifiques de cette zone estudiantine et résidentielle. Notre équipe qualifiée assure une prise en charge rapide et sécurisée, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture campus universitaires et cités étudiantes</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Sidi Maârouf et Californie</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté étudiants, familles et jeunes professionnels</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès facilité aux centres de santé universitaires</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isBouskouraVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Bouskoura
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    La commune de Bouskoura bénéficie de notre service d'ambulance étendu et professionnel, avec une couverture adaptée pour répondre aux urgences dans cette zone résidentielle et industrielle en expansion. Notre équipe expérimentée assure une prise en charge rapide et sécurisée, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture zones résidentielles, industrielles et commerciales</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention vers Nouaceur, Dar Bouazza et périphérie</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté entreprises industrielles et résidents</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Liaison avec centres médicaux régionaux</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isSidiBernoussiVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Casablanca – Quartier Sidi Bernoussi
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier industriel de Sidi Bernoussi à Casablanca bénéficie de notre service d'ambulance spécialisé et robuste, avec une couverture adaptée aux spécificités de cette zone industrielle majeure. Notre équipe expérimentée assure une prise en charge rapide et efficace, 24h/24 et 7j/7, adaptée aux urgences industrielles et résidentielles.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture zones industrielles, port et entreprises</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Aïn Sebaâ et zones portuaires</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service spécialisé accidents industriels et urgences</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Protocoles renforcés pour milieux industriels</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isDerbSultanVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Casablanca – Quartier Derb Sultan
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier central de Derb Sultan à Casablanca bénéficie de notre service d'ambulance stratégiquement positionné, avec une couverture optimale pour ce secteur administratif et commercial majeur. Notre équipe expérimentée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture centre administratif et zones commerciales</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Centre-Ville et Mers Sultan</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté administrations et entreprises centrales</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès privilégié aux hôpitaux du centre-ville</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isSidiBelyoutVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Casablanca – Quartier Sidi Belyout
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier central de Sidi Belyout à Casablanca bénéficie de notre service d'ambulance stratégiquement positionné, avec une couverture optimale pour ce secteur résidentiel et d'affaires privilégié. Notre équipe expérimentée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture centre d'affaires et zones résidentielles</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Maârif, Gauthier et Centre-Ville</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service premium adapté aux entreprises et résidences</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès facilité aux cliniques privées du secteur</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
               ) : (
                 <>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">

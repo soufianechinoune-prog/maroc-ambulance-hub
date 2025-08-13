@@ -1018,6 +1018,46 @@ const CityPage = () => {
                   </div>
                 </div>
               </>
+            ) : isBouskouraVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Bouskoura 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc met à votre disposition un service d'ambulance à Bouskoura rapide, sécurisé et disponible à toute heure, pour tous types d'interventions médicales : urgences vitales, transferts hospitaliers, hospitalisations planifiées ou assistance médicale à domicile. Nous couvrons tout le secteur de Bouskoura ainsi que les zones avoisinantes, afin d'assurer une prise en charge efficace, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Bouskoura avec personnel expérimenté</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont spécialement équipées pour assurer le transport médicalisé dans la région de Bouskoura. Chaque mission est assurée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon les besoins. Nous appliquons des protocoles rigoureux afin de garantir la sécurité, le confort et la qualité de chaque intervention, aussi bien pour les particuliers que pour les entreprises locales.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité à Bouskoura et dans les environs</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans tous les secteurs résidentiels et zones industrielles de Bouskoura, ainsi que dans les communes voisines : Nouaceur, Dar Bouazza, Aïn Chock et Californie. Notre centrale d'appel est joignable 24h/24 et 7j/7 pour organiser un transfert ou dépêcher immédiatement une ambulance sur place.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'ambulance à Bouskoura, appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une prise en charge immédiate.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Bouskoura ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans toute la région</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et parfaitement équipées</li>
+                  <li>Couverture complète de Bouskoura et des zones voisines</li>
+                  <li>Service d'ambulance privée pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Bouskoura et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
             ) : (
               <>
                 <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca 24h/24 et 7j/7</h2>

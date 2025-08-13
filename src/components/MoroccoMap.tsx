@@ -17,19 +17,19 @@ const MoroccoMap = () => {
 
   // Positions approximatives des villes sur une carte du Maroc (en pourcentages)
   const cities: CityPoint[] = [
-    { name: "Tanger", slug: "tanger", x: 20, y: 15, responseTime: "15-20 min", isMain: true },
-    { name: "Tétouan", slug: "tetouan", x: 25, y: 18, responseTime: "20-25 min" },
-    { name: "Rabat", slug: "rabat", x: 25, y: 35, responseTime: "12-18 min", isMain: true },
-    { name: "Sale", slug: "sale", x: 23, y: 33, responseTime: "15-20 min" },
-    { name: "Kenitra", slug: "kenitra", x: 22, y: 30, responseTime: "18-25 min" },
-    { name: "Casablanca", slug: "casablanca", x: 30, y: 45, responseTime: "10-15 min", isMain: true },
-    { name: "Mohammedia", slug: "mohammedia", x: 32, y: 43, responseTime: "15-20 min" },
-    { name: "Fès", slug: "fes", x: 45, y: 35, responseTime: "15-22 min", isMain: true },
-    { name: "Meknès", slug: "meknes", x: 40, y: 38, responseTime: "18-25 min", isMain: true },
-    { name: "Marrakech", slug: "marrakech", x: 40, y: 65, responseTime: "12-20 min", isMain: true },
-    { name: "Agadir", slug: "agadir", x: 25, y: 80, responseTime: "15-25 min", isMain: true },
-    { name: "Oujda", slug: "oujda", x: 85, y: 35, responseTime: "20-30 min", isMain: true },
-    { name: "Laâyoune", slug: "laayoune", x: 15, y: 95, responseTime: "25-35 min" }
+    { name: "Tanger", slug: "tanger", x: 35, y: 8, responseTime: "15-20 min", isMain: true },
+    { name: "Tétouan", slug: "tetouan", x: 40, y: 12, responseTime: "20-25 min" },
+    { name: "Rabat", slug: "rabat", x: 33, y: 28, responseTime: "12-18 min", isMain: true },
+    { name: "Sale", slug: "sale", x: 31, y: 26, responseTime: "15-20 min" },
+    { name: "Kenitra", slug: "kenitra", x: 30, y: 22, responseTime: "18-25 min" },
+    { name: "Casablanca", slug: "casablanca", x: 32, y: 35, responseTime: "10-15 min", isMain: true },
+    { name: "Mohammedia", slug: "mohammedia", x: 34, y: 33, responseTime: "15-20 min" },
+    { name: "Fès", slug: "fes", x: 55, y: 28, responseTime: "15-22 min", isMain: true },
+    { name: "Meknès", slug: "meknes", x: 50, y: 30, responseTime: "18-25 min", isMain: true },
+    { name: "Marrakech", slug: "marrakech", x: 45, y: 50, responseTime: "12-20 min", isMain: true },
+    { name: "Agadir", slug: "agadir", x: 25, y: 62, responseTime: "15-25 min", isMain: true },
+    { name: "Oujda", slug: "oujda", x: 85, y: 28, responseTime: "20-30 min", isMain: true },
+    { name: "Laâyoune", slug: "laayoune", x: 15, y: 85, responseTime: "25-35 min" }
   ];
 
   return (
@@ -48,20 +48,79 @@ const MoroccoMap = () => {
           {/* Carte du Maroc */}
           <div className="lg:col-span-2">
             <div className="relative bg-white rounded-2xl shadow-lg p-6">
-              <div className="relative w-full aspect-[4/5] bg-gradient-to-br from-blue-50 to-green-50 rounded-xl overflow-hidden">
-                {/* SVG simplifié du Maroc */}
+            <div className="relative w-full aspect-[3/4] bg-gradient-to-br from-blue-50 to-green-50 rounded-xl overflow-hidden">
+                {/* SVG réaliste du Maroc */}
                 <svg
-                  viewBox="0 0 400 500"
+                  viewBox="0 0 300 400"
                   className="w-full h-full"
                   aria-label="Carte du Maroc avec zones d'intervention"
                 >
-                  {/* Contour simplifié du Maroc */}
+                  {/* Contour réaliste du Maroc */}
                   <path
-                    d="M80 50 L320 50 L340 80 L360 120 L380 200 L360 280 L340 350 L300 420 L250 450 L200 480 L150 470 L100 450 L70 400 L50 350 L40 300 L30 250 L20 200 L30 150 L50 100 Z"
+                    d="M 80 15 
+                       L 120 5 
+                       L 140 8
+                       L 160 15
+                       L 180 25
+                       L 200 35
+                       L 220 30
+                       L 240 32
+                       L 260 35
+                       L 275 45
+                       L 280 60
+                       L 275 75
+                       L 270 90
+                       L 265 105
+                       L 260 120
+                       L 255 135
+                       L 250 150
+                       L 245 165
+                       L 240 180
+                       L 235 195
+                       L 230 210
+                       L 225 225
+                       L 220 240
+                       L 215 255
+                       L 210 270
+                       L 205 285
+                       L 200 300
+                       L 195 315
+                       L 190 330
+                       L 185 345
+                       L 180 360
+                       L 175 375
+                       L 170 390
+                       L 40 395
+                       L 30 380
+                       L 25 365
+                       L 20 350
+                       L 15 335
+                       L 12 320
+                       L 10 305
+                       L 8 290
+                       L 6 275
+                       L 5 260
+                       L 4 245
+                       L 3 230
+                       L 2 215
+                       L 1 200
+                       L 2 185
+                       L 4 170
+                       L 7 155
+                       L 11 140
+                       L 16 125
+                       L 22 110
+                       L 29 95
+                       L 37 80
+                       L 46 65
+                       L 56 50
+                       L 67 35
+                       L 78 20
+                       Z"
                     fill="hsl(var(--muted))"
                     stroke="hsl(var(--border))"
                     strokeWidth="2"
-                    className="transition-colors"
+                    className="transition-colors drop-shadow-sm"
                   />
                   
                   {/* Points des villes */}
@@ -69,21 +128,21 @@ const MoroccoMap = () => {
                     <g key={city.slug}>
                       {/* Point de la ville */}
                       <circle
-                        cx={city.x * 4}
-                        cy={city.y * 5}
+                        cx={city.x * 3}
+                        cy={city.y * 4}
                         r={city.isMain ? "8" : "6"}
                         fill={city.isMain ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
                         stroke="white"
                         strokeWidth="2"
-                        className="cursor-pointer hover:scale-110 transition-transform"
+                        className="cursor-pointer hover:scale-110 transition-transform drop-shadow-sm"
                         onClick={() => setSelectedCity(city)}
                       />
                       
                       {/* Effet de pulsation pour les villes principales */}
                       {city.isMain && (
                         <circle
-                          cx={city.x * 4}
-                          cy={city.y * 5}
+                          cx={city.x * 3}
+                          cy={city.y * 4}
                           r="8"
                           fill="none"
                           stroke="hsl(var(--primary))"
@@ -103,11 +162,11 @@ const MoroccoMap = () => {
                     className="absolute pointer-events-none"
                     style={{
                       left: `${city.x}%`,
-                      top: `${city.y + 3}%`,
+                      top: `${city.y + 4}%`,
                       transform: 'translate(-50%, 0)'
                     }}
                   >
-                    <Badge variant="secondary" className="text-xs shadow-sm">
+                    <Badge variant="secondary" className="text-xs shadow-sm bg-white/90">
                       {city.name}
                     </Badge>
                   </div>

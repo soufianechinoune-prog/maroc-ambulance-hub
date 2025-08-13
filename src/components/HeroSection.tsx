@@ -110,6 +110,18 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
             { icon: "✔", text: "Couverture Sidi Maârouf & CFC" }
           ]
         };
+      case 'sidi-belyout':
+        return {
+          title: "🚑 Ambulance Casablanca Sidi Belyout – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (8-12 min) dans le quartier Sidi Belyout et zones centrales – équipe médicale qualifiée – service disponible 24h/24.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Centre-ville & zones d'affaires" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Couverture Sidi Belyout & Centre" }
+          ]
+        };
       case 'ain-chock':
         return {
           title: "🚑 Ambulance Casablanca Aïn Chock – Urgences 24h/24, ambulance privée et transport médicalisé",

@@ -107,6 +107,7 @@ const CityPage = () => {
   const isBouskouraVariant = location?.pathname?.includes("/ambulance-casablanca-bouskoura");
   const isSidiBernoussiVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-bernoussi");
   const isDerbSultanVariant = location?.pathname?.includes("/ambulance-casablanca-derb-sultan");
+  const isSidiBelyoutVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-belyout");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -135,6 +136,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Sidi Bernoussi – Ambulance privée Sidi Bernoussi 24/7"
     : isDerbSultanVariant
     ? "Ambulance Casablanca Derb Sultan – Ambulance privée Derb Sultan 24/7"
+    : isSidiBelyoutVariant
+    ? "Ambulance Casablanca Sidi Belyout – Ambulance privée Sidi Belyout 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -161,6 +164,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Sidi Bernoussi: intervention rapide 24/7 à Sidi Bernoussi. Ambulance privée Sidi Bernoussi, transport médicalisé. Appelez +212 7777 223 11."
     : isDerbSultanVariant
     ? "Ambulance Casablanca Derb Sultan: intervention rapide 24/7 à Derb Sultan. Ambulance privée Derb Sultan, transport médicalisé. Appelez +212 7777 223 11."
+    : isSidiBelyoutVariant
+    ? "Ambulance Casablanca Sidi Belyout: intervention rapide 24/7 à Sidi Belyout. Ambulance privée Sidi Belyout, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -187,6 +192,8 @@ const CityPage = () => {
     ? ["Ambulance Casablanca Sidi Bernoussi","ambulance privée Sidi Bernoussi","ambulance casablanca","ambulance privée casablanca"]
     : isDerbSultanVariant
     ? ["Ambulance Casablanca Derb Sultan","ambulance privée Derb Sultan","ambulance casablanca","ambulance privée casablanca"]
+    : isSidiBelyoutVariant
+    ? ["Ambulance Casablanca Sidi Belyout","ambulance privée Sidi Belyout","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -213,6 +220,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-sidi-bernoussi`
     : isDerbSultanVariant
     ? `${siteUrl}/ambulance-casablanca-derb-sultan`
+    : isSidiBelyoutVariant
+    ? `${siteUrl}/ambulance-casablanca-sidi-belyout`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -239,6 +248,8 @@ const CityPage = () => {
     ? "Ambulance Casablanca Sidi Bernoussi – Intervention 24/7"
     : isDerbSultanVariant
     ? "Ambulance Casablanca Derb Sultan – Intervention 24/7"
+    : isSidiBelyoutVariant
+    ? "Ambulance Casablanca Sidi Belyout – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -288,6 +299,7 @@ const CityPage = () => {
           isBouskouraVariant ? 'bouskoura' :
           isSidiBernoussiVariant ? 'sidi-bernoussi' :
           isDerbSultanVariant ? 'derb-sultan' :
+          isSidiBelyoutVariant ? 'sidi-belyout' :
           undefined
         }
       />

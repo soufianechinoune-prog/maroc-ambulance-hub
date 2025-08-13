@@ -96,6 +96,7 @@ const CityPage = () => {
   const cityData = seoData[city?.slug] || {};
   const isCalifornieVariant = location?.pathname?.includes("/ambulance-casablanca-californie");
   const isAinDiabVariant = location?.pathname?.includes("/ambulance-casablanca-ain-diab");
+  const isMaarifVariant = location?.pathname?.includes("/ambulance-casablanca-maarif");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -104,30 +105,40 @@ const CityPage = () => {
     ? "Ambulance Casablanca Californie – Ambulance privée Californie 24/7"
     : isAinDiabVariant
     ? "Ambulance Casablanca Ain Diab – Ambulance privée Ain Diab 24/7"
+    : isMaarifVariant
+    ? "Ambulance Casablanca Maârif – Ambulance privée Maârif 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
     ? "Ambulance Casablanca Californie: intervention rapide 24/7 à Californie. Ambulance privée Californie, transport médicalisé. Appelez +212 7777 223 11."
     : isAinDiabVariant
     ? "Ambulance Casablanca Ain Diab: intervention rapide 24/7 à Ain Diab. Ambulance privée Ain Diab, transport médicalisé. Appelez +212 7777 223 11."
+    : isMaarifVariant
+    ? "Ambulance Casablanca Maârif: intervention rapide 24/7 à Maârif. Ambulance privée Maârif, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
     ? ["Ambulance Casablanca Californie","ambulance privée Californie","ambulance casablanca","ambulance privée casablanca"]
     : isAinDiabVariant
     ? ["Ambulance Casablanca Ain Diab","ambulance privée Ain Diab","ambulance casablanca","ambulance privée casablanca"]
+    : isMaarifVariant
+    ? ["Ambulance Casablanca Maârif","ambulance privée Maârif","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
     ? `${siteUrl}/ambulance-casablanca-californie`
     : isAinDiabVariant
     ? `${siteUrl}/ambulance-casablanca-ain-diab`
+    : isMaarifVariant
+    ? `${siteUrl}/ambulance-casablanca-maarif`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
     ? "Ambulance Casablanca Californie – Intervention 24/7"
     : isAinDiabVariant
     ? "Ambulance Casablanca Ain Diab – Intervention 24/7"
+    : isMaarifVariant
+    ? "Ambulance Casablanca Maârif – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -188,6 +199,8 @@ const CityPage = () => {
                   <>Ambulance <span className="text-emergency">Casablanca Californie</span> – Intervention 24/7</>
                 ) : isAinDiabVariant ? (
                   <>Ambulance <span className="text-emergency">Casablanca Ain Diab</span> – Intervention 24/7</>
+                ) : isMaarifVariant ? (
+                  <>Ambulance <span className="text-emergency">Casablanca Maârif</span> – Intervention 24/7</>
                 ) : (
                   <>Ambulance à <span className="text-emergency">{city.name}</span> – Intervention 24/7</>
                 )}
@@ -397,6 +410,36 @@ const CityPage = () => {
                     </ul>
                   </div>
                 </>
+              ) : isMaarifVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Casablanca – Quartier Maârif
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier résidentiel de Maârif à Casablanca bénéficie de notre service d'ambulance professionnel et réactif, avec une couverture étendue pour répondre efficacement à toutes les urgences médicales. Notre équipe expérimentée assure une prise en charge rapide et sécurisée, 24h/24 et 7j/7, dans ce secteur central de la ville.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture complète des zones résidentielles et commerciales</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Gauthier, Racine et Centre-Ville</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté aux entreprises et particuliers du secteur</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès privilégié aux centres médicaux de Maârif</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
               ) : (
                 <>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
@@ -474,29 +517,49 @@ const CityPage = () => {
                   </div>
                 </div>
               </>
+            ) : isMaarifVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Ambulance Casablanca Maârif – Intervention 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc met à votre disposition un <strong>service d'ambulance à Casablanca Maârif</strong> rapide, fiable et sécurisé, adapté à toutes les situations : urgences vitales, transferts médicaux programmés, hospitalisations ou assistance à domicile. Nous couvrons l'ensemble du quartier de Maârif ainsi que ses environs immédiats, garantissant une prise en charge efficace à toute heure, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Maârif avec équipe médicale qualifiée</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos véhicules sont entièrement équipés pour le <strong>transport médicalisé dans le quartier Maârif</strong>. Chaque mission est assurée par des professionnels de santé qualifiés : auxiliaires ambulanciers, infirmiers et, si nécessaire, médecins d'urgence. Nos interventions respectent strictement les protocoles sanitaires et de sécurité, et s'adressent aussi bien aux particuliers qu'aux entreprises locales.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zone d'intervention : Maârif et quartiers voisins</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les zones résidentielles, commerciales et administratives de Maârif, ainsi que dans les quartiers limitrophes comme Gauthier, Racine, Bourgogne et le Centre-Ville. <strong>Notre centrale d'appel est opérationnelle en continu, 24h/24 et 7j/7</strong>, pour organiser un transfert ou envoyer une ambulance immédiatement.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Nous contacter</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'intervention dans le quartier Maârif à Casablanca, <strong>composez le <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour un traitement rapide.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Les avantages Ambulance Maroc à Maârif</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Disponibilité 24/7 dans tout le secteur</li>
+                  <li>Personnel médical certifié et expérimenté</li>
+                  <li>Ambulances modernes et parfaitement équipées</li>
+                  <li>Couverture complète de Maârif et des quartiers proches</li>
+                  <li>Service d'<strong>ambulance privée Casablanca</strong> pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Informations utiles</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Maârif et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
             ) : isAinDiabVariant ? (
               <>
                 <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Maârif 24h/24 et 7j/7</h2>
-                <p className="mb-6 text-gray-700 leading-relaxed">
-                  Ambulance Maroc propose un <strong>service d'ambulance à Casablanca Maârif</strong> ultra-réactif, sécurisé et adapté à toutes les situations : urgences vitales, transferts médicaux, hospitalisations planifiées ou soins à domicile. Nous couvrons tout le quartier de Maârif, ainsi que ses zones voisines, pour offrir un service rapide et fiable à toute heure, que ce soit en journée ou en pleine nuit.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Maârif avec personnel qualifié</h3>
-                <p className="mb-6 text-gray-700 leading-relaxed">
-                  Nos ambulances sont entièrement équipées pour le <strong>transport médicalisé à Casablanca Maârif</strong>. Chaque intervention est assurée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon la situation. Nous garantissons une prise en charge conforme aux normes sanitaires et de sécurité, tant pour les particuliers que pour les entreprises implantées dans le secteur.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans tout le secteur de Maârif et ses alentours</h3>
-                <p className="mb-6 text-gray-700 leading-relaxed">
-                  Nous intervenons dans toutes les zones résidentielles, commerciales et administratives de Maârif, ainsi que dans les quartiers proches : Gauthier, Racine, Bourgogne et Centre-Ville. <strong>Notre centrale d'appel reste disponible 24h/24 et 7j/7</strong> pour répondre à vos questions, organiser un transfert ou dépêcher une ambulance en urgence.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
-                <p className="mb-6 text-gray-700 leading-relaxed">
-                  Pour toute demande d'ambulance dans le quartier Maârif à Casablanca, <strong>appelez le <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une réponse immédiate.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Maârif ?</h3>
                 <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
                   <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
                   <li>Personnel médical qualifié et expérimenté</li>

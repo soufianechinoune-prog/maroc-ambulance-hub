@@ -15,6 +15,7 @@ import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, 
 import { SITE_URL } from "@/lib/config";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 import HeroSection from "@/components/HeroSection";
+import medicalTeam from "@/assets/medical-team.jpg";
 // Mapping des quartiers selon la logique fournie
 const neighborhoodMapping = {
   // Quartiers de Casablanca
@@ -1069,7 +1070,7 @@ const CityPage = () => {
             </div>
             <div className="relative">
               <img 
-                src="/assets/medical-team.jpg" 
+                src={medicalTeam} 
                 alt={`Équipe médicale ${city.name}`}
                 className="rounded-lg shadow-xl"
               />

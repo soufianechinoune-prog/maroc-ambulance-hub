@@ -1,198 +1,152 @@
-import React, { useRef, useEffect } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import './map.css';
+"use client";
+import { useEffect, useRef } from "react";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-const MAPBOX_TOKEN = 'pk.eyJ1Ijoic29jaWFsZXhwbG9yZXIiLCJhIjoiREFQbXBISSJ9.dwFTwfSaWsHvktHrRtpydQ';
+const MAPBOX_TOKEN = "pk.eyJ1Ijoic29jaWFsZXhwbG9yZXIiLCJhIjoiREFQbXBISSJ9.dwFTwfSaWsHvktHrRtpydQ";
 
-// Données GeoJSON pour les villes
-const mainCitiesData = {
-  type: 'FeatureCollection',
-  features: [
-    {
-      type: 'Feature',
-      properties: { name: 'Casablanca' },
-      geometry: { type: 'Point', coordinates: [-7.5898, 33.5731] }
-    },
-    {
-      type: 'Feature',
-      properties: { name: 'Rabat' },
-      geometry: { type: 'Point', coordinates: [-6.8498, 34.0209] }
-    },
-    {
-      type: 'Feature',
-      properties: { name: 'Marrakech' },
-      geometry: { type: 'Point', coordinates: [-7.9811, 31.6295] }
-    },
-    {
-      type: 'Feature',
-      properties: { name: 'Tanger' },
-      geometry: { type: 'Point', coordinates: [-5.8008, 35.7595] }
-    },
-    {
-      type: 'Feature',
-      properties: { name: 'Agadir' },
-      geometry: { type: 'Point', coordinates: [-9.5981, 30.4278] }
-    }
-  ]
-};
-
-const otherCitiesData = {
-  type: 'FeatureCollection',
-  features: [
-    {
-      type: 'Feature',
-      properties: { name: 'Fès' },
-      geometry: { type: 'Point', coordinates: [-5.0003, 34.0181] }
-    },
-    {
-      type: 'Feature',
-      properties: { name: 'Oujda' },
-      geometry: { type: 'Point', coordinates: [-1.9115, 34.6814] }
-    }
-  ]
-};
-
-const MoroccoMap = () => {
-  const mapContainer = useRef(null);
-  const map = useRef(null);
+export default function MoroccoMap() {
+  const containerRef = useRef(null);
+  const mapRef = useRef(null); // anti double-init
 
   useEffect(() => {
-    // Garde pour éviter la double initialisation sous React 18
-    if (map.current) return;
+    if (mapRef.current) return;
 
-    // Configuration de Mapbox
+    // 1) Token + init
     mapboxgl.accessToken = MAPBOX_TOKEN;
 
-    // Initialisation de la carte
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: [-7.6, 33.5], // Centre sur Casablanca pour débugger
-      zoom: 5,
-      projection: 'mercator'
+    const map = new mapboxgl.Map({
+      container: containerRef.current,
+      style: "mapbox://styles/mapbox/light-v11",
+      center: [-7.62, 33.58], // Casablanca
+      zoom: 5
+    });
+    mapRef.current = map;
+
+    // Logs d'erreur utiles
+    map.on("error", (e) => {
+      console.error("Mapbox error:", e?.error || e);
     });
 
-    // Ajout des contrôles de navigation
-    map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
-    // Chargement des données et ajout des couches
-    map.current.on('load', () => {
-      console.log('Mapbox map loaded, adding sources and layers...');
-      console.log('Main cities data:', mainCitiesData);
-      console.log('Other cities data:', otherCitiesData);
-      
-      // Ajout des sources de données
-      map.current.addSource('main-cities', {
-        type: 'geojson',
-        data: mainCitiesData
-      });
+    // 2) Données GeoJSON (long, lat)
+    const cities = {
+      type: "FeatureCollection",
+      features: [
+        // Principales (bleu)
+        { type:"Feature", properties:{ name:"Casablanca", tier:"main" }, geometry:{ type:"Point", coordinates:[-7.62,33.58] } },
+        { type:"Feature", properties:{ name:"Rabat",       tier:"main" }, geometry:{ type:"Point", coordinates:[-6.84,34.02] } },
+        { type:"Feature", properties:{ name:"Marrakech",   tier:"main" }, geometry:{ type:"Point", coordinates:[-7.99,31.63] } },
+        { type:"Feature", properties:{ name:"Tanger",      tier:"main" }, geometry:{ type:"Point", coordinates:[-5.80,35.76] } },
+        { type:"Feature", properties:{ name:"Agadir",      tier:"main" }, geometry:{ type:"Point", coordinates:[-9.60,30.43] } },
 
-      map.current.addSource('other-cities', {
-        type: 'geojson',
-        data: otherCitiesData
-      });
+        // Autres (rouge)
+        { type:"Feature", properties:{ name:"Fès",   tier:"other" }, geometry:{ type:"Point", coordinates:[-5.00,34.04] } },
+        { type:"Feature", properties:{ name:"Oujda", tier:"other" }, geometry:{ type:"Point", coordinates:[-1.91,34.68] } }
+      ]
+    };
 
-      console.log('Sources added successfully');
+    // 3) Ajout des couches une fois le style chargé
+    map.on("style.load", () => {
+      console.log("Style chargé — ajout des sources/couches…");
+      console.log("Cities sample:", cities);
 
-      // Couche des villes principales (bleu)
-      map.current.addLayer({
-        id: 'main-cities-points',
-        type: 'circle',
-        source: 'main-cities',
-        paint: {
-          'circle-color': '#2563eb',
-          'circle-radius': 8,
-          'circle-stroke-color': '#ffffff',
-          'circle-stroke-width': 2
-        }
-      });
-      console.log('Main cities layer added');
-
-      // Couche des autres villes (rouge)
-      map.current.addLayer({
-        id: 'other-cities-points',
-        type: 'circle',
-        source: 'other-cities',
-        paint: {
-          'circle-color': '#dc2626',
-          'circle-radius': 6,
-          'circle-stroke-color': '#ffffff',
-          'circle-stroke-width': 2
-        }
-      });
-      console.log('Other cities layer added');
-
-      // Labels pour les villes principales avec halo blanc
-      map.current.addLayer({
-        id: 'main-cities-labels',
-        type: 'symbol',
-        source: 'main-cities',
-        layout: {
-          'text-field': ['get', 'name'],
-          'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
-          'text-size': 12,
-          'text-offset': [0, 1.5],
-          'text-anchor': 'top'
-        },
-        paint: {
-          'text-color': '#1f2937',
-          'text-halo-color': '#ffffff',
-          'text-halo-width': 2
-        }
-      });
-      console.log('Main cities labels added');
-
-      // Labels pour les autres villes avec halo blanc
-      map.current.addLayer({
-        id: 'other-cities-labels',
-        type: 'symbol',
-        source: 'other-cities',
-        layout: {
-          'text-field': ['get', 'name'],
-          'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
-          'text-size': 11,
-          'text-offset': [0, 1.5],
-          'text-anchor': 'top'
-        },
-        paint: {
-          'text-color': '#1f2937',
-          'text-halo-color': '#ffffff',
-          'text-halo-width': 2
-        }
-      });
-      console.log('Other cities labels added');
-      
-      console.log('All layers added successfully. Map should now display points.');
-    });
-
-    // Cleanup function
-    return () => {
-      if (map.current) {
-        map.current.remove();
-        map.current = null;
+      // Source unique (plus simple pour débug)
+      if (!map.getSource("cities")) {
+        map.addSource("cities", { type: "geojson", data: cities });
       }
+
+      // Points bleus (tier=main)
+      if (!map.getLayer("cities-main")) {
+        map.addLayer({
+          id: "cities-main",
+          type: "circle",
+          source: "cities",
+          filter: ["==", ["get", "tier"], "main"],
+          paint: {
+            "circle-radius": 7,
+            "circle-color": "#2563eb",
+            "circle-stroke-width": 2,
+            "circle-stroke-color": "#ffffff"
+          }
+        });
+      }
+
+      // Points rouges (tier=other)
+      if (!map.getLayer("cities-other")) {
+        map.addLayer({
+          id: "cities-other",
+          type: "circle",
+          source: "cities",
+          filter: ["==", ["get", "tier"], "other"],
+          paint: {
+            "circle-radius": 7,
+            "circle-color": "#ef4444",
+            "circle-stroke-width": 2,
+            "circle-stroke-color": "#ffffff"
+          }
+        });
+      }
+
+      // Labels
+      if (!map.getLayer("cities-labels")) {
+        map.addLayer({
+          id: "cities-labels",
+          type: "symbol",
+          source: "cities",
+          layout: {
+            "text-field": ["get", "name"],
+            "text-size": 12,
+            "text-offset": [0, 1.1],
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Regular"]
+          },
+          paint: {
+            "text-color": "#1f2937",
+            "text-halo-color": "#ffffff",
+            "text-halo-width": 1.2
+          }
+        });
+      }
+
+      // 4) Cadre Maroc + Sahara occidental (sans délimitation)
+      const bounds = new mapboxgl.LngLatBounds([-13.5, 27.3], [-0.8, 36.1]);
+      map.fitBounds(bounds, { padding: 40, duration: 0 });
+    });
+
+    return () => {
+      mapRef.current?.remove();
+      mapRef.current = null;
     };
   }, []);
 
   return (
-    <div className="morocco-map-container">
-      <div ref={mapContainer} className="map-container" />
-      
-      {/* Légende */}
-      <div className="map-legend">
-        <h4>Zones d'intervention</h4>
-        <div className="legend-item">
-          <div className="legend-color main-city"></div>
-          <span>Villes principales (8-18 min)</span>
+    <div style={{ position:"relative" }}>
+      <div
+        ref={containerRef}
+        style={{
+          height: 520, width: "100%",
+          borderRadius: 12, border: "1px solid #e5e7eb", overflow: "hidden"
+        }}
+      />
+      {/* Légende simple */}
+      <div style={{
+        position:"absolute", left:14, bottom:14, background:"#fff",
+        borderRadius:10, padding:"12px 14px", boxShadow:"0 6px 24px rgba(0,0,0,.08)",
+        font:"500 13px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial"
+      }}>
+        <div style={{fontWeight:700, marginBottom:8}}>Zones d'intervention</div>
+        <div style={{display:"flex", alignItems:"center", gap:8, margin:"6px 0"}}>
+          <span style={{width:12, height:12, borderRadius:999, background:"#2563eb",
+            border:"2px solid #fff", boxShadow:"0 0 0 1px rgba(0,0,0,.08)"}} />
+          Villes principales (8–18 min)
         </div>
-        <div className="legend-item">
-          <div className="legend-color other-city"></div>
-          <span>Autres villes (15-30 min)</span>
+        <div style={{display:"flex", alignItems:"center", gap:8, margin:"6px 0"}}>
+          <span style={{width:12, height:12, borderRadius:999, background:"#ef4444",
+            border:"2px solid #fff", boxShadow:"0 0 0 1px rgba(0,0,0,.08)"}} />
+          Autres villes (15–30 min)
         </div>
       </div>
     </div>
   );
-};
-
-export default MoroccoMap;
+}

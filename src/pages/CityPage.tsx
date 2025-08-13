@@ -17,6 +17,7 @@ import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 import HeroSection from "@/components/HeroSection";
 // Mapping des quartiers selon la logique fournie
 const neighborhoodMapping = {
+  // Quartiers de Casablanca
   'ain-diab': ['bourgogne', 'maarif', 'anfa', 'gauthier'],
   'bourgogne': ['ain-diab', 'maarif', 'racine', 'gauthier'],
   'maarif': ['bourgogne', 'racine', 'ain-diab', 'gauthier'],
@@ -35,10 +36,18 @@ const neighborhoodMapping = {
   'californie': ['oasis', 'sidi-maarouf', 'bouskoura', 'ain-chock'],
   'bouskoura': ['oasis', 'sidi-maarouf', 'californie', 'ain-chock'],
   'ain-chock': ['oasis', 'sidi-maarouf', 'californie', 'bouskoura'],
-  'sidi-belyout': ['gauthier', 'maarif', 'centre-ville', 'racine']
+  'sidi-belyout': ['gauthier', 'maarif', 'centre-ville', 'racine'],
+  
+  // Quartiers de Rabat
+  'agdal': ['hassan', 'hay-riad', 'souissi', 'yacoub-el-mansour'],
+  'hassan': ['agdal', 'yacoub-el-mansour', 'hay-riad', 'souissi'],
+  'hay-riad': ['agdal', 'souissi', 'hassan', 'yacoub-el-mansour'],
+  'souissi': ['hay-riad', 'agdal', 'hassan', 'yacoub-el-mansour'],
+  'yacoub-el-mansour': ['hassan', 'agdal', 'hay-riad', 'souissi']
 };
 
 const neighborhoodLabels = {
+  // Quartiers de Casablanca
   'ain-diab': 'Aïn Diab',
   'bourgogne': 'Bourgogne',
   'maarif': 'Maârif',
@@ -57,7 +66,14 @@ const neighborhoodLabels = {
   'californie': 'Californie',
   'bouskoura': 'Bouskoura',
   'ain-chock': 'Aïn Chock',
-  'sidi-belyout': 'Sidi Belyout'
+  'sidi-belyout': 'Sidi Belyout',
+  
+  // Quartiers de Rabat
+  'agdal': 'Agdal',
+  'hassan': 'Hassan',
+  'hay-riad': 'Hay Riad',
+  'souissi': 'Souissi',
+  'yacoub-el-mansour': 'Yacoub El Mansour'
 };
 
 const getRandomCities = (currentSlug: string, count = 4) => {
@@ -67,11 +83,11 @@ const getRandomCities = (currentSlug: string, count = 4) => {
   return pool.sort(() => 0.5 - Math.random()).slice(0, count);
 };
 
-const getRelatedNeighborhoods = (currentNeighborhood: string) => {
+const getRelatedNeighborhoods = (currentNeighborhood: string, currentCity: string) => {
   const related = neighborhoodMapping[currentNeighborhood] || [];
   return related.map(slug => ({
     name: neighborhoodLabels[slug] || slug,
-    slug: `ambulance-casablanca-${slug}`
+    slug: `ambulance-${currentCity}-${slug}`
   }));
 };
 
@@ -96,10 +112,21 @@ const CityPage = () => {
   const relatedCities = getRandomCities(normalizedSlug, 4);
   
   // Détection du quartier actuel pour le maillage interne
-  const currentNeighborhood = location?.pathname?.includes("/ambulance-casablanca-") 
-    ? location.pathname.replace("/ambulance-casablanca-", "").replace(/\/$/, "")
-    : null;
-  const relatedNeighborhoods = currentNeighborhood ? getRelatedNeighborhoods(currentNeighborhood) : [];
+  const isNeighborhoodPage = location?.pathname?.includes("/ambulance-casablanca-") || location?.pathname?.includes("/ambulance-rabat-");
+  let currentNeighborhood = null;
+  let currentCity = null;
+  
+  if (isNeighborhoodPage) {
+    if (location.pathname.includes("/ambulance-casablanca-")) {
+      currentNeighborhood = location.pathname.replace("/ambulance-casablanca-", "").replace(/\/$/, "");
+      currentCity = "casablanca";
+    } else if (location.pathname.includes("/ambulance-rabat-")) {
+      currentNeighborhood = location.pathname.replace("/ambulance-rabat-", "").replace(/\/$/, "");
+      currentCity = "rabat";
+    }
+  }
+  
+  const relatedNeighborhoods = currentNeighborhood && currentCity ? getRelatedNeighborhoods(currentNeighborhood, currentCity) : [];
   const siteUrl = SITE_URL;
   // SEO data optimisé pour chaque ville
   const seoData = {
@@ -167,6 +194,13 @@ const CityPage = () => {
   const isSidiBernoussiVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-bernoussi");
   const isDerbSultanVariant = location?.pathname?.includes("/ambulance-casablanca-derb-sultan");
   const isSidiBelyoutVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-belyout");
+  
+  // Quartiers de Rabat
+  const isAgdalVariant = location?.pathname?.includes("/ambulance-rabat-agdal");
+  const isHassanVariant = location?.pathname?.includes("/ambulance-rabat-hassan");
+  const isHayRiadVariant = location?.pathname?.includes("/ambulance-rabat-hay-riad");
+  const isSouissiVariant = location?.pathname?.includes("/ambulance-rabat-souissi");
+  const isYacoubElMansourVariant = location?.pathname?.includes("/ambulance-rabat-yacoub-el-mansour");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -197,6 +231,16 @@ const CityPage = () => {
     ? "Ambulance Casablanca Derb Sultan – Ambulance privée Derb Sultan 24/7"
     : isSidiBelyoutVariant
     ? "Ambulance Casablanca Sidi Belyout – Ambulance privée Sidi Belyout 24/7"
+    : isAgdalVariant
+    ? "Ambulance Rabat Agdal – Ambulance privée Agdal 24/7"
+    : isHassanVariant
+    ? "Ambulance Rabat Hassan – Ambulance privée Hassan 24/7"
+    : isHayRiadVariant
+    ? "Ambulance Rabat Hay Riad – Ambulance privée Hay Riad 24/7"
+    : isSouissiVariant
+    ? "Ambulance Rabat Souissi – Ambulance privée Souissi 24/7"
+    : isYacoubElMansourVariant
+    ? "Ambulance Rabat Yacoub El Mansour – Ambulance privée Yacoub El Mansour 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -225,6 +269,16 @@ const CityPage = () => {
     ? "Ambulance Casablanca Derb Sultan: intervention rapide 24/7 à Derb Sultan. Ambulance privée Derb Sultan, transport médicalisé. Appelez +212 7777 223 11."
     : isSidiBelyoutVariant
     ? "Ambulance Casablanca Sidi Belyout: intervention rapide 24/7 à Sidi Belyout. Ambulance privée Sidi Belyout, transport médicalisé. Appelez +212 7777 223 11."
+    : isAgdalVariant
+    ? "Ambulance Rabat Agdal: intervention rapide 24/7 à Agdal. Ambulance privée Agdal, transport médicalisé. Appelez +212 7777 223 11."
+    : isHassanVariant
+    ? "Ambulance Rabat Hassan: intervention rapide 24/7 à Hassan. Ambulance privée Hassan, transport médicalisé. Appelez +212 7777 223 11."
+    : isHayRiadVariant
+    ? "Ambulance Rabat Hay Riad: intervention rapide 24/7 à Hay Riad. Ambulance privée Hay Riad, transport médicalisé. Appelez +212 7777 223 11."
+    : isSouissiVariant
+    ? "Ambulance Rabat Souissi: intervention rapide 24/7 à Souissi. Ambulance privée Souissi, transport médicalisé. Appelez +212 7777 223 11."
+    : isYacoubElMansourVariant
+    ? "Ambulance Rabat Yacoub El Mansour: intervention rapide 24/7 à Yacoub El Mansour. Ambulance privée Yacoub El Mansour, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -253,6 +307,16 @@ const CityPage = () => {
     ? ["Ambulance Casablanca Derb Sultan","ambulance privée Derb Sultan","ambulance casablanca","ambulance privée casablanca"]
     : isSidiBelyoutVariant
     ? ["Ambulance Casablanca Sidi Belyout","ambulance privée Sidi Belyout","ambulance casablanca","ambulance privée casablanca"]
+    : isAgdalVariant
+    ? ["Ambulance Rabat Agdal","ambulance privée Agdal","ambulance rabat","ambulance privée rabat"]
+    : isHassanVariant
+    ? ["Ambulance Rabat Hassan","ambulance privée Hassan","ambulance rabat","ambulance privée rabat"]
+    : isHayRiadVariant
+    ? ["Ambulance Rabat Hay Riad","ambulance privée Hay Riad","ambulance rabat","ambulance privée rabat"]
+    : isSouissiVariant
+    ? ["Ambulance Rabat Souissi","ambulance privée Souissi","ambulance rabat","ambulance privée rabat"]
+    : isYacoubElMansourVariant
+    ? ["Ambulance Rabat Yacoub El Mansour","ambulance privée Yacoub El Mansour","ambulance rabat","ambulance privée rabat"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -281,6 +345,16 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-derb-sultan`
     : isSidiBelyoutVariant
     ? `${siteUrl}/ambulance-casablanca-sidi-belyout`
+    : isAgdalVariant
+    ? `${siteUrl}/ambulance-rabat-agdal`
+    : isHassanVariant
+    ? `${siteUrl}/ambulance-rabat-hassan`
+    : isHayRiadVariant
+    ? `${siteUrl}/ambulance-rabat-hay-riad`
+    : isSouissiVariant
+    ? `${siteUrl}/ambulance-rabat-souissi`
+    : isYacoubElMansourVariant
+    ? `${siteUrl}/ambulance-rabat-yacoub-el-mansour`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -309,6 +383,16 @@ const CityPage = () => {
     ? "Ambulance Casablanca Derb Sultan – Intervention 24/7"
     : isSidiBelyoutVariant
     ? "Ambulance Casablanca Sidi Belyout – Intervention 24/7"
+    : isAgdalVariant
+    ? "Ambulance Rabat Agdal – Intervention 24/7"
+    : isHassanVariant
+    ? "Ambulance Rabat Hassan – Intervention 24/7"
+    : isHayRiadVariant
+    ? "Ambulance Rabat Hay Riad – Intervention 24/7"
+    : isSouissiVariant
+    ? "Ambulance Rabat Souissi – Intervention 24/7"
+    : isYacoubElMansourVariant
+    ? "Ambulance Rabat Yacoub El Mansour – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -359,7 +443,13 @@ const CityPage = () => {
           isSidiBernoussiVariant ? 'sidi-bernoussi' :
           isDerbSultanVariant ? 'derb-sultan' :
           isSidiBelyoutVariant ? 'sidi-belyout' :
-          (city?.slug === 'casablanca' ? 'casablanca' : undefined)
+          isAgdalVariant ? 'agdal' :
+          isHassanVariant ? 'hassan' :
+          isHayRiadVariant ? 'hay-riad' :
+          isSouissiVariant ? 'souissi' :
+          isYacoubElMansourVariant ? 'yacoub-el-mansour' :
+          (city?.slug === 'casablanca' ? 'casablanca' : 
+           city?.slug === 'rabat' ? 'rabat' : undefined)
         }
       />
 
@@ -2706,10 +2796,10 @@ const CityPage = () => {
       </div>
 
       {/* Maillage interne: quartiers ou villes selon le contexte */}
-      <section className="mt-16 px-4 sm:px-6 lg:px-8 py-10 bg-muted/50 border-t border-border" aria-label={currentNeighborhood ? "Autres quartiers de Casablanca" : "Autres villes couvertes"}>
+      <section className="mt-16 px-4 sm:px-6 lg:px-8 py-10 bg-muted/50 border-t border-border" aria-label={currentNeighborhood ? `Autres quartiers de ${currentCity === 'casablanca' ? 'Casablanca' : 'Rabat'}` : "Autres villes couvertes"}>
         <div className="max-w-5xl mx-auto">
           <h2 className="text-xl font-bold mb-6 text-center">
-            {currentNeighborhood ? "🏘️ Autres Quartiers de Casablanca" : "🏙️ Autres Villes Couvertes"}
+            {currentNeighborhood ? `🏘️ Autres Quartiers de ${currentCity === 'casablanca' ? 'Casablanca' : 'Rabat'}` : "🏙️ Autres Villes Couvertes"}
           </h2>
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {(currentNeighborhood ? relatedNeighborhoods : relatedCities).map((item) => (

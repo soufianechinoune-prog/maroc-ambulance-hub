@@ -859,6 +859,46 @@ const CityPage = () => {
                   </div>
                 </div>
               </>
+            ) : isOasisVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Oasis 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc met à votre disposition un service d'ambulance à Casablanca Oasis rapide, sécurisé et fiable, adapté à toutes les situations : urgences vitales, transferts médicaux, hospitalisations programmées ou soins à domicile. Nous couvrons l'ensemble du quartier d'Oasis ainsi que ses environs, afin d'assurer une prise en charge efficace à toute heure, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Oasis avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont équipées pour le transport médicalisé dans le quartier d'Oasis. Chaque mission est effectuée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence en fonction des besoins. Nous appliquons des protocoles stricts afin de garantir sécurité, confort et qualité de service, que ce soit pour des particuliers ou pour des entreprises implantées dans le secteur.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans tout Oasis et ses alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les zones résidentielles et commerciales d'Oasis, ainsi que dans les quartiers voisins : Californie, Aïn Chock, Maârif et Hay Hassani. Notre centrale d'appel reste joignable 24h/24 et 7j/7 pour organiser un transfert médical ou envoyer immédiatement une ambulance sur place.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'ambulance dans le quartier Oasis à Casablanca, composez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une prise en charge rapide.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Oasis ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et entièrement équipées</li>
+                  <li>Couverture complète d'Oasis et des zones avoisinantes</li>
+                  <li>Service d'ambulance privée Casablanca pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Oasis et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
             ) : (
               <>
                 <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca 24h/24 et 7j/7</h2>
@@ -899,46 +939,6 @@ const CityPage = () => {
                     <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                     <p>📍 Casablanca & périphérie</p>
                     <p>🕐 Service 24h/24 – 7j/7</p>
-                  </div>
-                </div>
-              </>
-            ) : isOasisVariant ? (
-              <>
-                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Oasis 24h/24 et 7j/7</h2>
-                <p className="mb-6 text-gray-700 leading-relaxed">
-                  Ambulance Maroc met à votre disposition un service d'ambulance à Casablanca Oasis rapide, sécurisé et fiable, adapté à toutes les situations : urgences vitales, transferts médicaux, hospitalisations programmées ou soins à domicile. Nous couvrons l'ensemble du quartier d'Oasis ainsi que ses environs, afin d'assurer une prise en charge efficace à toute heure, de jour comme de nuit.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Oasis avec personnel qualifié</h3>
-                <p className="mb-6 text-gray-700 leading-relaxed">
-                  Nos ambulances sont équipées pour le transport médicalisé dans le quartier d'Oasis. Chaque mission est effectuée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence en fonction des besoins. Nous appliquons des protocoles stricts afin de garantir sécurité, confort et qualité de service, que ce soit pour des particuliers ou pour des entreprises implantées dans le secteur.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans tout Oasis et ses alentours</h3>
-                <p className="mb-6 text-gray-700 leading-relaxed">
-                  Nous intervenons dans toutes les zones résidentielles et commerciales d'Oasis, ainsi que dans les quartiers voisins : Californie, Aïn Chock, Maârif et Hay Hassani. Notre centrale d'appel reste joignable 24h/24 et 7j/7 pour organiser un transfert médical ou envoyer immédiatement une ambulance sur place.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
-                <p className="mb-6 text-gray-700 leading-relaxed">
-                  Pour toute demande d'ambulance dans le quartier Oasis à Casablanca, composez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une prise en charge rapide.
-                </p>
-
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Oasis ?</h3>
-                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
-                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
-                  <li>Personnel médical qualifié et expérimenté</li>
-                  <li>Ambulances modernes et entièrement équipées</li>
-                  <li>Couverture complète d'Oasis et des zones avoisinantes</li>
-                  <li>Service d'ambulance privée Casablanca pour particuliers et entreprises</li>
-                </ul>
-
-                <div className="bg-gray-100 p-6 rounded-lg">
-                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
-                  <div className="space-y-2 text-gray-700">
-                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
-                    <p>📍 Casablanca – Quartier Oasis et alentours</p>
-                    <p>🕐 Service : 24h/24 – 7j/7</p>
                   </div>
                 </div>
               </>

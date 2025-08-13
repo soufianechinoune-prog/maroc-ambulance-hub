@@ -10,7 +10,6 @@ import { Label } from "@/components/ui/label";
 
 const MoroccoMap = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
-  const [mapboxToken, setMapboxToken] = useState('');
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
@@ -34,20 +33,53 @@ const MoroccoMap = () => {
   const selectedCityData = selectedCity ? cities.find(c => c.slug === selectedCity) : null;
 
   useEffect(() => {
-    if (!mapboxToken || !mapContainerRef.current) return;
+    if (!mapContainerRef.current) return;
 
-    mapboxgl.accessToken = mapboxToken;
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic29jaWFsZXhwbG9yZXIiLCJhIjoiREFQbXBISSJ9.dwFTwfSaWsHvktHrRtpydQ';
     
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: [-7.0926, 31.7917], // Centre du Maroc
-      zoom: 5.5,
-      projection: 'mercator'
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [-6.2, 32.0], // Centre optimisé pour le Maroc
+      zoom: 5.8,
+      projection: 'mercator',
+      maxBounds: [
+        [-17.0, 21.0], // Sud-ouest
+        [2.0, 37.0]    // Nord-est
+      ]
     });
 
     // Add navigation controls
     mapRef.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    // Add country borders and better styling
+    mapRef.current.on('load', () => {
+      // Add Morocco boundary highlight
+      mapRef.current?.addSource('morocco-bounds', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Polygon',
+            coordinates: [[
+              [-17.0, 21.0], [-17.0, 37.0], [2.0, 37.0], [2.0, 21.0], [-17.0, 21.0]
+            ]]
+          }
+        }
+      });
+
+      mapRef.current?.addLayer({
+        id: 'morocco-boundary',
+        type: 'line',
+        source: 'morocco-bounds',
+        paint: {
+          'line-color': '#1d4ed8',
+          'line-width': 2,
+          'line-opacity': 0.8
+        }
+      });
+    });
 
     // Add city markers
     Object.entries(cityPositions).forEach(([citySlug, position]) => {
@@ -58,13 +90,27 @@ const MoroccoMap = () => {
       const markerEl = document.createElement('div');
       markerEl.className = 'cursor-pointer';
       markerEl.innerHTML = `
-        <div class="relative">
-          <div class="w-4 h-4 ${city.isMain ? 'bg-blue-600' : 'bg-red-500'} rounded-full border-2 border-white shadow-lg hover:scale-110 transition-transform"></div>
-          <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 text-xs font-semibold text-gray-800 whitespace-nowrap bg-white px-2 py-1 rounded shadow-lg">
+        <div class="relative group">
+          <div class="w-5 h-5 ${city.isMain ? 'bg-blue-600' : 'bg-red-500'} rounded-full border-3 border-white shadow-lg hover:scale-125 transition-all duration-200 pulse-animation"></div>
+          <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 text-xs font-bold text-gray-900 whitespace-nowrap bg-white/95 backdrop-blur-sm px-3 py-1 rounded-lg shadow-xl border opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
             ${city.name}
           </div>
+          ${city.isMain ? '<div class="absolute inset-0 w-5 h-5 bg-blue-400 rounded-full animate-ping opacity-30"></div>' : ''}
         </div>
       `;
+
+      // Add pulse animation style
+      const style = document.createElement('style');
+      style.textContent = `
+        .pulse-animation {
+          animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+      `;
+      document.head.appendChild(style);
 
       // Create marker
       const marker = new mapboxgl.Marker(markerEl)
@@ -74,11 +120,12 @@ const MoroccoMap = () => {
       // Add click event
       markerEl.addEventListener('click', () => {
         setSelectedCity(selectedCity === citySlug ? null : citySlug);
-        // Fly to city
+        // Fly to city with smooth animation
         mapRef.current?.flyTo({
           center: [position.lng, position.lat],
-          zoom: 8,
-          duration: 1000
+          zoom: 9,
+          duration: 1500,
+          essential: true
         });
       });
 
@@ -92,51 +139,7 @@ const MoroccoMap = () => {
       // Cleanup map
       mapRef.current?.remove();
     };
-  }, [mapboxToken, selectedCity]);
-
-  if (!mapboxToken) {
-    return (
-      <section className="py-16 bg-gradient-to-b from-background to-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              Carte Interactive du Maroc
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Découvrez nos zones d'intervention à travers le territoire marocain
-            </p>
-          </div>
-
-          <Card className="max-w-md mx-auto">
-            <CardContent className="p-6 space-y-4">
-              <div className="text-center">
-                <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Configuration Mapbox</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Veuillez entrer votre token d'accès Mapbox pour afficher la carte interactive.
-                </p>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="mapbox-token">Token d'accès Mapbox</Label>
-                <Input
-                  id="mapbox-token"
-                  type="password"
-                  placeholder="Entrez votre token Mapbox"
-                  value={mapboxToken}
-                  onChange={(e) => setMapboxToken(e.target.value)}
-                />
-              </div>
-              
-              <div className="text-xs text-muted-foreground">
-                <p>Obtenez votre token sur <a href="https://mapbox.com/" target="_blank" rel="noopener noreferrer" className="text-primary underline">mapbox.com</a></p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-    );
-  }
+  }, [selectedCity]);
 
   return (
     <section className="py-16 bg-gradient-to-b from-background to-muted/30">
@@ -154,22 +157,33 @@ const MoroccoMap = () => {
           {/* Carte Mapbox */}
           <div className="lg:col-span-2">
             <Card className="p-6">
-              <div className="relative w-full h-[600px] rounded-lg overflow-hidden">
+              <div className="relative w-full h-[650px] rounded-xl overflow-hidden border-2 border-muted">
                 <div ref={mapContainerRef} className="w-full h-full" />
                 
-                {/* Légende */}
-                <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
-                  <h4 className="font-semibold text-sm mb-3">Zones d'intervention</h4>
-                  <div className="space-y-2 text-xs">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-blue-600 rounded-full border-2 border-white"></div>
-                      <span>Villes principales (8-18 min)</span>
+                {/* Légende améliorée */}
+                <div className="absolute bottom-6 left-6 bg-white/98 backdrop-blur-md rounded-xl p-5 shadow-2xl border border-gray-200">
+                  <h4 className="font-bold text-base mb-4 text-gray-800">Zones d'intervention</h4>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="relative">
+                        <div className="w-5 h-5 bg-blue-600 rounded-full border-2 border-white shadow-md"></div>
+                        <div className="absolute inset-0 w-5 h-5 bg-blue-400 rounded-full animate-ping opacity-30"></div>
+                      </div>
+                      <span className="font-medium text-gray-700">Villes principales (8-18 min)</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-red-500 rounded-full border-2 border-white"></div>
-                      <span>Autres villes (15-30 min)</span>
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-5 bg-red-500 rounded-full border-2 border-white shadow-md"></div>
+                      <span className="font-medium text-gray-700">Autres villes (15-30 min)</span>
                     </div>
                   </div>
+                  <div className="mt-4 pt-3 border-t border-gray-200 text-xs text-gray-500">
+                    Cliquez sur une ville pour plus d'informations
+                  </div>
+                </div>
+                
+                {/* Attribution Mapbox */}
+                <div className="absolute bottom-6 right-6 text-xs text-gray-500 bg-white/80 px-2 py-1 rounded">
+                  © Mapbox
                 </div>
               </div>
             </Card>

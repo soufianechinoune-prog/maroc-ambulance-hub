@@ -1,30 +1,142 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Users } from "lucide-react";
 import { cities } from "@/data/cities";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const MoroccoMap = () => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
-  const [hoveredCity, setHoveredCity] = useState<string | null>(null);
+  const [mapboxToken, setMapboxToken] = useState('');
+  const mapRef = useRef<mapboxgl.Map | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const markersRef = useRef<mapboxgl.Marker[]>([]);
 
-  const cityPositions = {
-    tanger: { x: 820, y: 180 },
-    tetouan: { x: 860, y: 190 },
-    rabat: { x: 760, y: 260 },
-    casablanca: { x: 720, y: 280 },
-    marrakech: { x: 650, y: 420 },
-    agadir: { x: 560, y: 520 },
-    fes: { x: 780, y: 300 },
-    oujda: { x: 920, y: 300 },
-    laayoune: { x: 430, y: 620 },
-    meknes: { x: 750, y: 310 },
-    kenitra: { x: 740, y: 250 },
-    sale: { x: 750, y: 255 },
-    mohammedia: { x: 710, y: 290 }
+  const cityPositions: Record<string, { lng: number; lat: number }> = {
+    tanger: { lng: -5.8008, lat: 35.7595 },
+    tetouan: { lng: -5.3684, lat: 35.5889 },
+    rabat: { lng: -6.8498, lat: 34.0209 },
+    casablanca: { lng: -7.5898, lat: 33.5731 },
+    marrakech: { lng: -7.9811, lat: 31.6295 },
+    agadir: { lng: -9.5981, lat: 30.4278 },
+    fes: { lng: -5.0003, lat: 34.0181 },
+    oujda: { lng: -1.9115, lat: 34.6814 },
+    laayoune: { lng: -13.2036, lat: 27.1536 },
+    meknes: { lng: -5.5407, lat: 33.8935 },
+    kenitra: { lng: -6.5802, lat: 34.2610 },
+    sale: { lng: -6.7985, lat: 34.0531 },
+    mohammedia: { lng: -7.3837, lat: 33.6866 }
   };
 
   const selectedCityData = selectedCity ? cities.find(c => c.slug === selectedCity) : null;
+
+  useEffect(() => {
+    if (!mapboxToken || !mapContainerRef.current) return;
+
+    mapboxgl.accessToken = mapboxToken;
+    
+    mapRef.current = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [-7.0926, 31.7917], // Centre du Maroc
+      zoom: 5.5,
+      projection: 'mercator'
+    });
+
+    // Add navigation controls
+    mapRef.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    // Add city markers
+    Object.entries(cityPositions).forEach(([citySlug, position]) => {
+      const city = cities.find(c => c.slug === citySlug);
+      if (!city) return;
+
+      // Create marker element
+      const markerEl = document.createElement('div');
+      markerEl.className = 'cursor-pointer';
+      markerEl.innerHTML = `
+        <div class="relative">
+          <div class="w-4 h-4 ${city.isMain ? 'bg-blue-600' : 'bg-red-500'} rounded-full border-2 border-white shadow-lg hover:scale-110 transition-transform"></div>
+          <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 text-xs font-semibold text-gray-800 whitespace-nowrap bg-white px-2 py-1 rounded shadow-lg">
+            ${city.name}
+          </div>
+        </div>
+      `;
+
+      // Create marker
+      const marker = new mapboxgl.Marker(markerEl)
+        .setLngLat([position.lng, position.lat])
+        .addTo(mapRef.current!);
+
+      // Add click event
+      markerEl.addEventListener('click', () => {
+        setSelectedCity(selectedCity === citySlug ? null : citySlug);
+        // Fly to city
+        mapRef.current?.flyTo({
+          center: [position.lng, position.lat],
+          zoom: 8,
+          duration: 1000
+        });
+      });
+
+      markersRef.current.push(marker);
+    });
+
+    return () => {
+      // Cleanup markers
+      markersRef.current.forEach(marker => marker.remove());
+      markersRef.current = [];
+      // Cleanup map
+      mapRef.current?.remove();
+    };
+  }, [mapboxToken, selectedCity]);
+
+  if (!mapboxToken) {
+    return (
+      <section className="py-16 bg-gradient-to-b from-background to-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Carte Interactive du Maroc
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Découvrez nos zones d'intervention à travers le territoire marocain
+            </p>
+          </div>
+
+          <Card className="max-w-md mx-auto">
+            <CardContent className="p-6 space-y-4">
+              <div className="text-center">
+                <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-lg font-semibold mb-2">Configuration Mapbox</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Veuillez entrer votre token d'accès Mapbox pour afficher la carte interactive.
+                </p>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="mapbox-token">Token d'accès Mapbox</Label>
+                <Input
+                  id="mapbox-token"
+                  type="password"
+                  placeholder="Entrez votre token Mapbox"
+                  value={mapboxToken}
+                  onChange={(e) => setMapboxToken(e.target.value)}
+                />
+              </div>
+              
+              <div className="text-xs text-muted-foreground">
+                <p>Obtenez votre token sur <a href="https://mapbox.com/" target="_blank" rel="noopener noreferrer" className="text-primary underline">mapbox.com</a></p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 bg-gradient-to-b from-background to-muted/30">
@@ -39,145 +151,26 @@ const MoroccoMap = () => {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Carte */}
+          {/* Carte Mapbox */}
           <div className="lg:col-span-2">
             <Card className="p-6">
-              <div className="relative w-full h-[600px] bg-white rounded-lg overflow-hidden">
-                <svg viewBox="0 0 1200 900" className="w-full h-full">
-                  <defs>
-                    <style>
-                      {`
-                        .ocean { fill: #cfe3ee; }
-                        .land { fill: #efe9dc; }
-                        .stroke { fill: none; stroke: #c8c2b6; stroke-width: 1; }
-                        .city-dot { fill: #2b2b2b; cursor: pointer; transition: all 0.2s; }
-                        .city-dot:hover { fill: #3b82f6; transform: scale(1.2); }
-                        .city-dot.main { fill: #1d4ed8; }
-                        .city-dot.selected { fill: #ef4444; }
-                        .city-label {
-                          font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-                          font-size: 16px;
-                          fill: #2b2b2b;
-                          font-weight: 600;
-                          paint-order: stroke;
-                          stroke: #ffffff; 
-                          stroke-width: 3px; 
-                          stroke-linejoin: round;
-                          pointer-events: none;
-                        }
-                        .zone-circle {
-                          fill: none;
-                          stroke: #3b82f6;
-                          stroke-width: 2;
-                          opacity: 0.3;
-                        }
-                        .zone-circle.main {
-                          stroke: #1d4ed8;
-                        }
-                        .zone-circle.other {
-                          stroke: #ef4444;
-                        }
-                      `}
-                    </style>
-                  </defs>
-
-                  {/* Océan */}
-                  <rect className="ocean" x="0" y="0" width="1200" height="900"/>
-
-                  {/* Terre (Maroc + Sahara occidental) */}
-                  <g id="morocco">
-                    <path className="land" d="
-                      M 1150,120
-                      L 1020,120 980,140 950,170 920,210 880,245 850,270 820,300 780,320 730,330
-                      690,350 650,380 620,420 600,470 560,500 520,520 500,560 490,600 470,640
-                      450,690 420,720 390,740 350,760 330,800 300,830 270,845 240,855 210,860
-                      190,850 170,840 130,820 110,800 95,770 85,740 80,700 75,650 70,600 65,560
-                      70,520 85,500 120,470 150,450 170,430 190,400 220,360 260,330 300,310
-                      340,300 360,280 380,250 410,230 450,220 500,210 540,200 560,190 600,165
-                      640,150 700,140 760,135 820,130 900,120 1000,110 1080,110 1150,120 Z" />
-                    <path className="stroke" d="
-                      M 1150,120
-                      L 1020,120 980,140 950,170 920,210 880,245 850,270 820,300 780,320 730,330
-                      690,350 650,380 620,420 600,470 560,500 520,520 500,560 490,600 470,640
-                      450,690 420,720 390,740 350,760 330,800 300,830 270,845 240,855 210,860
-                      190,850 170,840 130,820 110,800 95,770 85,740 80,700 75,650 70,600 65,560
-                      70,520 85,500 120,470 150,450 170,430 190,400 220,360 260,330 300,310
-                      340,300 360,280 380,250 410,230 450,220 500,210 540,200 560,190 600,165
-                      640,150 700,140 760,135 820,130 900,120 1000,110 1080,110 1150,120" />
-                  </g>
-
-                  {/* Zones d'intervention (cercles de couverture) */}
-                  {Object.entries(cityPositions).map(([citySlug, position]) => {
-                    const city = cities.find(c => c.slug === citySlug);
-                    if (!city) return null;
-                    
-                    const isSelected = selectedCity === citySlug;
-                    const isHovered = hoveredCity === citySlug;
-                    
-                    if (isSelected || isHovered) {
-                      return (
-                        <circle 
-                          key={`zone-${citySlug}`}
-                          className={`zone-circle ${city.isMain ? 'main' : 'other'}`}
-                          cx={position.x} 
-                          cy={position.y} 
-                          r={city.isMain ? "80" : "60"}
-                          style={{ opacity: isSelected ? 0.4 : 0.2 }}
-                        />
-                      );
-                    }
-                    return null;
-                  })}
-
-                  {/* Villes */}
-                  {Object.entries(cityPositions).map(([citySlug, position]) => {
-                    const city = cities.find(c => c.slug === citySlug);
-                    if (!city) return null;
-                    
-                    const isSelected = selectedCity === citySlug;
-                    const isMain = city.isMain;
-                    
-                    return (
-                      <g key={citySlug}>
-                        <circle 
-                          className={`city-dot ${isMain ? 'main' : ''} ${isSelected ? 'selected' : ''}`}
-                          cx={position.x} 
-                          cy={position.y} 
-                          r={isMain ? "7" : "5"}
-                          onClick={() => setSelectedCity(selectedCity === citySlug ? null : citySlug)}
-                          onMouseEnter={() => setHoveredCity(citySlug)}
-                          onMouseLeave={() => setHoveredCity(null)}
-                        />
-                        <text 
-                          className="city-label" 
-                          x={position.x + 12} 
-                          y={position.y - 5}
-                        >
-                          {city.name}
-                        </text>
-                      </g>
-                    );
-                  })}
-
-                  {/* Légende */}
-                  <g id="legend" transform="translate(50, 750)">
-                    <rect fill="rgba(255,255,255,0.9)" x="-20" y="-40" width="400" height="100" rx="8" stroke="#c8c2b6"/>
-                    
-                    <text className="city-label" x="0" y="-15" style={{ fontSize: '18px', fontWeight: 'bold' }}>
-                      Zones d'intervention
-                    </text>
-                    
-                    <circle className="city-dot main" cx="20" cy="10" r="6"/>
-                    <text className="city-label" x="35" y="15" style={{ fontSize: '14px' }}>
-                      Villes principales (8-18 min)
-                    </text>
-                    
-                    <circle className="city-dot" cx="20" cy="35" r="5"/>
-                    <text className="city-label" x="35" y="40" style={{ fontSize: '14px' }}>
-                      Autres villes (15-30 min)
-                    </text>
-                  </g>
-                </svg>
+              <div className="relative w-full h-[600px] rounded-lg overflow-hidden">
+                <div ref={mapContainerRef} className="w-full h-full" />
+                
+                {/* Légende */}
+                <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+                  <h4 className="font-semibold text-sm mb-3">Zones d'intervention</h4>
+                  <div className="space-y-2 text-xs">
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-blue-600 rounded-full border-2 border-white"></div>
+                      <span>Villes principales (8-18 min)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-red-500 rounded-full border-2 border-white"></div>
+                      <span>Autres villes (15-30 min)</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </Card>
           </div>

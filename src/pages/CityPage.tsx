@@ -897,43 +897,12 @@ const CityPage = () => {
                 </>
               ) : isAgdalVariant ? (
                 <>
-                  <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Rabat Agdal 24h/24 et 7j/7</h2>
-                  <p className="mb-6 text-gray-700 leading-relaxed">
-                    Vous êtes à Agdal et avez besoin d'une intervention médicale rapide ? Notre service d'ambulance à Rabat Agdal couvre toutes les situations : urgences vitales, transferts médicaux, hospitalisations programmées ou soins à domicile. Présents 24h/24 et 7j/7, nous intervenons dans tout Agdal et ses environs en moins de 15 minutes pour assurer une prise en charge rapide et sécurisée.
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Rabat – Quartier Agdal
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier moderne d'Agdal à Rabat bénéficie de notre service d'ambulance spécialisé et réactif, avec une couverture optimale pour ce secteur universitaire et résidentiel stratégique. Notre équipe qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
                   </p>
-
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Rabat Agdal avec équipement complet</h3>
-                  <p className="mb-6 text-gray-700 leading-relaxed">
-                    Nos ambulances sont climatisées, dotées de matériel médical de pointe et accompagnées d'un personnel qualifié : auxiliaires ambulanciers, infirmiers, médecins urgentistes selon le besoin. Transports médicalisés, urgences à domicile, transferts cliniques : nous assurons des interventions conformes aux normes nationales et internationales.
-                  </p>
-
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Zones couvertes à Agdal et alentours</h3>
-                  <p className="mb-6 text-gray-700 leading-relaxed">
-                    Nous intervenons dans toutes les rues et zones résidentielles, universitaires et commerciales d'Agdal, ainsi que dans les quartiers voisins : Hay Riad, Souissi, Centre-Ville et Yacoub El Mansour. Notre centrale d'appel est disponible 24h/24 et 7j/7 pour organiser un transfert ou dépêcher une ambulance immédiatement.
-                  </p>
-
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Contact rapide</h3>
-                  <p className="mb-6 text-gray-700 leading-relaxed">
-                    Appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp sur le site pour nous contacter directement et obtenir une intervention immédiate.
-                  </p>
-
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc à Rabat Agdal ?</h3>
-                  <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
-                    <li>🚑 Réponse rapide 24h/24 – 7j/7</li>
-                    <li>🏥 Couverture large : Agdal + quartiers voisins</li>
-                    <li>🚐 Ambulances modernes, climatisées, parfaitement équipées</li>
-                    <li>👨‍⚕️ Personnel formé et expérimenté, bilingue FR/AR</li>
-                    <li>📌 Service d'ambulance privée adapté aux particuliers, entreprises et événements</li>
-                  </ul>
-
-                  <div className="bg-gray-100 p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
-                    <div className="space-y-2 text-gray-700">
-                      <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
-                      <p>📍 Rabat – Quartier Agdal et environs</p>
-                      <p>🕐 Disponible 24h/24 – 7j/7</p>
-                    </div>
-                  </div>
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
                     <ul className="space-y-3">

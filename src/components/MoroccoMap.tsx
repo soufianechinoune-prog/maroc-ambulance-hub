@@ -9,19 +9,19 @@ const MoroccoMap = () => {
   const [hoveredCity, setHoveredCity] = useState<string | null>(null);
 
   const cityPositions = {
-    casablanca: { x: 162, y: 332 },
-    rabat: { x: 145, y: 295 },
-    marrakech: { x: 135, y: 425 },
-    tanger: { x: 125, y: 180 },
-    fes: { x: 215, y: 275 },
-    agadir: { x: 85, y: 525 },
-    meknes: { x: 195, y: 285 },
-    oujda: { x: 385, y: 265 },
-    kenitra: { x: 138, y: 285 },
-    sale: { x: 142, y: 292 },
-    mohammedia: { x: 155, y: 325 },
-    tetouan: { x: 115, y: 195 },
-    laayoune: { x: 45, y: 745 }
+    tanger: { x: 820, y: 180 },
+    tetouan: { x: 860, y: 190 },
+    rabat: { x: 760, y: 260 },
+    casablanca: { x: 720, y: 280 },
+    marrakech: { x: 650, y: 420 },
+    agadir: { x: 560, y: 520 },
+    fes: { x: 780, y: 300 },
+    oujda: { x: 920, y: 300 },
+    laayoune: { x: 430, y: 620 },
+    meknes: { x: 750, y: 310 },
+    kenitra: { x: 740, y: 250 },
+    sale: { x: 750, y: 255 },
+    mohammedia: { x: 710, y: 290 }
   };
 
   const selectedCityData = selectedCity ? cities.find(c => c.slug === selectedCity) : null;
@@ -42,153 +42,142 @@ const MoroccoMap = () => {
           {/* Carte */}
           <div className="lg:col-span-2">
             <Card className="p-6">
-              <div className="relative w-full h-[600px] bg-gradient-to-b from-blue-50 to-blue-100 rounded-lg overflow-hidden">
-                {/* Carte du Maroc SVG basée sur la vraie géographie */}
-                <svg
-                  viewBox="0 0 500 800"
-                  className="w-full h-full"
-                  style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))' }}
-                >
-                  {/* Océan Atlantique */}
-                  <rect x="0" y="0" width="150" height="800" fill="#3b82f6" opacity="0.2" />
-                  
-                  {/* Mer Méditerranée */}
-                  <rect x="120" y="0" width="380" height="220" fill="#3b82f6" opacity="0.15" />
+              <div className="relative w-full h-[600px] bg-white rounded-lg overflow-hidden">
+                <svg viewBox="0 0 1200 900" className="w-full h-full">
+                  <defs>
+                    <style>
+                      {`
+                        .ocean { fill: #cfe3ee; }
+                        .land { fill: #efe9dc; }
+                        .stroke { fill: none; stroke: #c8c2b6; stroke-width: 1; }
+                        .city-dot { fill: #2b2b2b; cursor: pointer; transition: all 0.2s; }
+                        .city-dot:hover { fill: #3b82f6; transform: scale(1.2); }
+                        .city-dot.main { fill: #1d4ed8; }
+                        .city-dot.selected { fill: #ef4444; }
+                        .city-label {
+                          font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+                          font-size: 16px;
+                          fill: #2b2b2b;
+                          font-weight: 600;
+                          paint-order: stroke;
+                          stroke: #ffffff; 
+                          stroke-width: 3px; 
+                          stroke-linejoin: round;
+                          pointer-events: none;
+                        }
+                        .zone-circle {
+                          fill: none;
+                          stroke: #3b82f6;
+                          stroke-width: 2;
+                          opacity: 0.3;
+                        }
+                        .zone-circle.main {
+                          stroke: #1d4ed8;
+                        }
+                        .zone-circle.other {
+                          stroke: #ef4444;
+                        }
+                      `}
+                    </style>
+                  </defs>
 
-                  {/* Frontières du Maroc - Tracé réaliste */}
-                  <path
-                    d="M 125 175 
-                       L 140 170 L 155 168 L 170 170 L 185 172 L 200 175 
-                       L 215 178 L 230 182 L 245 186 L 260 190 L 275 195 
-                       L 290 200 L 305 206 L 320 212 L 335 219 L 350 226 
-                       L 365 234 L 380 242 L 395 251 L 410 260 L 425 270 
-                       L 435 282 L 440 295 L 442 308 L 441 321 L 438 334 
-                       L 433 347 L 426 360 L 417 372 L 406 384 L 393 395 
-                       L 378 405 L 361 414 L 342 422 L 321 429 L 298 435 
-                       L 273 440 L 246 444 L 217 447 L 186 449 L 153 450 
-                       L 118 450 L 82 449 L 45 447 L 7 444 L 25 460 
-                       L 45 480 L 60 502 L 70 525 L 75 549 L 76 574 
-                       L 73 599 L 66 624 L 55 648 L 40 671 L 22 693 
-                       L 0 714 L 15 730 L 35 745 L 58 758 L 84 769 
-                       L 113 778 L 145 785 L 179 790 L 215 793 L 253 794 
-                       L 292 793 L 332 790 L 372 785 L 412 778 L 451 769 
-                       L 489 758 L 525 745 L 559 730 L 590 713 L 618 694 
-                       L 642 673 L 662 650 L 677 625 L 687 598 L 692 570 
-                       L 691 541 L 685 512 L 673 484 L 656 457 L 634 432 
-                       L 607 409 L 575 388 L 538 370 L 497 354 L 451 341 
-                       L 401 330 L 347 322 L 289 316 L 228 313 L 164 312 
-                       L 125 175 Z"
-                    fill="#e8f4f8"
-                    stroke="#1e40af"
-                    strokeWidth="2"
-                    className="transition-colors hover:fill-blue-100"
-                  />
+                  {/* Océan */}
+                  <rect className="ocean" x="0" y="0" width="1200" height="900"/>
 
-                  {/* Sahara Occidental - frontière administrative */}
-                  <path
-                    d="M 0 714 L 15 730 L 35 745 L 58 758 L 84 769 L 113 778 L 145 785 L 179 790 L 215 793 L 253 794 L 292 793 L 332 790 L 372 785 L 412 778 L 451 769 L 489 758 L 525 745 L 525 800 L 0 800 Z"
-                    fill="#f0f8ff"
-                    stroke="#1e40af"
-                    strokeWidth="1"
-                    strokeDasharray="4,4"
-                    opacity="0.7"
-                  />
+                  {/* Terre (Maroc + Sahara occidental) */}
+                  <g id="morocco">
+                    <path className="land" d="
+                      M 1150,120
+                      L 1020,120 980,140 950,170 920,210 880,245 850,270 820,300 780,320 730,330
+                      690,350 650,380 620,420 600,470 560,500 520,520 500,560 490,600 470,640
+                      450,690 420,720 390,740 350,760 330,800 300,830 270,845 240,855 210,860
+                      190,850 170,840 130,820 110,800 95,770 85,740 80,700 75,650 70,600 65,560
+                      70,520 85,500 120,470 150,450 170,430 190,400 220,360 260,330 300,310
+                      340,300 360,280 380,250 410,230 450,220 500,210 540,200 560,190 600,165
+                      640,150 700,140 760,135 820,130 900,120 1000,110 1080,110 1150,120 Z" />
+                    <path className="stroke" d="
+                      M 1150,120
+                      L 1020,120 980,140 950,170 920,210 880,245 850,270 820,300 780,320 730,330
+                      690,350 650,380 620,420 600,470 560,500 520,520 500,560 490,600 470,640
+                      450,690 420,720 390,740 350,760 330,800 300,830 270,845 240,855 210,860
+                      190,850 170,840 130,820 110,800 95,770 85,740 80,700 75,650 70,600 65,560
+                      70,520 85,500 120,470 150,450 170,430 190,400 220,360 260,330 300,310
+                      340,300 360,280 380,250 410,230 450,220 500,210 540,200 560,190 600,165
+                      640,150 700,140 760,135 820,130 900,120 1000,110 1080,110 1150,120" />
+                  </g>
 
-                  {/* Chaîne de l'Atlas */}
-                  <path
-                    d="M 150 350 Q 200 340, 250 345 Q 300 350, 350 360 Q 400 370, 450 385"
-                    fill="none"
-                    stroke="#64748b"
-                    strokeWidth="3"
-                    opacity="0.3"
-                  />
-
-                  {/* Villes avec zones d'intervention */}
+                  {/* Zones d'intervention (cercles de couverture) */}
                   {Object.entries(cityPositions).map(([citySlug, position]) => {
                     const city = cities.find(c => c.slug === citySlug);
                     if (!city) return null;
-
-                    const isMain = city.isMain;
+                    
                     const isSelected = selectedCity === citySlug;
                     const isHovered = hoveredCity === citySlug;
+                    
+                    if (isSelected || isHovered) {
+                      return (
+                        <circle 
+                          key={`zone-${citySlug}`}
+                          className={`zone-circle ${city.isMain ? 'main' : 'other'}`}
+                          cx={position.x} 
+                          cy={position.y} 
+                          r={city.isMain ? "80" : "60"}
+                          style={{ opacity: isSelected ? 0.4 : 0.2 }}
+                        />
+                      );
+                    }
+                    return null;
+                  })}
 
+                  {/* Villes */}
+                  {Object.entries(cityPositions).map(([citySlug, position]) => {
+                    const city = cities.find(c => c.slug === citySlug);
+                    if (!city) return null;
+                    
+                    const isSelected = selectedCity === citySlug;
+                    const isMain = city.isMain;
+                    
                     return (
                       <g key={citySlug}>
-                        {/* Zone de couverture d'intervention */}
-                        <circle
-                          cx={position.x}
-                          cy={position.y}
-                          r={isMain ? "45" : "30"}
-                          fill={isMain ? "#3b82f6" : "#ef4444"}
-                          opacity={isSelected || isHovered ? "0.25" : "0.08"}
-                          className={isSelected ? "animate-pulse" : "transition-opacity duration-300"}
-                        />
-                        
-                        {/* Point principal de la ville */}
-                        <circle
-                          cx={position.x}
-                          cy={position.y}
-                          r={isMain ? "8" : "6"}
-                          fill={isMain ? "#1d4ed8" : "#dc2626"}
-                          stroke="white"
-                          strokeWidth="2.5"
-                          className="cursor-pointer transition-all duration-200 hover:scale-125"
+                        <circle 
+                          className={`city-dot ${isMain ? 'main' : ''} ${isSelected ? 'selected' : ''}`}
+                          cx={position.x} 
+                          cy={position.y} 
+                          r={isMain ? "7" : "5"}
                           onClick={() => setSelectedCity(selectedCity === citySlug ? null : citySlug)}
                           onMouseEnter={() => setHoveredCity(citySlug)}
                           onMouseLeave={() => setHoveredCity(null)}
                         />
-                        
-                        {/* Label de la ville */}
-                        <text
-                          x={position.x}
-                          y={position.y - 18}
-                          textAnchor="middle"
-                          className="text-xs font-semibold fill-gray-800 pointer-events-none"
-                          style={{ fontSize: '12px', fontFamily: 'Inter, sans-serif' }}
+                        <text 
+                          className="city-label" 
+                          x={position.x + 12} 
+                          y={position.y - 5}
                         >
                           {city.name}
                         </text>
-
-                        {/* Indicateur temps d'intervention pour villes principales */}
-                        {isMain && (isSelected || isHovered) && (
-                          <text
-                            x={position.x}
-                            y={position.y + 25}
-                            textAnchor="middle"
-                            className="text-xs font-medium fill-primary pointer-events-none"
-                            style={{ fontSize: '10px' }}
-                          >
-                            {city.responseTime}
-                          </text>
-                        )}
                       </g>
                     );
                   })}
 
-                  {/* Noms des villes voisines pour le contexte */}
-                  <text x="430" y="140" className="text-xs fill-gray-500" style={{ fontSize: '10px' }}>Algérie</text>
-                  <text x="50" y="160" className="text-xs fill-gray-500" style={{ fontSize: '10px' }}>Océan</text>
-                  <text x="50" y="175" className="text-xs fill-gray-500" style={{ fontSize: '10px' }}>Atlantique</text>
-                  <text x="280" y="140" className="text-xs fill-gray-500" style={{ fontSize: '10px' }}>Mer Méditerranée</text>
+                  {/* Légende */}
+                  <g id="legend" transform="translate(50, 750)">
+                    <rect fill="rgba(255,255,255,0.9)" x="-20" y="-40" width="400" height="100" rx="8" stroke="#c8c2b6"/>
+                    
+                    <text className="city-label" x="0" y="-15" style={{ fontSize: '18px', fontWeight: 'bold' }}>
+                      Zones d'intervention
+                    </text>
+                    
+                    <circle className="city-dot main" cx="20" cy="10" r="6"/>
+                    <text className="city-label" x="35" y="15" style={{ fontSize: '14px' }}>
+                      Villes principales (8-18 min)
+                    </text>
+                    
+                    <circle className="city-dot" cx="20" cy="35" r="5"/>
+                    <text className="city-label" x="35" y="40" style={{ fontSize: '14px' }}>
+                      Autres villes (15-30 min)
+                    </text>
+                  </g>
                 </svg>
-
-                {/* Légende interactive */}
-                <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-xl border">
-                  <h4 className="font-semibold text-sm mb-3 text-gray-800">Zones d'intervention</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-3">
-                      <div className="w-4 h-4 bg-blue-600 rounded-full shadow-sm"></div>
-                      <span className="text-gray-700">Villes principales (8-18 min)</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-red-600 rounded-full shadow-sm"></div>
-                      <span className="text-gray-700">Autres villes (15-30 min)</span>
-                    </div>
-                  </div>
-                  <div className="mt-3 pt-2 border-t border-gray-200">
-                    <p className="text-xs text-gray-600">Cliquez sur une ville pour plus d'infos</p>
-                  </div>
-                </div>
               </div>
             </Card>
           </div>

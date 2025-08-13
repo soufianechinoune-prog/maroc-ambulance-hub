@@ -897,12 +897,111 @@ const CityPage = () => {
                 </>
               ) : isAgdalVariant ? (
                 <>
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    Service d'Ambulance à Rabat – Quartier Agdal
-                  </h2>
-                  <p className="text-xl text-gray-600 mb-8">
-                    Le quartier moderne d'Agdal à Rabat bénéficie de notre service d'ambulance spécialisé et réactif, avec une couverture optimale pour ce secteur universitaire et résidentiel stratégique. Notre équipe qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
-                  </p>
+                  <div className="space-y-6 text-gray-700 leading-relaxed">
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        🚨 Service Ambulance Rabat Agdal 24h/24 et 7j/7
+                      </h2>
+                      <p className="mb-6">
+                        Vous êtes à Agdal et avez besoin d'une intervention médicale rapide ? Notre service d'ambulance à Rabat Agdal couvre toutes les situations : urgences vitales, transferts médicaux, hospitalisations programmées ou soins à domicile. Présents 24h/24 et 7j/7, nous intervenons dans tout Agdal et ses environs en moins de 15 minutes pour assurer une prise en charge rapide et sécurisée.
+                      </p>
+                    </div>
+
+                    <div className="border-l-4 border-primary/20 pl-4">
+                      <span className="text-gray-400">⸻</span>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        👨‍⚕️ Ambulance privée à Rabat Agdal avec équipement complet
+                      </h3>
+                      <p className="mb-6">
+                        Nos ambulances sont climatisées, dotées de matériel médical de pointe et accompagnées d'un personnel qualifié : auxiliaires ambulanciers, infirmiers, médecins urgentistes selon le besoin. Transports médicalisés, urgences à domicile, transferts cliniques : nous assurons des interventions conformes aux normes nationales et internationales.
+                      </p>
+                    </div>
+
+                    <div className="border-l-4 border-primary/20 pl-4">
+                      <span className="text-gray-400">⸻</span>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        📍 Zones couvertes à Agdal et alentours
+                      </h3>
+                      <p className="mb-6">
+                        Nous intervenons dans toutes les rues et zones résidentielles, universitaires et commerciales d'Agdal, ainsi que dans les quartiers voisins : Hay Riad, Souissi, Centre-Ville et Yacoub El Mansour. Notre centrale d'appel est disponible 24h/24 et 7j/7 pour organiser un transfert ou dépêcher une ambulance immédiatement.
+                      </p>
+                    </div>
+
+                    <div className="border-l-4 border-primary/20 pl-4">
+                      <span className="text-gray-400">⸻</span>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        💬 Contact rapide
+                      </h3>
+                      <p className="mb-6">
+                        Appelez le +212 7777 223 11 ou utilisez notre bouton WhatsApp sur le site pour nous contacter directement et obtenir une intervention immédiate.
+                      </p>
+                    </div>
+
+                    <div className="border-l-4 border-primary/20 pl-4">
+                      <span className="text-gray-400">⸻</span>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        ✅ Pourquoi choisir Ambulance Maroc à Rabat Agdal ?
+                      </h3>
+                      <ul className="list-none space-y-2 mb-6">
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>🚑 Réponse rapide 24h/24 – 7j/7</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>🏥 Couverture large : Agdal + quartiers voisins</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>🚐 Ambulances modernes, climatisées, parfaitement équipées</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>👨‍⚕️ Personnel formé et expérimenté, bilingue FR/AR</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span>•</span>
+                          <span>📌 Service d'ambulance privée adapté aux particuliers, entreprises et événements</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div className="border-l-4 border-primary/20 pl-4">
+                      <span className="text-gray-400">⸻</span>
+                    </div>
+
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        ℹ️ Infos pratiques
+                      </h3>
+                      <div className="space-y-2">
+                        <p className="flex items-center gap-2">
+                          <span>📞</span>
+                          <span>Téléphone : +212 7777 223 11</span>
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <span>📍</span>
+                          <span>Rabat – Quartier Agdal et environs</span>
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <span>🕐</span>
+                          <span>Disponible 24h/24 – 7j/7</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
                     <ul className="space-y-3">

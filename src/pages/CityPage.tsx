@@ -1013,6 +1013,46 @@ const CityPage = () => {
                   </div>
                 </div>
               </>
+            ) : isSidiBelyoutVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Sidi Belyout 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc propose un service d'ambulance à Casablanca Sidi Belyout rapide, fiable et disponible à toute heure, pour répondre à tous les besoins médicaux : urgences vitales, transferts hospitaliers, hospitalisations programmées ou assistance médicale à domicile. Nous intervenons sur l'ensemble du quartier de Sidi Belyout ainsi que dans les secteurs voisins, garantissant une prise en charge professionnelle, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Sidi Belyout avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont équipées pour le transport médicalisé dans le quartier de Sidi Belyout. Chaque intervention est assurée par un personnel médical expérimenté : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon la situation. Nous respectons des protocoles stricts pour garantir la sécurité, le confort et la qualité de service, que ce soit pour des particuliers ou pour des entreprises implantées localement.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité à Sidi Belyout et alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous couvrons toutes les zones résidentielles, administratives et commerciales de Sidi Belyout, ainsi que les quartiers proches : Centre-Ville, Maârif, Gauthier et Bourgogne. Notre centrale d'appel reste accessible 24h/24 et 7j/7 pour organiser un transfert médical ou envoyer immédiatement une ambulance sur place.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'ambulance dans le quartier Sidi Belyout à Casablanca, appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une prise en charge immédiate.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Sidi Belyout ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et parfaitement équipées</li>
+                  <li>Couverture complète de Sidi Belyout et des zones voisines</li>
+                  <li>Service d'ambulance privée Casablanca pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Sidi Belyout et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
             ) : isBouskouraVariant ? (
               <>
                 <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Bouskoura 24h/24 et 7j/7</h2>

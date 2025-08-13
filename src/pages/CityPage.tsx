@@ -1079,7 +1079,7 @@ const CityPage = () => {
         </div>
       </section>
 
-      {city.slug === 'casablanca' ? (
+      {city.slug === 'casablanca' && (
         <section className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-6">
             {isCalifornieVariant ? (

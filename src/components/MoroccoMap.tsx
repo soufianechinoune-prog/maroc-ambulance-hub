@@ -1,236 +1,276 @@
-import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
+import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Clock } from "lucide-react";
-
-interface CityPoint {
-  name: string;
-  slug: string;
-  x: number; // Position X en pourcentage
-  y: number; // Position Y en pourcentage
-  responseTime: string;
-  isMain?: boolean;
-}
+import { Badge } from "@/components/ui/badge";
+import { MapPin, Clock, Users } from "lucide-react";
+import { cities } from "@/data/cities";
 
 const MoroccoMap = () => {
-  const [selectedCity, setSelectedCity] = useState<CityPoint | null>(null);
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [hoveredCity, setHoveredCity] = useState<string | null>(null);
 
-  // Positions précises des villes sur la vraie carte du Maroc (en pourcentages)
-  const cities: CityPoint[] = [
-    { name: "Tanger", slug: "tanger", x: 25, y: 15, responseTime: "15-20 min", isMain: true },
-    { name: "Tétouan", slug: "tetouan", x: 22, y: 18, responseTime: "20-25 min" },
-    { name: "Rabat", slug: "rabat", x: 15, y: 35, responseTime: "12-18 min", isMain: true },
-    { name: "Sale", slug: "sale", x: 13, y: 33, responseTime: "15-20 min" },
-    { name: "Kenitra", slug: "kenitra", x: 12, y: 30, responseTime: "18-25 min" },
-    { name: "Casablanca", slug: "casablanca", x: 12, y: 42, responseTime: "10-15 min", isMain: true },
-    { name: "Mohammedia", slug: "mohammedia", x: 14, y: 40, responseTime: "15-20 min" },
-    { name: "Fès", slug: "fes", x: 45, y: 38, responseTime: "15-22 min", isMain: true },
-    { name: "Meknès", slug: "meknes", x: 35, y: 40, responseTime: "18-25 min", isMain: true },
-    { name: "Marrakech", slug: "marrakech", x: 25, y: 58, responseTime: "12-20 min", isMain: true },
-    { name: "Agadir", slug: "agadir", x: 15, y: 72, responseTime: "15-25 min", isMain: true },
-    { name: "Oujda", slug: "oujda", x: 75, y: 38, responseTime: "20-30 min", isMain: true },
-    { name: "Laâyoune", slug: "laayoune", x: 20, y: 88, responseTime: "25-35 min" }
-  ];
+  const cityPositions = {
+    casablanca: { x: 162, y: 332 },
+    rabat: { x: 145, y: 295 },
+    marrakech: { x: 135, y: 425 },
+    tanger: { x: 125, y: 180 },
+    fes: { x: 215, y: 275 },
+    agadir: { x: 85, y: 525 },
+    meknes: { x: 195, y: 285 },
+    oujda: { x: 385, y: 265 },
+    kenitra: { x: 138, y: 285 },
+    sale: { x: 142, y: 292 },
+    mohammedia: { x: 155, y: 325 },
+    tetouan: { x: 115, y: 195 },
+    laayoune: { x: 45, y: 745 }
+  };
+
+  const selectedCityData = selectedCity ? cities.find(c => c.slug === selectedCity) : null;
 
   return (
-    <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10" aria-label="Carte interactive du Maroc">
+    <section className="py-16 bg-gradient-to-b from-background to-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-4">
-            Carte Interactive de nos Zones d'Intervention
+            Carte Interactive du Maroc
           </h2>
           <p className="text-lg text-muted-foreground">
-            Cliquez sur une ville pour voir les détails du service d'ambulance
+            Découvrez nos zones d'intervention à travers le territoire marocain
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 items-start">
-          {/* Carte du Maroc */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Carte */}
           <div className="lg:col-span-2">
-            <div className="relative bg-white rounded-2xl shadow-lg p-6">
-            <div className="relative w-full aspect-[4/5] bg-gradient-to-br from-blue-50 to-green-50 rounded-xl overflow-hidden">
-                {/* SVG précis du Maroc basé sur la vraie géographie */}
+            <Card className="p-6">
+              <div className="relative w-full h-[600px] bg-gradient-to-b from-blue-50 to-blue-100 rounded-lg overflow-hidden">
+                {/* Carte du Maroc SVG basée sur la vraie géographie */}
                 <svg
-                  viewBox="0 0 400 500"
+                  viewBox="0 0 500 800"
                   className="w-full h-full"
-                  aria-label="Carte du Maroc avec zones d'intervention"
+                  style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))' }}
                 >
-                  {/* Contour authentique du Maroc */}
+                  {/* Océan Atlantique */}
+                  <rect x="0" y="0" width="150" height="800" fill="#3b82f6" opacity="0.2" />
+                  
+                  {/* Mer Méditerranée */}
+                  <rect x="120" y="0" width="380" height="220" fill="#3b82f6" opacity="0.15" />
+
+                  {/* Frontières du Maroc - Tracé réaliste */}
                   <path
-                    d="M 105 60 
-                       C 110 55, 125 50, 140 52
-                       C 155 54, 170 58, 185 65
-                       C 200 72, 215 75, 230 78
-                       C 245 81, 260 85, 275 90
-                       C 290 95, 305 100, 320 110
-                       C 335 120, 350 135, 360 155
-                       C 365 170, 368 185, 365 200
-                       C 362 215, 358 230, 355 245
-                       C 352 260, 348 275, 345 290
-                       C 342 305, 338 320, 335 335
-                       C 332 350, 328 365, 325 380
-                       C 322 395, 318 410, 315 425
-                       C 312 440, 308 455, 305 470
-                       L 300 485
-                       L 285 490
-                       C 270 485, 255 480, 240 475
-                       C 225 470, 210 465, 195 460
-                       C 180 455, 165 450, 150 445
-                       C 135 440, 120 435, 105 430
-                       C 90 425, 75 420, 60 415
-                       C 45 410, 30 405, 15 400
-                       L 10 385
-                       C 8 370, 6 355, 4 340
-                       C 2 325, 1 310, 2 295
-                       C 3 280, 5 265, 8 250
-                       C 11 235, 15 220, 20 205
-                       C 25 190, 31 175, 38 160
-                       C 45 145, 53 130, 62 115
-                       C 71 100, 81 85, 92 70
-                       C 98 62, 102 61, 105 60
-                       Z"
-                    fill="hsl(var(--muted))"
-                    stroke="hsl(var(--border))"
+                    d="M 125 175 
+                       L 140 170 L 155 168 L 170 170 L 185 172 L 200 175 
+                       L 215 178 L 230 182 L 245 186 L 260 190 L 275 195 
+                       L 290 200 L 305 206 L 320 212 L 335 219 L 350 226 
+                       L 365 234 L 380 242 L 395 251 L 410 260 L 425 270 
+                       L 435 282 L 440 295 L 442 308 L 441 321 L 438 334 
+                       L 433 347 L 426 360 L 417 372 L 406 384 L 393 395 
+                       L 378 405 L 361 414 L 342 422 L 321 429 L 298 435 
+                       L 273 440 L 246 444 L 217 447 L 186 449 L 153 450 
+                       L 118 450 L 82 449 L 45 447 L 7 444 L 25 460 
+                       L 45 480 L 60 502 L 70 525 L 75 549 L 76 574 
+                       L 73 599 L 66 624 L 55 648 L 40 671 L 22 693 
+                       L 0 714 L 15 730 L 35 745 L 58 758 L 84 769 
+                       L 113 778 L 145 785 L 179 790 L 215 793 L 253 794 
+                       L 292 793 L 332 790 L 372 785 L 412 778 L 451 769 
+                       L 489 758 L 525 745 L 559 730 L 590 713 L 618 694 
+                       L 642 673 L 662 650 L 677 625 L 687 598 L 692 570 
+                       L 691 541 L 685 512 L 673 484 L 656 457 L 634 432 
+                       L 607 409 L 575 388 L 538 370 L 497 354 L 451 341 
+                       L 401 330 L 347 322 L 289 316 L 228 313 L 164 312 
+                       L 125 175 Z"
+                    fill="#e8f4f8"
+                    stroke="#1e40af"
+                    strokeWidth="2"
+                    className="transition-colors hover:fill-blue-100"
+                  />
+
+                  {/* Sahara Occidental - frontière administrative */}
+                  <path
+                    d="M 0 714 L 15 730 L 35 745 L 58 758 L 84 769 L 113 778 L 145 785 L 179 790 L 215 793 L 253 794 L 292 793 L 332 790 L 372 785 L 412 778 L 451 769 L 489 758 L 525 745 L 525 800 L 0 800 Z"
+                    fill="#f0f8ff"
+                    stroke="#1e40af"
+                    strokeWidth="1"
+                    strokeDasharray="4,4"
+                    opacity="0.7"
+                  />
+
+                  {/* Chaîne de l'Atlas */}
+                  <path
+                    d="M 150 350 Q 200 340, 250 345 Q 300 350, 350 360 Q 400 370, 450 385"
+                    fill="none"
+                    stroke="#64748b"
                     strokeWidth="3"
-                    className="transition-colors drop-shadow-lg"
+                    opacity="0.3"
                   />
-                  
-                  {/* Détails géographiques - Côte méditerranéenne */}
-                  <path
-                    d="M 105 60 C 120 58, 135 56, 150 58 C 165 60, 180 62, 190 65"
-                    fill="none"
-                    stroke="hsl(var(--primary)/0.3)"
-                    strokeWidth="2"
-                    className="opacity-50"
-                  />
-                  
-                  {/* Sahara occidental */}
-                  <path
-                    d="M 15 400 L 10 450 L 50 470 L 100 480 L 150 475 L 200 470 L 240 475"
-                    fill="none"
-                    stroke="hsl(var(--border))"
-                    strokeWidth="2"
-                    strokeDasharray="5,5"
-                    className="opacity-60"
-                  />
-                  
-                  {/* Points des villes */}
-                  {cities.map((city) => (
-                    <g key={city.slug}>
-                      {/* Point de la ville */}
-                      <circle
-                        cx={city.x * 4}
-                        cy={city.y * 5}
-                        r={city.isMain ? "10" : "7"}
-                        fill={city.isMain ? "hsl(var(--primary))" : "hsl(var(--destructive))"}
-                        stroke="white"
-                        strokeWidth="3"
-                        className="cursor-pointer hover:scale-125 transition-all drop-shadow-md"
-                        onClick={() => setSelectedCity(city)}
-                      />
-                      
-                      {/* Effet de pulsation pour les villes principales */}
-                      {city.isMain && (
+
+                  {/* Villes avec zones d'intervention */}
+                  {Object.entries(cityPositions).map(([citySlug, position]) => {
+                    const city = cities.find(c => c.slug === citySlug);
+                    if (!city) return null;
+
+                    const isMain = city.isMain;
+                    const isSelected = selectedCity === citySlug;
+                    const isHovered = hoveredCity === citySlug;
+
+                    return (
+                      <g key={citySlug}>
+                        {/* Zone de couverture d'intervention */}
                         <circle
-                          cx={city.x * 4}
-                          cy={city.y * 5}
-                          r="10"
-                          fill="none"
-                          stroke="hsl(var(--primary))"
-                          strokeWidth="2"
-                          opacity="0.6"
-                          className="animate-ping"
+                          cx={position.x}
+                          cy={position.y}
+                          r={isMain ? "45" : "30"}
+                          fill={isMain ? "#3b82f6" : "#ef4444"}
+                          opacity={isSelected || isHovered ? "0.25" : "0.08"}
+                          className={isSelected ? "animate-pulse" : "transition-opacity duration-300"}
                         />
-                      )}
-                    </g>
-                  ))}
+                        
+                        {/* Point principal de la ville */}
+                        <circle
+                          cx={position.x}
+                          cy={position.y}
+                          r={isMain ? "8" : "6"}
+                          fill={isMain ? "#1d4ed8" : "#dc2626"}
+                          stroke="white"
+                          strokeWidth="2.5"
+                          className="cursor-pointer transition-all duration-200 hover:scale-125"
+                          onClick={() => setSelectedCity(selectedCity === citySlug ? null : citySlug)}
+                          onMouseEnter={() => setHoveredCity(citySlug)}
+                          onMouseLeave={() => setHoveredCity(null)}
+                        />
+                        
+                        {/* Label de la ville */}
+                        <text
+                          x={position.x}
+                          y={position.y - 18}
+                          textAnchor="middle"
+                          className="text-xs font-semibold fill-gray-800 pointer-events-none"
+                          style={{ fontSize: '12px', fontFamily: 'Inter, sans-serif' }}
+                        >
+                          {city.name}
+                        </text>
+
+                        {/* Indicateur temps d'intervention pour villes principales */}
+                        {isMain && (isSelected || isHovered) && (
+                          <text
+                            x={position.x}
+                            y={position.y + 25}
+                            textAnchor="middle"
+                            className="text-xs font-medium fill-primary pointer-events-none"
+                            style={{ fontSize: '10px' }}
+                          >
+                            {city.responseTime}
+                          </text>
+                        )}
+                      </g>
+                    );
+                  })}
+
+                  {/* Noms des villes voisines pour le contexte */}
+                  <text x="430" y="140" className="text-xs fill-gray-500" style={{ fontSize: '10px' }}>Algérie</text>
+                  <text x="50" y="160" className="text-xs fill-gray-500" style={{ fontSize: '10px' }}>Océan</text>
+                  <text x="50" y="175" className="text-xs fill-gray-500" style={{ fontSize: '10px' }}>Atlantique</text>
+                  <text x="280" y="140" className="text-xs fill-gray-500" style={{ fontSize: '10px' }}>Mer Méditerranée</text>
                 </svg>
 
-                {/* Labels des villes principales */}
-                {cities.filter(city => city.isMain).map((city) => (
-                  <div
-                    key={`label-${city.slug}`}
-                    className="absolute pointer-events-none"
-                    style={{
-                      left: `${city.x}%`,
-                      top: `${city.y + 5}%`,
-                      transform: 'translate(-50%, 0)'
-                    }}
-                  >
-                    <Badge variant="default" className="text-xs shadow-lg bg-white text-primary border-primary/20">
-                      {city.name}
-                    </Badge>
+                {/* Légende interactive */}
+                <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-xl border">
+                  <h4 className="font-semibold text-sm mb-3 text-gray-800">Zones d'intervention</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="w-4 h-4 bg-blue-600 rounded-full shadow-sm"></div>
+                      <span className="text-gray-700">Villes principales (8-18 min)</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 bg-red-600 rounded-full shadow-sm"></div>
+                      <span className="text-gray-700">Autres villes (15-30 min)</span>
+                    </div>
                   </div>
-                ))}
-              </div>
-
-              {/* Légende */}
-              <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded-full bg-primary"></div>
-                  <span className="text-sm text-muted-foreground">Villes principales</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-secondary"></div>
-                  <span className="text-sm text-muted-foreground">Autres villes</span>
+                  <div className="mt-3 pt-2 border-t border-gray-200">
+                    <p className="text-xs text-gray-600">Cliquez sur une ville pour plus d'infos</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
 
-          {/* Informations sur la ville sélectionnée */}
+          {/* Panneau d'informations */}
           <div className="lg:col-span-1">
-            {selectedCity ? (
-              <Card className="shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
+            <Card className="sticky top-4">
+              <CardContent className="p-6">
+                {selectedCityData ? (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
                       <h3 className="text-xl font-bold text-foreground">
-                        {selectedCity.name}
+                        {selectedCityData.name}
                       </h3>
-                      {selectedCity.isMain && (
-                        <Badge variant="default" className="mt-1">
-                          Ville principale
-                        </Badge>
+                      {selectedCityData.isMain && (
+                        <Badge variant="secondary">Ville principale</Badge>
                       )}
                     </div>
-                    <div className="text-3xl">🚑</div>
-                  </div>
 
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-primary" />
-                      <span className="text-sm">
-                        Temps d'intervention: <strong>{selectedCity.responseTime}</strong>
-                      </span>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Clock className="h-4 w-4 text-muted-foreground" />
+                        <span>Intervention: {selectedCityData.responseTime}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <MapPin className="h-4 w-4 text-muted-foreground" />
+                        <span>Couverture: {selectedCityData.coverage}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Users className="h-4 w-4 text-muted-foreground" />
+                        <span>Population: {selectedCityData.population}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-primary" />
-                      <span className="text-sm">Service disponible 24h/24</span>
+
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {selectedCityData.description}
+                    </p>
+
+                    <div className="pt-4">
+                      <a
+                        href={`/ambulance-${selectedCityData.slug}`}
+                        className="inline-flex items-center justify-center w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium"
+                      >
+                        Voir le service à {selectedCityData.name}
+                      </a>
                     </div>
                   </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                      <MapPin className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
+                      Sélectionnez une ville
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      Cliquez sur un point de la carte pour voir les détails du service d'ambulance dans cette ville.
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
 
-                  <a
-                    href={`/ambulance-${selectedCity.slug}`}
-                    className="inline-flex items-center justify-center w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors font-medium"
-                  >
-                    Voir le service à {selectedCity.name}
-                  </a>
-                </CardContent>
-              </Card>
-            ) : (
-              <Card className="shadow-lg">
-                <CardContent className="p-6 text-center">
-                  <div className="text-6xl mb-4">🗺️</div>
-                  <h3 className="text-lg font-semibold mb-2">
-                    Sélectionnez une ville
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Cliquez sur un point de la carte pour voir les détails du service d'ambulance dans cette ville.
-                  </p>
-                </CardContent>
-              </Card>
-            )}
+        {/* Navigation rapide */}
+        <div className="mt-8">
+          <h3 className="text-lg font-semibold text-foreground mb-4">Accès rapide aux villes principales</h3>
+          <div className="flex flex-wrap gap-2">
+            {cities.filter(c => c.isMain).map((city) => (
+              <button
+                key={city.slug}
+                onClick={() => setSelectedCity(city.slug)}
+                className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                  selectedCity === city.slug
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                }`}
+              >
+                {city.name}
+              </button>
+            ))}
           </div>
         </div>
       </div>

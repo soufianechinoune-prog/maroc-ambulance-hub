@@ -10,8 +10,13 @@ import ZonesFAQ from "@/components/ZonesFAQ";
 import QuickContactForm from "@/components/QuickContactForm";
 import MoroccoMap from "@/components/MoroccoMap";
 import { cities } from "@/data/cities";
+import { useMemo } from "react";
 
 const Zones = () => {
+  // Mémorisation des données filtrées pour éviter les recalculs
+  const mainCities = useMemo(() => cities.filter(city => city.isMain).slice(0, 6), []);
+  const otherCities = useMemo(() => cities.filter(city => !city.isMain), []);
+
   return (
     <div className="min-h-screen bg-background">
       <SEO 
@@ -79,7 +84,7 @@ const Zones = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {cities.filter(city => city.isMain).slice(0, 6).map((city) => (
+            {mainCities.map((city) => (
               <CityCardOptimized
                 key={city.slug}
                 name={city.name}
@@ -108,7 +113,7 @@ const Zones = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {cities.filter(city => !city.isMain).map((city) => (
+            {otherCities.map((city) => (
               <CityCardOptimized
                 key={city.slug}
                 name={city.name}

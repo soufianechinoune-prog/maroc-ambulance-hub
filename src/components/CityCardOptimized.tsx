@@ -74,6 +74,13 @@ const CityCardOptimized = ({
         <a
           href={`/ambulance-${slug}`}
           className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+          onMouseEnter={() => {
+            // Préchargement de la page au hover
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = `/ambulance-${slug}`;
+            document.head.appendChild(link);
+          }}
         >
           Voir le service Ambulance à {name} →
         </a>

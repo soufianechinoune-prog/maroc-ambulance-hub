@@ -388,50 +388,93 @@ const CityPage = () => {
         </div>
       </section>
 
-      {/* Contenu SEO spécifique pour Casablanca */}
       {city.slug === 'casablanca' && (
         <section className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca 24h/24 et 7j/7</h2>
-            <p className="mb-6 text-gray-700 leading-relaxed">
-              Ambulance Maroc propose un <strong>service d'ambulance à Casablanca</strong> ultra-réactif, sécurisé et adapté à tous les types de situations : urgences vitales, transferts médicaux, hospitalisations planifiées ou soins à domicile.
-              Nous opérons dans tous les quartiers de Casablanca : Maârif, Gauthier, Sidi Maarouf, Hay Hassani, Anfa, Ain Sebaâ, Derb Sultan, etc.
-            </p>
+            {isCalifornieVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Californie 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc propose un <strong>service d'ambulance à Casablanca Californie</strong> ultra-réactif, sécurisé et adapté à tous les types de situations : urgences vitales, transferts médicaux, hospitalisations planifiées ou soins à domicile. Nous couvrons tout le quartier de Californie à Casablanca, ainsi que ses zones voisines, pour offrir un service rapide et fiable à toute heure.
+                </p>
 
-            <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca avec personnel qualifié</h3>
-            <p className="mb-6 text-gray-700 leading-relaxed">
-              Nos ambulances sont équipées pour le <strong>transport médicalisé à Casablanca</strong>. Chaque intervention est assurée par un personnel qualifié : auxiliaires ambulanciers, infirmiers, médecins d'urgence selon le cas.
-              Le tout, dans un cadre réglementé, sécurisé et conforme aux standards nationaux et internationaux.
-            </p>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Californie avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont équipées pour le <strong>transport médicalisé à Casablanca Californie</strong>. Chaque intervention est assurée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon les besoins. Nous garantissons une prise en charge conforme aux normes sanitaires et de sécurité, pour particuliers comme pour entreprises.
+                </p>
 
-            <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans toute la région du Grand Casablanca</h3>
-            <p className="mb-6 text-gray-700 leading-relaxed">
-              Nous intervenons dans les zones urbaines comme périphériques : Bouskoura, Dar Bouazza, Nouaceur, Lissasfa, Aïn Diab, etc.
-              <strong> Notre centrale d'appel est disponible 24h/24</strong> pour vous orienter, répondre à vos questions ou planifier un transfert.
-            </p>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans tout le secteur de Californie et ses alentours</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans toutes les zones résidentielles et commerciales de Californie, ainsi que dans les quartiers voisins : Aïn Chock, Sidi Maârouf, Oasis et Hay Hassani. <strong>Notre centrale d'appel est ouverte 24h/24 et 7j/7</strong> pour répondre à vos questions, organiser un transfert ou envoyer une ambulance en urgence.
+                </p>
 
-            <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
-            <p className="mb-6 text-gray-700 leading-relaxed">
-              Un seul numéro pour toutes vos demandes à Casablanca : <strong>Appelez le <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou cliquez sur notre bouton WhatsApp pour une réponse immédiate.
-            </p>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande dans le quartier Californie à Casablanca, <strong>appelez le <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une réponse immédiate.
+                </p>
 
-            <h3 className="text-2xl font-semibold mb-4 text-gray-900">Pourquoi choisir Ambulance Maroc ?</h3>
-            <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
-              <li>✅ Réactivité 24h/24 dans toute la ville</li>
-              <li>✅ Personnel médical formé et expérimenté</li>
-              <li>✅ Ambulances modernes et bien équipées</li>
-              <li>✅ Intervention dans tous les arrondissements de Casablanca</li>
-              <li>✅ Service d'<strong>ambulance privé Casablanca</strong> pour particuliers et entreprises</li>
-            </ul>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Californie ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et bien équipées</li>
+                  <li>Couverture complète de Californie et des zones voisines</li>
+                  <li>Service d'<strong>ambulance privée Casablanca</strong> pour particuliers et entreprises</li>
+                </ul>
 
-            <div className="bg-gray-100 p-6 rounded-lg">
-              <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
-              <div className="space-y-2 text-gray-700">
-                <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
-                <p>📍 Casablanca & périphérie</p>
-                <p>🕐 Service 24h/24 – 7j/7</p>
-              </div>
-            </div>
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Californie et alentours</p>
+                    <p>🕐 Service 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc propose un <strong>service d'ambulance à Casablanca</strong> ultra-réactif, sécurisé et adapté à tous les types de situations : urgences vitales, transferts médicaux, hospitalisations planifiées ou soins à domicile.
+                  Nous opérons dans tous les quartiers de Casablanca : Maârif, Gauthier, Sidi Maarouf, Hay Hassani, Anfa, Ain Sebaâ, Derb Sultan, etc.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca avec personnel qualifié</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont équipées pour le <strong>transport médicalisé à Casablanca</strong>. Chaque intervention est assurée par un personnel qualifié : auxiliaires ambulanciers, infirmiers, médecins d'urgence selon le cas.
+                  Le tout, dans un cadre réglementé, sécurisé et conforme aux standards nationaux et internationaux.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité dans toute la région du Grand Casablanca</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous intervenons dans les zones urbaines comme périphériques : Bouskoura, Dar Bouazza, Nouaceur, Lissasfa, Aïn Diab, etc.
+                  <strong> Notre centrale d'appel est disponible 24h/24</strong> pour vous orienter, répondre à vos questions ou planifier un transfert.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Un seul numéro pour toutes vos demandes à Casablanca : <strong>Appelez le <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou cliquez sur notre bouton WhatsApp pour une réponse immédiate.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">Pourquoi choisir Ambulance Maroc ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>✅ Réactivité 24h/24 dans toute la ville</li>
+                  <li>✅ Personnel médical formé et expérimenté</li>
+                  <li>✅ Ambulances modernes et bien équipées</li>
+                  <li>✅ Intervention dans tous les arrondissements de Casablanca</li>
+                  <li>✅ Service d'<strong>ambulance privé Casablanca</strong> pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca & périphérie</p>
+                    <p>🕐 Service 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </section>
       )}

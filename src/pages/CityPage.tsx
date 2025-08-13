@@ -105,6 +105,7 @@ const CityPage = () => {
   const isAinChockVariant = location?.pathname?.includes("/ambulance-casablanca-ain-chock");
   const isBouskouraVariant = location?.pathname?.includes("/ambulance-casablanca-bouskoura");
   const isSidiBernoussiVariant = location?.pathname?.includes("/ambulance-casablanca-sidi-bernoussi");
+  const isDerbSultanVariant = location?.pathname?.includes("/ambulance-casablanca-derb-sultan");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -131,6 +132,8 @@ const CityPage = () => {
     ? "Ambulance Bouskoura – Ambulance privée Bouskoura 24/7"
     : isSidiBernoussiVariant
     ? "Ambulance Casablanca Sidi Bernoussi – Ambulance privée Sidi Bernoussi 24/7"
+    : isDerbSultanVariant
+    ? "Ambulance Casablanca Derb Sultan – Ambulance privée Derb Sultan 24/7"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -155,6 +158,8 @@ const CityPage = () => {
     ? "Ambulance Bouskoura: intervention rapide 24/7 à Bouskoura. Ambulance privée Bouskoura, transport médicalisé. Appelez +212 7777 223 11."
     : isSidiBernoussiVariant
     ? "Ambulance Casablanca Sidi Bernoussi: intervention rapide 24/7 à Sidi Bernoussi. Ambulance privée Sidi Bernoussi, transport médicalisé. Appelez +212 7777 223 11."
+    : isDerbSultanVariant
+    ? "Ambulance Casablanca Derb Sultan: intervention rapide 24/7 à Derb Sultan. Ambulance privée Derb Sultan, transport médicalisé. Appelez +212 7777 223 11."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -179,6 +184,8 @@ const CityPage = () => {
     ? ["Ambulance Bouskoura","ambulance privée Bouskoura","ambulance casablanca","ambulance privée casablanca"]
     : isSidiBernoussiVariant
     ? ["Ambulance Casablanca Sidi Bernoussi","ambulance privée Sidi Bernoussi","ambulance casablanca","ambulance privée casablanca"]
+    : isDerbSultanVariant
+    ? ["Ambulance Casablanca Derb Sultan","ambulance privée Derb Sultan","ambulance casablanca","ambulance privée casablanca"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -203,6 +210,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-casablanca-bouskoura`
     : isSidiBernoussiVariant
     ? `${siteUrl}/ambulance-casablanca-sidi-bernoussi`
+    : isDerbSultanVariant
+    ? `${siteUrl}/ambulance-casablanca-derb-sultan`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -227,6 +236,8 @@ const CityPage = () => {
     ? "Ambulance Bouskoura – Intervention 24/7"
     : isSidiBernoussiVariant
     ? "Ambulance Casablanca Sidi Bernoussi – Intervention 24/7"
+    : isDerbSultanVariant
+    ? "Ambulance Casablanca Derb Sultan – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
   // EmergencyService JSON-LD (uniform across cities)
@@ -1065,6 +1076,46 @@ const CityPage = () => {
                   <div className="space-y-2 text-gray-700">
                     <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
                     <p>📍 Casablanca – Quartier Sidi Bernoussi et alentours</p>
+                    <p>🕐 Service : 24h/24 – 7j/7</p>
+                  </div>
+                </div>
+              </>
+            ) : isDerbSultanVariant ? (
+              <>
+                <h2 className="text-3xl font-bold mb-6 text-gray-900">🚨 Service Ambulance Casablanca Derb Sultan 24h/24 et 7j/7</h2>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Ambulance Maroc assure un service d'ambulance à Casablanca Derb Sultan rapide, sécurisé et disponible en permanence, pour tous types d'interventions médicales : urgences vitales, transferts vers hôpitaux, hospitalisations planifiées ou assistance médicale à domicile. Nous intervenons dans l'ensemble du quartier de Derb Sultan ainsi que dans les zones limitrophes, pour garantir une prise en charge efficace, de jour comme de nuit.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">👨‍⚕️ Ambulance privée à Casablanca Derb Sultan avec équipe qualifiée</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nos ambulances sont équipées pour le transport médicalisé dans le secteur de Derb Sultan. Chaque mission est menée par un personnel médical qualifié : auxiliaires ambulanciers, infirmiers et médecins d'urgence selon la situation. Nous appliquons des procédures rigoureuses pour assurer sécurité, confort et qualité de service, que ce soit pour les particuliers ou pour les entreprises locales.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">📍 Disponibilité à Derb Sultan et dans les quartiers voisins</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Nous couvrons toutes les zones résidentielles, commerçantes et administratives de Derb Sultan, ainsi que les quartiers proches : El Fida, Mers Sultan, Hay Mohammadi et Centre-Ville. Notre centrale d'appel est joignable 24h/24 et 7j/7 pour organiser un transfert médical ou envoyer immédiatement une ambulance.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">💬 Comment nous contacter ?</h3>
+                <p className="mb-6 text-gray-700 leading-relaxed">
+                  Pour toute demande d'ambulance dans le quartier Derb Sultan à Casablanca, appelez le <strong><a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline">+212 7777 223 11</a></strong> ou utilisez notre bouton WhatsApp pour une réponse rapide.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">✅ Pourquoi choisir Ambulance Maroc pour Casablanca Derb Sultan ?</h3>
+                <ul className="list-disc list-inside mb-8 text-gray-700 space-y-2">
+                  <li>Réactivité 24h/24 et 7j/7 dans tout le quartier</li>
+                  <li>Personnel médical qualifié et expérimenté</li>
+                  <li>Ambulances modernes et bien équipées</li>
+                  <li>Couverture complète de Derb Sultan et des zones voisines</li>
+                  <li>Service d'ambulance privée Casablanca pour particuliers et entreprises</li>
+                </ul>
+
+                <div className="bg-gray-100 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">ℹ️ Infos pratiques</h4>
+                  <div className="space-y-2 text-gray-700">
+                    <p>📞 Téléphone : <a href="tel:+212777722311" className="text-primary hover:text-primary/80 underline font-semibold">+212 7777 223 11</a></p>
+                    <p>📍 Casablanca – Quartier Derb Sultan et alentours</p>
                     <p>🕐 Service : 24h/24 – 7j/7</p>
                   </div>
                 </div>

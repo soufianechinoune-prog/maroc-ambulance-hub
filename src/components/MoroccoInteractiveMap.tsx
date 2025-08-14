@@ -61,7 +61,7 @@ export default function MoroccoInteractiveMap({
 
         mapRef.current = new mapboxgl.Map({
           container: mapContainerRef.current,
-          style: "mapbox://styles/mapbox/light-v11", // Style light sans frontières disputées
+          style: "mapbox://styles/mapbox/streets-v12", // Style coloré avec labels français
           center: [center.lng, center.lat],
           zoom,
           attributionControl: true,
@@ -111,7 +111,9 @@ export default function MoroccoInteractiveMap({
                   offset: 25,
                   className: 'city-popup',
                   closeOnClick: false, // Ne pas fermer automatiquement
-                  closeButton: true    // Afficher le bouton fermer
+                  closeButton: true,   // Afficher le bouton fermer
+                  anchor: 'bottom',    // Ancrer en bas pour éviter le déplacement
+                  maxWidth: '250px'    // Largeur fixe
                 }).setHTML(`
                   <div style="padding: 12px; min-width: 220px;">
                     <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #1f2937; font-size: 16px;">${city.name}</h3>
@@ -146,17 +148,20 @@ export default function MoroccoInteractiveMap({
                 // Ajouter la popup au marqueur (ne pas l'ouvrir automatiquement)
                 marker.setPopup(popup);
                 
-                // Ouvrir la popup au clic sur le marqueur
+                // Ouvrir la popup au clic sur le marqueur SANS déplacer la vue
                 markerElement.addEventListener('click', (e) => {
                   e.stopPropagation();
+                  e.preventDefault();
+                  
                   // Fermer toutes les autres popups ouvertes
                   markersRef.current.forEach(m => {
                     if (m.getPopup().isOpen()) {
                       m.getPopup().remove();
                     }
                   });
-                  // Ouvrir cette popup
-                  popup.addTo(mapRef.current);
+                  
+                  // Ouvrir cette popup À SA POSITION FIXE
+                  marker.togglePopup();
                 });
 
                 markersRef.current.push(marker);

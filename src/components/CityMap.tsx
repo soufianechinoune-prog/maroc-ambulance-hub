@@ -1,41 +1,77 @@
-import { useRef, useEffect } from "react";
-import mapboxgl from "mapbox-gl";
+import { useEffect, useRef, useState } from "react";
+import { MAPBOX_TOKEN } from "@/config/map";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-const MAPBOX_TOKEN = "pk.eyJ1Ijoic29jaWFsZXhwbG9yZXIiLCJhIjoiREFQbXBISSJ9.dwFTwfSaWsHvktHrRtpydQ";
-
-mapboxgl.accessToken = MAPBOX_TOKEN;
-
-interface CityMapProps {
+type Props = {
   center?: { lng: number; lat: number };
   zoom?: number;
-}
-
-const CityMap = ({ center = { lng: -7.617, lat: 33.572 }, zoom = 10 }: CityMapProps) => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const mapInstance = useRef<mapboxgl.Map | null>(null);
-
-  useEffect(() => {
-    if (mapInstance.current) return; // éviter double initialisation
-
-    if (!mapContainer.current) return;
-
-    mapInstance.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [center.lng, center.lat],
-      zoom,
-    });
-
-    new mapboxgl.Marker().setLngLat([center.lng, center.lat]).addTo(mapInstance.current);
-
-    return () => {
-      mapInstance.current?.remove();
-      mapInstance.current = null;
-    };
-  }, [center.lng, center.lat, zoom]);
-
-  return <div ref={mapContainer} className="w-full h-[420px]" />;
+  className?: string;
+  showMarker?: boolean;
 };
 
-export default CityMap;
+/**
+ * CityMap : composant Mapbox robuste (import dynamique, anti double-init, message si token manquant)
+ */
+export default function CityMap({
+  center = { lng: -7.617, lat: 33.572 }, // Casablanca par défaut
+  zoom = 10,
+  className = "w-full h-[420px] rounded-xl overflow-hidden",
+  showMarker = true,
+}: Props) {
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<any>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      try {
+        if (!MAPBOX_TOKEN || MAPBOX_TOKEN.startsWith("pk.REMPLACE")) {
+          setError("Clé Mapbox manquante : renseigner MAPBOX_TOKEN dans src/config/map.ts");
+          return;
+        }
+        if (mapRef.current || !mapContainerRef.current) return;
+
+        // import dynamique pour éviter les soucis de bundling/SSR
+        const mapboxgl = (await import("mapbox-gl")).default;
+        mapboxgl.accessToken = MAPBOX_TOKEN;
+
+        if (cancelled) return;
+
+        mapRef.current = new mapboxgl.Map({
+          container: mapContainerRef.current,
+          style: "mapbox://styles/mapbox/streets-v12",
+          center: [center.lng, center.lat],
+          zoom,
+          attributionControl: true,
+        });
+
+        if (showMarker) {
+          new mapboxgl.Marker().setLngLat([center.lng, center.lat]).addTo(mapRef.current);
+        }
+      } catch (e: any) {
+        console.error("Mapbox init error:", e);
+        if (!cancelled) setError("Erreur d'initialisation de la carte");
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      try {
+        mapRef.current?.remove();
+      } catch {}
+      mapRef.current = null;
+    };
+  }, [center.lng, center.lat, zoom, showMarker]);
+
+  if (error) {
+    return (
+      <div className="w-full h-[420px] rounded-xl border border-red-200 bg-red-50 flex items-center justify-center text-red-700">
+        {error}
+      </div>
+    );
+  }
+
+  return <div ref={mapContainerRef} className={className} />;
+}

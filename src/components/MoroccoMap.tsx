@@ -1,5 +1,5 @@
 import React from 'react';
-import MoroccoMapComponent from '../MoroccoMap';
+import CityMap from "@/components/CityMap";
 
 const MoroccoMap = () => {
   return (
@@ -17,7 +17,7 @@ const MoroccoMap = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Carte Mapbox */}
           <div className="lg:col-span-3">
-            <MoroccoMapComponent />
+            <CityMap center={{ lng: -6.8498, lat: 34.0209 }} zoom={5.3} showMarker={false} />
           </div>
         </div>
       </div>

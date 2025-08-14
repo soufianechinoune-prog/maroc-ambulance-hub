@@ -61,7 +61,7 @@ export default function MoroccoInteractiveMap({
 
         mapRef.current = new mapboxgl.Map({
           container: mapContainerRef.current,
-          style: "mapbox://styles/mapbox/streets-v12",
+          style: "mapbox://styles/mapbox/light-v11", // Style light sans frontières disputées
           center: [center.lng, center.lat],
           zoom,
           attributionControl: true,
@@ -78,23 +78,27 @@ export default function MoroccoInteractiveMap({
                 const markerElement = document.createElement('div');
                 markerElement.className = `city-marker ${city.isMain ? 'main-city' : 'other-city'}`;
                 markerElement.style.cssText = `
-                  width: ${city.isMain ? '16px' : '12px'};
-                  height: ${city.isMain ? '16px' : '12px'};
+                  width: ${city.isMain ? '20px' : '16px'};
+                  height: ${city.isMain ? '20px' : '16px'};
                   background-color: ${city.isMain ? '#2563eb' : '#ef4444'};
-                  border: 2px solid white;
+                  border: 3px solid white;
                   border-radius: 50%;
                   cursor: pointer;
-                  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
                   transition: transform 0.2s ease;
+                  position: relative;
+                  z-index: 10;
                 `;
                 
-                // Effet hover
+                // Effet hover - plus visible
                 markerElement.addEventListener('mouseenter', () => {
-                  markerElement.style.transform = 'scale(1.2)';
+                  markerElement.style.transform = 'scale(1.3)';
+                  markerElement.style.zIndex = '20';
                 });
                 
                 markerElement.addEventListener('mouseleave', () => {
                   markerElement.style.transform = 'scale(1)';
+                  markerElement.style.zIndex = '10';
                 });
 
                 // Créer le marqueur Mapbox
@@ -105,15 +109,17 @@ export default function MoroccoInteractiveMap({
                 // Créer la popup
                 const popup = new mapboxgl.Popup({ 
                   offset: 25,
-                  className: 'city-popup'
+                  className: 'city-popup',
+                  closeOnClick: false, // Ne pas fermer automatiquement
+                  closeButton: true    // Afficher le bouton fermer
                 }).setHTML(`
-                  <div style="padding: 8px; min-width: 200px;">
-                    <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #1f2937;">${city.name}</h3>
+                  <div style="padding: 12px; min-width: 220px;">
+                    <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #1f2937; font-size: 16px;">${city.name}</h3>
                     <p style="margin: 0 0 4px 0; font-size: 14px; color: #6b7280;">
-                      Temps d'intervention: <strong>${city.responseTime}</strong>
+                      Temps d'intervention: <strong style="color: #059669;">${city.responseTime}</strong>
                     </p>
                     <p style="margin: 0 0 8px 0; font-size: 14px; color: #6b7280;">
-                      Couverture: <strong>${city.coverage}</strong>
+                      Couverture: <strong style="color: #059669;">${city.coverage}</strong>
                     </p>
                     <button 
                       onclick="window.cityNavigate('${city.slug}')" 
@@ -121,20 +127,37 @@ export default function MoroccoInteractiveMap({
                         background: #2563eb; 
                         color: white; 
                         border: none; 
-                        padding: 6px 12px; 
+                        padding: 8px 16px; 
                         border-radius: 6px; 
                         cursor: pointer; 
-                        font-size: 12px;
+                        font-size: 14px;
                         width: 100%;
+                        font-weight: 500;
+                        transition: background-color 0.2s;
                       "
+                      onmouseover="this.style.backgroundColor='#1d4ed8'"
+                      onmouseout="this.style.backgroundColor='#2563eb'"
                     >
                       Voir les détails →
                     </button>
                   </div>
                 `);
 
-                // Ajouter la popup au marqueur
+                // Ajouter la popup au marqueur (ne pas l'ouvrir automatiquement)
                 marker.setPopup(popup);
+                
+                // Ouvrir la popup au clic sur le marqueur
+                markerElement.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  // Fermer toutes les autres popups ouvertes
+                  markersRef.current.forEach(m => {
+                    if (m.getPopup().isOpen()) {
+                      m.getPopup().remove();
+                    }
+                  });
+                  // Ouvrir cette popup
+                  popup.addTo(mapRef.current);
+                });
 
                 markersRef.current.push(marker);
               }

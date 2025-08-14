@@ -1,5 +1,5 @@
 import React from 'react';
-import CityMap from "@/components/CityMap";
+import MoroccoInteractiveMap from "@/components/MoroccoInteractiveMap";
 
 const MoroccoMap = () => {
   return (
@@ -14,10 +14,15 @@ const MoroccoMap = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Carte Mapbox */}
-          <div className="lg:col-span-3">
-            <CityMap center={{ lng: -6.8498, lat: 34.0209 }} zoom={5.3} showMarker={false} />
+        <div className="grid lg:grid-cols-1 gap-8">
+          {/* Carte Mapbox Interactive */}
+          <div className="lg:col-span-1">
+            <MoroccoInteractiveMap 
+              center={{ lng: -6.8498, lat: 31.7917 }} 
+              zoom={5.5} 
+              showCityMarkers={true}
+              className="w-full h-[600px] rounded-xl overflow-hidden border shadow-lg"
+            />
           </div>
         </div>
       </div>

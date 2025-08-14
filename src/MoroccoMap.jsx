@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -6,22 +5,24 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const MAPBOX_TOKEN = "pk.eyJ1Ijoic29jaWFsZXhwbG9yZXIiLCJhIjoiREFQbXBISSJ9.dwFTwfSaWsHvktHrRtpydQ";
 
 export default function MoroccoMap() {
-  const containerRef = useRef(null);
-  const mapRef = useRef(null); // anti double-init
+  const mapContainer = useRef(null);
+  const mapInstance = useRef(null); // anti double-init
 
   useEffect(() => {
-    if (mapRef.current) return;
+    if (mapInstance.current) return; // éviter double initialisation
 
     // 1) Token + init
     mapboxgl.accessToken = MAPBOX_TOKEN;
 
+    if (!mapContainer.current) return;
+
     const map = new mapboxgl.Map({
-      container: containerRef.current,
+      container: mapContainer.current,
       style: "mapbox://styles/mapbox/light-v11",
       center: [-7.62, 33.58], // Casablanca
       zoom: 5
     });
-    mapRef.current = map;
+    mapInstance.current = map;
 
     // Logs d'erreur utiles
     map.on("error", (e) => {
@@ -138,17 +139,17 @@ export default function MoroccoMap() {
     });
 
     return () => {
-      mapRef.current?.remove();
-      mapRef.current = null;
+      mapInstance.current?.remove();
+      mapInstance.current = null;
     };
   }, []);
 
   return (
     <div style={{ position:"relative" }}>
       <div
-        ref={containerRef}
+        ref={mapContainer}
+        className="w-full h-[520px]"
         style={{
-          height: 520, width: "100%",
           borderRadius: 12, border: "1px solid #e5e7eb", overflow: "hidden"
         }}
       />

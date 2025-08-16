@@ -3444,10 +3444,10 @@ const CityPage = () => {
       </div>
 
       {/* Maillage interne: quartiers ou villes selon le contexte */}
-      <section className="mt-16 px-4 sm:px-6 lg:px-8 py-10 bg-muted/50 border-t border-border" aria-label={currentNeighborhood ? `Autres quartiers de ${currentCity === 'casablanca' ? 'Casablanca' : 'Rabat'}` : "Autres villes couvertes"}>
+      <section className="mt-16 px-4 sm:px-6 lg:px-8 py-10 bg-muted/50 border-t border-border" aria-label={currentNeighborhood ? `Autres quartiers de ${currentCity === 'casablanca' ? 'Casablanca' : currentCity === 'rabat' ? 'Rabat' : 'Marrakech'}` : "Autres villes couvertes"}>
         <div className="max-w-5xl mx-auto">
           <h2 className="text-xl font-bold mb-6 text-center">
-            {currentNeighborhood ? `🏘️ Autres Quartiers de ${currentCity === 'casablanca' ? 'Casablanca' : 'Rabat'}` : "🏙️ Autres Villes Couvertes"}
+            {currentNeighborhood ? `🏘️ Autres Quartiers de ${currentCity === 'casablanca' ? 'Casablanca' : currentCity === 'rabat' ? 'Rabat' : 'Marrakech'}` : "🏙️ Autres Villes Couvertes"}
           </h2>
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {(currentNeighborhood ? relatedNeighborhoods : relatedCities).map((item) => (

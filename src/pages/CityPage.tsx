@@ -16,6 +16,7 @@ import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, 
 import { SITE_URL } from "@/lib/config";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 import HeroSection from "@/components/HeroSection";
+import ContactInfo from "@/components/ContactInfo";
 import medicalTeam from "@/assets/medical-team.jpg";
 // Mapping des quartiers selon la logique fournie
 const neighborhoodMapping = {
@@ -3435,8 +3436,17 @@ const CityPage = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <TestimonialsSection />
+      {/* Testimonials avec structured data */}
+      <TestimonialsSection withStructuredData={true} />
+
+      {/* Contact Info optimisé SEO local */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <ContactInfo city={city.name} withStructuredData={true} />
+          </div>
+        </div>
+      </section>
 
       {/* Contact Form */}
       <div id="demande-ambulance" className="py-16 bg-gray-50">

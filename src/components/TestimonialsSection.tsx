@@ -2,7 +2,7 @@ import { Star, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import medicalTeam from "@/assets/medical-team.jpg";
 
-const TestimonialsSection = () => {
+const TestimonialsSection = ({ withStructuredData = false }: { withStructuredData?: boolean }) => {
   const testimonials = [
     {
       name: "Ahmed Benali",
@@ -34,8 +34,42 @@ const TestimonialsSection = () => {
     }
   ];
 
+  // Structured data for reviews
+  const reviewsStructuredData = withStructuredData ? {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ambulance Maroc",
+    "review": testimonials.map(testimonial => ({
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": testimonial.rating.toString(),
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person", 
+        "name": testimonial.name
+      },
+      "reviewBody": testimonial.text,
+      "datePublished": getDateFromRelative(testimonial.date)
+    })),
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": testimonials.length.toString(),
+      "bestRating": "5"
+    }
+  } : null;
+
   return (
-    <section className="py-16 bg-background">
+    <>
+      {withStructuredData && reviewsStructuredData && (
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsStructuredData) }}
+        />
+      )}
+      <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -132,9 +166,23 @@ const TestimonialsSection = () => {
             <span className="text-amber-600">• +500 avis clients</span>
           </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 };
+
+// Helper function to convert relative dates
+function getDateFromRelative(relativeDate: string): string {
+  const now = new Date();
+  if (relativeDate.includes('semaine')) {
+    const weeks = parseInt(relativeDate) || 1;
+    now.setDate(now.getDate() - (weeks * 7));
+  } else if (relativeDate.includes('mois')) {
+    const months = parseInt(relativeDate) || 1;
+    now.setMonth(now.getMonth() - months);
+  }
+  return now.toISOString().split('T')[0];
+}
 
 export default TestimonialsSection;

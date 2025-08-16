@@ -330,8 +330,8 @@ const Index = () => {
 
         {/* Services */}
         <ServicesSection />
-        {/* Témoignages */}
-        <TestimonialsSection />
+        {/* Témoignages avec structured data */}
+        <TestimonialsSection withStructuredData={true} />
 
         {/* CTA urgence bande rouge */}
         <section className="py-8 bg-emergency text-emergency-foreground" role="region" aria-label="Urgence médicale">

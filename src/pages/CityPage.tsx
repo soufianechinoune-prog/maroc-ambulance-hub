@@ -1104,6 +1104,126 @@ const CityPage = () => {
                     </ul>
                   </div>
                 </>
+              ) : isGuelizVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Marrakech – Quartier Guéliz
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier moderne de Guéliz à Marrakech bénéficie de notre service d'ambulance spécialisé et réactif, avec une couverture optimale pour ce secteur commercial et touristique stratégique. Notre équipe qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture zones commerciales et centres d'affaires</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Hivernage et zones touristiques</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté touristes et professionnels</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès privilégié aux cliniques modernes du secteur</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isHivernageVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Marrakech – Quartier Hivernage
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier luxueux d'Hivernage à Marrakech bénéficie de notre service d'ambulance premium et réactif, avec une couverture optimale pour ce secteur hôtelier et résidentiel haut de gamme. Notre équipe qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture hôtels de luxe et résidences privées</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Guéliz et zones hôtelières</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service premium adapté clientèle internationale</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès facilité aux centres médicaux privés</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isMedinaVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Marrakech – Quartier Médina
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier historique de la Médina à Marrakech bénéficie de notre service d'ambulance spécialisé et adapté, avec une couverture optimale pour ce secteur patrimonial et touristique unique. Notre équipe qualifiée connaît parfaitement les accès et assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture riads, souks et quartiers traditionnels</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Connaissance parfaite des accès dans la Médina</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté résidents et visiteurs</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Évacuation rapide vers centres médicaux modernes</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isSidiGhanemVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Marrakech – Quartier Sidi Ghanem
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier industriel de Sidi Ghanem à Marrakech bénéficie de notre service d'ambulance spécialisé et réactif, avec une couverture optimale pour ce secteur d'activité économique stratégique. Notre équipe qualifiée assure une prise en charge rapide et professionnelle des accidents du travail et urgences, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture zones industrielles et ateliers</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide pour accidents du travail</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service adapté entreprises et travailleurs</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Protocoles spécialisés urgences industrielles</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
               ) : (
                 <>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">

@@ -390,13 +390,13 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
         };
       case 'gueliz':
         return {
-          title: "🚑 Ambulance Marrakech Guéliz – Urgences 24h/24, ambulance privée et transport médicalisé",
-          subtitle: "Intervention rapide (10-15 min) dans Guéliz et zones touristiques — équipe expérimentée — service continu jour et nuit.",
-          badge: "Service disponible partout au Maroc — 24/7",
+          title: "🚑 Ambulance Privée Marrakech Guéliz – Urgences 24h/24, transport médicalisé centre-ville",
+          subtitle: "Intervention rapide (8-15 min) dans Guéliz — avenue Mohammed V, centres commerciaux, cliniques — ambulance privée professionnelle.",
+          badge: "Service ambulance privée partout au Maroc — 24/7",
           features: [
-            { icon: "✔", text: "Agréé" },
-            { icon: "✔", text: "Zone touristique & commerciale" },
-            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Ambulance privée agréée" },
+            { icon: "✔", text: "Centre-ville & zones commerciales" },
+            { icon: "✔", text: "Accès cliniques rapide" },
             { icon: "✔", text: "Équipes multilingues" }
           ]
         };

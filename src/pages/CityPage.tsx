@@ -267,7 +267,7 @@ const CityPage = () => {
     : isYacoubElMansourVariant
     ? "Ambulance Rabat Yacoub El Mansour – Ambulance privée Yacoub El Mansour 24/7"
     : isGuelizVariant
-    ? "Ambulance Marrakech Guéliz – Urgences 24h/24, ambulance privée et transport médicalisé"
+    ? "Ambulance Privée Marrakech Guéliz – Urgences 24h/24, transport médicalisé centre-ville"
     : isHivernageVariant
     ? "Ambulance Marrakech Hivernage – Urgences 24h/24, ambulance privée et transport médicalisé"
     : isMedinaVariant
@@ -315,7 +315,7 @@ const CityPage = () => {
     : isYacoubElMansourVariant
     ? "Ambulance Rabat Yacoub El Mansour: intervention rapide 24/7 à Yacoub El Mansour. Ambulance privée Yacoub El Mansour, transport médicalisé. Appelez +212 7777 223 11."
     : isGuelizVariant
-    ? "Intervention rapide (10-15 min) dans Guéliz et zones touristiques — équipe expérimentée — service continu jour et nuit."
+    ? "Ambulance privée Guéliz Marrakech (8-15 min) — centre commercial, avenue Mohammed V, cliniques — équipe médicale expérimentée — urgences 24h/24."
     : isHivernageVariant
     ? "Intervention rapide (10-15 min) dans Hivernage et zones hôtelières — équipe expérimentée — service continu jour et nuit."
     : isMedinaVariant
@@ -363,7 +363,7 @@ const CityPage = () => {
     : isYacoubElMansourVariant
     ? ["Ambulance Rabat Yacoub El Mansour","ambulance privée Yacoub El Mansour","ambulance rabat","ambulance privée rabat"]
     : isGuelizVariant
-    ? ["Ambulance Marrakech Guéliz","ambulance privée Guéliz","ambulance marrakech","ambulance privée marrakech"]
+    ? ["ambulance privée Guéliz","Ambulance Marrakech Guéliz","ambulance privée Marrakech","urgence médicale Guéliz","ambulance centre-ville Marrakech","transport médicalisé Guéliz"]
     : isHivernageVariant
     ? ["Ambulance Marrakech Hivernage","ambulance privée Hivernage","ambulance marrakech","ambulance privée marrakech"]
     : isMedinaVariant
@@ -1119,29 +1119,29 @@ const CityPage = () => {
               ) : isGuelizVariant ? (
                 <>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    Service d'Ambulance à Marrakech – Quartier Guéliz
+                    Ambulance Privée à Marrakech – Quartier Guéliz
                   </h2>
                   <p className="text-xl text-gray-600 mb-8">
-                    Le quartier moderne de Guéliz à Marrakech bénéficie de notre service d'ambulance spécialisé et réactif, avec une couverture optimale pour ce secteur commercial et touristique stratégique. Notre équipe qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                    Le quartier moderne de Guéliz, cœur commercial et touristique de Marrakech, bénéficie de notre service d'ambulance privée ultra-réactif. Situé près de l'avenue Mohammed V, des centres commerciaux et des principales cliniques de la ville, notre équipe médicale qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
                   </p>
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">🚑 Couverture zones commerciales et centres d'affaires</span>
+                        <span className="text-gray-700">🚑 Ambulance privée avenue Mohammed V et centres commerciaux</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">📍 Intervention rapide vers Hivernage et zones touristiques</span>
+                        <span className="text-gray-700">📍 Accès direct Clinique du Sud, Polyclinique du Sud et Clinique Agdal</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">🤝 Service adapté touristes et professionnels</span>
+                        <span className="text-gray-700">🤝 Ambulance privée pour touristes, résidents et professionnels</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">🏥 Accès privilégié aux cliniques modernes du secteur</span>
+                        <span className="text-gray-700">🏥 Transport médicalisé vers CHU Mohammed VI et cliniques privées</span>
                       </li>
                     </ul>
                   </div>

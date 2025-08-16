@@ -275,7 +275,7 @@ const CityPage = () => {
     : isSidiGhanemVariant
     ? "Ambulance Marrakech Sidi Ghanem – Urgences 24h/24, ambulance privée et transport médicalisé"
     : isPalmeraieVariant
-    ? "Ambulance Privée Marrakech Palmeraie – Urgences 24h/24, transport médicalisé haut de gamme"
+    ? "Ambulance Privée Marrakech Palmeraie – Urgences 24h/24, transport médicalisé rapide"
     : baseTitle;
 
   const description = isCalifornieVariant

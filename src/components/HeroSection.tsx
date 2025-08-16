@@ -438,8 +438,8 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
         };
       case 'palmeraie':
         return {
-          title: "🚑 Ambulance Privée Marrakech Palmeraie – Urgences 24h/24, transport médicalisé de luxe",
-          subtitle: "Intervention rapide (8-12 min) dans la Palmeraie — villas de prestige, golfs et résidences — ambulance privée haut de gamme — service VIP.",
+          title: "🚑 Ambulance Privée Marrakech Palmeraie – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (8-12 min) dans la Palmeraie — villas de prestige, golfs et résidences — ambulance privée professionnelle — service 24h/24.",
           badge: "Service ambulance privée partout au Maroc — 24/7",
           features: [
             { icon: "✔", text: "Ambulance privée agréée" },

@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => ({
       name: 'generate-seo-assets',
       apply: 'build' as const,
       async writeBundle() {
-        const site = process.env.VITE_SITE_URL || "https://www.ambulance-maroc.ma";
+        const site = process.env.VITE_SITE_URL || "https://www.ambulance-privee.ma";
         const distDir = path.resolve(rootDir, "dist");
         if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });
 
@@ -108,7 +108,7 @@ export default defineConfig(({ mode }) => ({
             ".webp": "dataurl",
           },
           define: {
-            "import.meta.env.VITE_SITE_URL": JSON.stringify(process.env.VITE_SITE_URL || "https://www.ambulance-maroc.ma"),
+            "import.meta.env.VITE_SITE_URL": JSON.stringify(process.env.VITE_SITE_URL || "https://www.ambulance-privee.ma"),
           },
         });
 

@@ -5,7 +5,7 @@ const tsContent = readFileSync("src/data/cities.ts", "utf8");
 const slugMatches = [...tsContent.matchAll(/slug:\s*"([^"]+)"/g)];
 const uniqueSlugs = Array.from(new Set(slugMatches.map((m) => m[1])));
 
-const site = process.env.VITE_SITE_URL || "https://www.ambulance-maroc.ma";
+const site = process.env.VITE_SITE_URL || "https://www.ambulance-privee.ma";
 
 const baseUrls = [
   `${site}/`,

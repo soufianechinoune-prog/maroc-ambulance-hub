@@ -135,8 +135,8 @@ const Footer = () => {
                     <Mail className="h-4 w-4 mt-0.5 text-primary flex-shrink-0" />
                     <div>
                       <p className="font-medium">Email</p>
-                      <a href="mailto:contact@ambulance-maroc.ma" className="text-background/80 hover:text-success">
-                        contact@ambulance-maroc.ma
+                      <a href="mailto:contact@ambulance-privee.ma" className="text-background/80 hover:text-success">
+                        contact@ambulance-privee.ma
                       </a>
                     </div>
                   </div>

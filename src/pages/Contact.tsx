@@ -19,7 +19,7 @@ const Contact = () => {
           "@type": "EmergencyService",
           "name": "Ambulance Maroc",
           "telephone": "+212777722311",
-          "email": "contact@ambulance-maroc.ma",
+          "email": "contact@ambulance-privee.ma",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "123 Bd Mohammed V",
@@ -96,7 +96,7 @@ const Contact = () => {
                 <CardTitle>Email</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-lg font-semibold text-gray-900 mb-2">contact@ambulance-maroc.ma</p>
+                <p className="text-lg font-semibold text-gray-900 mb-2">contact@ambulance-privee.ma</p>
                 <p className="text-gray-600">Réponse sous 2h</p>
               </CardContent>
             </Card>

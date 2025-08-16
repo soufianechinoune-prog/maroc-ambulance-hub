@@ -275,7 +275,7 @@ const CityPage = () => {
     : isSidiGhanemVariant
     ? "Ambulance Marrakech Sidi Ghanem – Urgences 24h/24, ambulance privée et transport médicalisé"
     : isPalmeraieVariant
-    ? "Ambulance Marrakech Palmeraie – Urgences 24h/24, ambulance privée et transport médicalisé"
+    ? "Ambulance Privée Marrakech Palmeraie – Urgences 24h/24, transport médicalisé haut de gamme"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -323,7 +323,7 @@ const CityPage = () => {
     : isSidiGhanemVariant
     ? "Intervention rapide (10-15 min) dans Sidi Ghanem et zones industrielles — équipe expérimentée — service continu jour et nuit."
     : isPalmeraieVariant
-    ? "Intervention rapide (10-15 min) dans la Palmeraie et zones résidentielles — équipe expérimentée — service continu jour et nuit."
+    ? "Ambulance privée dans la Palmeraie Marrakech (10-15 min) — zones résidentielles de prestige, golfs et villas — équipe médicale expérimentée — service continu."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -371,7 +371,7 @@ const CityPage = () => {
     : isSidiGhanemVariant
     ? ["Ambulance Marrakech Sidi Ghanem","ambulance privée Sidi Ghanem","ambulance marrakech","ambulance privée marrakech"]
     : isPalmeraieVariant
-    ? ["Ambulance Marrakech Palmeraie","ambulance privée Palmeraie","ambulance marrakech","ambulance privée marrakech"]
+    ? ["ambulance privée Palmeraie","Ambulance Marrakech Palmeraie","ambulance privée Marrakech","transport médicalisé Palmeraie","urgence médicale Palmeraie","ambulance de luxe Marrakech"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -1239,29 +1239,29 @@ const CityPage = () => {
               ) : isPalmeraieVariant ? (
                 <>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    Service d'Ambulance à Marrakech – Quartier Palmeraie
+                    Ambulance Privée à Marrakech – Quartier Palmeraie
                   </h2>
                   <p className="text-xl text-gray-600 mb-8">
-                    Le quartier prestigieux de la Palmeraie à Marrakech bénéficie de notre service d'ambulance spécialisé et réactif, avec une couverture optimale pour ce secteur résidentiel et touristique haut de gamme. Notre équipe qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                    La prestigieuse Palmeraie de Marrakech, avec ses villas de luxe, terrains de golf et résidences privées, bénéficie de notre service d'ambulance privée premium et ultra-réactif. Notre équipe médicale qualifiée connaît parfaitement les accès sécurisés de ce quartier exclusif et assure un transport médicalisé discret et professionnel, 24h/24 et 7j/7.
                   </p>
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">🚑 Couverture villas et complexes résidentiels</span>
+                        <span className="text-gray-700">🚑 Ambulance privée spécialisée villas de luxe et terrains de golf</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">📍 Intervention rapide vers Guéliz et zones touristiques</span>
+                        <span className="text-gray-700">📍 Accès sécurisés Route de Fès et Circuit de la Palmeraie</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">🤝 Service premium adapté résidents haut de gamme</span>
+                        <span className="text-gray-700">🤝 Transport médicalisé discret pour résidents et invités VIP</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">🏥 Accès privilégié aux cliniques privées de prestige</span>
+                        <span className="text-gray-700">🏥 Ambulance privée avec accès direct Clinique Internationale Marrakech</span>
                       </li>
                     </ul>
                   </div>

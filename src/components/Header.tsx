@@ -46,15 +46,15 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img src={logo} alt="Ambulance Maroc – Accueil" className="h-10 w-10 rounded-lg" loading="lazy" />
+            <img src="/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png" alt="Ambulance Privée Maroc – Accueil" className="h-10 w-10 rounded-lg" loading="lazy" />
             {isHomepage ? (
-              <div className="flex flex-col" aria-label="Ambulance Maroc – Accueil">
-                <span className="text-lg font-bold text-foreground">Ambulance Maroc</span>
+              <div className="flex flex-col" aria-label="Ambulance Privée Maroc – Accueil">
+                <span className="text-lg font-bold text-foreground">Ambulance Privée Maroc</span>
                 <span className="text-xs text-muted-foreground">Service 24/7</span>
               </div>
             ) : (
               <div>
-                <div className="text-lg font-bold text-foreground">Ambulance Maroc</div>
+                <div className="text-lg font-bold text-foreground">Ambulance Privée Maroc</div>
                 <p className="text-xs text-muted-foreground">Service 24/7</p>
               </div>
             )}

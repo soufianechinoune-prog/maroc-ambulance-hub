@@ -46,9 +46,9 @@ const Footer = () => {
               {/* Company Info */}
               <div className="space-y-4">
                 <Link to="/" className="flex items-center space-x-3">
-                  <img src={logo} alt="Ambulance Maroc" className="h-10 w-10 rounded-lg" />
+                  <img src="/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png" alt="Ambulance Privée Maroc" className="h-10 w-10 rounded-lg" />
                   <div>
-                    <h3 className="text-lg font-bold">Ambulance Maroc</h3>
+                    <h3 className="text-lg font-bold">Ambulance Privée Maroc</h3>
                     <p className="text-sm text-background/70">Service 24/7</p>
                   </div>
                 </Link>
@@ -158,7 +158,7 @@ const Footer = () => {
         <div className="py-6 border-t border-background/20">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-background/70">
             <p>
-              © {currentYear} Ambulance Maroc. Tous droits réservés.
+              © {currentYear} Ambulance Privée Maroc. Tous droits réservés.
             </p>
             <div className="flex space-x-4">
               <Link to="/mentions-legales" className="hover:text-success transition-colors">

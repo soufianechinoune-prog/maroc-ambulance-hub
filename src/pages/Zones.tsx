@@ -141,7 +141,7 @@ const Zones = () => {
       <WhyChooseUsSection />
 
       {/* FAQ */}
-      <ZonesFAQ />
+      <ZonesFAQ withStructuredData={true} />
 
       {/* Formulaire de contact rapide */}
       <div id="contact-form">

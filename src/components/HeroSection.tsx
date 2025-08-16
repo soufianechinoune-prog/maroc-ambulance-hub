@@ -480,9 +480,11 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
       {/* SEO and Accessibility Image */}
       <img 
         src={ambulanceHero} 
-        alt={`Ambulance à ${city} – intervention rapide 24/7`} 
-        className="sr-only" 
+        alt={`Ambulance professionnelle en intervention à ${city} - service d'urgence médicale 24h/24 et 7j/7`} 
+        className="sr-only"
         loading="lazy"
+        width="800"
+        height="600"
       />
 
       {/* Content */}

@@ -140,8 +140,10 @@ useEffect(() => {
               {p.coverImage && (
                 <img
                   src={p.coverImage}
-                  alt={`${p.title}`}
+                  alt={`Article ${p.title} - ambulance Maroc transport médicalisé`}
                   loading="lazy"
+                  width="400"
+                  height="200"
                   decoding="async"
                   className="w-full h-44 object-cover"
                 />

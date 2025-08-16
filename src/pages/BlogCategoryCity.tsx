@@ -124,8 +124,10 @@ const BlogCategoryCity = ({ cityName, citySlug, selectedSlugs = [] }: Props) => 
               {p.coverImage && (
                 <img
                   src={p.coverImage}
-                  alt={`${p.title} – ${cityName}`}
+                  alt={`Article: ${p.title} - ambulance ${cityName} transport médicalisé`}
                   loading="lazy"
+                  width="400"
+                  height="200"
                   decoding="async"
                   className="w-full h-44 object-cover"
                 />

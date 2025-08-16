@@ -9,7 +9,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactForm from "@/components/ContactForm";
 import SEO from "@/components/SEO";
 import SmartBreadcrumb from "@/components/SmartBreadcrumb";
-import { generateLocalBusinessSchema } from "@/lib/schema";
+import { generateLocalBusinessSchema, generateServiceSchema, generateFAQSchema } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, Zap } from "lucide-react";
@@ -461,10 +461,15 @@ const CityPage = () => {
     ? "Ambulance Rabat Yacoub El Mansour – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
-  // EmergencyService JSON-LD (uniform across cities)
-  const emergencySchema = city ? generateLocalBusinessSchema(city) : undefined;
+  // Rich structured data schemas
+  const localBusinessSchema = city ? generateLocalBusinessSchema(city) : undefined;
+  const serviceSchema = city ? generateServiceSchema(city) : undefined;
+  const faqSchema = generateFAQSchema();
+  
   const jsonLdArray: Record<string, any>[] = [];
-  if (emergencySchema) jsonLdArray.push(emergencySchema);
+  if (localBusinessSchema) jsonLdArray.push(localBusinessSchema);
+  if (serviceSchema) jsonLdArray.push(serviceSchema);
+  jsonLdArray.push(faqSchema);
 
 
   if (!city) {
@@ -1293,8 +1298,11 @@ const CityPage = () => {
             <div className="relative">
               <img 
                 src={medicalTeam} 
-                alt={`Équipe médicale ${city.name}`}
+                alt={`Équipe médicale professionnelle ambulance ${city.name} - personnel qualifié transport médicalisé`}
                 className="rounded-lg shadow-xl"
+                loading="lazy"
+                width="500"
+                height="400"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-lg"></div>
             </div>

@@ -117,8 +117,10 @@ const BlogCategoryCasablanca = () => {
               {p.coverImage && (
                 <img
                   src={p.coverImage}
-                  alt={`${p.title} – Casablanca`}
+                  alt={`Article: ${p.title} - ambulance Casablanca transport médicalisé`}
                   loading="lazy"
+                  width="400"
+                  height="200"
                   decoding="async"
                   className="w-full h-44 object-cover"
                 />

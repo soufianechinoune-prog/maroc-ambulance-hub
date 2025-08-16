@@ -109,8 +109,11 @@ const TestimonialsSection = () => {
             <div className="relative">
               <img 
                 src={medicalTeam} 
-                alt="Équipe médicale professionnelle" 
+                alt="Équipe médicale professionnelle d'ambulanciers - personnel qualifié en intervention d'urgence" 
                 className="rounded-xl shadow-lg w-full h-64 object-cover"
+                loading="lazy"
+                width="400"
+                height="256"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-xl"></div>
             </div>

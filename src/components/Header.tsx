@@ -46,7 +46,14 @@ const Header = ({ city = "Casablanca" }: HeaderProps) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img src="/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png" alt="Ambulance Privée Maroc – Accueil" className="h-10 w-10 rounded-lg" loading="lazy" />
+            <img 
+              src="/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png" 
+              alt="Logo Ambulance Privée Maroc - Transport médicalisé professionnel" 
+              className="h-10 w-10 rounded-lg" 
+              loading="lazy"
+              width="40"
+              height="40"
+            />
             {isHomepage ? (
               <div className="flex flex-col" aria-label="Ambulance Privée Maroc – Accueil">
                 <span className="text-lg font-bold text-foreground">Ambulance Privée Maroc</span>

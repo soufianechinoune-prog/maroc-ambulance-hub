@@ -119,7 +119,14 @@ const Index = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent"></div>
           </div>
-          <img src={heroImage} alt="Ambulance en intervention au Maroc, de nuit" className="sr-only" loading="lazy" />
+          <img 
+            src={heroImage} 
+            alt="Ambulance professionnelle en intervention d'urgence au Maroc - service médical 24h/24" 
+            className="sr-only" 
+            loading="lazy"
+            width="1200"
+            height="800"
+          />
 
           <div className="relative container mx-auto px-4 py-20">
             <div className="max-w-4xl space-y-6">
@@ -270,7 +277,14 @@ const Index = () => {
               </ul>
             </div>
             <div className="relative">
-              <img src={medicalTeam} alt="Équipe médicale au Maroc" className="rounded-2xl shadow-xl w-full h-80 object-cover" loading="lazy" />
+              <img 
+                src={medicalTeam} 
+                alt="Équipe médicale professionnelle ambulance Maroc - personnel qualifié transport médicalisé d'urgence" 
+                className="rounded-2xl shadow-xl w-full h-80 object-cover" 
+                loading="lazy"
+                width="600"
+                height="320"
+              />
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/20 to-transparent"></div>
             </div>
           </div>

@@ -46,7 +46,14 @@ const Footer = () => {
               {/* Company Info */}
               <div className="space-y-4">
                 <Link to="/" className="flex items-center space-x-3">
-                  <img src="/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png" alt="Ambulance Privée Maroc" className="h-10 w-10 rounded-lg" />
+                  <img 
+                    src="/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png" 
+                    alt="Logo Ambulance Privée Maroc - Service ambulance professionnel" 
+                    className="h-10 w-10 rounded-lg" 
+                    loading="lazy"
+                    width="40" 
+                    height="40"
+                  />
                   <div>
                     <h3 className="text-lg font-bold">Ambulance Privée Maroc</h3>
                     <p className="text-sm text-background/70">Service 24/7</p>

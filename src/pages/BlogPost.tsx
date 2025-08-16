@@ -258,8 +258,10 @@ const BlogPost = () => {
               {image && (
                 <img
                   src={image}
-                  alt={`${post.title} – ambulance ${post.city || "Maroc"}`}
+                  alt={`Article: ${post.title} - service ambulance professionnelle ${post.city || "Maroc"}`}
                   loading="lazy"
+                  width="800"
+                  height="400"
                   decoding="async"
                   className="w-full h-auto rounded-xl shadow-sm object-cover mt-4"
                   sizes="(min-width:1280px) 800px, 100vw"

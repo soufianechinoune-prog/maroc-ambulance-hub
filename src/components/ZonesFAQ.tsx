@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const ZonesFAQ = () => {
+const ZonesFAQ = ({ withStructuredData = false }: { withStructuredData?: boolean }) => {
   const faqs = [
     {
       question: "Dans quelles villes intervenez-vous au Maroc ?",
@@ -33,9 +33,29 @@ const ZonesFAQ = () => {
     }
   ];
 
+  const faqStructuredData = withStructuredData ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(faq => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer
+      }
+    }))
+  } : null;
+
   return (
-    <section className="py-16 bg-muted/50" aria-label="Questions fréquentes">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      {withStructuredData && faqStructuredData && (
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+        />
+      )}
+      <section className="py-16 bg-muted/50" aria-label="Questions fréquentes">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-4">
             Questions Fréquentes sur nos Zones d'Intervention
@@ -57,8 +77,9 @@ const ZonesFAQ = () => {
             </AccordionItem>
           ))}
         </Accordion>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 };
 

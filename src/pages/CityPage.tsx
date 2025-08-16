@@ -269,7 +269,7 @@ const CityPage = () => {
     : isGuelizVariant
     ? "Ambulance Privée Marrakech Guéliz – Urgences 24h/24, transport médicalisé centre-ville"
     : isHivernageVariant
-    ? "Ambulance Marrakech Hivernage – Urgences 24h/24, ambulance privée et transport médicalisé"
+    ? "Ambulance Privée Marrakech Hivernage – Urgences 24h/24, transport médicalisé hôtels"
     : isMedinaVariant
     ? "Ambulance Marrakech Médina – Urgences 24h/24, ambulance privée et transport médicalisé"
     : isSidiGhanemVariant
@@ -317,7 +317,7 @@ const CityPage = () => {
     : isGuelizVariant
     ? "Ambulance privée Guéliz Marrakech (8-15 min) — centre commercial, avenue Mohammed V, cliniques — équipe médicale expérimentée — urgences 24h/24."
     : isHivernageVariant
-    ? "Intervention rapide (10-15 min) dans Hivernage et zones hôtelières — équipe expérimentée — service continu jour et nuit."
+    ? "Ambulance privée Hivernage Marrakech (5-12 min) — La Mamounia, Palais des Congrès, hôtels de luxe — équipe médicale multilingue — urgences 24h/24."
     : isMedinaVariant
     ? "Intervention rapide (10-15 min) dans la Médina et quartiers historiques — équipe expérimentée — service continu jour et nuit."
     : isSidiGhanemVariant
@@ -365,7 +365,7 @@ const CityPage = () => {
     : isGuelizVariant
     ? ["ambulance privée Guéliz","Ambulance Marrakech Guéliz","ambulance privée Marrakech","urgence médicale Guéliz","ambulance centre-ville Marrakech","transport médicalisé Guéliz"]
     : isHivernageVariant
-    ? ["Ambulance Marrakech Hivernage","ambulance privée Hivernage","ambulance marrakech","ambulance privée marrakech"]
+    ? ["ambulance privée Hivernage","Ambulance Marrakech Hivernage","ambulance privée Marrakech","urgence médicale Hivernage","ambulance hôtels Marrakech","transport médicalisé Hivernage"]
     : isMedinaVariant
     ? ["Ambulance Marrakech Médina","ambulance privée Médina","ambulance marrakech","ambulance privée marrakech"]
     : isSidiGhanemVariant
@@ -1149,29 +1149,29 @@ const CityPage = () => {
               ) : isHivernageVariant ? (
                 <>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    Service d'Ambulance à Marrakech – Quartier Hivernage
+                    Ambulance Privée à Marrakech – Quartier Hivernage
                   </h2>
                   <p className="text-xl text-gray-600 mb-8">
-                    Le quartier luxueux d'Hivernage à Marrakech bénéficie de notre service d'ambulance premium et réactif, avec une couverture optimale pour ce secteur hôtelier et résidentiel haut de gamme. Notre équipe qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                    Le quartier prestigieux d'Hivernage, zone hôtelière internationale de Marrakech, bénéficie de notre service d'ambulance privée ultra-réactif. Avec La Mamounia, le Palais des Congrès et les plus grands hôtels 5 étoiles, notre équipe médicale multilingue assure une prise en charge discrète et professionnelle des clients internationaux, 24h/24 et 7j/7.
                   </p>
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">🚑 Couverture hôtels de luxe et résidences privées</span>
+                        <span className="text-gray-700">🚑 Ambulance privée La Mamounia, Four Seasons et hôtels 5 étoiles</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">📍 Intervention rapide vers Guéliz et zones hôtelières</span>
+                        <span className="text-gray-700">📍 Accès direct Clinique Internationale et Polyclinique Hivernage</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">🤝 Service premium adapté clientèle internationale</span>
+                        <span className="text-gray-700">🤝 Ambulance privée multilingue pour clientèle internationale</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">🏥 Accès facilité aux centres médicaux privés</span>
+                        <span className="text-gray-700">🏥 Transport médicalisé vers Clinique Averroès et centres médicaux privés</span>
                       </li>
                     </ul>
                   </div>

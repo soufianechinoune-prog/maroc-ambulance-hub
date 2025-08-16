@@ -402,14 +402,14 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
         };
       case 'hivernage':
         return {
-          title: "🚑 Ambulance Marrakech Hivernage – Urgences 24h/24, ambulance privée et transport médicalisé",
-          subtitle: "Intervention rapide (10-15 min) dans Hivernage et zones hôtelières — équipe expérimentée — service continu jour et nuit.",
-          badge: "Service disponible partout au Maroc — 24/7",
+          title: "🚑 Ambulance Privée Marrakech Hivernage – Urgences 24h/24, transport médicalisé hôtels",
+          subtitle: "Intervention ultra-rapide (5-12 min) Hivernage — La Mamounia, Four Seasons, hôtels 5 étoiles — ambulance privée multilingue.",
+          badge: "Service ambulance privée partout au Maroc — 24/7",
           features: [
-            { icon: "✔", text: "Agréé" },
-            { icon: "✔", text: "Service premium hôtelier" },
-            { icon: "✔", text: "Intervention rapide" },
-            { icon: "✔", text: "Clientèle internationale" }
+            { icon: "✔", text: "Ambulance privée agréée" },
+            { icon: "✔", text: "Hôtels de luxe & Palais des Congrès" },
+            { icon: "✔", text: "Équipe multilingue 24h/24" },
+            { icon: "✔", text: "Service discret VIP" }
           ]
         };
       case 'medina':

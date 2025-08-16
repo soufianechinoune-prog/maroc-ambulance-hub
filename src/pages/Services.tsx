@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import SmartBreadcrumb from "@/components/SmartBreadcrumb";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Ambulance, Clock, Users, Shield, Phone, MessageCircle, Search, Network, Star, CheckCircle } from "lucide-react";
@@ -63,6 +64,7 @@ const Services = () => {
         }}
       />
       <Header />
+      <SmartBreadcrumb />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary-dark to-secondary text-white py-24 relative overflow-hidden" aria-label="Présentation des services d'ambulance">

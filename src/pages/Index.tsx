@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import SmartBreadcrumb from "@/components/SmartBreadcrumb";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, MapPin, Clock, ShieldCheck, Users } from "lucide-react";
@@ -104,6 +105,7 @@ const Index = () => {
         jsonLdMultiple={[...(jsonLdMultiple || []), faqJsonLd]}
       />
       <Header />
+      <SmartBreadcrumb />
 
       <main>
         {/* Hero */}

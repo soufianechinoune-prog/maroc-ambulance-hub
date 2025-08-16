@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import SEO from "@/components/SEO";
+import SmartBreadcrumb from "@/components/SmartBreadcrumb";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, Mail, MapPin, Clock } from "lucide-react";
@@ -31,6 +32,7 @@ const Contact = () => {
         }}
       />
       <Header />
+      <SmartBreadcrumb />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary to-primary-dark text-white py-20" aria-label="Section de contact principal">

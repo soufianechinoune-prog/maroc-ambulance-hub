@@ -8,6 +8,7 @@ import ServicesSection from "@/components/ServicesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactForm from "@/components/ContactForm";
 import SEO from "@/components/SEO";
+import SmartBreadcrumb from "@/components/SmartBreadcrumb";
 import { generateLocalBusinessSchema } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -469,7 +470,8 @@ const CityPage = () => {
   if (!city) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+      <Header />
+      <SmartBreadcrumb />
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">Ville non trouvée</h1>
@@ -608,9 +610,9 @@ const CityPage = () => {
                 </>
               ) : isAinDiabVariant ? (
                 <>
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    Service d'Ambulance à Casablanca – Quartier Ain Diab
-                  </h2>
+                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    🚑 Ambulance Privée Casablanca Ain Diab – Urgences 24h/24 Corniche
+                  </h1>
                   <p className="text-xl text-gray-600 mb-8">
                     Le dynamique quartier d'Ain Diab à Casablanca bénéficie de notre service d'ambulance de haute qualité, avec une couverture optimale pour répondre rapidement à toutes les urgences médicales. Notre équipe d'intervention spécialisée assure une prise en charge rapide et sécurisée, 24h/24 et 7j/7, dans ce secteur stratégique de la ville.
                   </p>
@@ -1178,9 +1180,9 @@ const CityPage = () => {
                 </>
               ) : isMedinaVariant ? (
                 <>
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    Service d'Ambulance à Marrakech – Quartier Médina
-                  </h2>
+                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    🚑 Ambulance Privée Marrakech Médina – Urgences 24h/24 Centre Historique
+                  </h1>
                   <p className="text-xl text-gray-600 mb-8">
                     Le quartier historique de la Médina à Marrakech bénéficie de notre service d'ambulance spécialisé et adapté, avec une couverture optimale pour ce secteur patrimonial et touristique unique. Notre équipe qualifiée connaît parfaitement les accès et assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
                   </p>

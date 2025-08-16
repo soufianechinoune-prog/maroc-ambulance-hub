@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import SmartBreadcrumb from "@/components/SmartBreadcrumb";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageCircle, Ambulance, MapPin, Clock } from "lucide-react";
 import TrustBlock from "@/components/TrustBlock";
@@ -37,6 +38,7 @@ const Zones = () => {
         }}
       />
       <Header />
+      <SmartBreadcrumb />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary to-primary-dark text-white py-20" aria-label="Présentation des zones d'intervention">

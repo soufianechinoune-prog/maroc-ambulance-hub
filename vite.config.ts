@@ -167,4 +167,17 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(rootDir, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      external: ['fs', 'path'],
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  }
 }));

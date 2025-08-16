@@ -1,0 +1,27 @@
+{
+  "name": "Ambulance Maroc - Service d'urgence 24/7",
+  "short_name": "Ambulance Maroc",
+  "description": "Service d'ambulance professionnel au Maroc avec intervention 24h/24 et 7j/7",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#dc2626",
+  "orientation": "portrait-primary",
+  "categories": ["medical", "emergency", "health"],
+  "lang": "fr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

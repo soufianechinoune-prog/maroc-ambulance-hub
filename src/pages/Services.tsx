@@ -3,8 +3,9 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Ambulance, Clock, Users, Shield, Phone, MessageCircle } from "lucide-react";
+import { Ambulance, Clock, Users, Shield, Phone, MessageCircle, Search, Network, Star, CheckCircle } from "lucide-react";
 import { useHashScroll } from "@/hooks/useHashScroll";
+import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 
 const Services = () => {
   const services = [
@@ -39,14 +40,14 @@ const Services = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="Services d'Ambulance – Urgence 24/7 au Maroc | Ambulance Maroc"
-        description="Transports d'urgence, inter-hôpitaux, longue distance et événements. Intervention 24/7 partout au Maroc."
+        title="Services d'Ambulance – Urgence 24/7 au Maroc | Ambulance Privée Maroc"
+        description="Plateforme de mise en relation avec les meilleurs services d'ambulance. Transport d'urgence, inter-hôpitaux, longue distance. Intervention 24/7 partout au Maroc."
         canonical="/services"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Service",
           "name": "Services d'ambulance au Maroc",
-          "provider": {"@type": "Organization", "name": "Ambulance Maroc", "telephone": "+212600000000"},
+          "provider": {"@type": "Organization", "name": "Ambulance Privée Maroc", "telephone": "+212777722311"},
           "areaServed": "MA",
           "availableChannel": "OnSite",
           "offers": {
@@ -64,40 +65,166 @@ const Services = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary-dark text-white py-20" aria-label="Présentation des services d'ambulance">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Nos Services d'Ambulance
+      <section className="bg-gradient-to-br from-primary via-primary-dark to-secondary text-white py-24 relative overflow-hidden" aria-label="Présentation des services d'ambulance">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
+            <CheckCircle className="h-4 w-4 mr-2" />
+            Plateforme de confiance certifiée
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            Nos Services d'<span className="text-secondary">Ambulance</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Services professionnels d'ambulance 24h/24 et 7j/7 partout au Maroc
+          <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
+            Plateforme digitale de mise en relation avec les meilleurs services d'ambulance 24h/24 et 7j/7 partout au Maroc
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild>
-              <a href="tel:+212600000000" className="flex items-center gap-2">
+            <Button size="lg" variant="secondary" asChild className="shadow-lg hover:shadow-xl transition-all">
+              <CallButton phone="+212777722311" className="flex items-center gap-2">
                 <Phone className="h-5 w-5" />
                 Appelez maintenant
-              </a>
+              </CallButton>
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white/20" asChild>
-              <a href="https://wa.me/212777722311" className="flex items-center gap-2">
+            <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white/20 shadow-lg" asChild>
+              <WhatsAppButton phone="+212777722311" className="flex items-center gap-2">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
-              </a>
+              </WhatsAppButton>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-20" aria-label="Liste des services d'ambulance">
+      {/* Notre Plateforme Section */}
+      <section className="py-20 bg-gradient-to-r from-background to-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Services Professionnels
+            <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold mb-6">
+              <Network className="h-4 w-4 mr-2" />
+              Notre Mission
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              Plateforme Digitale de <span className="text-primary">Mise en Relation</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Nous offrons une gamme complète de services d'ambulance adaptés à tous vos besoins médicaux
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              Nous ne possédons pas nos propres ambulances, mais nous sommes votre partenaire de confiance pour vous connecter 
+              rapidement avec les meilleures sociétés d'ambulance du Maroc.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-primary/5">
+              <CardHeader className="text-center pb-4">
+                <div className="bg-primary/10 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Search className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-xl font-bold">Recherche Optimisée</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Nous analysons votre demande et trouvons l'ambulance la plus proche et la mieux équipée pour votre situation
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-secondary/5">
+              <CardHeader className="text-center pb-4">
+                <div className="bg-secondary/10 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Network className="h-8 w-8 text-secondary" />
+                </div>
+                <CardTitle className="text-xl font-bold">Réseau Partenaire</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Plus de 50 sociétés d'ambulance certifiées et vérifiées dans notre réseau à travers tout le Maroc
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-success/5">
+              <CardHeader className="text-center pb-4">
+                <div className="bg-success/10 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Star className="h-8 w-8 text-success" />
+                </div>
+                <CardTitle className="text-xl font-bold">Qualité Garantie</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Toutes nos sociétés partenaires sont évaluées selon des critères stricts de qualité et de réactivité
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+                  Comment nous fonctionnons ?
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm flex-shrink-0">1</div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">Vous nous contactez</h4>
+                      <p className="text-muted-foreground">Appelez-nous ou envoyez un message WhatsApp avec votre besoin</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm flex-shrink-0">2</div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">Nous recherchons pour vous</h4>
+                      <p className="text-muted-foreground">Notre équipe identifie la meilleure ambulance disponible selon vos critères</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm flex-shrink-0">3</div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">Mise en relation directe</h4>
+                      <p className="text-muted-foreground">Nous vous connectons directement avec la société d'ambulance sélectionnée</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl p-8 text-center">
+                <h4 className="text-xl font-bold text-foreground mb-4">Pourquoi nous choisir ?</h4>
+                <div className="space-y-3 text-left">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="h-5 w-5 text-success" />
+                    <span className="text-muted-foreground">Gain de temps précieux</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="h-5 w-5 text-success" />
+                    <span className="text-muted-foreground">Meilleur prix garanti</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="h-5 w-5 text-success" />
+                    <span className="text-muted-foreground">Qualité vérifiée</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="h-5 w-5 text-success" />
+                    <span className="text-muted-foreground">Disponibilité 24/7</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="py-20 bg-muted/30" aria-label="Liste des services d'ambulance">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold mb-6">
+              <Ambulance className="h-4 w-4 mr-2" />
+              Services Disponibles
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              Services <span className="text-primary">Professionnels</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              Notre réseau de partenaires offre une gamme complète de services d'ambulance adaptés à tous vos besoins médicaux
             </p>
           </div>
 
@@ -107,26 +234,26 @@ const Services = () => {
               const sectionId = ids[index] || `service-${index}`;
               return (
                 <section key={sectionId} id={sectionId} className="scroll-mt-24">
-                  <Card className="hover:shadow-lg transition-shadow">
+                  <Card className="hover:shadow-xl transition-all duration-300 border-none bg-gradient-to-br from-white to-primary/5 h-full">
                     <CardHeader>
                       <div className="flex items-center gap-4">
-                        <div className="bg-primary/10 p-3 rounded-lg">
-                          <service.icon className="h-8 w-8 text-primary" />
+                        <div className="bg-gradient-to-br from-primary to-primary-dark p-4 rounded-xl shadow-lg">
+                          <service.icon className="h-8 w-8 text-white" />
                         </div>
                         <div>
-                          <h3 className="text-xl">{service.title}</h3>
+                          <CardTitle className="text-xl font-bold text-foreground">{service.title}</CardTitle>
                         </div>
                       </div>
-                      <CardDescription className="text-base">
+                      <CardDescription className="text-base text-muted-foreground leading-relaxed">
                         {service.description}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <ul className="space-y-2">
+                      <ul className="space-y-3">
                         {service.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center gap-2 text-gray-700">
-                            <div className="h-2 w-2 bg-primary rounded-full"></div>
-                            {feature}
+                          <li key={idx} className="flex items-center gap-3 text-foreground">
+                            <div className="h-2 w-2 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                            <span className="font-medium">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -171,17 +298,17 @@ const Services = () => {
             Contactez-nous immédiatement pour une intervention rapide
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" asChild>
-              <a href="tel:+212600000000" className="flex items-center gap-2">
+            <Button size="lg" asChild className="shadow-lg hover:shadow-xl transition-all">
+              <CallButton phone="+212777722311" className="flex items-center gap-2">
                 <Phone className="h-5 w-5" />
-                Urgence: +212 6 00 00 00 00
-              </a>
+                Urgence: +212 7777 223 11
+              </CallButton>
             </Button>
-            <Button size="lg" variant="outline" asChild>
-              <a href="https://wa.me/212777722311" className="flex items-center gap-2">
+            <Button size="lg" variant="outline" asChild className="shadow-lg">
+              <WhatsAppButton phone="+212777722311" className="flex items-center gap-2">
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
-              </a>
+              </WhatsAppButton>
             </Button>
           </div>
         </div>

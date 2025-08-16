@@ -47,10 +47,11 @@ const neighborhoodMapping = {
   'yacoub-el-mansour': ['hassan', 'agdal', 'hay-riad', 'souissi'],
   
   // Quartiers de Marrakech
-  'gueliz': ['hivernage', 'medina', 'sidi-ghanem'],
-  'hivernage': ['gueliz', 'medina', 'sidi-ghanem'],
-  'medina': ['gueliz', 'hivernage', 'sidi-ghanem'],
-  'sidi-ghanem': ['gueliz', 'hivernage', 'medina']
+  'gueliz': ['hivernage', 'medina', 'sidi-ghanem', 'palmeraie'],
+  'hivernage': ['gueliz', 'medina', 'sidi-ghanem', 'palmeraie'],
+  'medina': ['gueliz', 'hivernage', 'sidi-ghanem', 'palmeraie'],
+  'sidi-ghanem': ['gueliz', 'hivernage', 'medina', 'palmeraie'],
+  'palmeraie': ['gueliz', 'hivernage', 'medina', 'sidi-ghanem']
 };
 
 const neighborhoodLabels = {
@@ -86,7 +87,8 @@ const neighborhoodLabels = {
   'gueliz': 'Guéliz',
   'hivernage': 'Hivernage',
   'medina': 'Médina',
-  'sidi-ghanem': 'Sidi Ghanem'
+  'sidi-ghanem': 'Sidi Ghanem',
+  'palmeraie': 'Palmeraie'
 };
 
 const getRandomCities = (currentSlug: string, count = 4) => {
@@ -223,6 +225,7 @@ const CityPage = () => {
   const isHivernageVariant = location?.pathname?.includes("/ambulance-marrakech-hivernage");
   const isMedinaVariant = location?.pathname?.includes("/ambulance-marrakech-medina");
   const isSidiGhanemVariant = location?.pathname?.includes("/ambulance-marrakech-sidi-ghanem");
+  const isPalmeraieVariant = location?.pathname?.includes("/ambulance-marrakech-palmeraie");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -271,6 +274,8 @@ const CityPage = () => {
     ? "Ambulance Marrakech Médina – Urgences 24h/24, ambulance privée et transport médicalisé"
     : isSidiGhanemVariant
     ? "Ambulance Marrakech Sidi Ghanem – Urgences 24h/24, ambulance privée et transport médicalisé"
+    : isPalmeraieVariant
+    ? "Ambulance Marrakech Palmeraie – Urgences 24h/24, ambulance privée et transport médicalisé"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -317,6 +322,8 @@ const CityPage = () => {
     ? "Intervention rapide (10-15 min) dans la Médina et quartiers historiques — équipe expérimentée — service continu jour et nuit."
     : isSidiGhanemVariant
     ? "Intervention rapide (10-15 min) dans Sidi Ghanem et zones industrielles — équipe expérimentée — service continu jour et nuit."
+    : isPalmeraieVariant
+    ? "Intervention rapide (10-15 min) dans la Palmeraie et zones résidentielles — équipe expérimentée — service continu jour et nuit."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -363,6 +370,8 @@ const CityPage = () => {
     ? ["Ambulance Marrakech Médina","ambulance privée Médina","ambulance marrakech","ambulance privée marrakech"]
     : isSidiGhanemVariant
     ? ["Ambulance Marrakech Sidi Ghanem","ambulance privée Sidi Ghanem","ambulance marrakech","ambulance privée marrakech"]
+    : isPalmeraieVariant
+    ? ["Ambulance Marrakech Palmeraie","ambulance privée Palmeraie","ambulance marrakech","ambulance privée marrakech"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -409,6 +418,8 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-marrakech-medina`
     : isSidiGhanemVariant
     ? `${siteUrl}/ambulance-marrakech-sidi-ghanem`
+    : isPalmeraieVariant
+    ? `${siteUrl}/ambulance-marrakech-palmeraie`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -506,6 +517,7 @@ const CityPage = () => {
           isHivernageVariant ? 'hivernage' :
           isMedinaVariant ? 'medina' :
           isSidiGhanemVariant ? 'sidi-ghanem' :
+          isPalmeraieVariant ? 'palmeraie' :
           (city?.slug === 'casablanca' ? 'casablanca' : 
            city?.slug === 'rabat' ? 'rabat' : 
            city?.slug === 'marrakech' ? 'marrakech' : undefined)
@@ -1220,6 +1232,36 @@ const CityPage = () => {
                       <li className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                         <span className="text-gray-700">🏥 Protocoles spécialisés urgences industrielles</span>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : isPalmeraieVariant ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Service d'Ambulance à Marrakech – Quartier Palmeraie
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-8">
+                    Le quartier prestigieux de la Palmeraie à Marrakech bénéficie de notre service d'ambulance spécialisé et réactif, avec une couverture optimale pour ce secteur résidentiel et touristique haut de gamme. Notre équipe qualifiée assure une prise en charge rapide et professionnelle, 24h/24 et 7j/7.
+                  </p>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900">Spécificités locales :</h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🚑 Couverture villas et complexes résidentiels</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">📍 Intervention rapide vers Guéliz et zones touristiques</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🤝 Service premium adapté résidents haut de gamme</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">🏥 Accès privilégié aux cliniques privées de prestige</span>
                       </li>
                     </ul>
                   </div>

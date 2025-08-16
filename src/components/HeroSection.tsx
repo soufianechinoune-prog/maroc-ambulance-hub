@@ -436,6 +436,18 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
             { icon: "✔", text: "Protocoles spécialisés" }
           ]
         };
+      case 'palmeraie':
+        return {
+          title: "🚑 Ambulance Marrakech Palmeraie – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (10-15 min) dans la Palmeraie et zones résidentielles — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Zone résidentielle haut de gamme" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Service premium" }
+          ]
+        };
       default:
         return {
           title: h1 || `🚑 Ambulance ${city} – Urgences 24h/24, ambulance privée et transport médicalisé`,

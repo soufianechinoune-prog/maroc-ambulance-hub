@@ -44,7 +44,13 @@ const neighborhoodMapping = {
   'hassan': ['agdal', 'yacoub-el-mansour', 'hay-riad', 'souissi'],
   'hay-riad': ['agdal', 'souissi', 'hassan', 'yacoub-el-mansour'],
   'souissi': ['hay-riad', 'agdal', 'hassan', 'yacoub-el-mansour'],
-  'yacoub-el-mansour': ['hassan', 'agdal', 'hay-riad', 'souissi']
+  'yacoub-el-mansour': ['hassan', 'agdal', 'hay-riad', 'souissi'],
+  
+  // Quartiers de Marrakech
+  'gueliz': ['hivernage', 'medina', 'sidi-ghanem'],
+  'hivernage': ['gueliz', 'medina', 'sidi-ghanem'],
+  'medina': ['gueliz', 'hivernage', 'sidi-ghanem'],
+  'sidi-ghanem': ['gueliz', 'hivernage', 'medina']
 };
 
 const neighborhoodLabels = {
@@ -74,7 +80,13 @@ const neighborhoodLabels = {
   'hassan': 'Hassan',
   'hay-riad': 'Hay Riad',
   'souissi': 'Souissi',
-  'yacoub-el-mansour': 'Yacoub El Mansour'
+  'yacoub-el-mansour': 'Yacoub El Mansour',
+  
+  // Quartiers de Marrakech  
+  'gueliz': 'Guéliz',
+  'hivernage': 'Hivernage',
+  'medina': 'Médina',
+  'sidi-ghanem': 'Sidi Ghanem'
 };
 
 const getRandomCities = (currentSlug: string, count = 4) => {
@@ -113,7 +125,7 @@ const CityPage = () => {
   const relatedCities = getRandomCities(normalizedSlug, 4);
   
   // Détection du quartier actuel pour le maillage interne
-  const isNeighborhoodPage = location?.pathname?.includes("/ambulance-casablanca-") || location?.pathname?.includes("/ambulance-rabat-");
+  const isNeighborhoodPage = location?.pathname?.includes("/ambulance-casablanca-") || location?.pathname?.includes("/ambulance-rabat-") || location?.pathname?.includes("/ambulance-marrakech-");
   let currentNeighborhood = null;
   let currentCity = null;
   
@@ -124,6 +136,9 @@ const CityPage = () => {
     } else if (location.pathname.includes("/ambulance-rabat-")) {
       currentNeighborhood = location.pathname.replace("/ambulance-rabat-", "").replace(/\/$/, "");
       currentCity = "rabat";
+    } else if (location.pathname.includes("/ambulance-marrakech-")) {
+      currentNeighborhood = location.pathname.replace("/ambulance-marrakech-", "").replace(/\/$/, "");
+      currentCity = "marrakech";
     }
   }
   
@@ -202,6 +217,12 @@ const CityPage = () => {
   const isHayRiadVariant = location?.pathname?.includes("/ambulance-rabat-hay-riad");
   const isSouissiVariant = location?.pathname?.includes("/ambulance-rabat-souissi");
   const isYacoubElMansourVariant = location?.pathname?.includes("/ambulance-rabat-yacoub-el-mansour");
+  
+  // Quartiers de Marrakech
+  const isGuelizVariant = location?.pathname?.includes("/ambulance-marrakech-gueliz");
+  const isHivernageVariant = location?.pathname?.includes("/ambulance-marrakech-hivernage");
+  const isMedinaVariant = location?.pathname?.includes("/ambulance-marrakech-medina");
+  const isSidiGhanemVariant = location?.pathname?.includes("/ambulance-marrakech-sidi-ghanem");
   const baseTitle = cityData.title || `Ambulance à ${city?.name} – Intervention rapide 24/7 | Ambulance Maroc` || "Ville non trouvée";
   const baseDescription = cityData.description || `Ambulance à ${city?.name}, intervention 24/7. Temps de réponse ${city?.responseTime}. ${city?.coverage}.` || "";
   const baseCanonical = city ? `${siteUrl}/ambulance-${city.slug}` : `${siteUrl}/`;
@@ -242,6 +263,14 @@ const CityPage = () => {
     ? "Ambulance Rabat Souissi – Ambulance privée Souissi 24/7"
     : isYacoubElMansourVariant
     ? "Ambulance Rabat Yacoub El Mansour – Ambulance privée Yacoub El Mansour 24/7"
+    : isGuelizVariant
+    ? "Ambulance Marrakech Guéliz – Urgences 24h/24, ambulance privée et transport médicalisé"
+    : isHivernageVariant
+    ? "Ambulance Marrakech Hivernage – Urgences 24h/24, ambulance privée et transport médicalisé"
+    : isMedinaVariant
+    ? "Ambulance Marrakech Médina – Urgences 24h/24, ambulance privée et transport médicalisé"
+    : isSidiGhanemVariant
+    ? "Ambulance Marrakech Sidi Ghanem – Urgences 24h/24, ambulance privée et transport médicalisé"
     : baseTitle;
 
   const description = isCalifornieVariant
@@ -280,6 +309,14 @@ const CityPage = () => {
     ? "Ambulance Rabat Souissi: intervention rapide 24/7 à Souissi. Ambulance privée Souissi, transport médicalisé. Appelez +212 7777 223 11."
     : isYacoubElMansourVariant
     ? "Ambulance Rabat Yacoub El Mansour: intervention rapide 24/7 à Yacoub El Mansour. Ambulance privée Yacoub El Mansour, transport médicalisé. Appelez +212 7777 223 11."
+    : isGuelizVariant
+    ? "Intervention rapide (10-15 min) dans Guéliz et zones touristiques — équipe expérimentée — service continu jour et nuit."
+    : isHivernageVariant
+    ? "Intervention rapide (10-15 min) dans Hivernage et zones hôtelières — équipe expérimentée — service continu jour et nuit."
+    : isMedinaVariant
+    ? "Intervention rapide (10-15 min) dans la Médina et quartiers historiques — équipe expérimentée — service continu jour et nuit."
+    : isSidiGhanemVariant
+    ? "Intervention rapide (10-15 min) dans Sidi Ghanem et zones industrielles — équipe expérimentée — service continu jour et nuit."
     : baseDescription;
 
   const keywords = isCalifornieVariant
@@ -318,6 +355,14 @@ const CityPage = () => {
     ? ["Ambulance Rabat Souissi","ambulance privée Souissi","ambulance rabat","ambulance privée rabat"]
     : isYacoubElMansourVariant
     ? ["Ambulance Rabat Yacoub El Mansour","ambulance privée Yacoub El Mansour","ambulance rabat","ambulance privée rabat"]
+    : isGuelizVariant
+    ? ["Ambulance Marrakech Guéliz","ambulance privée Guéliz","ambulance marrakech","ambulance privée marrakech"]
+    : isHivernageVariant
+    ? ["Ambulance Marrakech Hivernage","ambulance privée Hivernage","ambulance marrakech","ambulance privée marrakech"]
+    : isMedinaVariant
+    ? ["Ambulance Marrakech Médina","ambulance privée Médina","ambulance marrakech","ambulance privée marrakech"]
+    : isSidiGhanemVariant
+    ? ["Ambulance Marrakech Sidi Ghanem","ambulance privée Sidi Ghanem","ambulance marrakech","ambulance privée marrakech"]
     : undefined;
 
   const canonical = isCalifornieVariant
@@ -356,6 +401,14 @@ const CityPage = () => {
     ? `${siteUrl}/ambulance-rabat-souissi`
     : isYacoubElMansourVariant
     ? `${siteUrl}/ambulance-rabat-yacoub-el-mansour`
+    : isGuelizVariant
+    ? `${siteUrl}/ambulance-marrakech-gueliz`
+    : isHivernageVariant
+    ? `${siteUrl}/ambulance-marrakech-hivernage`
+    : isMedinaVariant
+    ? `${siteUrl}/ambulance-marrakech-medina`
+    : isSidiGhanemVariant
+    ? `${siteUrl}/ambulance-marrakech-sidi-ghanem`
     : baseCanonical;
 
   const h1Text = isCalifornieVariant
@@ -449,8 +502,13 @@ const CityPage = () => {
           isHayRiadVariant ? 'hay-riad' :
           isSouissiVariant ? 'souissi' :
           isYacoubElMansourVariant ? 'yacoub-el-mansour' :
+          isGuelizVariant ? 'gueliz' :
+          isHivernageVariant ? 'hivernage' :
+          isMedinaVariant ? 'medina' :
+          isSidiGhanemVariant ? 'sidi-ghanem' :
           (city?.slug === 'casablanca' ? 'casablanca' : 
-           city?.slug === 'rabat' ? 'rabat' : undefined)
+           city?.slug === 'rabat' ? 'rabat' : 
+           city?.slug === 'marrakech' ? 'marrakech' : undefined)
         }
       />
 

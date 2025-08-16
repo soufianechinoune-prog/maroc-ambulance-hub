@@ -16,9 +16,9 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
     switch (variant) {
       case 'californie':
         return {
-          title: "🚑 Ambulance Casablanca Californie – Urgences 24h/24, ambulance privée et transport médicalisé",
-          subtitle: "Intervention rapide (8-12 min) dans tout le quartier Californie et ses environs – couverture locale complète – équipe médicale qualifiée.",
-          badge: "Service disponible partout au Maroc — 24/7",
+          title: "🚑 Ambulance Casablanca Californie – Urgences 24h/24, service médical d'urgence et transport sanitaire",
+          subtitle: "Intervention immédiate (8-12 min) dans le quartier Californie et environs — équipe paramédicale expérimentée — prise en charge complète jour et nuit.",
+          badge: "Service médical d'urgence disponible partout au Maroc — 24/7",
           features: [
             { icon: "✔", text: "Agréé" },
             { icon: "✔", text: "Qualité protocolaire" },

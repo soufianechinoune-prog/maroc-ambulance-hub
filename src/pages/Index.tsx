@@ -13,6 +13,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactForm from "@/components/ContactForm";
 import { cities } from "@/data/cities";
 import { SITE_URL } from "@/lib/config";
+import EmergencyFAQ from "@/components/EmergencyFAQ";
 import heroImage from "@/assets/ambulance-hero.jpg";
 import medicalTeam from "@/assets/medical-team.jpg";
 import NationalSeoBlock from "@/components/NationalSeoBlock";
@@ -332,6 +333,9 @@ const Index = () => {
         <ServicesSection />
         {/* Témoignages avec structured data */}
         <TestimonialsSection withStructuredData={true} />
+        
+        {/* FAQ pour featured snippets */}
+        <EmergencyFAQ withStructuredData={true} variant="general" />
 
         {/* CTA urgence bande rouge */}
         <section className="py-8 bg-emergency text-emergency-foreground" role="region" aria-label="Urgence médicale">

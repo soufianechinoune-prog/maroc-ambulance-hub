@@ -5,17 +5,17 @@ const WhyChooseUsSection = () => {
     {
       icon: Clock,
       title: "Intervention Ultra-Rapide",
-      description: "Temps de réponse moyen de 12 minutes dans les zones urbaines, 24h/24 et 7j/7."
+      description: "Délai d'intervention moyen de 12 minutes en zone urbaine. Service médical d'urgence disponible en continu, jour et nuit, toute l'année."
     },
     {
       icon: Heart,
       title: "Équipement Médical Avancé",
-      description: "Ambulances équipées défibrillateurs, oxygène, matériel de réanimation et monitoring."
+      description: "Véhicules sanitaires équipés de défibrillateurs, système d'oxygénation, matériel de réanimation cardiaque et dispositifs de monitoring vital."
     },
     {
       icon: Stethoscope,
-      title: "Personnel Médical Qualifié",
-      description: "Équipes formées aux gestes d'urgence, secourisme et transport médicalisé."
+      title: "Personnel Soignant Certifié",
+      description: "Équipes paramédicales formées aux techniques d'urgence, secourisme avancé et transport médicalisé sécurisé."
     },
     {
       icon: Phone,

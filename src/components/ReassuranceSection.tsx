@@ -4,14 +4,14 @@ const ReassuranceSection = ({ title, subtitle, features: featuresProp, stats }: 
   const defaultFeatures = [
     {
       icon: Clock,
-      title: "Disponible 24/7",
-      description: "Service d'urgence disponible 24 heures sur 24, 7 jours sur 7, 365 jours par an",
+      title: "Service Médical Continu",
+      description: "Transport sanitaire disponible jour et nuit, 365 jours par an, incluant week-ends et jours fériés",
       color: "text-primary"
     },
     {
       icon: Zap,
-      title: "Intervention rapide",
-      description: "Temps de réponse moyen de moins de 15 minutes en zone urbaine",
+      title: "Réactivité Optimale",
+      description: "Délai d'intervention inférieur à 15 minutes en agglomération, équipes mobiles pré-positionnées",
       color: "text-emergency"
     },
     {

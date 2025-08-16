@@ -5,7 +5,7 @@ import Analytics from "@/components/Analytics";
 import App from './App.tsx'
 import './index.css'
 
-// Register service worker
+// Register service worker (only in production)
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')

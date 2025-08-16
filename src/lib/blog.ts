@@ -164,17 +164,44 @@ export function getPostByCityAndSlug(city: string, slug: string): BlogPost | und
   });
 }
 
-// Very light auto-internal-linking for a few primary keywords
+// Enhanced auto-internal-linking with better anchor texts and cross-linking
 export function addInternalLinks(md: string): string {
   const replacements: Array<{ re: RegExp; link: string }> = [
-    { re: /ambulance\s+casablanca/gi, link: "[ambulance Casablanca](/ambulance-casablanca)" },
-    { re: /ambulance\s+priv[ée]e/gi, link: "[ambulance privée](/services)" },
-    { re: /transport\s+m[ée]dicalis[ée]/gi, link: "[transport médicalisé](/services#longue-distance)" },
-    { re: /rapatriement\s+sanitaire/gi, link: "[rapatriement sanitaire](/rapatriement-sanitaire)" },
+    // Ville principale
+    { re: /\bambulance\s+casablanca\b/gi, link: "[service d'ambulance à Casablanca](/ambulance-casablanca)" },
+    { re: /\bambulance\s+rabat\b/gi, link: "[urgences médicales à Rabat](/ambulance-rabat)" },
+    { re: /\bambulance\s+marrakech\b/gi, link: "[transport sanitaire à Marrakech](/ambulance-marrakech)" },
+    { re: /\bambulance\s+tanger\b/gi, link: "[ambulance d'urgence à Tanger](/ambulance-tanger)" },
+    
+    // Services
+    { re: /\bambulance\s+priv[ée]e\b/gi, link: "[ambulance privée sur réservation](/services)" },
+    { re: /\btransport\s+m[ée]dicalis[ée]\b/gi, link: "[transport médicalisé professionnel](/services#transport-medicalise)" },
+    { re: /\btransport\s+inter[\-\s]h[ôo]pitaux?\b/gi, link: "[transfert inter-hôpitaux sécurisé](/services#inter-hopitaux)" },
+    { re: /\brapatriement\s+sanitaire\b/gi, link: "[rapatriement sanitaire national](/services#rapatriement)" },
+    { re: /\burgences?\s+m[ée]dicales?\b/gi, link: "[prise en charge des urgences médicales](/services#urgences)" },
+    
+    // Quartiers populaires pour cross-linking
+    { re: /\bquartier\s+ma[âa]rif\b/gi, link: "[ambulance quartier Maârif](/ambulance-casablanca-maarif)" },
+    { re: /\bquartier\s+californie\b/gi, link: "[intervention Californie Casablanca](/ambulance-casablanca-californie)" },
+    { re: /\bcentre[\-\s]ville\s+casablanca\b/gi, link: "[ambulance centre-ville Casablanca](/ambulance-casablanca-centre)" },
+    { re: /\bagdal\s+rabat\b/gi, link: "[service médical Agdal](/ambulance-rabat-agdal)" },
+    
+    // Mots-clés génériques
+    { re: /\bd[ée]lai\s+d['\']intervention\b/gi, link: "[temps de réponse ambulance](/)" },
+    { re: /\bservice\s+24h?\/24\b/gi, link: "[service d'urgence 24h/24](/)" },
+    { re: /\bnum[ée]ro\s+d['\']urgence\b/gi, link: "[numéro d'ambulance](/contact)" },
   ];
+  
   let out = md;
   for (const { re, link } of replacements) {
-    out = out.replace(re, link);
+    // Éviter de remplacer si déjà dans un lien
+    const segments = out.split(/(\[.*?\]\(.*?\))/);
+    out = segments.map(segment => {
+      if (segment.startsWith('[') && segment.includes('](')) {
+        return segment; // Ne pas modifier les liens existants
+      }
+      return segment.replace(re, link);
+    }).join('');
   }
   return out;
 }

@@ -57,11 +57,14 @@ export default function NationalSeoBlock() {
         {" "}<Link to="/ambulance-oujda">Ambulance à Oujda</Link>.
       </p>
 
-      <h3 className="mt-8">Un personnel médical formé et certifié</h3>
+      <h3 className="mt-8">Personnel médical certifié selon les normes nationales</h3>
       <p>
         Les interventions sont réalisées par des <strong>auxiliaires ambulanciers</strong>, <strong>infirmiers</strong> et,
         lorsque nécessaire, par un <strong>médecin urgentiste</strong>. Les équipes appliquent des protocoles validés,
-        conformes aux recommandations des autorités sanitaires.
+        conformes aux{" "}
+        <a href="https://www.sante.gov.ma" target="_blank" rel="noopener noreferrer" 
+           className="text-primary underline">recommandations du Ministère de la Santé</a>{" "}
+        et aux standards internationaux de transport sanitaire.
       </p>
 
       <h3 className="mt-8">Coordination avec les hôpitaux et cliniques</h3>

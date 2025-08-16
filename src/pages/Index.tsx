@@ -14,6 +14,7 @@ import ContactForm from "@/components/ContactForm";
 import { cities } from "@/data/cities";
 import { SITE_URL } from "@/lib/config";
 import EmergencyFAQ from "@/components/EmergencyFAQ";
+import AuthorityLinks from "@/components/AuthorityLinks";
 import heroImage from "@/assets/ambulance-hero.jpg";
 import medicalTeam from "@/assets/medical-team.jpg";
 import NationalSeoBlock from "@/components/NationalSeoBlock";
@@ -323,8 +324,16 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Bloc SEO national — placé entre Villes principales et Pourquoi nous faire confiance */}
+        {/* Bloc SEO national avec liens d'autorité */}
         <NationalSeoBlock />
+        
+        {/* Liens d'autorité médicale */}
+        <div className="container mx-auto px-4 py-8">
+          <AuthorityLinks 
+            variant="medical" 
+            context="Découvrez les institutions officielles de santé du Maroc et les références réglementaires en matière de transport sanitaire."
+          />
+        </div>
 
         {/* Réassurance */}
         <ReassuranceSection />

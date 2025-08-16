@@ -30,7 +30,7 @@ const WhyChooseUsSection = () => {
     {
       icon: Shield,
       title: "Sécurité & Conformité",
-      description: "Agréments officiels, assurances complètes et respect des protocoles sanitaires."
+      description: "Agréments officiels du Ministère de la Santé, assurances complètes et respect strict des protocoles sanitaires nationaux et internationaux."
     }
   ];
 

@@ -388,6 +388,54 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
             { icon: "✔", text: "Couverture Yacoub El Mansour & Hassan" }
           ]
         };
+      case 'gueliz':
+        return {
+          title: "🚑 Ambulance Marrakech Guéliz – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (10-15 min) dans Guéliz et zones touristiques — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Zone touristique & commerciale" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Équipes multilingues" }
+          ]
+        };
+      case 'hivernage':
+        return {
+          title: "🚑 Ambulance Marrakech Hivernage – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (10-15 min) dans Hivernage et zones hôtelières — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Service premium hôtelier" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Clientèle internationale" }
+          ]
+        };
+      case 'medina':
+        return {
+          title: "🚑 Ambulance Marrakech Médina – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (10-15 min) dans la Médina et quartiers historiques — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Accès Médina optimisé" },
+            { icon: "✔", text: "Intervention rapide" },
+            { icon: "✔", text: "Connaissance patrimoine" }
+          ]
+        };
+      case 'sidi-ghanem':
+        return {
+          title: "🚑 Ambulance Marrakech Sidi Ghanem – Urgences 24h/24, ambulance privée et transport médicalisé",
+          subtitle: "Intervention rapide (10-15 min) dans Sidi Ghanem et zones industrielles — équipe expérimentée — service continu jour et nuit.",
+          badge: "Service disponible partout au Maroc — 24/7",
+          features: [
+            { icon: "✔", text: "Agréé" },
+            { icon: "✔", text: "Zone industrielle" },
+            { icon: "✔", text: "Accidents du travail" },
+            { icon: "✔", text: "Protocoles spécialisés" }
+          ]
+        };
       default:
         return {
           title: h1 || `🚑 Ambulance ${city} – Urgences 24h/24, ambulance privée et transport médicalisé`,

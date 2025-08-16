@@ -140,16 +140,19 @@ const ContactInfo = ({
             </div>
 
             {/* Horaires */}
-            <div className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-accent/15 via-accent/10 to-accent/5 border border-accent/30 p-5 hover:shadow-md transition-all duration-300">
+            <div className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-primary/15 via-primary/10 to-primary/5 border border-primary/30 p-5 hover:shadow-md transition-all duration-300">
               <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <Clock className="h-6 w-6 text-accent" />
+                  <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Clock className="h-6 w-6 text-primary" />
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-accent mb-1">Disponibilité</p>
-                  <p className="text-lg font-bold text-accent">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-2xl">🕒</span>
+                    <p className="text-sm font-medium text-primary">Disponibilité</p>
+                  </div>
+                  <p className="text-lg font-bold text-foreground">
                     {contactData.hours}
                   </p>
                 </div>

@@ -414,14 +414,14 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
         };
       case 'medina':
         return {
-          title: "🚑 Ambulance Marrakech Médina – Urgences 24h/24, ambulance privée et transport médicalisé",
-          subtitle: "Intervention rapide (10-15 min) dans la Médina et quartiers historiques — équipe expérimentée — service continu jour et nuit.",
-          badge: "Service disponible partout au Maroc — 24/7",
+          title: "🚑 Ambulance Privée Marrakech Médina – Urgences 24h/24, transport médicalisé centre historique",
+          subtitle: "Intervention spécialisée (12-18 min) Médina — accès riads, Hôpital Ibn Tofail, Jamaa el Fna — ambulance privée patrimoine UNESCO.",
+          badge: "Service ambulance privée partout au Maroc — 24/7",
           features: [
-            { icon: "✔", text: "Agréé" },
-            { icon: "✔", text: "Accès Médina optimisé" },
-            { icon: "✔", text: "Intervention rapide" },
-            { icon: "✔", text: "Connaissance patrimoine" }
+            { icon: "✔", text: "Ambulance privée agréée" },
+            { icon: "✔", text: "Accès riads & souks optimisé" },
+            { icon: "✔", text: "Hôpital Ibn Tofail & dispensaires" },
+            { icon: "✔", text: "Expertise centre historique" }
           ]
         };
       case 'sidi-ghanem':

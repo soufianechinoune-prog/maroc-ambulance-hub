@@ -271,7 +271,7 @@ const CityPage = () => {
     : isHivernageVariant
     ? "Ambulance Privée Marrakech Hivernage – Urgences 24h/24, transport médicalisé hôtels"
     : isMedinaVariant
-    ? "Ambulance Marrakech Médina – Urgences 24h/24, ambulance privée et transport médicalisé"
+    ? "Ambulance Privée Marrakech Médina – Urgences 24h/24, transport médicalisé centre historique"
     : isSidiGhanemVariant
     ? "Ambulance Marrakech Sidi Ghanem – Urgences 24h/24, ambulance privée et transport médicalisé"
     : isPalmeraieVariant
@@ -319,7 +319,7 @@ const CityPage = () => {
     : isHivernageVariant
     ? "Ambulance privée Hivernage Marrakech (5-12 min) — La Mamounia, Palais des Congrès, hôtels de luxe — équipe médicale multilingue — urgences 24h/24."
     : isMedinaVariant
-    ? "Intervention rapide (10-15 min) dans la Médina et quartiers historiques — équipe expérimentée — service continu jour et nuit."
+    ? "Ambulance privée Médina Marrakech (12-18 min) — accès riads, Hôpital Ibn Tofail, Jamaa el Fna — équipe médicale expérimentée — urgences 24h/24."
     : isSidiGhanemVariant
     ? "Intervention rapide (10-15 min) dans Sidi Ghanem et zones industrielles — équipe expérimentée — service continu jour et nuit."
     : isPalmeraieVariant
@@ -367,7 +367,7 @@ const CityPage = () => {
     : isHivernageVariant
     ? ["ambulance privée Hivernage","Ambulance Marrakech Hivernage","ambulance privée Marrakech","urgence médicale Hivernage","ambulance hôtels Marrakech","transport médicalisé Hivernage"]
     : isMedinaVariant
-    ? ["Ambulance Marrakech Médina","ambulance privée Médina","ambulance marrakech","ambulance privée marrakech"]
+    ? ["ambulance privée Médina","Ambulance Marrakech Médina","ambulance privée Marrakech","urgence médicale Médina","ambulance centre historique Marrakech","transport médicalisé Médina","ambulance riads Marrakech","Hôpital Ibn Tofail","urgences Jamaa el Fna"]
     : isSidiGhanemVariant
     ? ["Ambulance Marrakech Sidi Ghanem","ambulance privée Sidi Ghanem","ambulance marrakech","ambulance privée marrakech"]
     : isPalmeraieVariant

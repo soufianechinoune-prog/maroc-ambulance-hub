@@ -24,7 +24,7 @@ export default function SEO({
   noIndex = false, 
   jsonLdMultiple 
 }: Props) {
-  const ogImg = image ?? "/default-ambulance.jpg";
+  const ogImg = image ?? "/default-seo-image.jpg";
   const absCanonical = canonical?.startsWith("http") ? canonical : `${SITE_URL}${canonical}`;
   
   return (

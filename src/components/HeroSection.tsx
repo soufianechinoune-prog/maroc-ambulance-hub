@@ -426,14 +426,14 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
         };
       case 'sidi-ghanem':
         return {
-          title: "🚑 Ambulance Marrakech Sidi Ghanem – Urgences 24h/24, ambulance privée et transport médicalisé",
-          subtitle: "Intervention rapide (10-15 min) dans Sidi Ghanem et zones industrielles — équipe expérimentée — service continu jour et nuit.",
-          badge: "Service disponible partout au Maroc — 24/7",
+          title: "🚑 Ambulance Privée Marrakech Sidi Ghanem – Urgences 24h/24, transport médicalisé zone industrielle",
+          subtitle: "Intervention spécialisée (10-15 min) Sidi Ghanem — zones industrielles, Clinique Atlas, entreprises — ambulance privée accidents travail.",
+          badge: "Service ambulance privée partout au Maroc — 24/7",
           features: [
-            { icon: "✔", text: "Agréé" },
-            { icon: "✔", text: "Zone industrielle" },
-            { icon: "✔", text: "Accidents du travail" },
-            { icon: "✔", text: "Protocoles spécialisés" }
+            { icon: "✔", text: "Ambulance privée agréée" },
+            { icon: "✔", text: "Zones industrielles & entreprises" },
+            { icon: "✔", text: "Clinique Atlas & centres médicaux" },
+            { icon: "✔", text: "Accidents du travail spécialisés" }
           ]
         };
       case 'palmeraie':

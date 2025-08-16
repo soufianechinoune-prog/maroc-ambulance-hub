@@ -273,7 +273,7 @@ const CityPage = () => {
     : isMedinaVariant
     ? "Ambulance Privée Marrakech Médina – Urgences 24h/24, transport médicalisé centre historique"
     : isSidiGhanemVariant
-    ? "Ambulance Marrakech Sidi Ghanem – Urgences 24h/24, ambulance privée et transport médicalisé"
+    ? "Ambulance Privée Marrakech Sidi Ghanem – Urgences 24h/24, transport médicalisé zone industrielle"
     : isPalmeraieVariant
     ? "Ambulance Privée Marrakech Palmeraie – Urgences 24h/24, transport médicalisé rapide"
     : baseTitle;
@@ -321,7 +321,7 @@ const CityPage = () => {
     : isMedinaVariant
     ? "Ambulance privée Médina Marrakech (12-18 min) — accès riads, Hôpital Ibn Tofail, Jamaa el Fna — équipe médicale expérimentée — urgences 24h/24."
     : isSidiGhanemVariant
-    ? "Intervention rapide (10-15 min) dans Sidi Ghanem et zones industrielles — équipe expérimentée — service continu jour et nuit."
+    ? "Ambulance privée Sidi Ghanem Marrakech (10-15 min) — zones industrielles, Clinique Atlas, entreprises — équipe médicale expérimentée — urgences 24h/24."
     : isPalmeraieVariant
     ? "Ambulance privée dans la Palmeraie Marrakech (10-15 min) — zones résidentielles de prestige, golfs et villas — équipe médicale expérimentée — service continu."
     : baseDescription;
@@ -369,7 +369,7 @@ const CityPage = () => {
     : isMedinaVariant
     ? ["ambulance privée Médina","Ambulance Marrakech Médina","ambulance privée Marrakech","urgence médicale Médina","ambulance centre historique Marrakech","transport médicalisé Médina","ambulance riads Marrakech","Hôpital Ibn Tofail","urgences Jamaa el Fna"]
     : isSidiGhanemVariant
-    ? ["Ambulance Marrakech Sidi Ghanem","ambulance privée Sidi Ghanem","ambulance marrakech","ambulance privée marrakech"]
+    ? ["ambulance privée Sidi Ghanem","Ambulance Marrakech Sidi Ghanem","ambulance privée Marrakech","urgence médicale Sidi Ghanem","ambulance zone industrielle Marrakech","transport médicalisé Sidi Ghanem","Clinique Atlas","urgences entreprises Marrakech"]
     : isPalmeraieVariant
     ? ["ambulance privée Palmeraie","Ambulance Marrakech Palmeraie","ambulance privée Marrakech","transport médicalisé Palmeraie","urgence médicale Palmeraie","ambulance de luxe Marrakech"]
     : undefined;

@@ -33,6 +33,12 @@ import NeighborhoodHayRiad from "./pages/NeighborhoodHayRiad";
 import NeighborhoodSouissi from "./pages/NeighborhoodSouissi";
 import NeighborhoodYacoubElMansour from "./pages/NeighborhoodYacoubElMansour";
 
+// Quartiers de Marrakech
+import NeighborhoodGueliz from "./pages/NeighborhoodGueliz";
+import NeighborhoodHivernage from "./pages/NeighborhoodHivernage";
+import NeighborhoodMedina from "./pages/NeighborhoodMedina";
+import NeighborhoodSidiGhanem from "./pages/NeighborhoodSidiGhanem";
+
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const BlogCategoryCasablanca = lazy(() => import("./pages/BlogCategoryCasablanca"));
@@ -79,6 +85,12 @@ const AppRoutes = () => (
     <Route path="/ambulance-rabat-hay-riad" element={<NeighborhoodHayRiad />} />
     <Route path="/ambulance-rabat-souissi" element={<NeighborhoodSouissi />} />
     <Route path="/ambulance-rabat-yacoub-el-mansour" element={<NeighborhoodYacoubElMansour />} />
+
+    {/* Quartiers de Marrakech */}
+    <Route path="/ambulance-marrakech-gueliz" element={<NeighborhoodGueliz />} />
+    <Route path="/ambulance-marrakech-hivernage" element={<NeighborhoodHivernage />} />
+    <Route path="/ambulance-marrakech-medina" element={<NeighborhoodMedina />} />
+    <Route path="/ambulance-marrakech-sidi-ghanem" element={<NeighborhoodSidiGhanem />} />
 
     {/* Route générique pour alias quartiers: /ambulance-:city-:district */}
     <Route path="/ambulance-:city-:district" element={<CityPage />} />

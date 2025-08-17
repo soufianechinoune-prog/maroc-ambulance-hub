@@ -24,22 +24,32 @@ const ImageOptimized = ({
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  // Generate srcSet for responsive images
+  // Generate srcSet for responsive images with WebP support
   const generateSrcSet = (originalSrc: string) => {
-    // For external images or already optimized images, return as-is
-    if (originalSrc.startsWith('http') || originalSrc.includes('webp')) {
+    // For external images, return as-is
+    if (originalSrc.startsWith('http')) {
       return originalSrc;
     }
 
-    // For local images, we would ideally have different sizes
-    // This is a placeholder for actual image optimization
+    // For local images, generate WebP versions
     const baseName = originalSrc.replace(/\.[^/.]+$/, '');
     const extension = originalSrc.split('.').pop();
     
+    // If already WebP, generate different sizes
+    if (extension === 'webp') {
+      return [
+        `${baseName} 400w`,
+        `${baseName} 800w`, 
+        `${baseName} 1200w`,
+        `${baseName} 1600w`
+      ].join(', ');
+    }
+
+    // Generate WebP alternatives with fallback
     return [
-      `${baseName}-400w.webp 400w`,
-      `${baseName}-800w.webp 800w`, 
-      `${baseName}-1200w.webp 1200w`,
+      `${baseName}.webp 400w`,
+      `${baseName}.webp 800w`, 
+      `${baseName}.webp 1200w`,
       `${originalSrc} 1600w`
     ].join(', ');
   };
@@ -72,19 +82,27 @@ const ImageOptimized = ({
           style={{ width, height }}
         />
       )}
-      <img
-        src={src}
-        srcSet={generateSrcSet(src)}
-        sizes={sizes}
-        alt={alt}
-        className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}`}
-        width={width}
-        height={height}
-        loading={priority ? 'eager' : loading}
-        onLoad={handleLoad}
-        onError={handleError}
-        decoding="async"
-      />
+      <picture>
+        <source 
+          srcSet={generateSrcSet(src.replace(/\.(jpg|jpeg|png)$/i, '.webp'))}
+          sizes={sizes}
+          type="image/webp"
+        />
+        <img
+          src={src}
+          srcSet={generateSrcSet(src)}
+          sizes={sizes}
+          alt={alt}
+          className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}`}
+          width={width}
+          height={height}
+          loading={priority ? 'eager' : loading}
+          onLoad={handleLoad}
+          onError={handleError}
+          decoding="async"
+          fetchPriority={priority ? 'high' : 'auto'}
+        />
+      </picture>
     </div>
   );
 };

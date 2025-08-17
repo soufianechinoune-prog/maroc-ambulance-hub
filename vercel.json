@@ -23,5 +23,34 @@
     { "source": "/ambulance-casablanca-bouskoura", "destination": "/ambulance-casablanca", "permanent": true },
     { "source": "/ambulance-casablanca-ain-chock", "destination": "/ambulance-casablanca", "permanent": true },
     { "source": "/ambulance-casablanca-derb-sultan", "destination": "/ambulance-casablanca", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control", 
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(css|js|woff2?|png|jpg|jpeg|webp|gif|svg|ico))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
   ]
 }

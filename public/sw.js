@@ -1,8 +1,12 @@
-const CACHE_NAME = 'ambulance-maroc-v1';
+const CACHE_NAME = 'ambulance-maroc-v1.1.0';
 const STATIC_ASSETS = [
   '/',
   '/default-seo-image.jpg',
-  '/manifest.json'
+  '/manifest.json',
+  // Critical WebP images
+  '/src/assets/ambulance-hero-optimized.webp',
+  '/src/assets/medical-team-optimized.webp',
+  '/src/assets/logo-optimized.webp'
 ];
 
 const CACHE_STRATEGIES = {
@@ -44,16 +48,16 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   // Handle different types of requests
-  if (request.destination === 'image') {
+  if (request.destination === 'image' || url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|ico)$/i)) {
     event.respondWith(handleImageRequest(request));
-  } else if (url.pathname.endsWith('.js') || url.pathname.endsWith('.css')) {
+  } else if (url.pathname.endsWith('.js') || url.pathname.endsWith('.css') || url.pathname.endsWith('.woff2') || url.pathname.endsWith('.woff')) {
     event.respondWith(handleAssetRequest(request));
   } else {
     event.respondWith(handlePageRequest(request));
   }
 });
 
-// Image caching strategy (cache-first)
+// Image caching strategy (cache-first) with WebP support
 async function handleImageRequest(request) {
   const cache = await caches.open(CACHE_NAME);
   const cachedResponse = await cache.match(request);
@@ -65,12 +69,14 @@ async function handleImageRequest(request) {
   try {
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
+      // Cache successful responses
       cache.put(request, networkResponse.clone());
     }
     return networkResponse;
   } catch (error) {
-    // Return a fallback image if needed
-    return new Response('Image not available', { status: 404 });
+    // Try to return fallback image
+    const fallbackResponse = await cache.match('/default-seo-image.jpg');
+    return fallbackResponse || new Response('Image not available', { status: 404 });
   }
 }
 

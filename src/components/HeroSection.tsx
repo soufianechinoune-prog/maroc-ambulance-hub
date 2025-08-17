@@ -1,7 +1,7 @@
 import { Phone, MessageCircle, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
-import ambulanceHero from "@/assets/ambulance-hero.jpg";
+import ambulanceHeroOptimized from "@/assets/ambulance-hero-optimized.webp";
 
 interface HeroSectionProps {
   city?: string;
@@ -471,7 +471,7 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${ambulanceHero})`,
+          backgroundImage: `url(${ambulanceHeroOptimized})`,
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent"></div>
@@ -479,7 +479,7 @@ const HeroSection = ({ city = "Casablanca", h1, subtitle, quarterVariant }: Hero
       
       {/* SEO and Accessibility Image */}
       <img 
-        src={ambulanceHero} 
+        src={ambulanceHeroOptimized} 
         alt={`Ambulance professionnelle en intervention à ${city} - service d'urgence médicale 24h/24 et 7j/7`} 
         className="sr-only"
         loading="lazy"

@@ -138,7 +138,7 @@ export default function MoroccoInteractiveMap({
                       onmouseover="this.style.backgroundColor='#1d4ed8'"
                       onmouseout="this.style.backgroundColor='#2563eb'"
                     >
-                      Voir les détails →
+                      Ambulance ${city.name} - Service 24h/24 →
                     </button>
                   </div>
                 `);
@@ -227,7 +227,7 @@ export default function MoroccoInteractiveMap({
           </div>
         </div>
         <p className="text-xs text-muted-foreground mt-2">
-          💡 Cliquez sur les marqueurs pour voir les détails de chaque ville
+          💡 Cliquez sur les marqueurs pour découvrir nos services d'ambulance par ville
         </p>
       </div>
     </>

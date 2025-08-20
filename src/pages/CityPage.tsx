@@ -3501,9 +3501,9 @@ const CityPage = () => {
                 <Link
                   to={currentNeighborhood ? `/${item.slug}` : `/ambulance-${item.slug}`}
                   className="mt-2 inline-flex items-center gap-1 text-sm text-primary underline hover:text-primary/80 transition-colors"
-                  aria-label={`Voir la page Ambulance à ${item.name}`}
+                  aria-label={`Service ambulance ${item.name} - Intervention 24h/24`}
                 >
-                  👉 Voir la page
+                  🚑 Service ambulance {item.name}
                 </Link>
               </li>
             ))}

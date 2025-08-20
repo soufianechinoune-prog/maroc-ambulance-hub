@@ -139,13 +139,13 @@ const ZonesSection = () => {
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {otherCities.map((city, index) => (
                 <li key={index}>
-                  <Link
-                    to={`/ambulance-${city.slug}`}
-                    className="block rounded-lg border border-border bg-card px-4 py-3 text-foreground hover:border-primary hover:bg-accent/30 hover:text-primary transition-colors"
-                    aria-label={`Voir les infos pour ${city.name}`}
-                  >
-                    Voir les infos pour {city.name}
-                  </Link>
+                    <Link
+                      to={`/ambulance-${city.slug}`}
+                      className="block rounded-lg border border-border bg-card px-4 py-3 text-foreground hover:border-primary hover:bg-accent/30 hover:text-primary transition-colors"
+                      aria-label={`Service ambulance ${city.name} - Intervention 24h/24`}
+                    >
+                      Ambulance {city.name} - Service 24h/24
+                    </Link>
                 </li>
               ))}
             </ul>
@@ -182,8 +182,8 @@ const ZonesSection = () => {
                     <span className="font-semibold text-primary">{city.coverage}</span>
                   </div>
                   <Button variant="default" size="sm" className="w-full mt-3" asChild>
-                    <Link to={`/ambulance-${city.slug}`} aria-label={`Voir la page dédiée ${city.name}`}>
-                      Voir la page dédiée
+                    <Link to={`/ambulance-${city.slug}`} aria-label={`Ambulance ${city.name} - Service d'urgence 24h/24`}>
+                      Service ambulance {city.name}
                     </Link>
                   </Button>
                 </CardContent>
@@ -210,8 +210,8 @@ const ZonesSection = () => {
                       {city.responseTime}
                     </div>
                       <Button variant="default" size="sm" className="mt-2" asChild>
-                        <Link to={`/ambulance-${city.slug}`} aria-label={`Voir les infos pour ${city.name}`}>
-                          Voir les infos pour {city.name}
+                        <Link to={`/ambulance-${city.slug}`} aria-label={`Ambulance ${city.name} - Intervention rapide 24h/24`}>
+                          Ambulance {city.name} - Urgent
                         </Link>
                       </Button>
                   </div>

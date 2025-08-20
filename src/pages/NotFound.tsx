@@ -41,13 +41,13 @@ const NotFound = () => {
                 <Link to="/">Retourner à l'accueil</Link>
               </Button>
               <Button asChild variant="outline" className="w-full">
-                <Link to="/services">Voir nos services</Link>
+                <Link to="/services">Services ambulance - Transport médical 24h/24</Link>
               </Button>
               <Button asChild variant="outline" className="w-full">
-                <Link to="/zones-d-intervention">Consulter nos zones d'intervention</Link>
+                <Link to="/zones-d-intervention">Zones d'intervention ambulance Maroc</Link>
               </Button>
               <Button asChild variant="outline" className="w-full">
-                <Link to="/contact">Nous contacter</Link>
+                <Link to="/contact">Contact ambulance d'urgence</Link>
               </Button>
             </div>
             

@@ -191,8 +191,8 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
                             Appeler maintenant
                           </CallButton>
                         ) : (
-                          <Link to={(service as any).ctaHref ?? "/services"} aria-label={`En savoir plus sur ${service.title}`}>
-                            {ctaLabel}
+                          <Link to={(service as any).ctaHref ?? "/services"} aria-label={`Obtenir un devis pour ${service.title}`}>
+                            Obtenir un devis gratuit
                           </Link>
                         )}
                       </Button>

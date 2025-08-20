@@ -92,48 +92,64 @@ function normalizeCityAndCategories(meta: any, helpers: { slug: string; filepath
   };
 }
 
-// Load all markdown files at build time in browser/CSR path (Vite transforms glob)
-const modules = import.meta.glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+// Load all markdown files at build time with SSG-safe fallback
+function loadBlogPosts(): BlogPost[] {
+  try {
+    // Check if import.meta.glob is available (not available during SSG builds)
+    if (typeof import.meta?.glob !== 'function') {
+      return [];
+    }
 
-const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
-  const { data, content } = parseFrontmatter(raw);
-  // slug from frontmatter or filename
-  const fileSlug = path.split("/").pop()?.replace(/\.md$/, "") || "";
-  const slug: string = (data.slug as string) || fileSlug;
+    const modules = import.meta.glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
 
-  const date = (data.date as string) || new Date().toISOString().slice(0, 10);
-  const updated = (data.updated as string) || date;
-  const cityRaw = data.city as string | undefined;
-  const city = cityRaw === "" ? "" : (cityRaw || "casablanca");
-  const service = ((data.service as string | undefined) || "");
-  const coverImage = ((data.cover as string) || (data.coverImage as string) || "/default-seo-image.jpg");
+    const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
+      const { data, content } = parseFrontmatter(raw);
+      // slug from frontmatter or filename
+      const fileSlug = path.split("/").pop()?.replace(/\.md$/, "") || "";
+      const slug: string = (data.slug as string) || fileSlug;
 
-  const calcReadingTime = (txt: string) => {
-    const words = txt.split(/\s+/).filter(Boolean).length;
-    return Math.max(1, Math.ceil(words / 200));
-  };
-  const rt = data.readingTime as unknown;
-  const readingTime = typeof rt === "number" ? rt : calcReadingTime(content);
+      const date = (data.date as string) || new Date().toISOString().slice(0, 10);
+      const updated = (data.updated as string) || date;
+      const cityRaw = data.city as string | undefined;
+      const city = cityRaw === "" ? "" : (cityRaw || "casablanca");
+      const service = ((data.service as string | undefined) || "");
+      const coverImage = ((data.cover as string) || (data.coverImage as string) || "/default-seo-image.jpg");
 
-  return {
-    slug,
-    title: (data.title as string) || fileSlug,
-    description: (data.description as string) || "",
-    date,
-    updated,
-    author: data.author as string | undefined,
-    tags: (data.tags as string[]) || [],
-    keywords: (data.keywords as string[]) || [],
-    coverImage,
-    city,
-    service,
-    readingTime,
-    content,
-  } satisfies BlogPost;
-});
+      const calcReadingTime = (txt: string) => {
+        const words = txt.split(/\s+/).filter(Boolean).length;
+        return Math.max(1, Math.ceil(words / 200));
+      };
+      const rt = data.readingTime as unknown;
+      const readingTime = typeof rt === "number" ? rt : calcReadingTime(content);
 
-// Sort newest first
-posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+      return {
+        slug,
+        title: (data.title as string) || fileSlug,
+        description: (data.description as string) || "",
+        date,
+        updated,
+        author: data.author as string | undefined,
+        tags: (data.tags as string[]) || [],
+        keywords: (data.keywords as string[]) || [],
+        coverImage,
+        city,
+        service,
+        readingTime,
+        content,
+      } satisfies BlogPost;
+    });
+
+    // Sort newest first
+    posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+    return posts;
+  } catch (error) {
+    // Graceful fallback for SSG builds where import.meta.glob is not available
+    console.warn('Blog posts could not be loaded during SSG build');
+    return [];
+  }
+}
+
+const posts = loadBlogPosts();
 
 export function getAllPosts(): BlogPost[] {
   // Normalize city and categories for each post

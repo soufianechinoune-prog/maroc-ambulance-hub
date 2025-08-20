@@ -50,11 +50,29 @@ const ServiceArticleLinks = ({
     services?: Array<{title: string; href: string; description: string}>;
   }>({});
 
+  const getServiceDescription = (service: keyof typeof serviceMapping, city?: string): string => {
+    const cityStr = city ? ` à ${city.charAt(0).toUpperCase() + city.slice(1)}` : '';
+    
+    switch (service) {
+      case 'urgence':
+        return `Service ambulance d'urgence 24/7${cityStr}. Intervention rapide avec équipe médicale qualifiée.`;
+      case 'inter-hopitaux':
+        return `Transport médicalisé entre hôpitaux${cityStr}. Transferts sécurisés avec suivi médical.`;
+      case 'longue-distance':
+        return `Transport ambulance longue distance${cityStr}. Accompagnement médical pour trajets étendus.`;
+      case 'evenements':
+        return `Couverture médicale événements${cityStr}. Équipes sur site et intervention d'urgence.`;
+      default:
+        return `Service ambulance professionnel${cityStr}. Intervention 24/7 partout au Maroc.`;
+    }
+  };
+
   useEffect(() => {
-    if (context === 'service-to-blog') {
-      // From service page to relevant blog articles
-      const allPosts = getAllPosts();
-      let filteredPosts = allPosts;
+    try {
+      if (context === 'service-to-blog') {
+        // From service page to relevant blog articles
+        const allPosts = getAllPosts();
+        let filteredPosts = allPosts;
 
       // Filter by current service if specified
       if (currentService) {
@@ -81,59 +99,58 @@ const ServiceArticleLinks = ({
         filteredPosts = filteredPosts.filter(post => post.slug !== currentSlug);
       }
 
-      // Sort by relevance and limit
-      const sortedPosts = filteredPosts
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .slice(0, maxLinks);
+        // Sort by relevance and limit
+        const sortedPosts = filteredPosts
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .slice(0, maxLinks);
 
-      setRelevantContent({ articles: sortedPosts });
+        setRelevantContent({ articles: sortedPosts });
 
-    } else if (context === 'blog-to-service') {
-      // From blog article to relevant services
-      const services = [];
-      
-      // Analyze current context to suggest relevant services
-      const contextText = `${currentSlug} ${currentCity}`.toLowerCase();
-      
-      for (const [serviceKey, serviceData] of Object.entries(serviceMapping)) {
-        if (serviceData.keywords.some(keyword => contextText.includes(keyword.toLowerCase()))) {
+      } else if (context === 'blog-to-service') {
+        // From blog article to relevant services
+        const services = [];
+        
+        // Analyze current context to suggest relevant services
+        const contextText = `${currentSlug} ${currentCity}`.toLowerCase();
+        
+        for (const [serviceKey, serviceData] of Object.entries(serviceMapping)) {
+          if (serviceData.keywords.some(keyword => contextText.includes(keyword.toLowerCase()))) {
+            services.push({
+              title: serviceData.title,
+              href: serviceData.servicePage,
+              description: getServiceDescription(serviceKey as keyof typeof serviceMapping, currentCity)
+            });
+          }
+        }
+
+        // Always add main services page
+        if (services.length < maxLinks) {
           services.push({
-            title: serviceData.title,
-            href: serviceData.servicePage,
-            description: getServiceDescription(serviceKey as keyof typeof serviceMapping, currentCity)
+            title: `Services ambulance ${currentCity ? currentCity.charAt(0).toUpperCase() + currentCity.slice(1) : 'Maroc'}`,
+            href: '/services',
+            description: `Découvrez tous nos services d'ambulance${currentCity ? ` à ${currentCity.charAt(0).toUpperCase() + currentCity.slice(1)}` : ' au Maroc'} : urgence, transferts, longue distance.`
           });
         }
-      }
 
-      // Always add main services page
-      if (services.length < maxLinks) {
-        services.push({
+        setRelevantContent({ services: services.slice(0, maxLinks) });
+      }
+    } catch (error) {
+      // Graceful fallback for SSG builds where import.meta.glob might not be available
+      console.warn('ServiceArticleLinks: Unable to load blog posts during SSG build');
+      
+      if (context === 'blog-to-service') {
+        // Still provide service links even if blog loading fails
+        const fallbackServices = [{
           title: `Services ambulance ${currentCity ? currentCity.charAt(0).toUpperCase() + currentCity.slice(1) : 'Maroc'}`,
           href: '/services',
           description: `Découvrez tous nos services d'ambulance${currentCity ? ` à ${currentCity.charAt(0).toUpperCase() + currentCity.slice(1)}` : ' au Maroc'} : urgence, transferts, longue distance.`
-        });
+        }];
+        setRelevantContent({ services: fallbackServices });
+      } else {
+        setRelevantContent({});
       }
-
-      setRelevantContent({ services: services.slice(0, maxLinks) });
     }
   }, [context, currentService, currentCity, currentSlug, maxLinks]);
-
-  const getServiceDescription = (service: keyof typeof serviceMapping, city?: string): string => {
-    const cityStr = city ? ` à ${city.charAt(0).toUpperCase() + city.slice(1)}` : '';
-    
-    switch (service) {
-      case 'urgence':
-        return `Service ambulance d'urgence 24/7${cityStr}. Intervention rapide avec équipe médicale qualifiée.`;
-      case 'inter-hopitaux':
-        return `Transport médicalisé entre hôpitaux${cityStr}. Transferts sécurisés avec suivi médical.`;
-      case 'longue-distance':
-        return `Transport ambulance longue distance${cityStr}. Accompagnement médical pour trajets étendus.`;
-      case 'evenements':
-        return `Couverture médicale événements${cityStr}. Équipes sur site et intervention d'urgence.`;
-      default:
-        return `Service ambulance professionnel${cityStr}. Intervention 24/7 partout au Maroc.`;
-    }
-  };
 
   if ((!relevantContent.articles || relevantContent.articles.length === 0) && 
       (!relevantContent.services || relevantContent.services.length === 0)) {

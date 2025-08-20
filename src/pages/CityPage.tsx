@@ -17,6 +17,7 @@ import { SITE_URL } from "@/lib/config";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 import HeroSection from "@/components/HeroSection";
 import ContactInfo from "@/components/ContactInfo";
+import AuthorityLinks from "@/components/AuthorityLinks";
 import medicalTeam from "@/assets/medical-team.jpg";
 // Mapping des quartiers selon la logique fournie
 const neighborhoodMapping = {
@@ -3433,6 +3434,26 @@ const CityPage = () => {
               </a>
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* Liens d'autorité médicale selon le contexte */}
+      <section className="py-12 bg-background">
+        <div className="container mx-auto px-4">
+          <AuthorityLinks 
+            variant={
+              (city?.slug === 'casablanca' || city?.slug === 'rabat') 
+                ? 'medical' 
+                : city?.slug === 'marrakech' 
+                ? 'emergency' 
+                : 'transport'
+            }
+            context={
+              currentNeighborhood && currentCity
+                ? `Références officielles pour les services d'ambulance dans le quartier ${neighborhoodLabels[currentNeighborhood] || currentNeighborhood} à ${currentCity === 'casablanca' ? 'Casablanca' : currentCity === 'rabat' ? 'Rabat' : 'Marrakech'}.`
+                : `Organismes officiels supervisant les services d'ambulance et transport sanitaire à ${city?.name}.`
+            }
+          />
         </div>
       </section>
 

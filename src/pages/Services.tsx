@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Ambulance, Clock, Users, Shield, Phone, MessageCircle, Search, Network, Star, CheckCircle } from "lucide-react";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
+import ServiceArticleLinks from "@/components/ServiceArticleLinks";
 
 const Services = () => {
   const services = [
@@ -348,6 +349,16 @@ const Services = () => {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+      
+      {/* ServiceArticleLinks: From services to related blog articles */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <ServiceArticleLinks 
+            context="service-to-blog"
+            maxLinks={6}
+          />
         </div>
       </section>
       

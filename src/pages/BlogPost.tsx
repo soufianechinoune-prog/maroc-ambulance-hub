@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { slugifyHeading, smoothScrollToId } from "@/lib/heading-utils";
+import ServiceArticleLinks from "@/components/ServiceArticleLinks";
 // Utils
 const PHONE_DISPLAY = "0777 22 23 11";
 const PHONE_TEL = "+212777722311";
@@ -426,6 +427,16 @@ const BlogPost = () => {
             </div>
           </aside>
         </div>
+
+        {/* ServiceArticleLinks: From blog to related services */}
+        <section className="max-w-5xl mx-auto mt-12">
+          <ServiceArticleLinks 
+            context="blog-to-service"
+            currentCity={post.city}
+            currentSlug={post.slug}
+            maxLinks={4}
+          />
+        </section>
 
         {/* Related articles */}
         {related.length > 0 && (

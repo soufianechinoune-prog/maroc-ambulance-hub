@@ -3,8 +3,8 @@ title: "Le chantier du nouvel hôpital Ibn Sina à Rabat : une révolution hospi
 description: "Nouveau CHU Ibn Sina à Rabat : capacité, calendrier, innovations, budget et impact sur les urgences et ambulances à Rabat."
 keywords: ["CHU Ibn Sina Rabat", "nouvel hôpital Rabat", "ambulance Rabat", "transport médicalisé Rabat", "urgences Rabat"]
 city: "rabat"
-date: "2025-08-10"
-updated: "2025-08-10"
+date: "2024-06-14"
+updated: "2024-06-14"
 slug: "nouveau-chu-ibn-sina-rabat"
 categories: ["toutes-les-villes", "rabat"]
 cover: "/lovable-uploads/34f65124-2fe2-42f2-aa89-4b991a31ec68.png"

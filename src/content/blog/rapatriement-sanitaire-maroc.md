@@ -2,8 +2,8 @@
 title: "🛫 Rapatriement sanitaire Maroc : procédure, tarifs et conseils"
 description: "Rapatriement sanitaire au Maroc : transfert médical sécurisé, organisation complète, devis rapide, depuis/vers le Maroc. Contactez-nous 24/7."
 slug: "rapatriement-sanitaire-maroc"
-date: "2025-08-09"
-updated: "2025-08-09"
+date: "2024-09-18"
+updated: "2024-09-18"
 author: "Ambulance Maroc"
 keywords: ["rapatriement sanitaire Maroc", "avion sanitaire Maroc", "transport médical international"]
 coverImage: "/images/blog/rapatriement-sanitaire-maroc.jpg"

@@ -3,8 +3,8 @@ title: "🚑 Transport médicalisé à Rabat – Guide complet et tarifs 2025"
 description: "Tout savoir sur le transport médicalisé à Rabat : définition, déroulement, tarifs, zones couvertes et réservation. Service 24/7."
 keywords: ["transport médicalisé Rabat", "ambulance Rabat", "prix ambulance Rabat", "ambulance urgence Rabat"]
 city: "rabat"
-date: "2025-08-10"
-updated: "2025-08-10"
+date: "2024-08-03"
+updated: "2024-08-03"
 slug: "transport-medicalise-rabat"
 categories: ["toutes-les-villes","rabat"]
 ---

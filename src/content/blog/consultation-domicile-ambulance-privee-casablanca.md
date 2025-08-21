@@ -3,8 +3,8 @@ title: "Consultation médicale à domicile & ambulance Casablanca privée"
 description: "Consultation à domicile à Casablanca avec ambulance privée : confort, rapidité et sécurité. Disponibilité 24/7 et couverture de tous les quartiers."
 keywords: ["consultation à domicile casablanca", "ambulance casablanca", "ambulance privée casablanca", "médecin à domicile casablanca", "urgence casablanca"]
 city: "casablanca"
-date: "2025-08-10"
-updated: "2025-08-10"
+date: "2024-10-05"
+updated: "2024-10-05"
 slug: "consultation-domicile-ambulance-privee-casablanca"
 categories: ["toutes-les-villes", "casablanca"]
 cover: "/lovable-uploads/c70f65a3-e23d-4e57-8241-b36e2d2cd774.png"

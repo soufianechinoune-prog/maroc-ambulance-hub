@@ -3,8 +3,8 @@ title: "🚑 Transport médicalisé à Marrakech – Guide complet et tarifs 202
 description: "Tout savoir sur le transport médicalisé à Marrakech : définition, déroulement, tarifs, zones couvertes et réservation. Service 24/7."
 keywords: ["transport médicalisé Marrakech", "ambulance Marrakech", "prix ambulance Marrakech", "ambulance urgence Marrakech"]
 city: "marrakech"
-date: "2025-08-10"
-updated: "2025-08-10"
+date: "2024-11-08"
+updated: "2024-11-08"
 slug: "transport-medicalise-marrakech"
 categories: ["toutes-les-villes","marrakech"]
 ---

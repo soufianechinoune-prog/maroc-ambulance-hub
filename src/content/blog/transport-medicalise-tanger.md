@@ -3,8 +3,8 @@ title: "🚑 Transport médicalisé à Tanger – Guide complet et tarifs 2025"
 description: "Tout savoir sur le transport médicalisé à Tanger : définition, déroulement, tarifs, zones couvertes et réservation. Service 24/7."
 keywords: ["transport médicalisé Tanger", "ambulance Tanger", "prix ambulance Tanger", "ambulance urgence Tanger"]
 city: "tanger"
-date: "2025-08-10"
-updated: "2025-08-10"
+date: "2024-07-26"
+updated: "2024-07-26"
 slug: "transport-medicalise-tanger"
 categories: ["toutes-les-villes","tanger"]
 ---

@@ -2,8 +2,8 @@
 title: "Ambulance privée Casablanca – Tarifs, réservation et services 24/7"
 description: "Ambulance privée Casablanca : transport médical rapide et confortable, 24h/24, toutes distances. Réservez votre ambulance dès maintenant."
 slug: "ambulance-privee-casablanca"
-date: "2025-08-09"
-updated: "2025-08-09"
+date: "2024-11-02"
+updated: "2024-11-02"
 author: "Ambulance Maroc"
 keywords: ["ambulance privée Casablanca", "transport patient Casablanca", "réserver ambulance Maroc"]
 coverImage: "/images/blog/ambulance-privee-casablanca.jpg"

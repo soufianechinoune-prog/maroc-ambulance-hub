@@ -3,8 +3,8 @@ title: "Consultation à domicile & ambulance privée à Rabat"
 description: "Consultation médicale à domicile et ambulance privée à Rabat : confort, rapidité et sécurité. Disponibilité 24/7, zones couvertes et infos pratiques."
 keywords: ["consultation à domicile rabat", "ambulance rabat", "ambulance privée rabat", "médecin à domicile rabat", "urgence rabat"]
 city: "rabat"
-date: "2025-08-10"
-updated: "2025-08-10"
+date: "2024-10-21"
+updated: "2024-10-21"
 slug: "consultation-a-domicile-ambulance-privee-rabat"
 categories: ["toutes-les-villes", "rabat"]
 cover: "/default-seo-image.jpg"

@@ -3,8 +3,8 @@ title: "🚑 Transport médicalisé à Casablanca – Guide complet et tarifs 20
 description: "Tout savoir sur le transport médicalisé à Casablanca : définition, déroulement, tarifs, zones couvertes, et réservation. Service 24/7."
 keywords: ["transport médicalisé Casablanca", "ambulance médicalisée Casablanca", "tarif ambulance Casablanca", "urgence ambulance Casablanca"]
 city: "casablanca"
-date: "2025-08-08"
-updated: "2025-08-08"
+date: "2024-09-30"
+updated: "2024-09-30"
 slug: "transport-medicalise-casablanca"
 categories: ["toutes-les-villes","casablanca"]
 ---

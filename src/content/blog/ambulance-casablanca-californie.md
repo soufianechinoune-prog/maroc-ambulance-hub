@@ -2,7 +2,7 @@
 title: "Ambulance à Californie Casablanca – Intervention rapide 24/7"
 slug: "ambulance-casablanca-californie"
 description: "Ambulance privée à Californie (Casablanca) : accès résidences gardées, intervention 24/7, transferts et urgences. Conseils pour faciliter l’accès."
-date: "2025-08-08"
+date: "2024-06-28"
 author: "Ambulance Maroc"
 keywords: ["ambulance Californie Casablanca","ambulance privée Californie","transport médicalisé Californie"]
 tags: ["Californie","Casablanca"]

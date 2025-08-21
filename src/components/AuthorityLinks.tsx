@@ -16,17 +16,17 @@ const AuthorityLinks = ({ variant = 'medical', context }: AuthorityLinksProps) =
     },
     {
       title: "CHU Ibn Sina Rabat", 
-      url: "https://www.chu-rabat.ma",
+      url: "https://churabat.ma",
       description: "Centre hospitalier universitaire de référence nationale"
     },
     {
       title: "CHU Ibn Rochd Casablanca",
-      url: "https://www.chu-casablanca.ma", 
+      url: "https://chuibnrochd.ma", 
       description: "Premier centre hospitalier du Grand Casablanca"
     },
     {
       title: "Ordre National des Médecins",
-      url: "https://www.ordremedecins.ma",
+      url: "https://cnom.ma",
       description: "Instance ordinale des professions médicales au Maroc"
     }
   ];

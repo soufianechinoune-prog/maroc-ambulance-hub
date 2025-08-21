@@ -254,5 +254,45 @@ export const cities: City[] = [
     whatsapp: "https://wa.me/212777722311",
     avgEtaMin: 21,
     serviceArea: "Rabat-Salé-Kénitra"
+  },
+  {
+    name: "Salé",
+    slug: "sale",
+    region: "Rabat-Salé-Kénitra",
+    responseTime: "12-18 min",
+    coverage: "90%",
+    population: "890K",
+    isMain: true,
+    description: "La ville impériale jumelée avec Rabat bénéficie d'une couverture ambulancière renforcée avec une coordination parfaite entre les deux rives du Bouregreg.",
+    specificities: [
+      "Coordination Rabat-Salé",
+      "Service médina historique",
+      "Transport inter-rives",
+      "Couverture zones résidentielles"
+    ],
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
+    avgEtaMin: 15,
+    serviceArea: "Rabat-Salé-Kénitra"
+  },
+  {
+    name: "Témara",
+    slug: "temara",
+    region: "Rabat-Salé-Kénitra",
+    responseTime: "15-20 min",
+    coverage: "85%",
+    population: "310K",
+    isMain: false,
+    description: "La ville côtière de l'agglomération de Rabat offre un service ambulancier intégré avec une attention particulière aux zones balnéaires et résidentielles.",
+    specificities: [
+      "Service zones balnéaires",
+      "Coordination agglomération Rabat",
+      "Transport plages-hôpitaux",
+      "Couverture Harhoura-Skhirat"
+    ],
+    phone: "+212777722311",
+    whatsapp: "https://wa.me/212777722311",
+    avgEtaMin: 17,
+    serviceArea: "Rabat-Salé-Kénitra"
   }
 ];

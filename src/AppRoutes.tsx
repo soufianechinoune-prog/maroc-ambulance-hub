@@ -51,6 +51,7 @@ const BlogCategoryMeknes = lazy(() => import("./pages/BlogCategoryMeknes"));
 const BlogCategoryAgadir = lazy(() => import("./pages/BlogCategoryAgadir"));
 const BlogCategoryKenitra = lazy(() => import("./pages/BlogCategoryKenitra"));
 const BlogCategorySale = lazy(() => import("./pages/BlogCategorySale"));
+const BlogCategoryTemara = lazy(() => import("./pages/BlogCategoryTemara"));
 const BlogCategoryOujda = lazy(() => import("./pages/BlogCategoryOujda"));
 const AppRoutes = () => (
   <Routes>
@@ -109,6 +110,7 @@ const AppRoutes = () => (
     <Route path="/blog/agadir" element={<Suspense fallback={null}><BlogCategoryAgadir /></Suspense>} />
     <Route path="/blog/kenitra" element={<Suspense fallback={null}><BlogCategoryKenitra /></Suspense>} />
     <Route path="/blog/sale" element={<Suspense fallback={null}><BlogCategorySale /></Suspense>} />
+    <Route path="/blog/temara" element={<Suspense fallback={null}><BlogCategoryTemara /></Suspense>} />
     <Route path="/blog/oujda" element={<Suspense fallback={null}><BlogCategoryOujda /></Suspense>} />
     <Route path="/blog/:city/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
     <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />

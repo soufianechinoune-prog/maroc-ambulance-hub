@@ -83,10 +83,11 @@ Pour un devis précis, contactez directement nos partenaires via **WhatsApp** ou
 
 ---
 
-## 📍 Zones couvertes à Rabat
+## 📍 Zones couvertes à Rabat-Salé-Témara
 
-Nos ambulances partenaires interviennent dans **tous les quartiers de Rabat** :
+Nos ambulances partenaires interviennent dans **toute l'agglomération de Rabat** :
 
+**Rabat :**
 - Agdal
 - Hassan
 - Souissi
@@ -94,12 +95,22 @@ Nos ambulances partenaires interviennent dans **tous les quartiers de Rabat** :
 - Yacoub El Mansour
 - Centre-ville
 
-Et également dans les **villes voisines** :
+**Salé :**
+- Hay Chellah
+- Laayoune
+- Tabriquet
+- Bab Lamrissa
 
-- Salé
-- Témara
+**Témara :**
+- Centre-ville Témara
+- Harhoura
+- Val d'Or
+
+Et également dans les **villes proches** :
+
 - Skhirat
 - Bouznika
+- Kénitra
 
 ---
 

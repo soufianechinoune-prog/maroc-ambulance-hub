@@ -7,7 +7,7 @@ date: "2024-10-21"
 updated: "2024-10-21"
 slug: "consultation-a-domicile-ambulance-privee-rabat"
 categories: ["toutes-les-villes", "rabat"]
-cover: "/default-seo-image.jpg"
+cover: "/images/blog/consultation-domicile-rabat.jpg"
 ---
 
 # Consultation à domicile & ambulance privée à Rabat : confort, rapidité et sécurité

@@ -7,6 +7,7 @@ date: "2024-09-30"
 updated: "2024-09-30"
 slug: "transport-medicalise-casablanca"
 categories: ["toutes-les-villes","casablanca"]
+coverImage: "/images/blog/transport-medicalise-casablanca-new.jpg"
 ---
 
 # 🚑 Transport médicalisé à Casablanca – Guide complet 2025

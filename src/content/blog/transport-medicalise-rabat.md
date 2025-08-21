@@ -7,6 +7,7 @@ date: "2024-08-03"
 updated: "2024-08-03"
 slug: "transport-medicalise-rabat"
 categories: ["toutes-les-villes","rabat"]
+coverImage: "/images/blog/transport-medicalise-rabat.jpg"
 ---
 
 # 🚑 Transport médicalisé à Rabat : guide complet 2025

@@ -7,6 +7,7 @@ date: "2024-07-26"
 updated: "2024-07-26"
 slug: "transport-medicalise-tanger"
 categories: ["toutes-les-villes","tanger"]
+coverImage: "/images/blog/transport-medicalise-tanger.jpg"
 ---
 
 # 🚑 Transport médicalisé à Tanger : guide complet 2025

@@ -7,6 +7,7 @@ date: "2024-11-08"
 updated: "2024-11-08"
 slug: "transport-medicalise-marrakech"
 categories: ["toutes-les-villes","marrakech"]
+coverImage: "/images/blog/transport-medicalise-marrakech.jpg"
 ---
 
 # 🚑 Transport médicalisé à Marrakech : guide complet 2025

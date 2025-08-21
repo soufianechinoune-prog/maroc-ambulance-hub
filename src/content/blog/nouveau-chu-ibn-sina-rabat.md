@@ -54,13 +54,6 @@ Un budget de **38 millions de dirhams** est prévu pour équiper les espaces cl�
 
 ---
 
-<AuthorityLinks 
-  variant="medical" 
-  context="Consultez les références officielles des établissements de santé mentionnés dans cet article sur le nouveau CHU Ibn Sina de Rabat."
-/>
-
----
-
 ## Voir aussi
 
 - [Transport médicalisé à Rabat](/blog/transport-medicalise-rabat)  

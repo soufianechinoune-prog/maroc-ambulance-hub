@@ -6,7 +6,7 @@ date: "2024-07-12"
 updated: "2024-07-12"
 author: "Ambulance Maroc"
 keywords: ["ambulance urgence Casablanca", "intervention rapide ambulance", "service ambulance 24/7 Casablanca"]
-coverImage: "/images/blog/ambulance-urgence-casablanca-fixed.jpg"
+coverImage: "/images/blog/ambulance-urgence-casablanca-hassan2.jpg"
 city: "casablanca"
 categories: ["toutes-les-villes","casablanca"]
 readingTime: 5

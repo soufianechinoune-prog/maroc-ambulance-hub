@@ -1,12 +1,12 @@
 ---
 title: "Ambulance urgence Casablanca – Intervention rapide 24/7"
-description: "Ambulance urgence Casablanca : intervention rapide 24h/24 et 7j/7, délais moyens 15-20 min, tarifs dès 400 MAD. Appelez maintenant !"
+description: "Service ambulance urgence Casablanca 24h/24. Intervention rapide en 15-20 min, équipe médicale qualifiée, tarifs dès 400 MAD. Appelez maintenant !"
 slug: "ambulance-urgence-casablanca"
 date: "2024-07-12"
 updated: "2024-07-12"
 author: "Ambulance Maroc"
 keywords: ["ambulance urgence Casablanca", "intervention rapide ambulance", "service ambulance 24/7 Casablanca"]
-coverImage: "/images/blog/ambulance-urgence-casablanca-hassan2.jpg"
+coverImage: "/lovable-uploads/30143fda-0279-47a1-a749-2f87bda36d98.png"
 city: "casablanca"
 categories: ["toutes-les-villes","casablanca"]
 readingTime: 5

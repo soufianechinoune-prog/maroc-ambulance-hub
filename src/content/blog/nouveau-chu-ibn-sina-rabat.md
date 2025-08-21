@@ -1,6 +1,6 @@
 ---
 title: "Le chantier du nouvel hôpital Ibn Sina à Rabat : une révolution hospitalière en construction"
-description: "Nouveau CHU Ibn Sina à Rabat : capacité, calendrier, innovations, budget et impact sur les urgences et ambulances à Rabat."
+description: "Découvrez le projet révolutionnaire du nouveau CHU Ibn Sina à Rabat : 33 étages, 1044 lits, 6,5 milliards DH. Impact sur les ambulances et urgences médicales. Livraison 2026."
 keywords: ["CHU Ibn Sina Rabat", "nouvel hôpital Rabat", "ambulance Rabat", "transport médicalisé Rabat", "urgences Rabat"]
 city: "rabat"
 date: "2024-06-14"

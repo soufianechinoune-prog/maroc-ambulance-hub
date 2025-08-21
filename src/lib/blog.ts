@@ -92,10 +92,18 @@ function normalizeCityAndCategories(meta: any, helpers: { slug: string; filepath
   };
 }
 
-// Load all markdown files at build time in browser/CSR path (Vite transforms glob)
-const modules = import.meta.glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+// Load all markdown files - dynamic loading function
+function loadBlogPosts(): BlogPost[] {
+  let modules: Record<string, string> = {};
+  
+  try {
+    modules = import.meta.glob("/src/content/blog/*.md", { eager: true, query: "?raw", import: "default" }) as Record<string, string>;
+  } catch (error) {
+    console.warn("Failed to load blog posts:", error);
+    return [];
+  }
 
-const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
+  return Object.entries(modules).map(([path, raw]) => {
   const { data, content } = parseFrontmatter(raw);
   // slug from frontmatter or filename
   const fileSlug = path.split("/").pop()?.replace(/\.md$/, "") || "";
@@ -130,13 +138,25 @@ const posts: BlogPost[] = Object.entries(modules).map(([path, raw]) => {
     readingTime,
     content,
   } satisfies BlogPost;
-});
+  });
+}
 
-// Sort newest first
-posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+// Cache for posts - will reload in development
+let cachedPosts: BlogPost[] | null = null;
+
+function getPosts(): BlogPost[] {
+  if (!cachedPosts || import.meta.env.DEV) {
+    const rawPosts = loadBlogPosts();
+    // Sort newest first
+    rawPosts.sort((a, b) => (a.date < b.date ? 1 : -1));
+    cachedPosts = rawPosts;
+  }
+  return cachedPosts;
+}
 
 export function getAllPosts(): BlogPost[] {
   // Normalize city and categories for each post
+  const posts = getPosts();
   return posts.map((p: any) => {
     const meta = normalizeCityAndCategories(p, { slug: p.slug });
     return { ...p, ...meta } as BlogPost;
@@ -144,6 +164,7 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
+  const posts = getPosts();
   return posts.find((p) => p.slug === slug);
 }
 

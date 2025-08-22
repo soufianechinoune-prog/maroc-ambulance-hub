@@ -32,7 +32,7 @@ const Index = () => {
     "@type": "Organization",
     name: "Ambulance Maroc",
     url: SITE_URL,
-    logo: `${SITE_URL}/favicon.ico`,
+    logo: `${SITE_URL}/favicon.png`,
     sameAs: [SITE_URL, "https://wa.me/212777722311", "tel:+212777722311"],
   };
 

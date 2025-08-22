@@ -1,6 +1,6 @@
 import { Star, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import medicalTeamOptimized from "@/assets/medical-team-optimized.webp";
+import medicalTeam from "@/assets/medical-team.jpg";
 
 const TestimonialsSection = ({ withStructuredData = false }: { withStructuredData?: boolean }) => {
   const testimonials = [
@@ -142,7 +142,7 @@ const TestimonialsSection = ({ withStructuredData = false }: { withStructuredDat
 
             <div className="relative">
               <img 
-                src={medicalTeamOptimized}
+                src={medicalTeam}
                 alt="Équipe médicale professionnelle d'ambulanciers - personnel qualifié en intervention d'urgence" 
                 className="rounded-xl shadow-lg w-full h-64 object-cover"
                 loading="lazy"

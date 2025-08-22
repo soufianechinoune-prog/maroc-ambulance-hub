@@ -12,16 +12,16 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
     navigator.serviceWorker.register('/sw.js')
       .then((registration) => {
         console.log('SW registered: ', registration);
-        // Preload critical images
-        if ('caches' in window) {
-          caches.open('ambulance-maroc-v1.1.0').then(cache => {
-            cache.addAll([
-              '/src/assets/ambulance-hero-optimized.webp',
-              '/src/assets/medical-team-optimized.webp',
-              '/src/assets/logo-optimized.webp'
-            ]).catch(err => console.log('Cache preload failed:', err));
-          });
-        }
+        // Preload critical images - temporarily disabled
+        // if ('caches' in window) {
+        //   caches.open('ambulance-maroc-v1.1.0').then(cache => {
+        //     cache.addAll([
+        //       '/src/assets/ambulance-hero.jpg',
+        //       '/src/assets/medical-team.jpg',
+        //       '/src/assets/logo.jpg'
+        //     ]).catch(err => console.log('Cache preload failed:', err));
+        //   });
+        // }
       })
       .catch((registrationError) => {
         console.log('SW registration failed: ', registrationError);

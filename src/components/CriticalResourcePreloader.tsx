@@ -3,11 +3,9 @@ import { useEffect } from 'react';
 // Preload critical resources for Core Web Vitals optimization
 const CriticalResourcePreloader = () => {
   useEffect(() => {
-    // Critical images to preload
+    // Critical images to preload - using actual import paths for production
     const criticalImages = [
-      '/src/assets/ambulance-hero-optimized.webp',
-      '/src/assets/medical-team-optimized.webp',
-      '/src/assets/logo-optimized.webp'
+      // Images will be handled by proper imports in components
     ];
 
     // Critical fonts (if any)

@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, statSync } from "fs";
 
 // Use cities defined in src/data/cities.ts as single source of truth
 const tsContent = readFileSync("src/data/cities.ts", "utf8");
@@ -25,10 +25,13 @@ const blogCityUrls = uniqueSlugs.map((slug) => `${site}/blog/ambulance-${slug}`)
 import { readdirSync, readFileSync as rfs } from "fs";
 const blogDir = "src/content/blog";
 let blogArticleUrls = [];
+const urlModDates = new Map(); // Store modification dates for each URL
+
 try {
   const files = readdirSync(blogDir).filter((f) => f.endsWith(".md"));
   for (const f of files) {
-    const raw = rfs(`${blogDir}/${f}`, "utf8");
+    const filePath = `${blogDir}/${f}`;
+    const raw = rfs(filePath, "utf8");
     const fmMatch = raw.startsWith("---") ? raw.slice(3).split("\n---")[0] : "";
     const get = (k) => {
       const m = fmMatch.match(new RegExp(`^${k}:(.*)$`, "m"));
@@ -37,16 +40,43 @@ try {
     const slug = get("slug") || f.replace(/\.md$/, "");
     const city = get("city") || "casablanca";
     const url = city ? `${site}/blog/${city}/${slug}` : `${site}/blog/${slug}`;
+    
+    // Get real file modification date
+    const stats = statSync(filePath);
+    const modDate = stats.mtime.toISOString().slice(0, 10);
+    
     blogArticleUrls.push(url);
+    urlModDates.set(url, modDate);
   }
 } catch {}
 
+// Set different base dates for different content types
+const today = new Date().toISOString().slice(0, 10);
+const lastWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+const lastMonth = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
+// Set modification dates for different URL types
+baseUrls.forEach(url => {
+  if (url.includes("/mentions-legales") || url.includes("/politique-confidentialite") || url.includes("/conditions-generales-utilisation")) {
+    urlModDates.set(url, lastMonth); // Legal pages updated less frequently
+  } else if (url === `${site}/`) {
+    urlModDates.set(url, today); // Homepage updated most recently
+  } else {
+    urlModDates.set(url, lastWeek); // Other pages updated weekly
+  }
+});
+
+cityUrls.forEach(url => urlModDates.set(url, lastWeek));
+blogCityUrls.forEach(url => urlModDates.set(url, lastWeek));
+
 const urls = [...baseUrls, ...cityUrls, ...blogCityUrls, ...blogArticleUrls];
 
-const today = new Date().toISOString().slice(0, 10);
 const toUrlXml = (u) => {
   let priority = 0.8;
   let changefreq = "daily";
+  
+  // Get the real modification date for this URL
+  const lastmod = urlModDates.get(u) || today;
 
   // Home
   if (u === `${site}/`) {
@@ -76,7 +106,7 @@ const toUrlXml = (u) => {
     changefreq = "weekly";
   }
 
-  return `<url><loc>${u}</loc><lastmod>${today}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
+  return `<url><loc>${u}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
 };
 
 const body = urls.map(toUrlXml).join("");

@@ -86,6 +86,8 @@ export default defineConfig(({ mode }) => ({
         fs.writeFileSync(path.resolve(distDir, "sitemap.xml"), xml);
 
         // --- SSG prerender for SEO-critical routes (simulated ISR 24h via daily rebuild) ---
+        // Temporairement désactivé pour corriger les échecs de déploiement Vercel
+        /*
         const ssgTmpDir = path.resolve(rootDir, "dist-ssg");
         if (!fs.existsSync(ssgTmpDir)) fs.mkdirSync(ssgTmpDir, { recursive: true });
         const serverEntry = path.resolve(ssgTmpDir, "entry-ssg.cjs");
@@ -159,6 +161,7 @@ export default defineConfig(({ mode }) => ({
 
         // Build timestamp to help external schedulers verify freshness
         fs.writeFileSync(path.resolve(distDir, "ssg-build.txt"), new Date().toISOString());
+        */
       }
     } as Plugin
   ].filter(Boolean),
@@ -168,8 +171,8 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    rollupOptions: {
-      external: ['fs', 'path']
-    }
+      rollupOptions: {
+        external: ['fs', 'path', 'esbuild']
+      }
   }
 }));

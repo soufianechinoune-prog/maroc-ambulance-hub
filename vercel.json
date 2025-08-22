@@ -1,5 +1,8 @@
 {
   "redirects": [
+    { "source": "/", "destination": "https://www.ambulance-privee.ma/", "permanent": true, "has": [{"type": "host", "value": "ambulance-privee.ma"}] },
+    { "source": "/:path*", "destination": "https://www.ambulance-privee.ma/:path*", "permanent": true, "has": [{"type": "host", "value": "ambulance-privee.ma"}] },
+    
     { "source": "/casablanca", "destination": "/ambulance-casablanca", "permanent": true },
     { "source": "/rabat", "destination": "/ambulance-rabat", "permanent": true },
     { "source": "/marrakech", "destination": "/ambulance-marrakech", "permanent": true },

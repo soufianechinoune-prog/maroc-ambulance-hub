@@ -45,13 +45,25 @@ const ImageOptimized = ({
       ].join(', ');
     }
 
-    // Generate WebP alternatives with fallback
-    return [
-      `${baseName}.webp 400w`,
-      `${baseName}.webp 800w`, 
-      `${baseName}.webp 1200w`,
-      `${originalSrc} 1600w`
-    ].join(', ');
+    // Generate WebP alternatives with fallback - TEMPORARILY DISABLED
+    // return [
+    //   `${baseName}.webp 400w`,
+    //   `${baseName}.webp 800w`, 
+    //   `${baseName}.webp 1200w`,
+    //   `${originalSrc} 1600w`
+    // ].join(', ');
+    
+    // Use only original format for now
+    if (originalSrc.includes('400w')) {
+      return [
+        `${baseName} 400w`,
+        `${baseName} 800w`, 
+        `${baseName} 1200w`,
+        `${baseName} 1600w`
+      ].join(', ');
+    }
+    
+    return originalSrc;
   };
 
   const handleLoad = () => {
@@ -83,11 +95,12 @@ const ImageOptimized = ({
         />
       )}
       <picture>
-        <source 
+        {/* WebP source temporarily disabled */}
+        {/* <source 
           srcSet={generateSrcSet(src.replace(/\.(jpg|jpeg|png)$/i, '.webp'))}
           sizes={sizes}
           type="image/webp"
-        />
+        /> */}
         <img
           src={src}
           srcSet={generateSrcSet(src)}

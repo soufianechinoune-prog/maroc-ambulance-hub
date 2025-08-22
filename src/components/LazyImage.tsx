@@ -48,8 +48,8 @@ const LazyImage = ({
     return () => observer.disconnect();
   }, [priority]);
 
-  // Generate WebP source
-  const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+  // Generate WebP source - TEMPORARILY DISABLED
+  // const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -82,11 +82,12 @@ const LazyImage = ({
       
       {isInView && (
         <picture>
-          <source 
+          {/* WebP source temporarily disabled */}
+          {/* <source 
             srcSet={webpSrc}
             sizes={sizes}
             type="image/webp"
-          />
+          /> */}
           <img
             src={src}
             alt={alt}

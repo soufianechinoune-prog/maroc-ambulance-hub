@@ -7,35 +7,39 @@ const DEFAULT_IMAGE = "/default-seo-image.jpg"; // served from public/
  * Generate LocalBusiness JSON-LD schema for a given city
  */
 export function generateLocalBusinessSchema(city: City): Record<string, any> {
-  const url = `${SITE_URL}/ambulance-${city.slug}`;
-  const image = `${SITE_URL}${DEFAULT_IMAGE}`;
+  try {
+    const url = `${SITE_URL}/ambulance-${city.slug}`;
+    const image = `${SITE_URL}${DEFAULT_IMAGE}`;
+    const coordinates = getCityCoordinates(city.name);
+    const region = getRegionForCity(city.name);
+    const postalCode = getPostalCodeForCity(city.name);
 
-  return {
-    "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "EmergencyService", "MedicalBusiness"],
-    "@id": url,
-    name: `Ambulance ${city.name} – Intervention 24/7`,
-    alternateName: `Service ambulance ${city.name}`,
-    description: `Service d'ambulance professionnelle à ${city.name} avec intervention 24h/24 et 7j/7. Équipe médicale qualifiée, véhicules équipés.`,
-    image: [image],
-    logo: `${SITE_URL}/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png`,
-    url,
-    telephone: "+212777722311",
-    faxNumber: "+212777722312", 
-    email: "contact@ambulance-maroc.ma",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: `Centre médical ${city.name}`,
-      addressLocality: city.name,
-      addressRegion: getRegionForCity(city.name),
-      addressCountry: "MA",
-      postalCode: getPostalCodeForCity(city.name)
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: getCityCoordinates(city.name).lat,
-      longitude: getCityCoordinates(city.name).lng
-    },
+    return {
+      "@context": "https://schema.org",
+      "@type": ["LocalBusiness", "EmergencyService", "MedicalBusiness"],
+      "@id": url,
+      name: `Ambulance ${city.name} – Intervention 24/7`,
+      alternateName: `Service ambulance ${city.name}`,
+      description: `Service d'ambulance professionnelle à ${city.name} avec intervention 24h/24 et 7j/7. Équipe médicale qualifiée, véhicules équipés.`,
+      image: [image],
+      logo: `${SITE_URL}/lovable-uploads/63bee4de-b62b-41e3-82a0-f4e71697ea78.png`,
+      url,
+      telephone: "+212777722311",
+      faxNumber: "+212777722312", 
+      email: "contact@ambulance-maroc.ma",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: `Centre médical ${city.name}`,
+        addressLocality: city.name,
+        addressRegion: region,
+        addressCountry: "MA",
+        postalCode: postalCode
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: coordinates.lat,
+        longitude: coordinates.lng
+      },
     areaServed: [
       {
         "@type": "City",
@@ -147,6 +151,10 @@ export function generateLocalBusinessSchema(city: City): Record<string, any> {
       worstRating: "4"
     }
   };
+  } catch (error) {
+    console.error('Error generating LocalBusiness schema:', error);
+    return {};
+  }
 }
 
 // Helper functions for geo data
@@ -202,31 +210,36 @@ function getPostalCodeForCity(cityName: string): string {
  * Generate Service JSON-LD schema
  */
 export function generateServiceSchema(city: City): Record<string, any> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `${SITE_URL}/ambulance-${city.slug}#service`,
-    name: `Service d'ambulance à ${city.name}`,
-    description: `Transport médicalisé d'urgence et programmé à ${city.name}. Intervention 24h/24, équipe médicale qualifiée.`,
-    provider: {
-      "@type": "LocalBusiness",
-      name: `Ambulance ${city.name}`,
-      "@id": `${SITE_URL}/ambulance-${city.slug}`
-    },
-    areaServed: `${city.name}, Maroc`,
-    serviceType: "Transport médicalisé",
-    availableChannel: {
-      "@type": "ServiceChannel",
-      servicePhone: "+212777722311",
-      availableLanguage: ["French", "Arabic"]
-    },
-    hoursAvailable: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "00:00",
-      closes: "23:59"
-    }
-  };
+  try {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${SITE_URL}/ambulance-${city.slug}#service`,
+      name: `Service d'ambulance à ${city.name}`,
+      description: `Transport médicalisé d'urgence et programmé à ${city.name}. Intervention 24h/24, équipe médicale qualifiée.`,
+      provider: {
+        "@type": "LocalBusiness",
+        name: `Ambulance ${city.name}`,
+        "@id": `${SITE_URL}/ambulance-${city.slug}`
+      },
+      areaServed: `${city.name}, Maroc`,
+      serviceType: "Transport médicalisé",
+      availableChannel: {
+        "@type": "ServiceChannel",
+        servicePhone: "+212777722311",
+        availableLanguage: ["French", "Arabic"]
+      },
+      hoursAvailable: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "00:00",
+        closes: "23:59"
+      }
+    };
+  } catch (error) {
+    console.error('Error generating Service schema:', error);
+    return {};
+  }
 }
 
 /**

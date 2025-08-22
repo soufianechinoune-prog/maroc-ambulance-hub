@@ -463,15 +463,30 @@ const CityPage = () => {
     ? "Ambulance Rabat Yacoub El Mansour – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
-  // Rich structured data schemas
-  const localBusinessSchema = city ? generateLocalBusinessSchema(city) : undefined;
-  const serviceSchema = city ? generateServiceSchema(city) : undefined;
-  const faqSchema = generateFAQSchema();
-  
+  // Rich structured data schemas - with error handling
   const jsonLdArray: Record<string, any>[] = [];
-  if (localBusinessSchema) jsonLdArray.push(localBusinessSchema);
-  if (serviceSchema) jsonLdArray.push(serviceSchema);
-  jsonLdArray.push(faqSchema);
+  
+  try {
+    if (city) {
+      const localBusinessSchema = generateLocalBusinessSchema(city);
+      const serviceSchema = generateServiceSchema(city);
+      
+      // Only add schemas if they're valid (not empty objects)
+      if (Object.keys(localBusinessSchema).length > 0) {
+        jsonLdArray.push(localBusinessSchema);
+      }
+      if (Object.keys(serviceSchema).length > 0) {
+        jsonLdArray.push(serviceSchema);
+      }
+    }
+    
+    const faqSchema = generateFAQSchema();
+    if (Object.keys(faqSchema).length > 0) {
+      jsonLdArray.push(faqSchema);
+    }
+  } catch (error) {
+    console.error('Error generating schemas for city page:', error);
+  }
 
 
   if (!city) {

@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import SmartBreadcrumb from "@/components/SmartBreadcrumb";
 import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, MapPin, Clock, ShieldCheck, Users } from "lucide-react";
 import CityGrid, { mainCitySlugs } from "@/components/CityGrid";
 
@@ -23,7 +22,7 @@ import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 const Index = () => {
   // SEO
   const title = "Ambulance au Maroc — Intervention 24h/24 & 7j/7 | Ambulance Maroc";
-  const description = "Besoin d’une ambulance en urgence ou d’un transport médicalisé au Maroc ? Intervention 24h/24 et 7j/7, prise en charge rapide, coordination hôpitaux et cliniques. Appelez +212 7777 223 11.";
+  const description = "Besoin d'une ambulance en urgence ou d'un transport médicalisé au Maroc ? Intervention 24h/24 et 7j/7, prise en charge rapide, coordination hôpitaux et cliniques. Appelez +212 7777 223 11.";
   const canonical = "/";
   const seoImage = "/default-seo-image.jpg";
 
@@ -52,45 +51,6 @@ const Index = () => {
     provider: { "@type": "Organization", name: "Ambulance Maroc", url: SITE_URL },
   };
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Comment appeler une ambulance au Maroc ?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Appelez le +212 777 722 311 ou contactez-nous sur WhatsApp. Notre centre d'appel est opérationnel 24/7 pour une prise en charge immédiate."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "En combien de temps arrive l’ambulance ?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Selon la localisation, nous visons en moyenne moins de 15 minutes dans les grandes villes. Nos équipes sont mobilisées 24/7."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Quels sont les tarifs d’un transport médicalisé ?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Le tarif dépend de la distance, du matériel requis et du niveau d’assistance. Un devis clair et transparent est fourni avant intervention."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Peut-on réserver une ambulance privée ?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Oui, l'ambulance privée est disponible sur réservation pour transferts programmés, consultations spécialisées et inter-hôpitaux."
-        }
-      }
-    ]
-  };
-
   const jsonLdMultiple = [org, website, service];
 
   // Cities split
@@ -104,7 +64,7 @@ const Index = () => {
         title="Ambulance au Maroc – Urgences 24h/24 | Ambulance privée & transport médicalisé"
         description="Service d'ambulance au Maroc disponible 24h/24 et 7j/7. Intervention rapide, ambulance privée, urgences médicales et transport médicalisé dans toutes les grandes villes."
         canonical="https://www.ambulance-privee.ma/"
-        jsonLdMultiple={[...(jsonLdMultiple || []), faqJsonLd]}
+        jsonLdMultiple={jsonLdMultiple}
       />
       <Header />
       <SmartBreadcrumb />
@@ -208,9 +168,9 @@ const Index = () => {
             <ShieldCheck className="h-4 w-4 text-primary" />
             <span>Service certifié • Assistance 24/7</span>
           </div>
-          <h2 className="text-2xl font-semibold">Service d’ambulance au Maroc – Rapidité et professionnalisme</h2>
+          <h2 className="text-2xl font-semibold">Service d'ambulance au Maroc – Rapidité et professionnalisme</h2>
           <p>
-            Besoin d’une <strong>ambulance</strong> au <strong>Maroc</strong> maintenant ? Nous intervenons
+            Besoin d'une <strong>ambulance</strong> au <strong>Maroc</strong> maintenant ? Nous intervenons
             <strong> 24h/24 et 7j/7</strong> avec des équipes qualifiées et une flotte équipée pour toute <strong>urgence médicale</strong>.
           </p>
 
@@ -269,7 +229,7 @@ const Index = () => {
         <section className="py-16" role="region" aria-labelledby="intro-heading">
           <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-center">
             <div>
-              <h2 id="intro-heading" className="text-2xl md:text-3xl font-semibold text-foreground">Service d’ambulance national</h2>
+              <h2 id="intro-heading" className="text-2xl md:text-3xl font-semibold text-foreground">Service d'ambulance national</h2>
               <ul className="mt-6 space-y-3 text-muted-foreground">
                 <li className="flex items-start"><Clock className="h-5 w-5 text-success mt-0.5 mr-3" />Réponse en 8–15 min en zone urbaine</li>
                 <li className="flex items-start"><ShieldCheck className="h-5 w-5 text-primary mt-0.5 mr-3" />Coordination cliniques & hôpitaux</li>
@@ -301,7 +261,7 @@ const Index = () => {
             </div>
 
             <div className="text-center mt-4">
-              <a href="/zones-d-intervention" className="underline">Voir toutes nos zones d’intervention</a>
+              <a href="/zones-d-intervention" className="underline">Voir toutes nos zones d'intervention</a>
             </div>
             {/* Autres villes couvertes */}
             {otherCities.length > 0 && (
@@ -324,16 +284,10 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Bloc SEO national avec liens d'autorité */}
-        <NationalSeoBlock />
-        
-        {/* Liens d'autorité médicale */}
-        <div className="container mx-auto px-4 py-8">
-          <AuthorityLinks 
-            variant="medical" 
-            context="Découvrez les institutions officielles de santé du Maroc et les références réglementaires en matière de transport sanitaire."
-          />
-        </div>
+        {/* Bloc SEO national */}
+        <section className="bg-card py-16" role="region" aria-labelledby="seo-heading">
+          <NationalSeoBlock />
+        </section>
 
         {/* Réassurance */}
         <ReassuranceSection />
@@ -343,7 +297,7 @@ const Index = () => {
         {/* Témoignages avec structured data */}
         <TestimonialsSection withStructuredData={true} />
         
-        {/* FAQ pour featured snippets */}
+        {/* FAQ pour featured snippets - EmergencyFAQ composant avec structured data */}
         <EmergencyFAQ withStructuredData={true} variant="general" />
 
         {/* CTA urgence bande rouge */}
@@ -354,29 +308,32 @@ const Index = () => {
               <Button variant="emergency" asChild>
                 <CallButton aria-label="Appeler +212 7777 223 11" phone="+212777722311">Appeler</CallButton>
               </Button>
-               <Button variant="success" asChild>
-                 <WhatsAppButton phone="+212777722311" aria-label="Ouvrir WhatsApp direct" utm="utm_source=site&utm_medium=whatsapp&utm_campaign=cta_principal">WhatsApp</WhatsAppButton>
-               </Button>
+              <Button variant="success" asChild>
+                <WhatsAppButton phone="+212777722311" aria-label="Ouvrir WhatsApp direct" utm="utm_source=site&utm_medium=whatsapp&utm_campaign=cta_principal">WhatsApp</WhatsAppButton>
+              </Button>
             </div>
           </div>
         </section>
 
-        {/* Formulaire ancré */}
-        <ContactForm />
-
-        {/* Maillage interne */}
-        <section className="py-16" role="region" aria-labelledby="popular-pages-heading">
+        {/* Form contact pour les demandes non urgentes */}
+        <section id="demande-ambulance" className="py-16 bg-muted/50" role="region" aria-labelledby="demande-heading">
           <div className="container mx-auto px-4">
-            <h2 id="popular-pages-heading" className="text-2xl md:text-3xl font-semibold text-foreground">Pages populaires</h2>
-            <nav className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" aria-label="Pages populaires">
-              {[
-                { name: "Casablanca", slug: "casablanca" },
-                { name: "Rabat", slug: "rabat" },
-                { name: "Marrakech", slug: "marrakech" },
-                { name: "Tanger", slug: "tanger" },
-                { name: "Fès", slug: "fes" },
-                { name: "Oujda", slug: "oujda" },
-              ].map((c) => (
+            <div className="max-w-4xl mx-auto">
+              <h2 id="demande-heading" className="text-2xl md:text-3xl font-semibold text-foreground">Demande d'ambulance non urgente</h2>
+              <p className="text-lg text-muted-foreground mt-4 mb-8">
+                Pour les transports programmés, consultations ou autres besoins non urgents
+              </p>
+              <ContactForm />
+            </div>
+          </div>
+        </section>
+
+        {/* Navigation autres villes */}
+        <section className="py-10" role="region" aria-labelledby="nav-autres-heading">
+          <div className="container mx-auto px-4">
+            <h3 id="nav-autres-heading" className="sr-only">Navigation - Autres villes</h3>
+            <nav className="flex flex-wrap gap-2 justify-center" aria-label="Autres villes importantes">
+              {otherCities.slice(0, 10).map((c) => (
                 <a 
                   key={c.slug}
                   href={`/ambulance-${c.slug}`}
@@ -389,43 +346,6 @@ const Index = () => {
             </nav>
           </div>
         </section>
-        <section className="max-w-[800px] mx-auto px-4 py-10">
-          <h2 className="text-2xl font-semibold mb-4">Questions fréquentes sur nos services d’ambulance au Maroc</h2>
-          <Accordion type="single" collapsible className="w-full space-y-2 mt-4">
-            <AccordionItem value="item-1">
-              <AccordionTrigger><h3 className="text-left text-base md:text-lg font-medium">Comment appeler une ambulance au Maroc ?</h3></AccordionTrigger>
-              <AccordionContent>
-                Contactez-nous au <strong>+212 777 722 311</strong> ou sur WhatsApp. Centre d’appel disponible 24/7.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger><h3 className="text-left text-base md:text-lg font-medium">En combien de temps arrive l’ambulance ?</h3></AccordionTrigger>
-              <AccordionContent>
-                Nous visons en moyenne <strong>moins de 15 minutes</strong> dans les grandes villes, selon la localisation et le trafic.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger><h3 className="text-left text-base md:text-lg font-medium">Quels sont les tarifs d’un transport médicalisé ?</h3></AccordionTrigger>
-              <AccordionContent>
-                Selon distance, équipements et assistance nécessaire. Un devis clair est fourni avant toute intervention.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-4">
-              <AccordionTrigger><h3 className="text-left text-base md:text-lg font-medium">Peut-on réserver une ambulance privée ?</h3></AccordionTrigger>
-              <AccordionContent>
-                Oui, sur réservation pour transferts programmés, consultations spécialisées et inter-hôpitaux.
-              </AccordionContent>
-            </AccordionItem>
-           </Accordion>
-           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-             <Button variant="emergency" asChild>
-               <CallButton aria-label="Appeler +212 7777 223 11" phone="+212777722311">Appeler maintenant</CallButton>
-             </Button>
-             <Button variant="success" asChild>
-               <WhatsAppButton phone="+212777722311" aria-label="Ouvrir WhatsApp direct" utm="utm_source=site&utm_medium=whatsapp&utm_campaign=cta_principal">WhatsApp direct</WhatsAppButton>
-             </Button>
-           </div>
-         </section>
       </main>
 
       <Footer />

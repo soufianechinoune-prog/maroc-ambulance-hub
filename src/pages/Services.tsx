@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Ambulance, Clock, Users, Shield, Phone, MessageCircle, Search, Network, Star, CheckCircle } from "lucide-react";
 import { useHashScroll } from "@/hooks/useHashScroll";
+import EmergencyFAQ from "@/components/EmergencyFAQ";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 
 const Services = () => {
@@ -316,73 +317,8 @@ const Services = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-            Questions Fréquentes
-          </h2>
-          <div className="space-y-6">
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                En combien de temps intervenez-vous ?
-              </h3>
-              <p className="text-gray-700">
-                Temps de réponse moyen 8–20 minutes selon la ville.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Pouvez-vous assurer un transfert inter-hôpitaux ?
-              </h3>
-              <p className="text-gray-700">
-                Oui, avec personnel qualifié et matériel adapté.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Couvrez-vous les événements ?
-              </h3>
-              <p className="text-gray-700">
-                Oui, équipes dédiées et protocole d'évacuation.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <script type="application/ld+json" dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "En combien de temps intervenez-vous ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Temps de réponse moyen 8–20 minutes selon la ville."
-              }
-            },
-            {
-              "@type": "Question", 
-              "name": "Pouvez-vous assurer un transfert inter-hôpitaux ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Oui, avec personnel qualifié et matériel adapté."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Couvrez-vous les événements ?", 
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Oui, équipes dédiées et protocole d'évacuation."
-              }
-            }
-          ]
-        })
-      }} />
+      {/* FAQ avec EmergencyFAQ component (structured data) - remplace la FAQ manuelle */}
+      <EmergencyFAQ withStructuredData={true} variant="transport" />
 
       <Footer />
     </div>

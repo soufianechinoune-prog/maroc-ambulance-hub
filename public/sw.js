@@ -2,11 +2,7 @@ const CACHE_NAME = 'ambulance-maroc-v1.1.0';
 const STATIC_ASSETS = [
   '/',
   '/default-seo-image.jpg',
-  '/manifest.json',
-  // Critical WebP images
-  '/src/assets/ambulance-hero-optimized.webp',
-  '/src/assets/medical-team-optimized.webp',
-  '/src/assets/logo-optimized.webp'
+  '/manifest.json'
 ];
 
 const CACHE_STRATEGIES = {

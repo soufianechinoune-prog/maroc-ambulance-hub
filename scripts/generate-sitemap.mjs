@@ -72,38 +72,74 @@ blogCityUrls.forEach(url => urlModDates.set(url, lastWeek));
 const urls = [...baseUrls, ...cityUrls, ...blogCityUrls, ...blogArticleUrls];
 
 const toUrlXml = (u) => {
-  let priority = 0.8;
-  let changefreq = "daily";
+  let priority = 0.6; // Default priority lowered
+  let changefreq = "monthly";
   
   // Get the real modification date for this URL
   const lastmod = urlModDates.get(u) || today;
 
-  // Home
+  // Home page - maximum priority
   if (u === `${site}/`) {
     priority = 1.0;
+    changefreq = "daily";
+  }
+  
+  // Services page - very high priority (business critical)
+  else if (u.includes("/services")) {
+    priority = 0.9;
+    changefreq = "weekly";
+  }
+  
+  // Main city pages - high priority (business targets)
+  else if (u.includes("/ambulance-") && !u.includes("/blog/")) {
+    const citySlug = u.split("/ambulance-")[1];
+    // Major cities get higher priority
+    if (["casablanca", "rabat", "marrakech", "tanger", "fes", "agadir"].includes(citySlug)) {
+      priority = 0.8;
+    } else {
+      priority = 0.7;
+    }
+    changefreq = "weekly";
+  }
+  
+  // Zones page - important for business
+  else if (u.includes("/zones-d-intervention")) {
+    priority = 0.8;
+    changefreq = "weekly";
+  }
+  
+  // Contact page - important conversion page
+  else if (u.includes("/contact")) {
+    priority = 0.8;
+    changefreq = "monthly";
   }
 
-  // Legal pages
-  if (
+  // Blog index - content hub
+  else if (u === `${site}/blog`) {
+    priority = 0.7;
+    changefreq = "weekly";
+  }
+
+  // Blog categories by city - moderate priority
+  else if (u.includes("/blog/ambulance-")) {
+    priority = 0.5;
+    changefreq = "weekly";
+  }
+
+  // Blog articles - content priority
+  else if (u.includes("/blog/") && u !== `${site}/blog`) {
+    priority = 0.6;
+    changefreq = "monthly";
+  }
+
+  // Legal pages - low priority
+  else if (
     u.includes("/mentions-legales") ||
     u.includes("/politique-confidentialite") ||
     u.includes("/conditions-generales-utilisation")
   ) {
     priority = 0.3;
     changefreq = "yearly";
-  }
-
-  // Blog categories by city
-  if (u.includes("/blog/ambulance-")) {
-    priority = 0.4;
-    changefreq = "weekly";
-  }
-
-  // Blog articles (city or general)
-  const isBlogArticle = /\/blog\/(?!villes\/|ambulance-).+/.test(u) && u !== `${site}/blog`;
-  if (isBlogArticle) {
-    priority = 0.5;
-    changefreq = "weekly";
   }
 
   return `<url><loc>${u}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;

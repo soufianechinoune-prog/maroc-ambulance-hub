@@ -9,7 +9,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactForm from "@/components/ContactForm";
 import SEO from "@/components/SEO";
 import SmartBreadcrumb from "@/components/SmartBreadcrumb";
-import { generateLocalBusinessSchema, generateServiceSchema, generateFAQSchema } from "@/lib/schema";
+// import { generateLocalBusinessSchema, generateServiceSchema, generateFAQSchema } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, Zap } from "lucide-react";
@@ -463,30 +463,30 @@ const CityPage = () => {
     ? "Ambulance Rabat Yacoub El Mansour – Intervention 24/7"
     : `Ambulance à ${city?.name} – Intervention 24/7`;
 
-  // Rich structured data schemas - with error handling
-  const jsonLdArray: Record<string, any>[] = [];
+  // Rich structured data schemas - TEMPORARILY DISABLED
+  // const jsonLdArray: Record<string, any>[] = [];
   
-  try {
-    if (city) {
-      const localBusinessSchema = generateLocalBusinessSchema(city);
-      const serviceSchema = generateServiceSchema(city);
-      
-      // Only add schemas if they're valid (not empty objects)
-      if (Object.keys(localBusinessSchema).length > 0) {
-        jsonLdArray.push(localBusinessSchema);
-      }
-      if (Object.keys(serviceSchema).length > 0) {
-        jsonLdArray.push(serviceSchema);
-      }
-    }
-    
-    const faqSchema = generateFAQSchema();
-    if (Object.keys(faqSchema).length > 0) {
-      jsonLdArray.push(faqSchema);
-    }
-  } catch (error) {
-    console.error('Error generating schemas for city page:', error);
-  }
+  // try {
+  //   if (city) {
+  //     const localBusinessSchema = generateLocalBusinessSchema(city);
+  //     const serviceSchema = generateServiceSchema(city);
+  //     
+  //     // Only add schemas if they're valid (not empty objects)
+  //     if (Object.keys(localBusinessSchema).length > 0) {
+  //       jsonLdArray.push(localBusinessSchema);
+  //     }
+  //     if (Object.keys(serviceSchema).length > 0) {
+  //       jsonLdArray.push(serviceSchema);
+  //     }
+  //   }
+  //   
+  //   const faqSchema = generateFAQSchema();
+  //   if (Object.keys(faqSchema).length > 0) {
+  //     jsonLdArray.push(faqSchema);
+  //   }
+  // } catch (error) {
+  //   console.error('Error generating schemas for city page:', error);
+  // }
 
 
   if (!city) {
@@ -512,7 +512,7 @@ const CityPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title={title} description={description} canonical={canonical} jsonLdMultiple={jsonLdArray} keywords={keywords} />
+      <SEO title={title} description={description} canonical={canonical} keywords={keywords} />
       <Header city={city.name} />
       
       {/* Hero Section optimisé par quartier */}

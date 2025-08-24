@@ -73,9 +73,9 @@ export function generateLocalBusinessSchema(city: City): Record<string, any> {
     foundingLocation: `${city.name}, Maroc`,
     numberOfEmployees: "25-50",
     sameAs: [
-      "https://www.facebook.com/ambulancemaroc",
-      "https://www.instagram.com/ambulancemaroc",
-      "https://twitter.com/ambulancemaroc"
+      "https://www.facebook.com/ambulanceprivee",
+      "https://www.instagram.com/ambulanceprivee",
+      "https://twitter.com/ambulanceprivee"
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",

@@ -54,3 +54,7 @@
 /ambulance-casablanca-ain-choc /ambulance-casablanca 301!
 /ambulance-casablanca-derb-sultan /ambulance-casablanca 301!
 
+# SPA fallback - ESSENTIEL pour React Router
+# Toutes les routes qui ne matchent pas un fichier physique sont servies par index.html
+/* /index.html 200
+

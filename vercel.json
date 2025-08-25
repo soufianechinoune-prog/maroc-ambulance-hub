@@ -1,12 +1,18 @@
 {
-  "version": 2,
-  "routes": [
+  "redirects": [
     {
-      "src": "/:path*",
-      "dest": "https://www.ambulance-privee.ma/:path*",
-      "status": 308,
-      "headers": { "host": "ambulance-privee.ma" }
-    },
-    { "src": "/(.*)", "dest": "/index.html" }
+      "source": "/(.*)",
+      "destination": "https://www.ambulance-privee.ma/$1",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "ambulance-privee.ma" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

@@ -9,6 +9,12 @@
       ]
     }
   ],
+  "rewrites": [
+    {
+      "source": "/((?!api|_next/static|_next/image|favicon.ico|sw.js|sitemap.xml|robots.txt|manifest.json|images/).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/:path*",

@@ -21,6 +21,7 @@ const RabatPage = () => {
     name: "",
     service: "",
     city: "Rabat",
+    datetime: "",
     details: ""
   });
 
@@ -67,6 +68,22 @@ const RabatPage = () => {
   };
   
   const jsonLdMultiple = [
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalBusiness",
+      "name": "Ambulance Privée Maroc – Rabat",
+      "url": canonical,
+      "telephone": "+212777722311",
+      "areaServed": ["Rabat","Salé","Témara","Skhirat","Harhoura"],
+      "address": { 
+        "@type": "PostalAddress", 
+        "addressLocality": "Rabat", 
+        "addressCountry": "MA" 
+      },
+      "openingHours": "Mo-Su 00:00-23:59",
+      "image": `${SITE_URL}/images/ambulance-hero-rabat.jpg`,
+      "sameAs": []
+    },
     {
       "@context": "https://schema.org",
       "@type": "EmergencyService",
@@ -214,21 +231,21 @@ const RabatPage = () => {
                   Intervention rapide pour urgences et transferts médicalisés.
                 </p>
                 
-                {/* Badges de confiance */}
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle className="h-5 w-5 text-success" />
+                {/* Badges de confiance en liste UL avec aria-label */}
+                <ul className="space-y-3 mb-8" role="list" aria-label="Badges de confiance et certifications">
+                  <li className="flex items-center gap-2 text-sm">
+                    <CheckCircle className="h-5 w-5 text-success" aria-hidden="true" />
                     <span>✅ Agréé Ministère de la Santé</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Star className="h-5 w-5 text-primary" />
+                  </li>
+                  <li className="flex items-center gap-2 text-sm">
+                    <Star className="h-5 w-5 text-primary" aria-hidden="true" />
                     <span>⭐ 4.9/5 basé sur +5000 interventions</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Timer className="h-5 w-5 text-primary" />
+                  </li>
+                  <li className="flex items-center gap-2 text-sm">
+                    <Timer className="h-5 w-5 text-primary" aria-hidden="true" />
                     <span>⏱ Temps moyen d'intervention à Rabat : 12–15 min</span>
-                  </div>
-                </div>
+                  </li>
+                </ul>
                 
                 {/* CTA groupés */}
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -236,6 +253,8 @@ const RabatPage = () => {
                     phone="+212777722311"
                     onClick={handleCallClick}
                     className="bg-emergency hover:bg-emergency-hover text-emergency-foreground px-8 py-4 text-lg font-semibold rounded-lg flex items-center justify-center gap-2"
+                    aria-label="Appeler ambulance Rabat maintenant"
+                    data-analytics="cta_call_rabat_hero"
                   >
                     <Phone className="h-5 w-5" />
                     Appeler maintenant
@@ -245,6 +264,8 @@ const RabatPage = () => {
                     text="Urgence ambulance Rabat - Intervention immédiate demandée"
                     onClick={handleWhatsAppClick}
                     className="bg-success hover:bg-success/90 text-success-foreground px-8 py-4 text-lg font-semibold rounded-lg flex items-center justify-center gap-2"
+                    aria-label="Contacter WhatsApp ambulance Rabat"
+                    data-analytics="cta_wa_rabat_hero"
                   >
                     <MessageCircle className="h-5 w-5" />
                     WhatsApp immédiat
@@ -252,13 +273,15 @@ const RabatPage = () => {
                 </div>
               </div>
               
-              {/* Colonne droite - Image */}
+              {/* Colonne droite - Image - Hero avec loading="eager" */}
               <div className="relative">
                 <img 
                   src="/images/ambulance-hero-rabat.jpg" 
-                  alt="Ambulance à Rabat – équipe médicale"
+                  alt="Ambulance privée à Rabat devant un établissement de santé"
                   className="w-full h-96 object-cover rounded-xl shadow-lg"
-                  loading="lazy"
+                  loading="eager"
+                  width="600"
+                  height="384"
                   onError={(e) => {
                     e.currentTarget.src = "/lovable-uploads/30143fda-0279-47a1-a749-2f87bda36d98.png";
                   }}
@@ -402,6 +425,34 @@ const RabatPage = () => {
             </div>
           </section>
 
+          {/* CTA de section après Services */}
+          <div className="mb-12 text-center p-6 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border">
+            <h3 className="text-xl font-semibold text-foreground mb-4">Besoin d'une intervention à Rabat ?</h3>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <CallButton
+                phone="+212777722311"
+                onClick={() => track('cta_call_section_services', { city: 'Rabat' })}
+                className="bg-emergency hover:bg-emergency-hover text-emergency-foreground px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2"
+                aria-label="Appeler ambulance Rabat depuis section services"
+                data-analytics="cta_call_rabat_services"
+              >
+                <Phone className="h-4 w-4" />
+                Appeler
+              </CallButton>
+              <WhatsAppButton
+                phone="+212777722311"
+                text="Demande ambulance Rabat - Services médicalisés"
+                onClick={() => track('cta_whatsapp_section_services', { city: 'Rabat' })}
+                className="bg-success hover:bg-success/90 text-success-foreground px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2"
+                aria-label="Contacter WhatsApp ambulance Rabat depuis section services"
+                data-analytics="cta_wa_rabat_services"
+              >
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp
+              </WhatsAppButton>
+            </div>
+          </div>
+
           {/* Zones couvertes avec carte statique */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-8 flex items-center gap-3">
@@ -478,6 +529,34 @@ const RabatPage = () => {
               </Card>
             </div>
           </section>
+
+          {/* CTA de section après Zones couvertes */}
+          <div className="mb-12 text-center p-6 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border">
+            <h3 className="text-xl font-semibold text-foreground mb-4">Besoin d'une intervention à Rabat ?</h3>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <CallButton
+                phone="+212777722311"
+                onClick={() => track('cta_call_section_zones', { city: 'Rabat' })}
+                className="bg-emergency hover:bg-emergency-hover text-emergency-foreground px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2"
+                aria-label="Appeler ambulance Rabat depuis section zones"
+                data-analytics="cta_call_rabat_zones"
+              >
+                <Phone className="h-4 w-4" />
+                Appeler
+              </CallButton>
+              <WhatsAppButton
+                phone="+212777722311"
+                text="Demande ambulance Rabat - Couverture zones"
+                onClick={() => track('cta_whatsapp_section_zones', { city: 'Rabat' })}
+                className="bg-success hover:bg-success/90 text-success-foreground px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2"
+                aria-label="Contacter WhatsApp ambulance Rabat depuis section zones"
+                data-analytics="cta_wa_rabat_zones"
+              >
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp
+              </WhatsAppButton>
+            </div>
+          </div>
 
           {/* Équipe médicale avec photos */}
           <section className="mb-12">
@@ -670,6 +749,19 @@ const RabatPage = () => {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Note globale */}
+            <div className="mt-8 text-center p-6 bg-primary/5 rounded-lg border">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <span className="text-2xl font-bold text-foreground">4.9/5</span> 
+              </div>
+              <p className="text-muted-foreground">Basé sur plus de 500 avis clients à Rabat</p>
+            </div>
           </section>
 
           {/* Témoignages en grille (plus de carrousel) */}
@@ -810,6 +902,34 @@ const RabatPage = () => {
             </div>
           </section>
 
+          {/* CTA de section après FAQ */}
+          <div className="mb-12 text-center p-6 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border">
+            <h3 className="text-xl font-semibold text-foreground mb-4">Besoin d'une intervention à Rabat ?</h3>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <CallButton
+                phone="+212777722311"
+                onClick={() => track('cta_call_section_faq', { city: 'Rabat' })}
+                className="bg-emergency hover:bg-emergency-hover text-emergency-foreground px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2"
+                aria-label="Appeler ambulance Rabat depuis section FAQ"
+                data-analytics="cta_call_rabat_faq"
+              >
+                <Phone className="h-4 w-4" />
+                Appeler
+              </CallButton>
+              <WhatsAppButton
+                phone="+212777722311"
+                text="Demande ambulance Rabat - Questions / réponses"
+                onClick={() => track('cta_whatsapp_section_faq', { city: 'Rabat' })}
+                className="bg-success hover:bg-success/90 text-success-foreground px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2"
+                aria-label="Contacter WhatsApp ambulance Rabat depuis section FAQ"
+                data-analytics="cta_wa_rabat_faq"
+              >
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp
+              </WhatsAppButton>
+            </div>
+          </div>
+
           {/* Contact urgent restructuré */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-8 flex items-center gap-3">
@@ -871,10 +991,15 @@ const RabatPage = () => {
                       <Input 
                         id="phone"
                         type="tel"
+                        inputMode="tel"
+                        pattern="^(\+212|0)(6|7)\d{8}$"
                         placeholder="+212 6XX XXX XXX"
                         value={formData.phone}
                         onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                        autoComplete="tel"
+                        aria-required="true"
                         required
+                        autoFocus
                       />
                     </div>
                     
@@ -886,20 +1011,21 @@ const RabatPage = () => {
                         placeholder="Votre nom et prénom"
                         value={formData.name}
                         onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                        autoComplete="name"
                       />
                     </div>
                     
                     <div>
-                      <Label htmlFor="service">Type de service</Label>
+                      <Label htmlFor="service">Type de service *</Label>
                       <Select value={formData.service} onValueChange={(value) => setFormData(prev => ({ ...prev, service: value }))}>
-                        <SelectTrigger>
+                        <SelectTrigger aria-required="true">
                           <SelectValue placeholder="Sélectionnez un service" />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="urgence-non-vitale">Urgence non vitale</SelectItem>
                           <SelectItem value="transfert">Transfert inter-hôpitaux</SelectItem>
-                          <SelectItem value="longue-distance">Transport longue distance</SelectItem>
-                          <SelectItem value="evenement">Couverture événement</SelectItem>
-                          <SelectItem value="autre">Autre demande</SelectItem>
+                          <SelectItem value="longue-distance">Longue distance</SelectItem>
+                          <SelectItem value="evenement">Événement</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -912,29 +1038,55 @@ const RabatPage = () => {
                         value={formData.city}
                         onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
                         disabled
+                        className="bg-muted"
                       />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="datetime">Date & heure souhaitées</Label>
+                      <Input 
+                        id="datetime"
+                        type="datetime-local"
+                        value={formData.datetime}
+                        onChange={(e) => setFormData(prev => ({ ...prev, datetime: e.target.value }))}
+                        min={new Date().toISOString().slice(0, 16)}
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Laissez vide pour "Dès que possible"
+                      </p>
                     </div>
                     
                     <div>
-                      <Label htmlFor="details">Détails de la demande</Label>
+                      <Label htmlFor="details">Détails de la demande *</Label>
                       <Textarea 
                         id="details"
-                        placeholder="Décrivez votre besoin, date souhaitée, destination..."
+                        placeholder="Ex: Transfert vers CHU Ibn Sina demain 09:00, fauteuil roulant requis"
                         value={formData.details}
                         onChange={(e) => setFormData(prev => ({ ...prev, details: e.target.value }))}
                         rows={3}
+                        aria-required="true"
+                        required
                       />
                     </div>
                     
-                    <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+                    <Button 
+                      type="submit" 
+                      className="w-full h-12 bg-primary hover:bg-primary/90"
+                      data-analytics="lead_submit_rabat"
+                    >
                       Être rappelé en 2–3 minutes
                     </Button>
                     
+                    <p className="text-xs text-muted-foreground text-center">
+                      ✅ Réponse sous 5 minutes • 🔒 Données protégées
+                    </p>
+                    
                     <p className="text-center text-sm text-muted-foreground">
-                      Ou <WhatsAppButton
+                      ou <WhatsAppButton
                         phone="+212777722311"
                         text="Demande d'information ambulance Rabat"
                         className="text-primary hover:underline font-medium inline"
+                        aria-label="Contacter sur WhatsApp pour demande non urgente"
                       >
                         contactez-nous sur WhatsApp
                       </WhatsAppButton>
@@ -966,13 +1118,15 @@ const RabatPage = () => {
           </div>
         </div>
 
-        {/* Sticky CTA Mobile amélioré */}
-        <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-sm border-t border-border shadow-lg p-3">
+        {/* Sticky CTA Mobile amélioré avec aria-label et h-12 */}
+        <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-sm border-t border-border shadow-lg p-3" role="navigation" aria-label="Actions rapides">
           <div className="flex gap-2">
             <CallButton
               phone="+212777722311"
               onClick={() => handleStickyClick('call')}
-              className="flex-1 bg-emergency hover:bg-emergency-hover text-emergency-foreground px-4 py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"
+              className="flex-1 h-12 bg-emergency hover:bg-emergency/90 text-emergency-foreground px-4 py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 border border-emergency/50"
+              aria-label="Appeler ambulance Rabat immédiatement"
+              data-analytics="cta_call_rabat_sticky"
             >
               <Phone className="h-4 w-4" />
               📞 Appeler
@@ -982,7 +1136,9 @@ const RabatPage = () => {
               phone="+212777722311"
               text="Urgence ambulance Rabat - Intervention immédiate demandée"
               onClick={() => handleStickyClick('whatsapp')}
-              className="flex-1 bg-success hover:bg-success/90 text-success-foreground px-4 py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"
+              className="flex-1 h-12 bg-success hover:bg-success/90 text-success-foreground px-4 py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 border border-success/50"
+              aria-label="Contacter WhatsApp ambulance Rabat immédiatement"
+              data-analytics="cta_wa_rabat_sticky"
             >
               <MessageCircle className="h-4 w-4" />
               💬 WhatsApp

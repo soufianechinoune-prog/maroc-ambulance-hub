@@ -1,38 +1,12 @@
 {
-  "redirects": [
+  "version": 2,
+  "routes": [
     {
-      "source": "/:path*",
-      "destination": "https://www.ambulance-privee.ma/:path*",
-      "permanent": true,
-      "has": [
-        { "type": "host", "value": "ambulance-privee.ma" }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/((?!api|_next/static|_next/image|favicon.ico|sw.js|sitemap.xml|robots.txt|manifest.json|images/).*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/:path*",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
+      "src": "/:path*",
+      "dest": "https://www.ambulance-privee.ma/:path*",
+      "status": 308,
+      "headers": { "host": "ambulance-privee.ma" }
     },
-    {
-      "source": "/sw.js",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/:all*.(css|js|woff2|png|jpg|jpeg|webp|gif|svg|ico)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    }
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }

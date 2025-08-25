@@ -96,7 +96,16 @@ const AppRoutes = () => (
     <Route path="/ambulance-marrakech-sidi-ghanem" element={<NeighborhoodSidiGhanem />} />
     <Route path="/ambulance-marrakech-palmeraie" element={<NeighborhoodPalmeraie />} />
 
-    {/* Route générique pour alias quartiers: /ambulance-:city-:district */}
+    {/* Routes spécifiques des villes AVANT la route générique */}
+    {cities.map((city) => (
+      <Route
+        key={city.slug}
+        path={`/ambulance-${city.slug}`}
+        element={city.slug === 'rabat' ? <RabatPage /> : <CityPage />}
+      />
+    ))}
+
+    {/* Route générique pour alias quartiers: /ambulance-:city-:district APRÈS les routes spécifiques */}
     <Route path="/ambulance-:city-:district" element={<CityPage />} />
 
 
@@ -115,14 +124,6 @@ const AppRoutes = () => (
     <Route path="/blog/oujda" element={<Suspense fallback={null}><BlogCategoryOujda /></Suspense>} />
     <Route path="/blog/:city/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
     <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
-
-    {cities.map((city) => (
-      <Route
-        key={city.slug}
-        path={`/ambulance-${city.slug}`}
-        element={city.slug === 'rabat' ? <RabatPage /> : <CityPage />}
-      />
-    ))}
 
     {/* Legacy zone route redirect */}
     <Route path="/zones" element={<Zones />} />

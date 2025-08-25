@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import SmartBreadcrumb from "@/components/SmartBreadcrumb";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, Zap, Hospital, Globe, Award } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, Zap, Hospital, Globe, Award, ChevronLeft, ChevronRight, AlertCircle, Calendar, ExternalLink } from "lucide-react";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
 import ContactForm from "@/components/ContactForm";
 import { SITE_URL } from "@/lib/config";
 
 const RabatPage = () => {
   const canonical = `${SITE_URL}/ambulance-rabat`;
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const testimonials = [
+    {
+      name: "Ahmed M.",
+      location: "Hay Riad, Rabat",
+      text: "Intervention rapide en 10 minutes à Hay Riad. Personnel très professionnel et équipement médical moderne. Service diplomatique impeccable.",
+      rating: 5
+    },
+    {
+      name: "Fatima L.",
+      location: "Agdal, Rabat", 
+      text: "Transport médicalisé parfait pour ma mère depuis l'hôpital Ibn Sina. Équipe bienveillante et véhicule très propre.",
+      rating: 5
+    },
+    {
+      name: "Dr. Karim B.",
+      location: "Souissi, Rabat",
+      text: "En tant que médecin, je recommande ce service. Matériel conforme aux normes, personnel qualifié. Excellent pour les urgences à Rabat.",
+      rating: 5
+    }
+  ];
   
   const jsonLdMultiple = [
     {
@@ -75,6 +97,22 @@ const RabatPage = () => {
             "@type": "Answer",
             "text": "Absolument. En tant que capitale diplomatique, nous proposons des services spécialisés pour les ambassades, consulats et institutions internationales avec personnel multilingue et protocoles adaptés."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Proposez-vous un service d'ambulance pour événements à Rabat ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, nous couvrons les événements officiels, conférences diplomatiques, manifestations publiques et rassemblements à Rabat avec des équipes médicales dédiées et du matériel d'urgence sur site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Intervenez-vous aussi dans la région Salé-Témara-Skhirat ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolument. Notre couverture s'étend à toute l'agglomération Rabat-Salé-Témara-Skhirat avec des temps d'intervention optimisés et une parfaite connaissance des axes routiers de la région."
+          }
         }
       ]
     }
@@ -83,8 +121,8 @@ const RabatPage = () => {
   return (
     <>
       <SEO
-        title="🚑 Ambulance privée à Rabat – Urgence 24h/24 & transport médicalisé"
-        description="Ambulance Rabat disponible 24h/24 pour urgences vitales. Intervention rapide dans tous quartiers, transferts CHU Ibn Sina, service diplomatique. ☎️ +212 7777 223 11"
+        title="Ambulance Rabat 24/7 – Urgences & Transport médicalisé privé"
+        description="Ambulance privée à Rabat disponible 24/7. Urgences, transferts inter-hôpitaux, diplomatiques et longue distance. Temps moyen 12 min."
         canonical={canonical}
         jsonLdMultiple={jsonLdMultiple}
         keywords={["ambulance Rabat", "ambulance privée Rabat", "transport médicalisé Rabat", "urgence ambulance Rabat", "ambulance 24h/24 Rabat", "CHU Ibn Sina", "ambulance Agdal", "ambulance Hassan", "ambulance Hay Riad", "ambulance Souissi"]}
@@ -95,16 +133,39 @@ const RabatPage = () => {
         <div className="container mx-auto px-4 py-8">
           <SmartBreadcrumb />
           
-          {/* H1 + Intro locale */}
-          <section className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 flex items-center justify-center gap-3">
-              🚑 Ambulance privée à Rabat – Urgence 24h/24 & transport médicalisé
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              En tant que capitale administrative du Maroc, Rabat requiert des services d'ambulance adaptés aux spécificités diplomatiques et institutionnelles. 
-              Notre équipe intervient 24h/24 dans toute l'agglomération Rabat-Salé-Témara pour répondre aux besoins urgents des résidents, 
-              diplomates et visiteurs internationaux avec un niveau de service exemplaire.
-            </p>
+          {/* Hero Section avec image de couverture */}
+          <section className="relative mb-12 rounded-xl overflow-hidden">
+            <div className="relative h-96 bg-gradient-to-r from-primary/20 to-primary/10 flex items-center justify-center">
+              <img 
+                src="/images/ambulance-hero-rabat.jpg" 
+                alt="Ambulance privée Rabat devant CHU Ibn Sina"
+                className="absolute inset-0 w-full h-full object-cover opacity-30"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+              <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+                  🚑 Ambulance privée à Rabat – Urgence 24h/24 & transport médicalisé
+                </h1>
+                <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                  En tant que capitale administrative du Maroc, Rabat requiert des services d'ambulance adaptés aux spécificités diplomatiques et institutionnelles. 
+                  Notre équipe intervient 24h/24 dans toute l'agglomération Rabat-Salé-Témara.
+                </p>
+                
+                {/* CTA Héro */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button size="lg" className="bg-emergency hover:bg-emergency-hover text-emergency-foreground px-8 py-4 text-lg font-semibold">
+                    <Phone className="mr-2 h-5 w-5" />
+                    📞 Urgence Immédiate
+                  </Button>
+                  <Button size="lg" className="bg-success hover:bg-success/90 text-success-foreground px-8 py-4 text-lg font-semibold">
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    💬 WhatsApp Direct
+                  </Button>
+                </div>
+              </div>
+            </div>
           </section>
 
           {/* Spécificités locales à Rabat */}
@@ -161,49 +222,83 @@ const RabatPage = () => {
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <Phone className="h-6 w-6 text-primary" />
-                  Urgences vitales 24h/24
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  Intervention d'urgence immédiate à Rabat pour toutes situations critiques. Nos ambulances équipées interviennent en moins de 15 minutes 
-                  dans les quartiers centraux de Rabat (Hassan, Agdal, Hay Riad, Souissi).
-                </p>
-              </div>
+              {/* Urgences vitales - Rouge pour urgence */}
+              <Card className="border-emergency/30 bg-emergency/5 hover:bg-emergency/10 transition-colors">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
+                    <AlertCircle className="h-6 w-6 text-emergency" />
+                    Urgences vitales 24h/24
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    Intervention d'urgence immédiate à Rabat pour toutes situations critiques. Nos ambulances équipées interviennent en moins de 15 minutes 
+                    dans les quartiers centraux de Rabat (Hassan, Agdal, Hay Riad, Souissi).
+                  </p>
+                  <Button className="bg-emergency hover:bg-emergency-hover text-emergency-foreground">
+                    <Phone className="mr-2 h-4 w-4" />
+                    Appel Urgence
+                  </Button>
+                </CardContent>
+              </Card>
 
-              <div>
-                <h3 className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <Hospital className="h-6 w-6 text-primary" />
-                  Transferts inter-hôpitaux Rabat
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  Transport médicalisé sécurisé entre les établissements de santé de Rabat : CHU Ibn Sina, Hôpital Cheikh Zaid, 
-                  Hôpital Avicenne, et Hôpital Militaire Mohamed V avec accompagnement médical spécialisé.
-                </p>
-              </div>
+              <Card className="border-primary/20 hover:border-primary/40 transition-colors">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
+                    <Hospital className="h-6 w-6 text-primary" />
+                    Transferts inter-hôpitaux Rabat
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    Transport médicalisé sécurisé entre les établissements de santé de Rabat : CHU Ibn Sina, Hôpital Cheikh Zaid, 
+                    Hôpital Avicenne, et Hôpital Militaire Mohamed V avec accompagnement médical spécialisé.
+                  </p>
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    <Hospital className="mr-2 h-4 w-4" />
+                    Planifier Transfert
+                  </Button>
+                </CardContent>
+              </Card>
 
-              <div>
-                <h3 className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <MapPin className="h-6 w-6 text-primary" />
-                  Transports longue distance depuis Rabat
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  Évacuations médicalisées de Rabat vers Casablanca, Fès, Marrakech et autres villes du Maroc. 
-                  Transport sécurisé avec équipe médicale dédiée pour les trajets longue distance.
-                </p>
-              </div>
+              <Card className="border-primary/20 hover:border-primary/40 transition-colors">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
+                    <MapPin className="h-6 w-6 text-primary" />
+                    Transports longue distance depuis Rabat
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    Évacuations médicalisées de Rabat vers <a href="/ambulance-casablanca" className="text-primary hover:underline font-medium">Casablanca</a>, Fès, Marrakech et autres villes du Maroc. 
+                    Transport sécurisé avec équipe médicale dédiée pour les trajets longue distance.
+                  </p>
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    <MapPin className="mr-2 h-4 w-4" />
+                    Devis Longue Distance
+                  </Button>
+                </CardContent>
+              </Card>
 
-              <div>
-                <h3 className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <Users className="h-6 w-6 text-primary" />
-                  Assistance événements officiels
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  Couverture médicale pour conférences internationales, manifestations officielles et événements diplomatiques 
-                  organisés dans la capitale Rabat avec équipes d'intervention dédiées.
-                </p>
-              </div>
+              {/* Assistance événements - Avec CTA WhatsApp vert */}
+              <Card className="border-success/30 bg-success/5 hover:bg-success/10 transition-colors">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
+                    <Calendar className="h-6 w-6 text-success" />
+                    Assistance événements officiels
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    Couverture médicale pour conférences internationales, manifestations officielles et événements diplomatiques 
+                    organisés dans la capitale Rabat avec équipes d'intervention dédiées.
+                  </p>
+                  <Button className="bg-success hover:bg-success/90 text-success-foreground">
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    WhatsApp Direct
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
           </section>
 
@@ -247,6 +342,32 @@ const RabatPage = () => {
                     <span className="bg-secondary/10 px-3 py-1 rounded-full text-sm">Bouknadel</span>
                     <span className="bg-secondary/10 px-3 py-1 rounded-full text-sm">Harhoura</span>
                     <span className="bg-secondary/10 px-3 py-1 rounded-full text-sm">Ain Atiq</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Mini carte Google Maps */}
+            <div className="mt-8">
+              <Card className="border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MapPin className="h-5 w-5 text-primary" />
+                    Zone d'intervention Rabat-Salé-Témara
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="w-full h-64 bg-muted rounded-lg flex items-center justify-center">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106673.9785120789!2d-6.906616199999999!3d34.020882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76b871f50c5c1%3A0x7ac946ed7408076b!2sRabat%2C%20Morocco!5e0!3m2!1sen!2s!4v1635000000000!5m2!1sen!2s"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="rounded-lg"
+                    ></iframe>
                   </div>
                 </CardContent>
               </Card>
@@ -363,64 +484,82 @@ const RabatPage = () => {
             </div>
           </section>
 
-          {/* Témoignages Rabat */}
+          {/* Témoignages Rabat - Carrousel */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-8 flex items-center gap-3">
               <Star className="h-8 w-8 text-primary" />
               Témoignages clients Rabat
             </h2>
             
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="border-primary/20">
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <CardTitle className="text-lg">Mme Fatima K. - Hay Riad</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    "Intervention très rapide à Hay Riad pour ma mère. L'équipe était professionnelle et rassurante. 
-                    Transport jusqu'au CHU Ibn Sina en 12 minutes. Service exemplaire à Rabat !"
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/20">
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <CardTitle className="text-lg">M. Ahmed B. - Agdal</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    "Transfert d'urgence depuis Agdal vers Casablanca parfaitement organisé. Personnel médical compétent, 
-                    véhicule bien équipé. Je recommande ce service d'ambulance à Rabat."
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/20">
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <CardTitle className="text-lg">Ambassade du Canada - Souissi</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    "Service diplomatique irréprochable lors d'une urgence médicale. Personnel multilingue, 
-                    discrétion assurée et protocole respecté. Partenaire de confiance à Rabat."
-                  </p>
-                </CardContent>
-              </Card>
+            {/* Carrousel */}
+            <div className="relative">
+              <div className="overflow-hidden">
+                <div 
+                  className="flex transition-transform duration-300 ease-in-out"
+                  style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
+                >
+                  {testimonials.map((testimonial, index) => (
+                    <div key={index} className="w-full flex-shrink-0 px-4">
+                      <Card className="border-primary/20 max-w-2xl mx-auto">
+                        <CardHeader>
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                              <Users className="h-6 w-6 text-primary" />
+                            </div>
+                            <div>
+                              <CardTitle className="text-lg">{testimonial.name}</CardTitle>
+                              <CardDescription>{testimonial.location}</CardDescription>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            {[...Array(testimonial.rating)].map((_, i) => (
+                              <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                            ))}
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-muted-foreground text-lg italic">
+                            "{testimonial.text}"
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Navigation carrousel */}
+              <div className="flex justify-center gap-4 mt-6">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setCurrentTestimonial(Math.max(0, currentTestimonial - 1))}
+                  disabled={currentTestimonial === 0}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Précédent
+                </Button>
+                <div className="flex items-center gap-2">
+                  {testimonials.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-colors ${
+                        index === currentTestimonial ? 'bg-primary' : 'bg-muted'
+                      }`}
+                      onClick={() => setCurrentTestimonial(index)}
+                    />
+                  ))}
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setCurrentTestimonial(Math.min(testimonials.length - 1, currentTestimonial + 1))}
+                  disabled={currentTestimonial === testimonials.length - 1}
+                >
+                  Suivant
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </section>
 
@@ -496,6 +635,45 @@ const RabatPage = () => {
                   </p>
                 </CardContent>
               </Card>
+              <Card className="border-primary/20">
+                <CardHeader>
+                  <h3 className="text-xl font-semibold">Proposez-vous un service d'ambulance pour événements à Rabat ?</h3>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">
+                    Oui, nous proposons une couverture médicale complète pour tous types d'événements à Rabat : conférences internationales, 
+                    manifestations diplomatiques, événements culturels et rassemblements publics. Nos équipes médicales se déploient sur site 
+                    avec matériel d'urgence adapté et ambulances de standby pour intervention immédiate si nécessaire.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-primary/20">
+                <CardHeader>
+                  <h3 className="text-xl font-semibold">Intervenez-vous aussi dans la région Salé-Témara-Skhirat ?</h3>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">
+                    Absolument. Notre couverture s'étend à toute l'agglomération Rabat-Salé-Témara-Skhirat. Nous disposons d'équipes dédiées 
+                    qui connaissent parfaitement les axes routiers, les raccourcis et les points d'accès rapides dans cette zone métropolitaine. 
+                    Temps d'intervention optimisés même aux heures de pointe entre Rabat et les villes satellites.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-primary/20">
+                <CardHeader>
+                  <h3 className="text-xl font-semibold">Avez-vous des partenariats avec d'autres villes ?</h3>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">
+                    Oui, nous travaillons en réseau avec nos partenaires dans les principales villes du Maroc. Pour les transports longue distance 
+                    depuis Rabat, nous coordonnons avec nos équipes <a href="/ambulance-casablanca" className="text-primary hover:underline font-medium">ambulance Casablanca</a>, 
+                    Marrakech et Tanger. Consultez aussi notre guide sur <a href="/blog" className="text-primary hover:underline font-medium">"Comment choisir une ambulance privée au Maroc"</a> 
+                    pour plus d'informations.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </section>
 
@@ -557,6 +735,40 @@ const RabatPage = () => {
               Nous facilitons l'accès aux services d'urgence médicale dans toute l'agglomération de Rabat 
               en connectant patients et professionnels qualifiés 24h/24.
             </p>
+            
+            {/* Maillage interne footer */}
+            <div className="mt-6 pt-6 border-t border-primary/20">
+              <h4 className="font-semibold text-foreground mb-4">Nos services dans d'autres villes :</h4>
+              <div className="flex flex-wrap justify-center gap-4 text-sm">
+                <a href="/ambulance-casablanca" className="text-primary hover:underline">Ambulance Casablanca</a>
+                <a href="/ambulance-marrakech" className="text-primary hover:underline">Ambulance Marrakech</a>
+                <a href="/ambulance-tanger" className="text-primary hover:underline">Ambulance Tanger</a>
+                <a href="/blog" className="text-primary hover:underline">Blog Ambulance Maroc</a>
+                <a href="/blog/comment-choisir-ambulance-privee-fiable-maroc" className="text-primary hover:underline">Guide: Choisir son ambulance</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Sticky CTA Mobile */}
+        <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-sm border-t border-border shadow-lg p-4">
+          <div className="flex gap-2">
+            <CallButton
+              phone="+212777722311"
+              className="flex-1 bg-emergency hover:bg-emergency-hover text-emergency-foreground px-4 py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"
+            >
+              <Phone className="h-4 w-4" />
+              📞 Appeler
+            </CallButton>
+            
+            <WhatsAppButton
+              phone="+212777722311"
+              text="Urgence ambulance Rabat - Intervention immédiate demandée"
+              className="flex-1 bg-success hover:bg-success/90 text-success-foreground px-4 py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"
+            >
+              <MessageCircle className="h-4 w-4" />
+              💬 WhatsApp
+            </WhatsAppButton>
           </div>
         </div>
       </main>

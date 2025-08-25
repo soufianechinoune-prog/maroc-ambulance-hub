@@ -117,3 +117,60 @@
 /* Smooth scrolling and anchor offset for blog headings */
 :root { scroll-behavior: smooth; }
 h2, h3 { scroll-margin-top: 7rem; }
+
+/* Emergency Banner Styles */
+.emergency-banner {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: hsl(30 80% 95%);
+  border-bottom: 1px solid hsl(30 60% 85%);
+  color: hsl(0 0% 7%);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.emergency-banner.rtl {
+  direction: rtl;
+}
+
+.emergency-banner .emergency-icon {
+  color: hsl(30 70% 50%);
+  flex-shrink: 0;
+}
+
+.emergency-banner .emergency-text {
+  flex: 1;
+}
+
+.emergency-banner .emergency-text strong {
+  font-weight: 800;
+  color: hsl(var(--emergency));
+}
+
+.emergency-banner .emergency-close {
+  margin-left: auto;
+  background: transparent;
+  border: 0;
+  color: hsl(0 0% 40%);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.emergency-banner .emergency-close:hover {
+  background: hsl(0 0% 0% / 0.1);
+}
+
+.emergency-banner.rtl .emergency-close {
+  margin-left: 0;
+  margin-right: auto;
+}

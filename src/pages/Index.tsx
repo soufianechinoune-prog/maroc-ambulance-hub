@@ -63,7 +63,7 @@ const Index = () => {
       <SEO
         title="Ambulance au Maroc – Urgences 24h/24 | Ambulance privée & transport médicalisé"
         description="Service d'ambulance au Maroc disponible 24h/24 et 7j/7. Intervention rapide, ambulance privée, urgences médicales et transport médicalisé dans toutes les grandes villes."
-        canonical="https://www.ambulance-privee.ma/"
+        canonical={canonical}
         jsonLdMultiple={jsonLdMultiple}
       />
       <Header />

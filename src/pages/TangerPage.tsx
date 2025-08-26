@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, Zap, Hospital, Globe, Award, AlertCircle, Calendar, ExternalLink, Timer, Badge, Ship, Plane, Factory } from "lucide-react";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
+import CityMap from "@/components/CityMap";
 import { SITE_URL } from "@/lib/config";
 import { track } from "@/lib/track";
 import ambulanceTangerImage from "@/assets/ambulance-tanger-med.webp";
@@ -549,19 +550,12 @@ const TangerPage = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-primary/5 rounded-lg flex items-center justify-center">
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d104216.31882467138!2d-5.9339065!3d35.7594651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b265e6402d907%3A0x91548980ce97ea0c!2sTangier%2C%20Morocco!5e0!3m2!1sen!2s!4v1635000000000!5m2!1sen!2s"
-                      width="100%" 
-                      height="256"
-                      style={{border: 0}}
-                      loading="lazy"
-                      className="rounded-lg"
-                      allowFullScreen
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Carte zone intervention ambulance Tanger région Nord"
-                    />
-                  </div>
+                  <CityMap
+                    center={{ lng: -5.8333, lat: 35.7833 }}
+                    zoom={11}
+                    className="w-full h-64 rounded-lg"
+                    showMarker={true}
+                  />
                 </CardContent>
               </Card>
             </div>

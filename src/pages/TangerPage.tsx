@@ -26,6 +26,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
 import { useState } from "react";
+import ambulanceTangerImage from "@/assets/ambulance-tanger-med.webp";
 
 const PHONE = "+212777722311";
 const WHATSAPP_TEXT = "Bonjour, j'ai besoin d'une ambulance à Tanger";
@@ -175,11 +176,11 @@ export default function TangerPage() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')"
+            backgroundImage: `url(${ambulanceTangerImage})`
           }}
         />
-        <div className="absolute inset-0 bg-blue-900/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-transparent" />
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/40" />
         
         <div className="relative z-10 container mx-auto px-4 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center lg:text-left">
@@ -192,17 +193,17 @@ export default function TangerPage() {
               Ambulance privée à <span className="text-yellow-400">Tanger</span> – Urgences médicales 24h/24, transferts inter-hôpitaux & transport médicalisé région Nord
             </h1>
             
-            <p className="text-xl lg:text-2xl mb-8 text-blue-100 leading-relaxed">
-              Temps de réponse moyen 15–20 minutes • Couverture Tanger & région Nord • Service agréé Ministère de la Santé
+            <p className="text-xl lg:text-2xl mb-8 text-gray-100 leading-relaxed">
+              Temps moyen d'arrivée : 15 minutes • Couverture complète de Tanger et région Nord • Service agréé Ministère de la Santé
             </p>
 
             {/* Texte introductif riche SEO */}
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8 text-left">
-              <p className="text-lg text-blue-50 leading-relaxed">
-                <strong className="text-white">Tanger, capitale économique du Nord du Maroc</strong>, bénéficie d'un service d'ambulance privée d'excellence adapté aux besoins spécifiques de cette métropole stratégique. Avec le <strong className="text-yellow-200">port Tanger Med</strong>, la <strong className="text-yellow-200">zone franche TFZ</strong> et un secteur industriel en pleine expansion, notre <strong className="text-white">ambulance privée à Tanger</strong> répond aux exigences des entreprises, résidents et visiteurs. 
+              <p className="text-lg text-gray-100 leading-relaxed">
+                <strong className="text-white">Tanger, capitale économique du Nord du Maroc</strong>, bénéficie d'un service d'ambulance privée d'excellence adapté aux besoins spécifiques de cette métropole stratégique. Avec le <strong className="text-yellow-300">port Tanger Med</strong>, la <strong className="text-yellow-300">zone franche TFZ</strong> et un secteur industriel en pleine expansion, notre <strong className="text-white">ambulance privée à Tanger</strong> répond aux exigences des entreprises, résidents et visiteurs. 
               </p>
-              <p className="text-lg text-blue-50 leading-relaxed mt-3">
-                Nos équipes spécialisées en <strong className="text-yellow-200">transport médicalisé Tanger</strong> maîtrisent parfaitement les infrastructures locales : autoroutes vers Tétouan, accès rapide à <strong className="text-yellow-200">Tanger Med</strong>, coordination avec les établissements de santé régionaux. Que ce soit pour une <strong className="text-white">urgence médicale à Tanger</strong>, un transfert inter-hôpitaux ou un transport longue distance, notre service garantit sécurité et réactivité 24h/24.
+              <p className="text-lg text-gray-100 leading-relaxed mt-3">
+                Nos équipes spécialisées en <strong className="text-yellow-300">transport médicalisé Tanger</strong> maîtrisent parfaitement les infrastructures locales : autoroutes vers Tétouan, accès rapide à <strong className="text-yellow-300">Tanger Med</strong>, coordination avec les établissements de santé régionaux. Que ce soit pour une <strong className="text-white">urgence médicale à Tanger</strong>, un transfert inter-hôpitaux ou un transport longue distance, notre service garantit sécurité et réactivité 24h/24.
               </p>
             </div>
 
@@ -385,7 +386,7 @@ export default function TangerPage() {
                 <CardTitle className="text-xl">Urgences médicales 24/7</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <p className="text-gray-600">Intervention immédiate pour toute urgence médicale dans Tanger et sa région.</p>
+                <p className="text-gray-600">Intervention immédiate avec matériel complet, prise en charge à domicile, lieux publics et entreprises.</p>
                 <p className="text-gray-500 text-sm mt-2">Équipement médical complet à bord, personnel qualifié aux urgences vitales.</p>
                 <p className="text-gray-500 text-sm">Temps de réponse moyen : 15 minutes en zone urbaine.</p>
               </CardContent>
@@ -399,7 +400,7 @@ export default function TangerPage() {
                 <CardTitle className="text-xl">Transport inter-hôpitaux</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <p className="text-gray-600">Transferts sécurisés entre établissements de santé à Tanger.</p>
+                <p className="text-gray-600">Transferts sécurisés entre hôpitaux publics et cliniques privées (CHU Tanger, hôpital Mohamed V, cliniques privées).</p>
                 <p className="text-gray-500 text-sm mt-2">Coordination avec les hôpitaux publics et privés de Tanger.</p>
                 <p className="text-gray-500 text-sm">Monitoring médical continu pendant le transport.</p>
               </CardContent>
@@ -413,7 +414,7 @@ export default function TangerPage() {
                 <CardTitle className="text-xl">Transport longue distance</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <p className="text-gray-600">Transports médicalisés vers toutes les villes du Maroc depuis Tanger.</p>
+                <p className="text-gray-600">Liaisons médicalisées Tanger → Casablanca, Rabat, Fès, Marrakech, avec suivi médical continu.</p>
                 <p className="text-gray-500 text-sm mt-2">Casablanca (3h), Rabat (2h30), Fès (4h), Marrakech (6h).</p>
                 <p className="text-gray-500 text-sm">Équipe médicale dédiée et équipement adapté au trajet.</p>
               </CardContent>
@@ -427,7 +428,7 @@ export default function TangerPage() {
                 <CardTitle className="text-xl">Couverture événements</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <p className="text-gray-600">Couverture médicale pour festivals, conférences et salons à Tanger.</p>
+                <p className="text-gray-600">Assistance médicale pour festivals (Tanjazz, Mawazine off), conférences et salons professionnels.</p>
                 <p className="text-gray-500 text-sm mt-2">Festivals internationaux, salons professionnels, événements sportifs.</p>
                 <p className="text-gray-500 text-sm">Équipe sur site et ambulance en standby selon vos besoins.</p>
               </CardContent>
@@ -453,7 +454,7 @@ export default function TangerPage() {
                 <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="w-10 h-10 text-blue-600" />
                 </div>
-                <h3 className="font-semibold mb-2">+4 000 interventions/an</h3>
+                <h3 className="font-semibold mb-2">+5000 interventions/an</h3>
                 <p className="text-gray-600 text-sm">Dans la région Nord du Maroc</p>
               </div>
               
@@ -607,21 +608,21 @@ export default function TangerPage() {
               <AccordionItem value="temps-arrivee">
                 <AccordionTrigger>Quel est le temps moyen d'arrivée d'une ambulance privée à Tanger ?</AccordionTrigger>
                 <AccordionContent>
-                  Le temps moyen d'arrivée de nos ambulances à Tanger est de 15-20 minutes en zone urbaine. Pour les quartiers périphériques ou Tanger Med, comptez 20-30 minutes selon la localisation exacte.
+                  En moyenne 15 minutes dans la zone urbaine, grâce à notre flotte dédiée à Tanger et nos équipes de garde 24/7. Pour les zones périphériques comme Tanger Med, comptez 20-25 minutes. Nos ambulances sont stratégiquement positionnées pour optimiser les temps de réponse.
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="prix">
                 <AccordionTrigger>Quel est le prix d'une ambulance privée à Tanger ?</AccordionTrigger>
                 <AccordionContent>
-                  Le tarif de notre ambulance privée à Tanger varie de 500 à 1400 MAD selon le type d'intervention : urgences locales (500-800 MAD), transferts inter-hôpitaux (600-1000 MAD) ou transport longue distance (1000-1400 MAD). Devis gratuit par téléphone.
+                  Nos tarifs dépendent du type de service : urgences locales (500-800 MAD), transferts inter-hôpitaux (600-1000 MAD), transport longue distance (1000-1400 MAD). Exemple concret : transport médicalisé Tanger-Rabat à partir de 1200 MAD. Devis gratuit et transparent par téléphone en fonction de vos besoins spécifiques.
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="region-nord">
                 <AccordionTrigger>Intervenez-vous jusqu'à Tétouan, Fnideq et M'diq ?</AccordionTrigger>
                 <AccordionContent>
-                  Oui, notre service d'ambulance privée couvre toute la région Nord : Tétouan (45 min depuis Tanger), Fnideq et M'diq (1h), ainsi qu'Assilah et Ksar El Kebir. Tarification adaptée selon la distance.
+                  Oui, nous couvrons toute la région Nord avec des temps d'intervention optimisés : Tétouan (45 min), Fnideq et M'diq (1h), Assilah (30 min) et Ksar El Kebir (50 min). Nos équipes connaissent parfaitement ces trajets et les infrastructures routières pour garantir un transport sécurisé.
                 </AccordionContent>
               </AccordionItem>
               
@@ -642,14 +643,14 @@ export default function TangerPage() {
               <AccordionItem value="equipement">
                 <AccordionTrigger>Vos ambulances sont-elles équipées pour les urgences cardiaques ou pédiatriques ?</AccordionTrigger>
                 <AccordionContent>
-                  Nos ambulances à Tanger sont équipées d'un défibrillateur, monitoring cardiaque, matériel de réanimation adulte et pédiatrique. Personnel formé aux urgences vitales et transport néonatal.
+                  Absolument équipées ! Nos ambulances disposent de défibrillateurs semi-automatiques, monitoring cardiaque complet, matériel de réanimation adulte et pédiatrique, et équipement pour transport néonatal. Notre personnel est formé aux protocoles d'urgences vitales et aux spécificités des patients cardiaques et pédiatriques.
                 </AccordionContent>
               </AccordionItem>
               
               <AccordionItem value="evenements">
                 <AccordionTrigger>Est-ce que le service est disponible pour les événements à Tanger ?</AccordionTrigger>
                 <AccordionContent>
-                  Oui, nous proposons une couverture médicale pour tous types d'événements à Tanger : festivals, conférences internationales, salons professionnels, événements sportifs ou culturels. Devis personnalisé selon la durée et le nombre de participants.
+                  Oui, nous proposons des forfaits spécifiques pour tous types d'événements : festivals comme Tanjazz, congrès internationaux, salons professionnels au Tanger Med, événements sportifs. Nos forfaits incluent équipe médicale sur site, ambulance en standby et coordination avec les organisateurs. Devis personnalisé selon la durée et l'ampleur de l'événement.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

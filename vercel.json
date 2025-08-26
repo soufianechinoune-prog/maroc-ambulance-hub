@@ -5,7 +5,10 @@
       "destination": "https://www.ambulance-privee.ma/$1",
       "permanent": true,
       "has": [
-        { "type": "host", "value": "ambulance-privee.ma" }
+        {
+          "type": "host",
+          "value": "ambulance-privee.ma"
+        }
       ]
     }
   ],

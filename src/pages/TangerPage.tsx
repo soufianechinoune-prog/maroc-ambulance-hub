@@ -320,23 +320,35 @@ const TangerPage = () => {
             </div>
           </section>
 
-          {/* Spécificités locales à Tanger */}
+          {/* Spécificités locales à Tanger - Quartiers */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-8 flex items-center gap-3">
-              <Globe className="h-8 w-8 text-primary" />
-              Spécificités locales à Tanger
+              <MapPin className="h-8 w-8 text-primary" />
+              Quartiers principaux de Tanger
             </h2>
             
             <div className="grid md:grid-cols-4 gap-6">
               <Card className="border-primary/20 hover:border-primary/40 transition-colors">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Ship className="h-5 w-5 text-primary" />
-                    Service portuaire spécialisé
+                    <MapPin className="h-5 w-5 text-primary" />
+                    <a href="/ambulance-tanger-medina" className="text-primary hover:underline">Médina de Tanger</a>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Intervention prioritaire au port Tanger Med avec autorisations spéciales et protocoles adaptés aux zones portuaires et logistiques stratégiques.</p>
+                  <p>Cœur historique de Tanger avec ses ruelles étroites et monuments emblématiques. Intervention spécialisée dans la vieille ville avec équipes formées aux accès difficiles.</p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-primary/20 hover:border-primary/40 transition-colors">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Ship className="h-5 w-5 text-primary" />
+                    <a href="/ambulance-tanger-malabata" className="text-primary hover:underline">Malabata</a>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p>Quartier résidentiel moderne près des plages de Tanger. Zone d'intervention prioritaire avec accès rapide aux cliniques privées et hôpitaux de la région.</p>
                 </CardContent>
               </Card>
 
@@ -344,23 +356,11 @@ const TangerPage = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Factory className="h-5 w-5 text-primary" />
-                    Zone franche TFZ
+                    <a href="/ambulance-tanger-beni-makada" className="text-primary hover:underline">Beni Makada</a>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Couverture complète de la zone franche de Tanger avec équipes formées aux interventions en milieu industriel et logistique international.</p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/20 hover:border-primary/40 transition-colors">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Plane className="h-5 w-5 text-primary" />
-                    Transport ferry/aéroport
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p>Service spécialisé pour transports vers ferry (direction Espagne) et aéroport Ibn Battouta avec coordination internationale.</p>
+                  <p>Grand quartier populaire de Tanger avec forte densité de population. Couverture médicale renforcée 24h/24 avec équipes spécialisées dans les urgences urbaines.</p>
                 </CardContent>
               </Card>
 
@@ -368,11 +368,11 @@ const TangerPage = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Award className="h-5 w-5 text-primary" />
-                    Coordination internationale
+                    <a href="/ambulance-tanger-marshan" className="text-primary hover:underline">Marshan</a>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Partenariats transfrontaliers pour évacuations vers l'Espagne et coordination avec les services d'urgence européens.</p>
+                  <p>Quartier résidentiel huppé de Tanger avec vue sur le détroit de Gibraltar. Service premium avec protocoles diplomatiques pour résidences officielles.</p>
                 </CardContent>
               </Card>
             </div>
@@ -549,23 +549,19 @@ const TangerPage = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <img 
-                    src="/images/carte-tanger-nord.webp"
-                    alt="Carte zone intervention ambulance Tanger région Nord"
-                    className="w-full h-64 object-cover rounded-lg"
-                    loading="lazy"
-                    onError={(e) => {
-                      // Fallback vers carte Google Maps embed
-                      const iframe = document.createElement('iframe');
-                      iframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d104216.31882467138!2d-5.9339065!3d35.7594651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b265e6402d907%3A0x91548980ce97ea0c!2sTangier%2C%20Morocco!5e0!3m2!1sen!2s!4v1635000000000!5m2!1sen!2s";
-                      iframe.width = "100%";
-                      iframe.height = "256";
-                      iframe.style.border = "0";
-                      iframe.loading = "lazy";
-                      iframe.className = "rounded-lg";
-                      e.currentTarget.parentNode?.replaceChild(iframe, e.currentTarget);
-                    }}
-                  />
+                  <div className="w-full h-64 bg-primary/5 rounded-lg flex items-center justify-center">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d104216.31882467138!2d-5.9339065!3d35.7594651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b265e6402d907%3A0x91548980ce97ea0c!2sTangier%2C%20Morocco!5e0!3m2!1sen!2s!4v1635000000000!5m2!1sen!2s"
+                      width="100%" 
+                      height="256"
+                      style={{border: 0}}
+                      loading="lazy"
+                      className="rounded-lg"
+                      allowFullScreen
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Carte zone intervention ambulance Tanger région Nord"
+                    />
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -1082,6 +1078,27 @@ const TangerPage = () => {
               </Card>
             </div>
           </section>
+
+          {/* Maillage interne footer optimisé */}
+          <div className="text-center mt-12 p-6 bg-primary/5 rounded-lg">
+            <p className="text-muted-foreground text-sm">
+              <strong>Ambulance Maroc</strong> est une plateforme de mise en relation avec des prestataires d'ambulances privées à Tanger. 
+              Nous facilitons l'accès aux services d'urgence médicale dans toute la région Nord 
+              en connectant patients et professionnels qualifiés 24h/24.
+            </p>
+            
+            <div className="mt-6 pt-6 border-t border-primary/20">
+              <h4 className="font-semibold text-foreground mb-4">Nos services dans d'autres villes :</h4>
+              <div className="flex flex-wrap justify-center gap-4 text-sm">
+                <a href="/ambulance-casablanca" className="text-primary hover:underline">Ambulance Casablanca</a>
+                <a href="/ambulance-rabat" className="text-primary hover:underline">Ambulance Rabat</a>
+                <a href="/ambulance-marrakech" className="text-primary hover:underline">Ambulance Marrakech</a>
+                <a href="/blog" className="text-primary hover:underline">Blog Ambulance Maroc</a>
+                <a href="/blog/transport-medicalise-tanger" className="text-primary hover:underline">Transport médicalisé Tanger</a>
+                <a href="/blog/comment-choisir-ambulance-privee-fiable-maroc" className="text-primary hover:underline">Guide: Choisir son ambulance</a>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Barre sticky mobile */}

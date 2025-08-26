@@ -40,6 +40,7 @@ import NeighborhoodMedina from "./pages/NeighborhoodMedina";
 import NeighborhoodSidiGhanem from "./pages/NeighborhoodSidiGhanem";
 import NeighborhoodPalmeraie from "./pages/NeighborhoodPalmeraie";
 import RabatPage from "./pages/RabatPage";
+import TangerPage from "./pages/TangerPage";
 
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -101,7 +102,11 @@ const AppRoutes = () => (
       <Route
         key={city.slug}
         path={`/ambulance-${city.slug}`}
-        element={city.slug === 'rabat' ? <RabatPage /> : <CityPage />}
+        element={
+          city.slug === 'rabat' ? <RabatPage /> : 
+          city.slug === 'tanger' ? <TangerPage /> : 
+          <CityPage />
+        }
       />
     ))}
 

@@ -86,7 +86,7 @@ export default function TangerPage() {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Quel est le temps moyen d'arrivée d'une ambulance à Tanger ?",
+        "name": "Quel est le temps moyen d'arrivée d'une ambulance privée à Tanger ?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Le temps moyen d'arrivée de nos ambulances à Tanger est de 15-20 minutes en zone urbaine. Pour les quartiers périphériques ou Tanger Med, comptez 20-30 minutes selon la localisation."
@@ -94,18 +94,42 @@ export default function TangerPage() {
       },
       {
         "@type": "Question", 
-        "name": "Est-ce que vous couvrez Tanger Med et la zone franche ?",
+        "name": "Quel est le prix d'une ambulance privée à Tanger ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Oui, nous couvrons intégralement Tanger Med, la zone franche TFZ et toutes les zones industrielles et portuaires de Tanger. Nos équipes sont habituées aux interventions dans ces secteurs stratégiques."
+          "text": "Le tarif de notre ambulance privée à Tanger varie de 500 à 1400 MAD selon le type d'intervention : urgences locales, transferts inter-hôpitaux ou transport longue distance. Devis gratuit par téléphone."
+        }
+      },
+      {
+        "@type": "Question", 
+        "name": "Intervenez-vous jusqu'à Tétouan, Fnideq et M'diq ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oui, notre service d'ambulance privée couvre toute la région Nord : Tétouan (45 min depuis Tanger), Fnideq et M'diq (1h), ainsi qu'Assilah et Ksar El Kebir. Tarification adaptée selon la distance."
         }
       },
       {
         "@type": "Question",
-        "name": "Puis-je réserver un transport médicalisé longue distance depuis Tanger ?",
+        "name": "Est-ce que vous couvrez Tanger Med et la zone franche TFZ ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Absolument. Nous proposons des transports médicalisés longue distance depuis Tanger vers toutes les villes du Maroc : Casablanca, Rabat, Fès, Marrakech. Devis sur mesure selon la destination."
+          "text": "Absolument. Nous couvrons intégralement Tanger Med, la zone franche TFZ et toutes les zones industrielles et portuaires de Tanger. Nos équipes sont habituées aux interventions dans ces secteurs stratégiques et disposent des autorisations nécessaires."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Peut-on réserver un transport médicalisé longue distance depuis Tanger ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oui, nous proposons des transports médicalisés longue distance depuis Tanger vers toutes les villes du Maroc : Casablanca (3h), Rabat (2h30), Fès (4h), Marrakech (6h). Équipement médical complet et personnel qualifié à bord."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vos ambulances sont-elles équipées pour les urgences cardiaques ou pédiatriques ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nos ambulances à Tanger sont équipées d'un défibrillateur, monitoring cardiaque, matériel de réanimation adulte et pédiatrique. Personnel formé aux urgences vitales et transport néonatal."
         }
       },
       {
@@ -113,7 +137,7 @@ export default function TangerPage() {
         "name": "Est-ce que le service est disponible pour les événements à Tanger ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Oui, nous proposons une couverture médicale pour tous types d'événements à Tanger : festivals, conférences, salons, événements sportifs ou culturels. Devis personnalisé selon vos besoins."
+          "text": "Oui, nous proposons une couverture médicale pour tous types d'événements à Tanger : festivals, conférences internationales, salons professionnels, événements sportifs ou culturels. Devis personnalisé selon la durée et le nombre de participants."
         }
       }
     ]
@@ -122,8 +146,8 @@ export default function TangerPage() {
   return (
     <>
       <Helmet>
-        <title>Ambulance privée Tanger — Intervention rapide 24/7</title>
-        <meta name="description" content="Ambulance privée à Tanger disponible 24/7. Temps de réponse moyen 15 min. Urgences, transferts, longue distance et événements. Appelez dès maintenant !" />
+        <title>Ambulance privée à Tanger | Urgences 24/7, transport médicalisé & inter-hôpitaux</title>
+        <meta name="description" content="Ambulance privée agréée à Tanger. Urgences médicales 24/7, transferts inter-hôpitaux, transport médicalisé région Nord et Tanger Med. Intervention rapide." />
         <link rel="canonical" href="https://www.ambulance-privee.ma/ambulance-tanger" />
         <meta name="keywords" content="ambulance Tanger, ambulance privée Tanger, transport médicalisé Tanger, ambulance urgence Tanger, ambulance port Tanger Med, ambulance zone franche Tanger" />
         
@@ -147,8 +171,15 @@ export default function TangerPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')"
+          }}
+        />
+        <div className="absolute inset-0 bg-blue-900/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-transparent" />
         
         <div className="relative z-10 container mx-auto px-4 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center lg:text-left">
@@ -158,12 +189,22 @@ export default function TangerPage() {
             </Badge>
             
             <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-              Ambulance privée à <span className="text-yellow-400">Tanger</span> — Intervention rapide 24/7
+              Ambulance privée à <span className="text-yellow-400">Tanger</span> – Urgences médicales 24h/24, transferts inter-hôpitaux & transport médicalisé région Nord
             </h1>
             
             <p className="text-xl lg:text-2xl mb-8 text-blue-100 leading-relaxed">
               Temps de réponse moyen 15–20 minutes • Couverture Tanger & région Nord • Service agréé Ministère de la Santé
             </p>
+
+            {/* Texte introductif riche SEO */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8 text-left">
+              <p className="text-lg text-blue-50 leading-relaxed">
+                <strong className="text-white">Tanger, capitale économique du Nord du Maroc</strong>, bénéficie d'un service d'ambulance privée d'excellence adapté aux besoins spécifiques de cette métropole stratégique. Avec le <strong className="text-yellow-200">port Tanger Med</strong>, la <strong className="text-yellow-200">zone franche TFZ</strong> et un secteur industriel en pleine expansion, notre <strong className="text-white">ambulance privée à Tanger</strong> répond aux exigences des entreprises, résidents et visiteurs. 
+              </p>
+              <p className="text-lg text-blue-50 leading-relaxed mt-3">
+                Nos équipes spécialisées en <strong className="text-yellow-200">transport médicalisé Tanger</strong> maîtrisent parfaitement les infrastructures locales : autoroutes vers Tétouan, accès rapide à <strong className="text-yellow-200">Tanger Med</strong>, coordination avec les établissements de santé régionaux. Que ce soit pour une <strong className="text-white">urgence médicale à Tanger</strong>, un transfert inter-hôpitaux ou un transport longue distance, notre service garantit sécurité et réactivité 24h/24.
+              </p>
+            </div>
 
             {/* Trust Indicators */}
             <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
@@ -237,20 +278,62 @@ export default function TangerPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Médina</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Malabata</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Marshan</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Iberia</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Beni Makada</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Tanger Med</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Zone Franche TFZ</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Aéroport</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Tétouan</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Fnideq</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> M'diq</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Assilah</span>
-                    <span className="flex items-center"><CheckCircle className="w-4 h-4 mr-1 text-green-600" /> Ksar El Kebir</span>
+                  <p className="text-gray-700 mb-4">
+                    <strong>Nous intervenons dans tous les quartiers stratégiques de Tanger et jusqu'aux principales villes de la région Nord.</strong>
+                  </p>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <Link to="#medina" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Médina</span>
+                    </Link>
+                    <Link to="#malabata" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Malabata</span>
+                    </Link>
+                    <Link to="#marshan" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Marshan</span>
+                    </Link>
+                    <Link to="#iberia" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Iberia</span>
+                    </Link>
+                    <Link to="#beni-makada" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Beni Makada</span>
+                    </Link>
+                    <Link to="#tanger-med" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Tanger Med</span>
+                    </Link>
+                    <Link to="#zone-franche-tfz" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Zone Franche TFZ</span>
+                    </Link>
+                    <Link to="#aeroport" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Aéroport</span>
+                    </Link>
+                    <Link to="#tetouan" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Tétouan</span>
+                    </Link>
+                    <Link to="#fnideq" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Fnideq</span>
+                    </Link>
+                    <Link to="#mdiq" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">M'diq</span>
+                    </Link>
+                    <Link to="#assilah" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Assilah</span>
+                    </Link>
+                    <Link to="#ksar-el-kebir" className="flex items-center hover:text-primary transition-colors group">
+                      <CheckCircle className="w-4 h-4 mr-2 text-green-600 group-hover:text-primary" /> 
+                      <span className="underline decoration-dotted">Ksar El Kebir</span>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
@@ -303,6 +386,8 @@ export default function TangerPage() {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600">Intervention immédiate pour toute urgence médicale dans Tanger et sa région.</p>
+                <p className="text-gray-500 text-sm mt-2">Équipement médical complet à bord, personnel qualifié aux urgences vitales.</p>
+                <p className="text-gray-500 text-sm">Temps de réponse moyen : 15 minutes en zone urbaine.</p>
               </CardContent>
             </Card>
 
@@ -315,6 +400,8 @@ export default function TangerPage() {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600">Transferts sécurisés entre établissements de santé à Tanger.</p>
+                <p className="text-gray-500 text-sm mt-2">Coordination avec les hôpitaux publics et privés de Tanger.</p>
+                <p className="text-gray-500 text-sm">Monitoring médical continu pendant le transport.</p>
               </CardContent>
             </Card>
 
@@ -327,6 +414,8 @@ export default function TangerPage() {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600">Transports médicalisés vers toutes les villes du Maroc depuis Tanger.</p>
+                <p className="text-gray-500 text-sm mt-2">Casablanca (3h), Rabat (2h30), Fès (4h), Marrakech (6h).</p>
+                <p className="text-gray-500 text-sm">Équipe médicale dédiée et équipement adapté au trajet.</p>
               </CardContent>
             </Card>
 
@@ -339,6 +428,8 @@ export default function TangerPage() {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600">Couverture médicale pour festivals, conférences et salons à Tanger.</p>
+                <p className="text-gray-500 text-sm mt-2">Festivals internationaux, salons professionnels, événements sportifs.</p>
+                <p className="text-gray-500 text-sm">Équipe sur site et ambulance en standby selon vos besoins.</p>
               </CardContent>
             </Card>
           </div>
@@ -376,7 +467,7 @@ export default function TangerPage() {
             </div>
 
             {/* Témoignages */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex items-center mb-4">
@@ -406,6 +497,54 @@ export default function TangerPage() {
                     "Transport médicalisé Tanger-Casablanca parfaitement organisé. Ma mère était en sécurité durant tout le trajet."
                   </blockquote>
                   <cite className="text-sm text-gray-500">— Ahmed M., Malabata</cite>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex items-center mb-4">
+                    <div className="flex text-yellow-400">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-lg">★</span>
+                      ))}
+                    </div>
+                  </div>
+                  <blockquote className="text-gray-700 mb-4">
+                    "Service professionnel lors d'un transfert Tanger-Rabat. Personnel rassurant et matériel médical complet."
+                  </blockquote>
+                  <cite className="text-sm text-gray-500">— Samir B., Tétouan</cite>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex items-center mb-4">
+                    <div className="flex text-yellow-400">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-lg">★</span>
+                      ))}
+                    </div>
+                  </div>
+                  <blockquote className="text-gray-700 mb-4">
+                    "Équipe très réactive pour une urgence cardiaque à domicile. Prise en charge immédiate et transport rapide vers l'hôpital."
+                  </blockquote>
+                  <cite className="text-sm text-gray-500">— Nadia L., Iberia</cite>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex items-center mb-4">
+                    <div className="flex text-yellow-400">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-lg">★</span>
+                      ))}
+                    </div>
+                  </div>
+                  <blockquote className="text-gray-700 mb-4">
+                    "Couverture médicale parfaite lors de notre salon au Tanger Med. Personnel disponible et discret."
+                  </blockquote>
+                  <cite className="text-sm text-gray-500">— Youssef A., Organisateur d'événements</cite>
                 </CardContent>
               </Card>
             </div>
@@ -466,30 +605,51 @@ export default function TangerPage() {
             
             <Accordion type="single" collapsible>
               <AccordionItem value="temps-arrivee">
-                <AccordionTrigger>Quel est le temps moyen d'arrivée d'une ambulance à Tanger ?</AccordionTrigger>
+                <AccordionTrigger>Quel est le temps moyen d'arrivée d'une ambulance privée à Tanger ?</AccordionTrigger>
                 <AccordionContent>
                   Le temps moyen d'arrivée de nos ambulances à Tanger est de 15-20 minutes en zone urbaine. Pour les quartiers périphériques ou Tanger Med, comptez 20-30 minutes selon la localisation exacte.
                 </AccordionContent>
               </AccordionItem>
+
+              <AccordionItem value="prix">
+                <AccordionTrigger>Quel est le prix d'une ambulance privée à Tanger ?</AccordionTrigger>
+                <AccordionContent>
+                  Le tarif de notre ambulance privée à Tanger varie de 500 à 1400 MAD selon le type d'intervention : urgences locales (500-800 MAD), transferts inter-hôpitaux (600-1000 MAD) ou transport longue distance (1000-1400 MAD). Devis gratuit par téléphone.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="region-nord">
+                <AccordionTrigger>Intervenez-vous jusqu'à Tétouan, Fnideq et M'diq ?</AccordionTrigger>
+                <AccordionContent>
+                  Oui, notre service d'ambulance privée couvre toute la région Nord : Tétouan (45 min depuis Tanger), Fnideq et M'diq (1h), ainsi qu'Assilah et Ksar El Kebir. Tarification adaptée selon la distance.
+                </AccordionContent>
+              </AccordionItem>
               
               <AccordionItem value="tanger-med">
-                <AccordionTrigger>Est-ce que vous couvrez Tanger Med et la zone franche ?</AccordionTrigger>
+                <AccordionTrigger>Est-ce que vous couvrez Tanger Med et la zone franche TFZ ?</AccordionTrigger>
                 <AccordionContent>
-                  Oui, nous couvrons intégralement Tanger Med, la zone franche TFZ et toutes les zones industrielles et portuaires de Tanger. Nos équipes sont habituées aux interventions dans ces secteurs stratégiques.
+                  Absolument. Nous couvrons intégralement Tanger Med, la zone franche TFZ et toutes les zones industrielles et portuaires de Tanger. Nos équipes sont habituées aux interventions dans ces secteurs stratégiques et disposent des autorisations nécessaires.
                 </AccordionContent>
               </AccordionItem>
               
               <AccordionItem value="longue-distance">
-                <AccordionTrigger>Puis-je réserver un transport médicalisé longue distance depuis Tanger ?</AccordionTrigger>
+                <AccordionTrigger>Peut-on réserver un transport médicalisé longue distance depuis Tanger ?</AccordionTrigger>
                 <AccordionContent>
-                  Absolument. Nous proposons des transports médicalisés longue distance depuis Tanger vers toutes les villes du Maroc : Casablanca, Rabat, Fès, Marrakech. Devis sur mesure selon la destination.
+                  Oui, nous proposons des transports médicalisés longue distance depuis Tanger vers toutes les villes du Maroc : Casablanca (3h), Rabat (2h30), Fès (4h), Marrakech (6h). Équipement médical complet et personnel qualifié à bord.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="equipement">
+                <AccordionTrigger>Vos ambulances sont-elles équipées pour les urgences cardiaques ou pédiatriques ?</AccordionTrigger>
+                <AccordionContent>
+                  Nos ambulances à Tanger sont équipées d'un défibrillateur, monitoring cardiaque, matériel de réanimation adulte et pédiatrique. Personnel formé aux urgences vitales et transport néonatal.
                 </AccordionContent>
               </AccordionItem>
               
               <AccordionItem value="evenements">
                 <AccordionTrigger>Est-ce que le service est disponible pour les événements à Tanger ?</AccordionTrigger>
                 <AccordionContent>
-                  Oui, nous proposons une couverture médicale pour tous types d'événements à Tanger : festivals, conférences, salons, événements sportifs ou culturels. Devis personnalisé selon vos besoins.
+                  Oui, nous proposons une couverture médicale pour tous types d'événements à Tanger : festivals, conférences internationales, salons professionnels, événements sportifs ou culturels. Devis personnalisé selon la durée et le nombre de participants.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -572,6 +732,12 @@ export default function TangerPage() {
                   <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white text-lg py-3">
                     📞 Demander une ambulance maintenant
                   </Button>
+                  
+                  <div className="text-center mt-4">
+                    <p className="text-green-600 font-medium text-sm">
+                      ⏱ Réponse en moins de 5 minutes – service disponible 24/7.
+                    </p>
+                  </div>
                 </form>
               </CardContent>
             </Card>
@@ -632,6 +798,31 @@ export default function TangerPage() {
       </section>
 
       <Footer />
+
+      {/* Sticky Bottom Bar Mobile */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white border-t border-gray-200 shadow-lg">
+        <div className="flex">
+          <CallButton
+            phone={PHONE}
+            className="flex-1 bg-red-600 hover:bg-red-700 text-white py-4 px-4 flex items-center justify-center font-semibold transition-colors"
+          >
+            <Phone className="w-5 h-5 mr-2" />
+            📞 Urgence 24/7
+          </CallButton>
+          
+          <WhatsAppButton
+            phone={PHONE}
+            text={WHATSAPP_TEXT}
+            className="flex-1 bg-green-600 hover:bg-green-700 text-white py-4 px-4 flex items-center justify-center font-semibold transition-colors"
+          >
+            <MessageCircle className="w-5 h-5 mr-2" />
+            💬 WhatsApp direct
+          </WhatsAppButton>
+        </div>
+      </div>
+
+      {/* Spacer for sticky bar on mobile */}
+      <div className="h-16 lg:hidden" />
     </>
   );
 }

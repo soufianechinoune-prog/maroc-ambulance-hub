@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Phone, MessageCircle, MapPin, Clock, Users, CheckCircle, Shield, Star, Zap, Hospital, Globe, Award, AlertCircle, Calendar, ExternalLink, Timer, Badge } from "lucide-react";
 import { CallButton, WhatsAppButton } from "@/components/ContactCTA";
+import CityMap from "@/components/CityMap";
 import { SITE_URL } from "@/lib/config";
 import { track } from "@/lib/track";
 
@@ -499,7 +500,7 @@ const RabatPage = () => {
                 </Card>
               </div>
 
-              {/* Carte statique optimisée */}
+              {/* Carte interactive Mapbox */}
               <Card className="border-primary/20">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -508,22 +509,11 @@ const RabatPage = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <img 
-                    src="/images/carte-rabat-sale-temara.webp"
-                    alt="Carte zone intervention ambulance Rabat Salé Témara"
-                    className="w-full h-64 object-cover rounded-lg"
-                    loading="lazy"
-                    onError={(e) => {
-                      // Fallback vers carte Google Maps embed
-                      const iframe = document.createElement('iframe');
-                      iframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106673.9785120789!2d-6.906616199999999!3d34.020882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76b871f50c5c1%3A0x7ac946ed7408076b!2sRabat%2C%20Morocco!5e0!3m2!1sen!2s!4v1635000000000!5m2!1sen!2s";
-                      iframe.width = "100%";
-                      iframe.height = "256";
-                      iframe.style.border = "0";
-                      iframe.loading = "lazy";
-                      iframe.className = "rounded-lg";
-                      e.currentTarget.parentNode?.replaceChild(iframe, e.currentTarget);
-                    }}
+                  <CityMap
+                    center={{ lng: -6.8416, lat: 34.0209 }}
+                    zoom={11}
+                    className="w-full h-64 rounded-lg"
+                    showMarker={true}
                   />
                 </CardContent>
               </Card>

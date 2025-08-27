@@ -130,8 +130,6 @@ const AppRoutes = () => (
     <Route path="/blog/:city/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
     <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
 
-    {/* Legacy zone route redirect */}
-    <Route path="/zones" element={<Zones />} />
 
     {/* Legal pages */}
     <Route path="/mentions-legales" element={<MentionsLegales />} />

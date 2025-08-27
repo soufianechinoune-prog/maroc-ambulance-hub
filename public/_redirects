@@ -31,6 +31,9 @@
 /al-hoceima /ambulance-al-hoceima 301!
 /tiznit /ambulance-tiznit 301!
 
+# Redirection pour éviter le contenu dupliqué zones/zones-d-intervention
+/zones /zones-d-intervention 301!
+
 # Fallback pour toute autre route qui ne match pas les routes spécifiques
 
 # Consolidation du blog sur /blog et /blog/:slug

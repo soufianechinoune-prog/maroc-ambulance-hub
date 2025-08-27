@@ -118,7 +118,7 @@ const Footer = () => {
                   ))}
                 </ul>
                 <Link 
-                  to="/zones" 
+                  to="/zones-d-intervention" 
                   className="text-success hover:underline text-sm font-medium"
                 >
                   Voir toutes les villes →

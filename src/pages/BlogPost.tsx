@@ -46,7 +46,7 @@ const BlogPost = () => {
         <SEO
           title="Article introuvable – Blog Ambulance Maroc"
           description="Article introuvable. Découvrez nos guides sur l'ambulance au Maroc."
-          canonical={`${SITE_URL}${city ? `/blog/${city}/${slug || ""}` : `/blog/${slug || ""}`}`}
+          canonical={`${SITE_URL}/blog/${slug || ""}`}
           noIndex
         />
         <Header />

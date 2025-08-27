@@ -2,6 +2,10 @@
 # Redirections 301 permanentes pour les anciennes URLs de villes
 # Format: ancien_chemin nouveau_chemin code_statut
 
+# Force HTTPS et WWW (géré par Vercel mais backup)
+http://ambulance-privee.ma/* https://www.ambulance-privee.ma/:splat 301!
+https://ambulance-privee.ma/* https://www.ambulance-privee.ma/:splat 301!
+
 # Villes principales
 /casablanca /ambulance-casablanca 301!
 /rabat /ambulance-rabat 301!
@@ -41,21 +45,11 @@
 /blog/villes/:city /blog 301!
 /blog/:city/:slug /blog/:slug 301!
 
-# Quartiers de Casablanca (alias vers contenu Casablanca)
-/ambulance-casablanca-ain-diab /ambulance-casablanca 301!
-/ambulance-casablanca-californie /ambulance-casablanca 301!
-/ambulance-casablanca-maarif /ambulance-casablanca 301!
-/ambulance-casablanca-bourgogne /ambulance-casablanca 301!
-/ambulance-casablanca-sidi-belyout /ambulance-casablanca 301!
-/ambulance-casablanca-ain-sebaa /ambulance-casablanca 301!
-/ambulance-casablanca-oasis /ambulance-casablanca 301!
-/ambulance-casablanca-sidi-maarouf /ambulance-casablanca 301!
-/ambulance-casablanca-sidi-bernoussi /ambulance-casablanca 301!
-/ambulance-casablanca-gauthier /ambulance-casablanca 301!
-/ambulance-casablanca-bouskoura /ambulance-casablanca 301!
-/ambulance-casablanca-ain-chock /ambulance-casablanca 301!
-/ambulance-casablanca-ain-choc /ambulance-casablanca 301!
-/ambulance-casablanca-derb-sultan /ambulance-casablanca 301!
+# Quartiers de Casablanca (redirigés vers pages spécifiques de quartiers)
+# Ces pages existent donc on ne les redirige PAS vers Casablanca générique
+# /ambulance-casablanca-ain-diab reste sur sa page dédiée
+# /ambulance-casablanca-californie reste sur sa page dédiée
+# etc.
 
 # SPA fallback - ESSENTIEL pour React Router
 # Toutes les routes qui ne matchent pas un fichier physique sont servies par index.html

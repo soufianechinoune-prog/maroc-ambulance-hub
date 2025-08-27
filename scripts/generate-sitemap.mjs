@@ -19,7 +19,7 @@ const baseUrls = [
 ];
 
 const cityUrls = uniqueSlugs.map((slug) => `${site}/ambulance-${slug}`);
-const blogCityUrls = uniqueSlugs.map((slug) => `${site}/blog/ambulance-${slug}`);
+// Removed blogCityUrls - these URLs don't exist in routes
 
 // Build blog article URLs from markdown frontmatter (fallback city=casablanca)
 import { readdirSync, readFileSync as rfs } from "fs";
@@ -38,8 +38,8 @@ try {
       return m ? m[1].trim().replace(/^['\"]|['\"]$/g, "") : "";
     };
     const slug = get("slug") || f.replace(/\.md$/, "");
-    const city = get("city") || "casablanca";
-    const url = city ? `${site}/blog/${city}/${slug}` : `${site}/blog/${slug}`;
+    // Always use /blog/:slug format (city redirected to this format)
+    const url = `${site}/blog/${slug}`;
     
     // Get real file modification date
     const stats = statSync(filePath);
@@ -67,9 +67,24 @@ baseUrls.forEach(url => {
 });
 
 cityUrls.forEach(url => urlModDates.set(url, lastWeek));
-blogCityUrls.forEach(url => urlModDates.set(url, lastWeek));
 
-const urls = [...baseUrls, ...cityUrls, ...blogCityUrls, ...blogArticleUrls];
+// Add blog category pages (actual routes that exist)
+const blogCategoryUrls = [
+  `${site}/blog/casablanca`,
+  `${site}/blog/rabat`, 
+  `${site}/blog/marrakech`,
+  `${site}/blog/fes`,
+  `${site}/blog/tanger`,
+  `${site}/blog/meknes`,
+  `${site}/blog/agadir`,
+  `${site}/blog/kenitra`,
+  `${site}/blog/sale`,
+  `${site}/blog/temara`,
+  `${site}/blog/oujda`
+];
+blogCategoryUrls.forEach(url => urlModDates.set(url, lastWeek));
+
+const urls = [...baseUrls, ...cityUrls, ...blogCategoryUrls, ...blogArticleUrls];
 
 const toUrlXml = (u) => {
   let priority = 0.6; // Default priority lowered
@@ -120,9 +135,9 @@ const toUrlXml = (u) => {
     changefreq = "weekly";
   }
 
-  // Blog categories by city - moderate priority
-  else if (u.includes("/blog/ambulance-")) {
-    priority = 0.5;
+  // Blog categories by city - moderate priority  
+  else if (u.match(/\/blog\/(casablanca|rabat|marrakech|fes|tanger|meknes|agadir|kenitra|sale|temara|oujda)$/)) {
+    priority = 0.6;
     changefreq = "weekly";
   }
 

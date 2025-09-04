@@ -7,7 +7,6 @@ import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./AppRoutes";
 import { track } from "@/lib/track";
 import EmergencyBanner from "@/components/EmergencyBanner";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +34,6 @@ const App = () => {
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>
-        <FloatingWhatsApp />
       </TooltipProvider>
     </QueryClientProvider>
   );

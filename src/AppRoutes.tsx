@@ -43,6 +43,7 @@ import NeighborhoodPalmeraie from "./pages/NeighborhoodPalmeraie";
 // Quartiers de Tanger
 import NeighborhoodMalabata from "./pages/NeighborhoodMalabata";
 import NeighborhoodMarshan from "./pages/NeighborhoodMarshan";
+import NeighborhoodIberia from "./pages/NeighborhoodIberia";
 
 import RabatPage from "./pages/RabatPage";
 import TangerPage from "./pages/TangerPage";
@@ -105,6 +106,7 @@ const AppRoutes = () => (
     {/* Quartiers de Tanger */}
     <Route path="/ambulance-tanger-malabata" element={<NeighborhoodMalabata />} />
     <Route path="/ambulance-tanger-marshan" element={<NeighborhoodMarshan />} />
+    <Route path="/ambulance-tanger-iberia" element={<NeighborhoodIberia />} />
 
     {/* Routes spécifiques des villes AVANT la route générique */}
     {cities.map((city) => (
